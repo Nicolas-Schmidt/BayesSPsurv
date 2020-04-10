@@ -12,6 +12,7 @@ NULL
 
 #' @title betas.slice.sampling
 #' @description slice sampling for betas
+#'
 #' @param Sigma.b variance estimate of betas
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -24,7 +25,9 @@ NULL
 #' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param m limit on steps in the slice sampling
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 betas.slice.sampling <- function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, form) {
@@ -40,6 +43,7 @@ betas.slice.sampling <- function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho,
 
 #' @title univ.betas.slice.sampling
 #' @description univariate slice sampling for betas.p
+#'
 #' @param betas.p current value of the pth element of betas
 #' @param p pth element
 #' @param Sigma.b variance estimate of betas
@@ -56,7 +60,9 @@ betas.slice.sampling <- function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho,
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 univ.betas.slice.sampling <- function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
@@ -129,6 +135,7 @@ univ.betas.slice.sampling <- function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, d
 
 #' @title gammas.slice.sampling
 #' @description slice sampling for gammas
+#'
 #' @param Sigma.g variance estimate of gammas
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -140,7 +147,9 @@ univ.betas.slice.sampling <- function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, d
 #' @param w size of the slice in the slice sampling
 #' @param m limit on steps in the slice sampling
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 gammas.slice.sampling <- function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m, form) {
@@ -156,6 +165,7 @@ gammas.slice.sampling <- function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, 
 
 #' @title gammas.slice.sampling2
 #' @description slice sampling for gammas
+#'
 #' @param Sigma.g variance estimate of gammas
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -168,7 +178,9 @@ gammas.slice.sampling <- function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, 
 #' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param m limit on steps in the slice sampling
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 gammas.slice.sampling2 <- function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form) {
@@ -185,6 +197,7 @@ gammas.slice.sampling2 <- function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho,
 
 #' @title univ.gammas.slice.sampling2
 #' @description univariate slice sampling for gammas.p
+#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -201,7 +214,9 @@ gammas.slice.sampling2 <- function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho,
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 univ.gammas.slice.sampling2 <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
@@ -274,6 +289,7 @@ univ.gammas.slice.sampling2 <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, 
 
 #' @title univ.gammas.slice.sampling
 #' @description univariate slice sampling for gammas.p
+#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -289,7 +305,9 @@ univ.gammas.slice.sampling2 <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, 
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
@@ -363,6 +381,7 @@ univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gamm
 
 #' @title rho.slice.sampling
 #' @description univariate slice sampling for rho
+#'
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param eXB exponentiated vector of covariates times betas
@@ -373,7 +392,9 @@ univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gamm
 #' @param m limit on steps in the slice sampling
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 rho.slice.sampling <- function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, upper = +Inf) {
@@ -447,6 +468,7 @@ rho.slice.sampling <- function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01,
 
 #' @title betas.post
 #' @description log-posterior distribution of betas with pth element fixed as betas.p
+#'
 #' @param betas.p current value of the pth element of betas
 #' @param p pth element
 #' @param Sigma.b variance estimate of betas
@@ -459,7 +481,9 @@ rho.slice.sampling <- function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01,
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return log- posterior density of betas
+#'
 #' @export
 
 betas.post <- function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, form) {
@@ -475,6 +499,7 @@ betas.post <- function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho
 
 #' @title gammas.post
 #' @description log-posterior distribution of gammas with pth element fixed as gammas.p
+#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -486,7 +511,9 @@ betas.post <- function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return log- posterior density of betas
+#'
 #' @export
 #'
 gammas.post <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, form) {
@@ -506,6 +533,7 @@ gammas.post <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, 
 
 #' @title gammas.post2
 #' @description log-posterior distribution of gammas with pth element fixed as gammas.p
+#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -518,7 +546,9 @@ gammas.post <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, 
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param form type of parametric model (Exponential or Weibull)
+#'
 #' @return log- posterior density of betas
+#'
 #' @export
 
 gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, form) {
@@ -538,6 +568,7 @@ gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, r
 
 #' @title rho.post
 #' @description log-posterior distribution of rho
+#'
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param eXB exponentiated vector of covariates times betas
@@ -546,7 +577,9 @@ gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, r
 #' @param rho current value of rho
 #' @param a shape parameter of gammas prior
 #' @param b scale parameter of gammas prior
+#'
 #' @return log- posterior density of betas
+#'
 #' @export
 
 rho.post <-  function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
@@ -560,6 +593,7 @@ rho.post <-  function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
 
 #' @title W.post
 #' @description log-posterior distribution of W with sth element fixed as W.s
+#'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
 #' @param lambda CAR parameter
@@ -571,7 +605,9 @@ rho.post <-  function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
 #' @param delta probability of true censoring
 #' @param C censoring indicator
 #' @param rho current value of rho
+#'
 #' @return log- posterior density of W
+#'
 #' @export
 
 W.post <- function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
@@ -608,6 +644,7 @@ W.post <- function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
 
 #' @title W.MH.sampling
 #' @description MH Sampling for W
+#'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
 #' @param lambda CAR parameter
@@ -620,7 +657,9 @@ W.post <- function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param prop.var proposal variance for Metropolis-Hastings
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 W.MH.sampling <- function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var) {
@@ -647,6 +686,7 @@ W.MH.sampling <- function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, pr
 
 #' @title W.F.post
 #' @description log-posterior distribution of W with sth element fixed as W.s
+#'
 #' @param S spatial information (e.g. district)
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -656,7 +696,9 @@ W.MH.sampling <- function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, pr
 #' @param delta probability of true censoring
 #' @param C censoring indicator
 #' @param rho current value of rho
+#'
 #' @return log- posterior density of W
+#'
 #' @export
 
 W.F.post <- function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
@@ -676,6 +718,7 @@ W.F.post <- function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
 
 #' @title W.F.MH.sampling (Cure Model with Frailties)
 #' @description MH sampling for W
+#'
 #' @param S spatial information (e.g. district)
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -686,7 +729,9 @@ W.F.post <- function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param prop.var proposal variance for Metropolis-Hastings
+#'
 #' @return One sample update using slice sampling
+#'
 #' @export
 
 W.F.MH.sampling <- function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var) {
@@ -710,7 +755,6 @@ W.F.MH.sampling <- function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, p
 }
 
 
-
 #' @title V.post
 #' @description log-posterior distribution of W with sth element fixed as W.s
 #'
@@ -729,7 +773,8 @@ W.F.MH.sampling <- function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, p
 #' @return log- posterior density of betas
 #'
 #' @export
-V.post = function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
+
+V.post <- function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
 
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -761,6 +806,7 @@ V.post = function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
   }
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
 }
 
 #' @title V.MH.sampling
@@ -782,7 +828,9 @@ V.post = function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
 #' @return One sample update using slice sampling
 #'
 #' @export
-V.MH.sampling = function(S, A, lambda, Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop.var) {
+
+V.MH.sampling <- function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var) {
+
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
   V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
@@ -800,6 +848,7 @@ V.MH.sampling = function(S, A, lambda, Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop
   	V = V_old[S]
   }
   return(V)
+
 }
 
 
@@ -819,7 +868,8 @@ V.MH.sampling = function(S, A, lambda, Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop
 #' @return log- posterior density of betas
 #'
 #' @export
-V.F.post = function(Sigma.v,S, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
+
+V.F.post <- function(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -835,6 +885,7 @@ V.F.post = function(Sigma.v,S, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
   }
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
 }
 
 
