@@ -12,7 +12,6 @@ NULL
 
 #' @title betas.slice.sampling
 #' @description slice sampling for betas
-#'
 #' @param Sigma.b variance estimate of betas
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -25,22 +24,22 @@ NULL
 #' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param m limit on steps in the slice sampling
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-betas.slice.sampling = function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, form) {
-  p1 = length(betas)
+
+betas.slice.sampling <- function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, form) {
+
+  p1 <- length(betas)
   for (p in sample(1:p1, p1, replace = FALSE)) {
-    betas[p] = univ.betas.slice.sampling(betas[p], p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, w, m, form = form)
+    betas[p] = univ.betas.slice.sampling(betas[p], p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, form = form)
   }
   return(betas)
+
 }
 
 
 #' @title univ.betas.slice.sampling
 #' @description univariate slice sampling for betas.p
-#'
 #' @param betas.p current value of the pth element of betas
 #' @param p pth element
 #' @param Sigma.b variance estimate of betas
@@ -57,19 +56,19 @@ betas.slice.sampling = function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, 
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-univ.betas.slice.sampling = function(betas.p, p, Sigma.b, Y,Y0, X, W, betas, delta, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+
+univ.betas.slice.sampling <- function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+
   b0 = betas.p
-  b.post0 = betas.post(b0, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) 
-  
+  b.post0 = betas.post(b0, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form)
+
   e.b.post0 = exp(b.post0)
   if (is.infinite(e.b.post0)){e.b.post0 = exp(700)}
-  
+
   if (exp(b.post0) > 0) { b.post0 = log(runif(1, 0, e.b.post0))}
-  
+
   u = runif(1, 0, w)
   L = b0 - u
   R = b0 + (w - u)
@@ -82,40 +81,40 @@ univ.betas.slice.sampling = function(betas.p, p, Sigma.b, Y,Y0, X, W, betas, del
     repeat
     {
       if (R >= upper) break
-      if (betas.post(R, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, form) <= b.post0) break
+      if (betas.post(R, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
       R = R + w
     }
   } else if (m > 1) {
     J = floor(runif(1, 0, m))
     K = (m - 1) - J
-    
+
     while (J > 0) {
       if (L <= lower) break
-      if (betas.post(L, p, Sigma.b, Y,Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
+      if (betas.post(L, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
       L = L - w
       J = J - 1
     }
-    
+
     while (K > 0) {
       if (R >= upper) break
-      if (betas.post(R, p, Sigma.b, Y,Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
+      if (betas.post(R, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
       R = R + w
       K = K - 1
     }
   }
-  
+
   if (L < lower) {
     L = lower
   }
   if (R > upper) {
     R = upper
   }
-  
+
   repeat
   {
     b1 = runif(1, L, R)
-    b.post1 = betas.post(b1, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, form)
-    
+    b.post1 = betas.post(b1, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form)
+
     if (b.post1 >= b.post0) break
     if (b1 > b0) {
       R = b1
@@ -124,12 +123,12 @@ univ.betas.slice.sampling = function(betas.p, p, Sigma.b, Y,Y0, X, W, betas, del
     }
   }
   return(b1)
+
 }
 
 
 #' @title gammas.slice.sampling
 #' @description slice sampling for gammas
-#'
 #' @param Sigma.g variance estimate of gammas
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -141,51 +140,51 @@ univ.betas.slice.sampling = function(betas.p, p, Sigma.b, Y,Y0, X, W, betas, del
 #' @param w size of the slice in the slice sampling
 #' @param m limit on steps in the slice sampling
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-gammas.slice.sampling = function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m, form) {
+
+gammas.slice.sampling <- function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m, form) {
+
   p2 = length(gammas)
   for (p in sample(1:p2, p2, replace = FALSE)) {
-    gammas[p] = univ.gammas.slice.sampling(gammas[p], p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, w, m, form = form)
+    gammas[p] = univ.gammas.slice.sampling(gammas[p], p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w, m, form = form)
   }
   return(gammas)
+
 }
 
 
 #' @title gammas.slice.sampling2
 #' @description slice sampling for gammas
-#'
 #' @param Sigma.g variance estimate of gammas
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-#'@param eXB exponentiated vector of covariates times betas
+#' @param eXB exponentiated vector of covariates times betas
 #' @param Z covariates for gammas
 #' @param V spatial random effects
 #' @param gammas current value of gammas
 #' @param C censoring indicator
 #' @param rho current value of rho
-#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param m limit on steps in the slice sampling
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-gammas.slice.sampling2 = function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form) {
+
+gammas.slice.sampling2 <- function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form) {
+
   p2 = length(gammas)
   for (p in sample(1:p2, p2, replace = FALSE)) {
-    gammas[p] = univ.gammas.slice.sampling2(gammas[p], p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form = form)
+    gammas[p] = univ.gammas.slice.sampling2(gammas[p], p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form = form)
   }
   return(gammas)
+
 }
 
 
 
 #' @title univ.gammas.slice.sampling2
 #' @description univariate slice sampling for gammas.p
-#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -197,25 +196,25 @@ gammas.slice.sampling2 = function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, 
 #' @param gammas current value of gammas
 #' @param C censoring indicator
 #' @param rho current value of rho
-#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param m limit on steps in the slice sampling
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-univ.gammas.slice.sampling2 = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, V, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+
+univ.gammas.slice.sampling2 <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+
   g0 = gammas.p
   g.post0 = gammas.post2(g0, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, form)
-  
+
   e.g.post0 = exp(g.post0)
-  
+
   if (is.infinite(e.g.post0)){e.g.post0 = exp(700)}
-  
+
   if (exp(g.post0) > 0) { g.post0 = log(runif(1, 0, e.g.post0))}
-  
+
   u = runif(1, 0, w)
   L = g0 - u
   R = g0 + (w - u)
@@ -234,14 +233,14 @@ univ.gammas.slice.sampling2 = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, V, ga
   } else if (m > 1) {
     J = floor(runif(1, 0, m))
     K = (m - 1) - J
-    
+
     while (J > 0) {
       if (L <= lower) break
       if (gammas.post2(L, p, Sigma.g, Y, Y0,eXB, Z, V, gammas, C, LY, rho, form) <= g.post0) break
       L = L - w
       J = J - 1
     }
-    
+
     while (K > 0) {
       if (R >= upper) break
       if (gammas.post2(R, p, Sigma.g, Y, Y0,eXB, Z, V, gammas, C, LY, rho, form) <= g.post0) break
@@ -249,19 +248,19 @@ univ.gammas.slice.sampling2 = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, V, ga
       K = K - 1
     }
   }
-  
+
   if (L < lower) {
     L = lower
   }
   if (R > upper) {
     R = upper
   }
-  
+
   repeat
   {
     g1 = runif(1, L, R)
     g.post1 = gammas.post2(g1, p, Sigma.g, Y, Y0,eXB, Z, V, gammas, C, LY, rho, form)
-    
+
     if (g.post1 >= g.post0) break
     if (g1 > g0) {
       R = g1
@@ -270,11 +269,11 @@ univ.gammas.slice.sampling2 = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, V, ga
     }
   }
   return(g1)
+
 }
 
 #' @title univ.gammas.slice.sampling
 #' @description univariate slice sampling for gammas.p
-#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -290,67 +289,66 @@ univ.gammas.slice.sampling2 = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, V, ga
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-univ.gammas.slice.sampling = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+
+univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+
   g0 = gammas.p
-  g.post0 = gammas.post(g0, p, Sigma.g, Y, Y0,eXB, Z,gammas, C, LY, rho, form)
-  
+  g.post0 = gammas.post(g0, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form)
+
   e.g.post0 = exp(g.post0)
-  
+
   if (is.infinite(e.g.post0)){e.g.post0 = exp(700)}
-  
+
   if (exp(g.post0) > 0) { g.post0 = log(runif(1, 0, e.g.post0))}
-  
-  
+
   u = runif(1, 0, w)
   L = g0 - u
   R = g0 + (w - u)
   if (is.infinite(m)) {
     repeat
     { if (L <= lower) break
-      if (gammas.post(L, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
+      if (gammas.post(L, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       L = L - w
     }
     repeat
     {
       if (R >= upper) break
-      if (gammas.post(R, p, Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
+      if (gammas.post(R, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       R = R + w
     }
   } else if (m > 1) {
     J = floor(runif(1, 0, m))
     K = (m - 1) - J
-    
+
     while (J > 0) {
       if (L <= lower) break
-      if (gammas.post(L, p, Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
+      if (gammas.post(L, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       L = L - w
       J = J - 1
     }
-    
+
     while (K > 0) {
       if (R >= upper) break
-      if (gammas.post(R, p, Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
+      if (gammas.post(R, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       R = R + w
       K = K - 1
     }
   }
-  
+
   if (L < lower) {
     L = lower
   }
   if (R > upper) {
     R = upper
   }
-  
+
   repeat
   {
     g1 = runif(1, L, R)
     g.post1 = gammas.post(g1, p, Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, form)
-    
+
     if (g.post1 >= g.post0) break
     if (g1 > g0) {
       R = g1
@@ -359,6 +357,7 @@ univ.gammas.slice.sampling = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, gammas
     }
   }
   return(g1)
+
 }
 
 
@@ -371,7 +370,7 @@ univ.gammas.slice.sampling = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, gammas
 #' @param delta probability of true censoring
 #' @param C censoring indicator
 #' @param rho current value of rho
-#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param m limit on steps in the slice sampling
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
@@ -382,13 +381,13 @@ univ.gammas.slice.sampling = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, gammas
 rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, upper = +Inf) {
   l0 = rho
   l.post0 = rho.post(Y, Y0,eXB, delta, C, LY, l0)
-  
+
   e.l.post0 = exp(l.post0)
   if (is.infinite(e.l.post0)){e.l.post0 = exp(700)}
-  
+
   if (exp(l.post0) > 0) { l.post0 = log(runif(1, 0, e.l.post0))}
-  
-  
+
+
   u = runif(1, 0, w)
   L = l0 - u
   R = l0 + (w - u)
@@ -408,14 +407,14 @@ rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, 
   } else if (m > 1) {
     J = floor(runif(1, 0, m))
     K = (m - 1) - J
-    
+
     while (J > 0) {
       if (L <= lower) break
       if (rho.post(Y, Y0,eXB, delta, C, LY, L) <= l.post0) break
       L = L - w
       J = J - 1
     }
-    
+
     while (K > 0) {
       if (R >= upper) break
       if (is.na(rho.post(Y, Y0,eXB, delta, C, LY, R))) #browser()
@@ -424,19 +423,19 @@ rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, 
       K = K - 1
     }
   }
-  
+
   if (L < lower) {
     L = lower
   }
   if (R > upper) {
     R = upper
   }
-  
+
   repeat
   {
     l1 = runif(1, L, R)
     l.post1 = rho.post(Y, Y0,eXB, delta, C, LY, l1)
-    
+
     if (l.post1 >= l.post0) break
     if (l1 > l0) {
       R = l1
@@ -499,8 +498,8 @@ gammas.post = function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, f
   num[which(is.infinite(num))] <- exp(700)
   denom = (1 + exp(Z %*% gammas))
   num[which(is.infinite(denom))] <- exp(700)
-  delta = num/denom  
-  
+  delta = num/denom
+
   lprior = rcpp_log_dmvnorm(Sigma.g, rep(0, length(gammas)), gammas, FALSE)
   lpost = llikWeibull(Y, Y0,eXB, delta, C, LY, rho) + lprior
   return(lpost)
@@ -568,7 +567,7 @@ rho.post = function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
 #'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
-#' @param lambda CAR parameter 
+#' @param lambda CAR parameter
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param X covariates for betas
@@ -589,21 +588,21 @@ W.post = function(S, A, lambda, Y,Y0,X, W, betas, delta, C, LY, rho) {
   for (s in 1:nrow(A)) {
   adj = which(A[s,] == 1)
   m_j = length(adj)
-  
+
   if(m_j == 0){
     m_j <- exp(-700)
   } else {
     m_j <- m_j
   }
-  
+
   wj = S_uniq[which(S_uniq[,1] %in% adj),2]
-  
+
   if (length(wj) == 0){
     W_j_bar = 0
   } else {
     W_j_bar = mean(wj)
   }
-  
+
   lprior = lprior + dnorm(S_uniq[s, 2], W_j_bar, sqrt(1/(lambda * m_j)), log = TRUE)
   }
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
@@ -616,7 +615,7 @@ W.post = function(S, A, lambda, Y,Y0,X, W, betas, delta, C, LY, rho) {
 #'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
-#' @param lambda CAR parameter 
+#' @param lambda CAR parameter
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param X covariates for betas
@@ -640,7 +639,7 @@ W.MH.sampling = function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, pro
   w1[which(w1==-Inf)] <- -740
   w2 = W.post(S, A, lambda, Y,Y0, X, W_old[S], betas, delta, C, LY, rho)
   w2[which(w2==-Inf)] <- -740
-  temp = w1- w2 
+  temp = w1- w2
   alpha = min(0, temp)
   if (u <= alpha) {
   	W = W_new[S]
@@ -671,7 +670,7 @@ W.F.post = function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
   eXB = exp(-(X %*% betas) + W)
   S_uniq = unique(cbind(S, W))
   S_uniq = S_uniq[order(S_uniq[,1]),]
-  lprior = 0 
+  lprior = 0
   for (s in 1:length(unique(S))){
     lprior = lprior + dnorm(S_uniq[s, 2], 0, Sigma.w[s,s])
   }
@@ -705,7 +704,7 @@ W.F.MH.sampling = function(Sigma.w, S, Y, Y0,X, W, betas, delta, C, LY, rho, pro
   u = log(runif(1))
   w1 = W.F.post(Sigma.w,S, Y, Y0,X, W_new[S], betas, delta, C, LY, rho)
   w2 = W.F.post(Sigma.w,S,  Y,Y0, X, W_old[S], betas, delta, C, LY, rho)
-  temp = w1- w2 
+  temp = w1- w2
   alpha = min(0, temp)
   if (u <= alpha) {
     W = W_new[S]
@@ -722,7 +721,7 @@ W.F.MH.sampling = function(Sigma.w, S, Y, Y0,X, W, betas, delta, C, LY, rho, pro
 #'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
-#' @param lambda CAR parameter 
+#' @param lambda CAR parameter
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param eXB exponentiated vector of covariates times betas
@@ -736,33 +735,33 @@ W.F.MH.sampling = function(Sigma.w, S, Y, Y0,X, W, betas, delta, C, LY, rho, pro
 #'
 #' @export
 V.post = function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
-  
+
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
   denom = (1 + exp(Z %*% gammas + V))
   num[which(is.infinite(denom))] <- exp(700)
   delta = num/denom
-  
+
   S_uniq = unique(cbind(S, V))
   S_uniq = S_uniq[order(S_uniq[,1]),]
   lprior = 0
   for (s in 1:nrow(A)) {
   adj = which(A[s,] == 1)
-  
+
   m_j = length(adj)
   if(m_j == 0){
     m_j <- exp(-700)
   } else {
     m_j <- m_j
   }
-  
+
   vj = S_uniq[which(S_uniq[,1] %in% adj),2]
   if (length(vj) == 0){
     V_j_bar = 0
   } else {
     V_j_bar = mean(vj)
   }
-  
+
   lprior = lprior + dnorm(S_uniq[s, 2], V_j_bar, sqrt(1/(lambda * m_j)), log = TRUE)
   }
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
@@ -774,7 +773,7 @@ V.post = function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
 #'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
-#' @param lambda CAR parameter 
+#' @param lambda CAR parameter
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param eXB exponentiated vector of covariates times betas
@@ -798,7 +797,7 @@ V.MH.sampling = function(S, A, lambda, Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop
   v1[which(v1==-Inf)] <- -740
   v2 = V.post(S, A, lambda, Y, Y0,eXB, Z, V_old[S], gammas, C, LY, rho)
   v2[which(v2==-Inf)] <- -740
-  temp = v1- v2 
+  temp = v1- v2
   alpha = min(0, temp)
   if (u <= alpha) {
   	V = V_new[S]
@@ -826,13 +825,13 @@ V.MH.sampling = function(S, A, lambda, Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop
 #'
 #' @export
 V.F.post = function(Sigma.v,S, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
-  
+
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
   denom = (1 + exp(Z %*% gammas + V))
   num[which(is.infinite(denom))] <- exp(700)
   delta = num/denom
-  
+
   S_uniq = unique(cbind(S, V))
   S_uniq = S_uniq[order(S_uniq[,1]),]
   lprior = 0
@@ -872,7 +871,7 @@ V.F.MH.sampling = function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop
   v1[which(v1==-Inf)] <- -740
   v2 = V.F.post(Sigma.v,S, Y, Y0,eXB, Z, V_old[S], gammas, C, LY, rho)
   v2[which(v2==-Inf)] <- -740
-  temp = v1- v2 
+  temp = v1- v2
   alpha = min(0, temp)
   if (u <= alpha) {
     V = V_new[S]
@@ -905,32 +904,32 @@ lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
   for (j in 1:J) {
     adj = which(A[j,]==1)
     m_j = length(adj)
-    
+
     if(m_j == 0){
       m_j <- exp(-700)
     } else {
       m_j <- m_j
     }
-    
+
     wj = S_uniq[which(S_uniq[,1] %in% adj),2]
     if (length(wj) == 0){
       W_j_bar = 0
     } else {
       W_j_bar = mean(wj)
     }
-    
+
     vj = S_uniq[which(S_uniq[,1] %in% adj),3]
     if (length(vj) == 0){
       V_j_bar = 0
     } else {
       V_j_bar = mean(vj)
     }
-    
+
     W_j = S_uniq[j, 2]
     V_j = S_uniq[j, 3]
-    
+
     sums = sums + m_j/2 * ((W_j-W_j_bar)^2 + (V_j-V_j_bar)^2)
-    
+
   }
   lambda = rgamma(1, J + a, sums + b)
   return(lambda)
@@ -950,7 +949,7 @@ lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho)
-#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
 #'
 #' @return chain of the variables of interest
@@ -987,16 +986,16 @@ mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, for
     denom = (1 + exp(Z %*% gammas))
     num[which(is.infinite(denom))] <- exp(700)
     delta = num/denom
-    
+
     if (form %in% "Weibull") {
       rho = rho.slice.sampling(Y, Y0,eXB, delta, C, LY, rho, w[3], m)
-    } 
+    }
     if (iter > burn & (iter - burn) %% thin == 0) {
       betas.samp[(iter - burn) / thin, ] = betas
       gammas.samp[(iter - burn) / thin, ] = gammas
       rho.samp[(iter - burn) / thin] = rho
       delta.samp[(iter - burn) / thin] = mean(delta)
-      
+
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp))
@@ -1018,7 +1017,7 @@ mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, for
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho)
-#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
 #' @param prop.var proposal variance for Metropolis-Hastings
 #'
@@ -1063,11 +1062,11 @@ mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1)
  	  denom = (1 + exp(Z %*% gammas + V))
  	  num[which(is.infinite(denom))] <- exp(700)
  	  delta = num/denom
- 	  
+
 
     if (form %in% "Weibull") {
       rho = rho.slice.sampling(Y, Y0,eXB, delta, C, LY, rho, w[3], m)
-    } 
+    }
     if (iter > burn & (iter - burn) %% thin == 0) {
       betas.samp[(iter - burn) / thin, ] = betas
       gammas.samp[(iter - burn) / thin, ] = gammas
@@ -1100,7 +1099,7 @@ mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1)
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho)
-#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
 #' @param prop.var proposal variance for Metropolis-Hastings
 #'
@@ -1152,10 +1151,10 @@ mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m
     denom = (1 + exp(Z %*% gammas + V))
     num[which(is.infinite(denom))] <- exp(700)
     delta = num/denom
-    
+
     if (form %in% "Weibull") {
       rho = rho.slice.sampling(Y, Y0,eXB, delta, C, LY, rho, w[3], m)
-    } 
+    }
     if (iter > burn & (iter - burn) %% thin == 0) {
       betas.samp[(iter - burn) / thin, ] = betas
       gammas.samp[(iter - burn) / thin, ] = gammas
@@ -1176,7 +1175,7 @@ mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m
 #' @title spatialSPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian spatial split population survival model
 #'
-#' @param formula 
+#' @param formula
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param C censoring indicator
 #' @param LY last observation year
@@ -1188,17 +1187,17 @@ mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
-#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
 #' @param prop.var proposal variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
 #' @export
-#' 
+#'
 spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
   data <- data
-  
+
   equation1 <- as.character(duration)
   equation2<-as.character(immune)
   formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
@@ -1209,19 +1208,19 @@ spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, 
   Z <- model.matrix(attr(mf2, "terms"), data=mf2)
   Y <- as.matrix(model.response(mf1))
   C <- as.matrix(model.response(mf2))
-  
+
   Y0 <- as.character(Y0)
   LY <- as.character(LY)
   S <- as.character(S)
-  
+
   dat <- subset(data, select=c(Y0, LY, S))
-  
+
   Y0 <- dat[,1]
   LY <- dat[,2]
   S <- dat[,3]
-  
+
   A <- as.matrix(A)
-  
+
   burn = burn
   if(is.null(w)){
     w = c(1,1,1)
@@ -1235,11 +1234,11 @@ spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, 
   }
   form = form
   prop.var = prop.var
-  
+
   dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
   dataset  <- na.omit(dataset)
   col <- ncol(dataset)
-  
+
   Y <- as.matrix(dataset[,1])
   Y0 <- as.matrix(dataset[,2])
   C <- as.matrix(dataset[,3])
@@ -1247,17 +1246,17 @@ spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, 
   S <- as.matrix(dataset[,5])
   X <- as.matrix(dataset[,6:5+ncol(X)])
   Z <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
-  
-  results <- mcmcspatialSP(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w, m , form, prop.var) 
+
+  results <- mcmcspatialSP(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w, m , form, prop.var)
   return(results)
-  
+
 }
 
 
 #' @title frailtySPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian non-spatial frailty split population survival model
 #'
-#' @param formula 
+#' @param formula
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param C censoring indicator
 #' @param LY last observation year
@@ -1268,17 +1267,17 @@ spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, 
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
-#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
 #' @param prop.var proposal variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
 #' @export
-#' 
+#'
 frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
   data <- data
-  
+
   equation1 <- as.character(duration)
   equation2<-as.character(immune)
   formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
@@ -1289,17 +1288,17 @@ frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin
   Z <- model.matrix(attr(mf2, "terms"), data=mf2)
   Y <- as.matrix(model.response(mf1))
   C <- as.matrix(model.response(mf2))
-  
+
   Y0 <- as.character(Y0)
   LY <- as.character(LY)
   S <- as.character(S)
-  
+
   dat <- subset(data, select=c(Y0, LY, S))
-  
+
   Y0 <- dat[,1]
   LY <- dat[,2]
   S <- dat[,3]
-  
+
   burn = burn
   if(is.null(w)){
     w = c(1,1,1)
@@ -1313,11 +1312,11 @@ frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin
   }
   form = form
   prop.var = prop.var
-  
+
   dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
   dataset  <- na.omit(dataset)
   col <- ncol(dataset)
-  
+
   Y <- as.matrix(dataset[,1])
   Y0 <- as.matrix(dataset[,2])
   C <- as.matrix(dataset[,3])
@@ -1325,10 +1324,10 @@ frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin
   S <- as.matrix(dataset[,5])
   X <- as.matrix(dataset[,6:5+ncol(X)])
   Z <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
-  
-  results <- mcmcfrailtySP(Y, Y0,C, LY, X, Z, S, N, burn, thin, w, m , form, prop.var) 
+
+  results <- mcmcfrailtySP(Y, Y0,C, LY, X, Z, S, N, burn, thin, w, m , form, prop.var)
   return(results)
-  
+
 }
 
 
@@ -1336,7 +1335,7 @@ frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin
 #' @title SPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties
 #'
-#' @param formula 
+#' @param formula
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param C censoring indicator
 #' @param LY last observation year
@@ -1347,17 +1346,17 @@ frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
-#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho. 
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
 #' @param prop.var proposal variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
 #' @export
-#' 
+#'
 SPsurv<- function(duration, immune, Y0, LY, data=list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
   data <- data
-  
+
   equation1 <- as.character(duration)
   equation2<-as.character(immune)
   formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
@@ -1368,12 +1367,12 @@ SPsurv<- function(duration, immune, Y0, LY, data=list(), N, burn, thin, w = c(1,
   Z <- model.matrix(attr(mf2, "terms"), data=mf2)
   Y <- as.matrix(model.response(mf1))
   C <- as.matrix(model.response(mf2))
-  
+
   Y0 <- as.character(Y0)
   LY <- as.character(LY)
-  
+
   dat <- subset(data, select=c(Y0, LY))
-  
+
   Y0 <- dat[,1]
   LY <- dat[,2]
 
@@ -1393,17 +1392,17 @@ SPsurv<- function(duration, immune, Y0, LY, data=list(), N, burn, thin, w = c(1,
   dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
   dataset  <- na.omit(dataset)
   col <- ncol(dataset)
-  
+
   Y <- as.matrix(dataset[,1])
   Y0 <- as.matrix(dataset[,2])
   C <- as.matrix(dataset[,3])
   LY <- as.matrix(dataset[,4])
   X <- as.matrix(dataset[,5:4+ncol(X)])
   Z <- as.matrix(dataset[,(5+ncol(X)):ncol(dataset)])
-  
-  results <- mcmcSP(Y, Y0,C, LY, X, Z, N, burn, thin, w, m , form) 
+
+  results <- mcmcSP(Y, Y0,C, LY, X, Z, N, burn, thin, w, m , form)
   return(results)
-  
+
 }
 
 
