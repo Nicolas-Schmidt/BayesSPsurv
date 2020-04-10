@@ -363,7 +363,6 @@ univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gamm
 
 #' @title rho.slice.sampling
 #' @description univariate slice sampling for rho
-#'
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param eXB exponentiated vector of covariates times betas
@@ -374,11 +373,11 @@ univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gamm
 #' @param m limit on steps in the slice sampling
 #' @param lower lower bound on support of the distribution
 #' @param upper upper bound on support of the distribution
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, upper = +Inf) {
+
+rho.slice.sampling <- function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, upper = +Inf) {
+
   l0 = rho
   l.post0 = rho.post(Y, Y0,eXB, delta, C, LY, l0)
 
@@ -386,7 +385,6 @@ rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, 
   if (is.infinite(e.l.post0)){e.l.post0 = exp(700)}
 
   if (exp(l.post0) > 0) { l.post0 = log(runif(1, 0, e.l.post0))}
-
 
   u = runif(1, 0, w)
   L = l0 - u
@@ -444,11 +442,11 @@ rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, 
     }
   }
   return(l1)
+
 }
 
 #' @title betas.post
 #' @description log-posterior distribution of betas with pth element fixed as betas.p
-#'
 #' @param betas.p current value of the pth element of betas
 #' @param p pth element
 #' @param Sigma.b variance estimate of betas
@@ -461,22 +459,22 @@ rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, 
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return log- posterior density of betas
-#'
 #' @export
-betas.post = function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, form) {
-  betas[p] = betas.p
+
+betas.post <- function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, form) {
+
+   betas[p] = betas.p
   eXB = exp(-(X %*% betas) + W)
   lprior = rcpp_log_dmvnorm(Sigma.b, rep(0, length(betas)), betas, FALSE)
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
 }
 
 
 #' @title gammas.post
 #' @description log-posterior distribution of gammas with pth element fixed as gammas.p
-#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -488,27 +486,26 @@ betas.post = function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho,
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return log- posterior density of betas
-#'
 #' @export
-gammas.post = function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, form) {
+#'
+gammas.post <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, form) {
+
   gammas[p] = gammas.p
   num = exp(Z %*% gammas)
   num[which(is.infinite(num))] <- exp(700)
   denom = (1 + exp(Z %*% gammas))
   num[which(is.infinite(denom))] <- exp(700)
   delta = num/denom
-
   lprior = rcpp_log_dmvnorm(Sigma.g, rep(0, length(gammas)), gammas, FALSE)
   lpost = llikWeibull(Y, Y0,eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
 }
 
 
 #' @title gammas.post2
 #' @description log-posterior distribution of gammas with pth element fixed as gammas.p
-#'
 #' @param gammas.p current value of the pth element of gammas
 #' @param p pth element
 #' @param Sigma.g variance estimate of gammas
@@ -521,21 +518,21 @@ gammas.post = function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, f
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param form type of parametric model (Exponential or Weibull)
-#'
 #' @return log- posterior density of betas
-#'
 #' @export
-gammas.post2 = function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, form) {
+
+gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, form) {
+
   gammas[p] = gammas.p
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
   denom = (1 + exp(Z %*% gammas + V))
   num[which(is.infinite(denom))] <- exp(700)
   delta = num/denom
-
   lprior = rcpp_log_dmvnorm(Sigma.g, rep(0, length(gammas)), gammas, FALSE)
   lpost = llikWeibull(Y, Y0,eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
 }
 
 
