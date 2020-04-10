@@ -1254,7 +1254,7 @@ mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m
 #'
 #' @export
 #'
-spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+spatialSPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
 
   data <- data
 
@@ -1335,7 +1335,7 @@ spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, bur
 #'
 #' @export
 
-frailtySPsurv <- function(duration, immune, Y0, LY, S, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+frailtySPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
 
   data <- data
 
@@ -1414,7 +1414,7 @@ frailtySPsurv <- function(duration, immune, Y0, LY, S, data = list(), N, burn, t
 #'
 #' @export
 
-SPsurv <- function(duration, immune, Y0, LY, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
+SPsurv <- function(formula, duration, immune, Y0, LY, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
 
   data <- data
   equation1 <- as.character(duration)
