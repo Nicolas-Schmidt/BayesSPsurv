@@ -538,7 +538,6 @@ gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, r
 
 #' @title rho.post
 #' @description log-posterior distribution of rho
-#'
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param eXB exponentiated vector of covariates times betas
@@ -547,21 +546,20 @@ gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, r
 #' @param rho current value of rho
 #' @param a shape parameter of gammas prior
 #' @param b scale parameter of gammas prior
-#'
 #' @return log- posterior density of betas
-#'
 #' @export
-rho.post = function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
+
+rho.post <-  function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
+
   lprior = dgamma(rho, a, b, log = TRUE)
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
+
 }
-
-
 
 #' @title W.post
 #' @description log-posterior distribution of W with sth element fixed as W.s
-#'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
 #' @param lambda CAR parameter
@@ -573,11 +571,11 @@ rho.post = function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
 #' @param delta probability of true censoring
 #' @param C censoring indicator
 #' @param rho current value of rho
-#'
 #' @return log- posterior density of W
-#'
 #' @export
-W.post = function(S, A, lambda, Y,Y0,X, W, betas, delta, C, LY, rho) {
+
+W.post <- function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
+
   eXB = exp(-(X %*% betas) + W)
   S_uniq = unique(cbind(S, W))
   S_uniq = S_uniq[order(S_uniq[,1]),]
@@ -604,12 +602,12 @@ W.post = function(S, A, lambda, Y,Y0,X, W, betas, delta, C, LY, rho) {
   }
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
 }
 
 
 #' @title W.MH.sampling
 #' @description MH Sampling for W
-#'
 #' @param S spatial information (e.g. district)
 #' @param A adjacency information corresponding to spatial information
 #' @param lambda CAR parameter
@@ -622,11 +620,11 @@ W.post = function(S, A, lambda, Y,Y0,X, W, betas, delta, C, LY, rho) {
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param prop.var proposal variance for Metropolis-Hastings
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-W.MH.sampling = function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var) {
+
+W.MH.sampling <- function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var) {
+
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
   W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
@@ -644,12 +642,11 @@ W.MH.sampling = function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, pro
   	W = W_old[S]
   }
   return(W)
-}
 
+}
 
 #' @title W.F.post
 #' @description log-posterior distribution of W with sth element fixed as W.s
-#'
 #' @param S spatial information (e.g. district)
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -659,11 +656,11 @@ W.MH.sampling = function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, pro
 #' @param delta probability of true censoring
 #' @param C censoring indicator
 #' @param rho current value of rho
-#'
 #' @return log- posterior density of W
-#'
 #' @export
-W.F.post = function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
+
+W.F.post <- function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
+
   eXB = exp(-(X %*% betas) + W)
   S_uniq = unique(cbind(S, W))
   S_uniq = S_uniq[order(S_uniq[,1]),]
@@ -673,12 +670,12 @@ W.F.post = function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
   }
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
+
 }
 
 
 #' @title W.F.MH.sampling (Cure Model with Frailties)
 #' @description MH sampling for W
-#'
 #' @param S spatial information (e.g. district)
 #' @param Y the time (duration) dependent variable for the survival stage (t)
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
@@ -689,11 +686,11 @@ W.F.post = function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
 #' @param C censoring indicator
 #' @param rho current value of rho
 #' @param prop.var proposal variance for Metropolis-Hastings
-#'
 #' @return One sample update using slice sampling
-#'
 #' @export
-W.F.MH.sampling = function(Sigma.w, S, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var) {
+
+W.F.MH.sampling <- function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var) {
+
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
   W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
@@ -709,6 +706,7 @@ W.F.MH.sampling = function(Sigma.w, S, Y, Y0,X, W, betas, delta, C, LY, rho, pro
     W = W_old[S]
   }
   return(W)
+
 }
 
 
