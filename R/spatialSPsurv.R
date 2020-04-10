@@ -1234,7 +1234,6 @@ mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m
 #' @title spatialSPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian spatial split population survival model
 #'
-#' @param formula
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param C censoring indicator
 #' @param LY last observation year
@@ -1254,7 +1253,7 @@ mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m
 #'
 #' @export
 #'
-spatialSPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
 
   data <- data
 
@@ -1316,7 +1315,6 @@ spatialSPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), A
 #' @title frailtySPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian non-spatial frailty split population survival model
 #'
-#' @param formula
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param C censoring indicator
 #' @param LY last observation year
@@ -1329,13 +1327,12 @@ spatialSPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), A
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
-#' @param prop.var proposal variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
 #' @export
 
-frailtySPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+frailtySPsurv <- function(formula,duration, immune, Y0, LY, S, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
 
   data <- data
 
@@ -1396,7 +1393,6 @@ frailtySPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), N
 #' @title SPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties
 #'
-#' @param formula
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param C censoring indicator
 #' @param LY last observation year
@@ -1414,7 +1410,7 @@ frailtySPsurv <- function(formula, duration, immune, Y0, LY, S, data = list(), N
 #'
 #' @export
 
-SPsurv <- function(formula, duration, immune, Y0, LY, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
+SPsurv <- function(duration, immune, Y0, LY, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
 
   data <- data
   equation1 <- as.character(duration)
