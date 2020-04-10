@@ -1409,7 +1409,6 @@ frailtySPsurv <- function(duration, immune, Y0, LY, S, data = list(), N, burn, t
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
-#' @param prop.var proposal variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
