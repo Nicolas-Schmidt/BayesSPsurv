@@ -907,7 +907,9 @@ V.F.post <- function(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 #' @return One sample update using slice sampling
 #'
 #' @export
-V.F.MH.sampling = function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop.var) {
+
+V.F.MH.sampling <- function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop.var) {
+
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
   V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
@@ -925,8 +927,8 @@ V.F.MH.sampling = function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop
     V = V_old[S]
   }
   return(V)
-}
 
+}
 
 
 #' @title lambda.gibbs.sampling2
@@ -942,7 +944,9 @@ V.F.MH.sampling = function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop
 #' @return log- posterior density of betas
 #'
 #' @export
+
 lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
+
   S_uniq = unique(cbind(S, W, V))
   S_uniq = S_uniq[order(S_uniq[,1]),]
   J = nrow(S_uniq)
@@ -979,6 +983,7 @@ lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
   }
   lambda = rgamma(1, J + a, sums + b)
   return(lambda)
+
 }
 
 
@@ -1001,7 +1006,9 @@ lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
 #' @return chain of the variables of interest
 #'
 #' @export
+
 mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, form) {
+
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -1045,6 +1052,7 @@ mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, for
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp))
+
 }
 
 
@@ -1070,7 +1078,9 @@ mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, for
 #' @return chain of the variables of interest
 #'
 #' @export
+
 mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var) {
+
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -1126,6 +1136,7 @@ mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1)
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp))
+
 }
 
 
@@ -1152,7 +1163,9 @@ mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1)
 #' @return chain of the variables of interest
 #'
 #' @export
+
 mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var) {
+
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   p3 = length(unique(S))
@@ -1241,7 +1254,8 @@ mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m
 #'
 #' @export
 #'
-spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+
   data <- data
 
   equation1 <- as.character(duration)
@@ -1285,13 +1299,13 @@ spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, 
   dataset  <- na.omit(dataset)
   col <- ncol(dataset)
 
-  Y <- as.matrix(dataset[,1])
+  Y  <- as.matrix(dataset[,1])
   Y0 <- as.matrix(dataset[,2])
-  C <- as.matrix(dataset[,3])
+  C  <- as.matrix(dataset[,3])
   LY <- as.matrix(dataset[,4])
-  S <- as.matrix(dataset[,5])
-  X <- as.matrix(dataset[,6:5+ncol(X)])
-  Z <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
+  S  <- as.matrix(dataset[,5])
+  X  <- as.matrix(dataset[,6:5+ncol(X)])
+  Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
 
   results <- mcmcspatialSP(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w, m , form, prop.var)
   return(results)
@@ -1320,8 +1334,9 @@ spatialSPsurv<- function(duration, immune, Y0, LY, S, data=list(), A,  N, burn, 
 #' @return chain of the variables of interest
 #'
 #' @export
-#'
-frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+
+frailtySPsurv <- function(duration, immune, Y0, LY, S, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+
   data <- data
 
   equation1 <- as.character(duration)
@@ -1363,13 +1378,13 @@ frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin
   dataset  <- na.omit(dataset)
   col <- ncol(dataset)
 
-  Y <- as.matrix(dataset[,1])
+  Y  <- as.matrix(dataset[,1])
   Y0 <- as.matrix(dataset[,2])
-  C <- as.matrix(dataset[,3])
+  C  <- as.matrix(dataset[,3])
   LY <- as.matrix(dataset[,4])
-  S <- as.matrix(dataset[,5])
-  X <- as.matrix(dataset[,6:5+ncol(X)])
-  Z <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
+  S  <- as.matrix(dataset[,5])
+  X  <- as.matrix(dataset[,6:5+ncol(X)])
+  Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
 
   results <- mcmcfrailtySP(Y, Y0,C, LY, X, Z, S, N, burn, thin, w, m , form, prop.var)
   return(results)
@@ -1399,10 +1414,10 @@ frailtySPsurv<- function(duration, immune, Y0, LY, S, data=list(), N, burn, thin
 #' @return chain of the variables of interest
 #'
 #' @export
-#'
-SPsurv<- function(duration, immune, Y0, LY, data=list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
-  data <- data
 
+SPsurv <- function(duration, immune, Y0, LY, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
+
+  data <- data
   equation1 <- as.character(duration)
   equation2<-as.character(immune)
   formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
@@ -1439,12 +1454,12 @@ SPsurv<- function(duration, immune, Y0, LY, data=list(), N, burn, thin, w = c(1,
   dataset  <- na.omit(dataset)
   col <- ncol(dataset)
 
-  Y <- as.matrix(dataset[,1])
+  Y  <- as.matrix(dataset[,1])
   Y0 <- as.matrix(dataset[,2])
-  C <- as.matrix(dataset[,3])
+  C  <- as.matrix(dataset[,3])
   LY <- as.matrix(dataset[,4])
-  X <- as.matrix(dataset[,5:4+ncol(X)])
-  Z <- as.matrix(dataset[,(5+ncol(X)):ncol(dataset)])
+  X  <- as.matrix(dataset[,5:4+ncol(X)])
+  Z  <- as.matrix(dataset[,(5+ncol(X)):ncol(dataset)])
 
   results <- mcmcSP(Y, Y0,C, LY, X, Z, N, burn, thin, w, m , form)
   return(results)
