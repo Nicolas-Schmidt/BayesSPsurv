@@ -16,6 +16,13 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 
 Bayesian Spatial Split Population Survival Model
 
+#### \>\> V E R S I O N \<\<
+
+    #> Version: 0.1.0.9000
+
+Manual
+[**here**](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_spatialSPsurv.pdf).
+
 ## Installation
 
 ``` r

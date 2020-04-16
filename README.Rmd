@@ -26,8 +26,43 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 
 Bayesian Spatial Split Population Survival Model
 
+
+#### >> V E R S I O N <<
+```{r, echo = FALSE}
+cat(paste("Version:", packageVersion("spatialSPsurv")))
+```
+
+
+
+Manual [__here__](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_spatialSPsurv.pdf).
+
+
+
 ## Installation
 
 ``` r
 source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 ```
+
+
+
+
+```{r, echo = FALSE, message = FALSE}
+manual <- function(){
+    old <- here::here()
+    path <- here::here('man', 'figures')
+    sink('noise.txt')
+    devtools::build_manual(path = path)
+    sink()
+    setwd(path)
+    invisible(file.rename(list.files(pattern="^spatialSPsurv"), 'manual_spatialSPsurv.pdf'))
+    setwd(old)
+    invisible(file.remove('noise.txt'))
+}
+manual()
+```
+
+
+
+
+
