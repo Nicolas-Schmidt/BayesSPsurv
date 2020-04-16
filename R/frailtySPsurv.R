@@ -1,26 +1,26 @@
-#' @title spatialSPsurv
-#' @description Markov Chain Monte Carlo (MCMC) to run Bayesian spatial split population survival model
+#' @title frailtySPsurv
+#' @description Markov Chain Monte Carlo (MCMC) to run Bayesian non-spatial frailty split population survival model
 #'
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-#' @param duration ...
+#' @param formula ...
 #' @param LY last observation year
+#' @param duration ...
 #' @param immune ...
 #' @param data ...
+#' @param prop.var ...
 #' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information
-#' @param A Spatial Matrix (load separate spatial weights matrix file)
 #' @param N number of MCMC iterations
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
-#' @param prop.var proposal variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
 #' @export
-#'
-spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+
+frailtySPsurv <- function(formula,duration, immune, Y0, LY, S, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
 
     data <- data
 
@@ -44,8 +44,6 @@ spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, bur
     Y0 <- dat[,1]
     LY <- dat[,2]
     S <- dat[,3]
-
-    A <- as.matrix(A)
 
     burn = burn
     if(is.null(w)){
@@ -73,7 +71,7 @@ spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, bur
     X  <- as.matrix(dataset[,6:5+ncol(X)])
     Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
 
-    results <- mcmcspatialSP(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w, m , form, prop.var)
+    results <- mcmcfrailtySP(Y, Y0,C, LY, X, Z, S, N, burn, thin, w, m , form, prop.var)
     return(results)
 
 }

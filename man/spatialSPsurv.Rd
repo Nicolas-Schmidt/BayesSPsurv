@@ -22,11 +22,17 @@ spatialSPsurv(
 )
 }
 \arguments{
+\item{duration}{...}
+
+\item{immune}{...}
+
 \item{Y0}{the elapsed time since inception until the beginning of time period (t-1)}
 
 \item{LY}{last observation year}
 
 \item{S}{spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information}
+
+\item{data}{...}
 
 \item{A}{Spatial Matrix (load separate spatial weights matrix file)}
 
@@ -43,14 +49,6 @@ spatialSPsurv(
 \item{form}{type of parametric model (Exponential or Weibull)}
 
 \item{prop.var}{proposal variance for Metropolis-Hastings}
-
-\item{formula}{}
-
-\item{C}{censoring indicator}
-
-\item{X}{covariates for betas}
-
-\item{Z}{covariates for gammas}
 }
 \value{
 chain of the variables of interest

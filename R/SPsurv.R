@@ -1,29 +1,25 @@
-#' @title spatialSPsurv
-#' @description Markov Chain Monte Carlo (MCMC) to run Bayesian spatial split population survival model
+#' @title SPsurv
+#' @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties
 #'
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param duration ...
 #' @param LY last observation year
 #' @param immune ...
 #' @param data ...
-#' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information
-#' @param A Spatial Matrix (load separate spatial weights matrix file)
 #' @param N number of MCMC iterations
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Exponential or Weibull)
-#' @param prop.var proposal variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
 #' @export
-#'
-spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+
+SPsurv <- function(duration, immune, Y0, LY, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
 
     data <- data
-
     equation1 <- as.character(duration)
     equation2<-as.character(immune)
     formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
@@ -37,15 +33,11 @@ spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, bur
 
     Y0 <- as.character(Y0)
     LY <- as.character(LY)
-    S <- as.character(S)
 
-    dat <- subset(data, select=c(Y0, LY, S))
+    dat <- subset(data, select=c(Y0, LY))
 
     Y0 <- dat[,1]
     LY <- dat[,2]
-    S <- dat[,3]
-
-    A <- as.matrix(A)
 
     burn = burn
     if(is.null(w)){
@@ -59,9 +51,8 @@ spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, bur
         m=m
     }
     form = form
-    prop.var = prop.var
 
-    dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
+    dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))  # S ??
     dataset  <- na.omit(dataset)
     col <- ncol(dataset)
 
@@ -69,11 +60,10 @@ spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, bur
     Y0 <- as.matrix(dataset[,2])
     C  <- as.matrix(dataset[,3])
     LY <- as.matrix(dataset[,4])
-    S  <- as.matrix(dataset[,5])
-    X  <- as.matrix(dataset[,6:5+ncol(X)])
-    Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
+    X  <- as.matrix(dataset[,5:4+ncol(X)])
+    Z  <- as.matrix(dataset[,(5+ncol(X)):ncol(dataset)])
 
-    results <- mcmcspatialSP(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w, m , form, prop.var)
+    results <- mcmcSP(Y, Y0,C, LY, X, Z, N, burn, thin, w, m , form)
     return(results)
 
 }
