@@ -46,6 +46,39 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 
 
 
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+net_str_f <- function(package){
+    init <- ls(pos = 1)
+    package <- 'spatialSPsurv'
+    suppressMessages(require(package, character.only = TRUE)) 
+    source(here::here('R', 'utils.r')) 
+    visible_fun_pack <- ls(search()[search() == paste0("package:", package)]) 
+    all_fun_pack <- setdiff(ls(pos = 1), init)[-c(7, 21)]
+    all   <- c(all_fun_pack, visible_fun_pack) 
+    l1 <- purrr::map(all, function(x){pryr::fun_calls(body(x))})
+    l2 <- purrr::map(l1, function(x) paste(paste0(all[all %in% x], "--"), collapse = ""))
+    names(l2) <- all
+    out <- 
+    stack(l2) %>% tidyr::separate(col = 'values', into = paste("func", 1:6), sep = "--", remove = FALSE) %>% 
+        .[, c(ncol(.), 2:(ncol(.)-1))]
+    out[is.na(out)] <- ''
+    out[,-7] %>% as.tibble() %>% print(n = Inf)
+    
+    
+}
+```
+
+```{r, echo = TRUE, , warning = FALSE}
+## ---------------------
+## LOCAL CHECK!
+## ---------------------
+
+
+net_str_f('spatialSPsurv')
+
+```
+
 
 ```{r, echo = FALSE, message = FALSE}
 manual <- function(){

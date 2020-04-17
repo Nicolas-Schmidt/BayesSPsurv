@@ -28,3 +28,42 @@ Manual
 ``` r
 source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 ```
+
+``` r
+## ---------------------
+## LOCAL CHECK!
+## ---------------------
+
+
+net_str_f('spatialSPsurv')
+#> Registered S3 method overwritten by 'pryr':
+#>   method      from
+#>   print.bytes Rcpp
+#> # A tibble: 24 x 6
+#>    ind          `func 1`        `func 2`      `func 3`     `func 4`   `func 5`  
+#>    <fct>        <chr>           <chr>         <chr>        <chr>      <chr>     
+#>  1 betas.post   ""              ""            ""           ""         ""        
+#>  2 betas.slice~ "univ.betas.sl~ ""            ""           ""         ""        
+#>  3 gammas.post  ""              ""            ""           ""         ""        
+#>  4 gammas.post2 ""              ""            ""           ""         ""        
+#>  5 gammas.slic~ "univ.gammas.s~ ""            ""           ""         ""        
+#>  6 gammas.slic~ "univ.gammas.s~ ""            ""           ""         ""        
+#>  7 mcmcfrailty~ "betas.slice.s~ "gammas.slic~ "rho.slice.~ "V.F.MH.s~ "W.F.MH.s~
+#>  8 mcmcSP       "betas.slice.s~ "gammas.slic~ "rho.slice.~ ""         ""        
+#>  9 mcmcspatial~ "betas.slice.s~ "gammas.slic~ "rho.slice.~ "V.MH.sam~ "W.MH.sam~
+#> 10 rho.post     ""              ""            ""           ""         ""        
+#> 11 rho.slice.s~ "rho.post"      ""            ""           ""         ""        
+#> 12 univ.betas.~ "betas.post"    ""            ""           ""         ""        
+#> 13 univ.gammas~ "gammas.post"   ""            ""           ""         ""        
+#> 14 univ.gammas~ "gammas.post2"  ""            ""           ""         ""        
+#> 15 V.F.MH.samp~ "V.F.post"      ""            ""           ""         ""        
+#> 16 V.F.post     ""              ""            ""           ""         ""        
+#> 17 V.MH.sampli~ "V.post"        ""            ""           ""         ""        
+#> 18 V.post       ""              ""            ""           ""         ""        
+#> 19 W.F.MH.samp~ ""              ""            ""           ""         ""        
+#> 20 W.MH.sampli~ "W.post"        ""            ""           ""         ""        
+#> 21 W.post       ""              ""            ""           ""         ""        
+#> 22 frailtySPsu~ "mcmcfrailtySP" ""            ""           ""         ""        
+#> 23 spatialSPsu~ "mcmcspatialSP" ""            ""           ""         ""        
+#> 24 SPsurv       "mcmcSP"        ""            ""           ""         ""
+```
