@@ -22,15 +22,11 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+`r badger::badge_devel("Nicolas-Schmidt/IntRo", "blue")`
 <!-- badges: end -->
 
 Bayesian Spatial Split Population Survival Model
 
-
-#### >> V E R S I O N <<
-```{r, echo = FALSE}
-cat(paste("Version:", packageVersion("spatialSPsurv")))
-```
 
 
 
