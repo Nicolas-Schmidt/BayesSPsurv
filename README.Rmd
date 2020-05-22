@@ -92,6 +92,66 @@ manual()
 ```
 
 
+```{r, eval = FALSE}
+
+# ADD
+
+.onUnload <- function (libpath) {
+  library.dynam.unload("spatialSPsurv", libpath)
+}
+
+# ATT
+
+> checking Rd \usage sections ... WARNING
+  Undocumented arguments in documentation object 'V.F.MH.sampling'
+    'Sigma.v'
+  
+  Undocumented arguments in documentation object 'V.F.post'
+    'Sigma.v'
+  
+  Undocumented arguments in documentation object 'W.F.MH.sampling'
+    'Sigma.w'
+  
+  Undocumented arguments in documentation object 'W.F.post'
+    'Sigma.w'
+  
+  Undocumented arguments in documentation object 'mcmcSP'
+    'LY'
+  
+  Documented arguments not in \usage in documentation object 'mcmcfrailtySP':
+    'A'
+  
+  Functions with \usage entries need to have the appropriate \alias
+  entries, and all their arguments documented.
+  The \usage entries must correspond to syntactically valid R code.
+  See chapter 'Writing R documentation files' in the 'Writing R
+  Extensions' manual.
+
+> checking R code for possible problems ... NOTE
+  SPsurv: no visible binding for global variable 'S'
+  Undefined global functions or variables:
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

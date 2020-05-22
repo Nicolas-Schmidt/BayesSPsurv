@@ -9,26 +9,30 @@
 #' @importFrom FastGP rcpp_rmvnorm rcpp_log_dmvnorm
 NULL
 
+.onUnload <- function (libpath) {
+  library.dynam.unload("spatialSPsurv", libpath)
+}
 
-# @title betas.slice.sampling
-# @description slice sampling for betas
-#
-# @param Sigma.b variance estimate of betas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param X covariates for betas
-# @param W spatial random effects
-# @param betas current value of betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-# @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
-# @param m limit on steps in the slice sampling
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title betas.slice.sampling
+#' @description slice sampling for betas
+#'
+#' @param Sigma.b variance estimate of betas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param X covariates for betas
+#' @param W spatial random effects
+#' @param betas current value of betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param m limit on steps in the slice sampling
+#' @param LY last observation year
+#' @param form type of parametric model (Exponential or Weibull)
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 betas.slice.sampling <- function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, form) {
 
@@ -41,29 +45,30 @@ betas.slice.sampling <- function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho,
 }
 
 
-# @title univ.betas.slice.sampling
-# @description univariate slice sampling for betas.p
-#
-# @param betas.p current value of the pth element of betas
-# @param p pth element
-# @param Sigma.b variance estimate of betas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param X covariates for betas
-# @param W spatial random effects
-# @param betas current value of betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-# @param w size of the slice in the slice sampling
-# @param m limit on steps in the slice sampling
-# @param lower lower bound on support of the distribution
-# @param upper upper bound on support of the distribution
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title univ.betas.slice.sampling
+#' @description univariate slice sampling for betas.p
+#'
+#' @param betas.p current value of the pth element of betas
+#' @param p pth element
+#' @param Sigma.b variance estimate of betas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param X covariates for betas
+#' @param W spatial random effects
+#' @param betas current value of betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param w size of the slice in the slice sampling
+#' @param m limit on steps in the slice sampling
+#' @param lower lower bound on support of the distribution
+#' @param upper upper bound on support of the distribution
+#' @param LY last observation year
+#' @param form type of parametric model (Exponential or Weibull)
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 univ.betas.slice.sampling <- function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
 
@@ -133,24 +138,25 @@ univ.betas.slice.sampling <- function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, d
 }
 
 
-# @title gammas.slice.sampling
-# @description slice sampling for gammas
-#
-# @param Sigma.g variance estimate of gammas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param w size of the slice in the slice sampling
-# @param m limit on steps in the slice sampling
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title gammas.slice.sampling
+#' @description slice sampling for gammas
+#'
+#' @param Sigma.g variance estimate of gammas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param w size of the slice in the slice sampling
+#' @param m limit on steps in the slice sampling
+#' @param LY last observation year
+#' @param form type of parametric model (Exponential or Weibull)
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 gammas.slice.sampling <- function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m, form) {
 
@@ -163,25 +169,26 @@ gammas.slice.sampling <- function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, 
 }
 
 
-# @title gammas.slice.sampling2
-# @description slice sampling for gammas
-#
-# @param Sigma.g variance estimate of gammas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param V spatial random effects
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
-# @param m limit on steps in the slice sampling
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title gammas.slice.sampling2
+#' @description slice sampling for gammas
+#'
+#' @param Sigma.g variance estimate of gammas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param V spatial random effects
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param m limit on steps in the slice sampling
+#' @param form type of parametric model (Exponential or Weibull)
+#' @param LY last observation year
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 gammas.slice.sampling2 <- function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form) {
 
@@ -195,29 +202,30 @@ gammas.slice.sampling2 <- function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho,
 
 
 
-# @title univ.gammas.slice.sampling2
-# @description univariate slice sampling for gammas.p
-#
-# @param gammas.p current value of the pth element of gammas
-# @param p pth element
-# @param Sigma.g variance estimate of gammas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param V spatial random effects
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
-# @param m limit on steps in the slice sampling
-# @param lower lower bound on support of the distribution
-# @param upper upper bound on support of the distribution
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title univ.gammas.slice.sampling2
+#' @description univariate slice sampling for gammas.p
+#'
+#' @param gammas.p current value of the pth element of gammas
+#' @param p pth element
+#' @param Sigma.g variance estimate of gammas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param V spatial random effects
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param m limit on steps in the slice sampling
+#' @param lower lower bound on support of the distribution
+#' @param upper upper bound on support of the distribution
+#' @param LY last observation year
+#' @param form type of parametric model (Exponential or Weibull)
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 univ.gammas.slice.sampling2 <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
 
@@ -287,28 +295,29 @@ univ.gammas.slice.sampling2 <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, 
 
 }
 
-# @title univ.gammas.slice.sampling
-# @description univariate slice sampling for gammas.p
-#
-# @param gammas.p current value of the pth element of gammas
-# @param p pth element
-# @param Sigma.g variance estimate of gammas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param w size of the slice in the slice sampling
-# @param m limit on steps in the slice sampling
-# @param lower lower bound on support of the distribution
-# @param upper upper bound on support of the distribution
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title univ.gammas.slice.sampling
+#' @description univariate slice sampling for gammas.p
+#'
+#' @param gammas.p current value of the pth element of gammas
+#' @param p pth element
+#' @param Sigma.g variance estimate of gammas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param w size of the slice in the slice sampling
+#' @param m limit on steps in the slice sampling
+#' @param lower lower bound on support of the distribution
+#' @param upper upper bound on support of the distribution
+#' @param form type of parametric model (Exponential or Weibull)
+#' @param LY last observation year
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
 
@@ -379,23 +388,24 @@ univ.gammas.slice.sampling <- function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gamm
 }
 
 
-# @title rho.slice.sampling
-# @description univariate slice sampling for rho
-#
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-# @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
-# @param m limit on steps in the slice sampling
-# @param lower lower bound on support of the distribution
-# @param upper upper bound on support of the distribution
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title rho.slice.sampling
+#' @description univariate slice sampling for rho
+#'
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param w size of the slice in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param m limit on steps in the slice sampling
+#' @param lower lower bound on support of the distribution
+#' @param upper upper bound on support of the distribution
+#' @param LY last observation year
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 rho.slice.sampling <- function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, upper = +Inf) {
 
@@ -466,25 +476,26 @@ rho.slice.sampling <- function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01,
 
 }
 
-# @title betas.post
-# @description log-posterior distribution of betas with pth element fixed as betas.p
-#
-# @param betas.p current value of the pth element of betas
-# @param p pth element
-# @param Sigma.b variance estimate of betas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param X covariates for betas
-# @param W spatial random effects
-# @param betas current value of betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return log- posterior density of betas
-#
-# @export
+#' @title betas.post
+#' @description log-posterior distribution of betas with pth element fixed as betas.p
+#'
+#' @param betas.p current value of the pth element of betas
+#' @param p pth element
+#' @param Sigma.b variance estimate of betas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param X covariates for betas
+#' @param W spatial random effects
+#' @param betas current value of betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param LY last observation year
+#' @param form type of parametric model (Exponential or Weibull)
+#'
+#' @return log- posterior density of betas
+#'
+#' @export
 
 betas.post <- function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, form) {
 
@@ -497,25 +508,26 @@ betas.post <- function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho
 }
 
 
-# @title gammas.post
-# @description log-posterior distribution of gammas with pth element fixed as gammas.p
-#
-# @param gammas.p current value of the pth element of gammas
-# @param p pth element
-# @param Sigma.g variance estimate of gammas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return log- posterior density of betas
-#
-# @export
-#
+#' @title gammas.post
+#' @description log-posterior distribution of gammas with pth element fixed as gammas.p
+#'
+#' @param gammas.p current value of the pth element of gammas
+#' @param p pth element
+#' @param Sigma.g variance estimate of gammas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param LY last observation year
+#' @param form type of parametric model (Exponential or Weibull)
+#'
+#' @return log- posterior density of betas
+#'
+#' @export
+#'
 gammas.post <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, form) {
 
   gammas[p] = gammas.p
@@ -531,25 +543,26 @@ gammas.post <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, 
 }
 
 
-# @title gammas.post2
-# @description log-posterior distribution of gammas with pth element fixed as gammas.p
-#
-# @param gammas.p current value of the pth element of gammas
-# @param p pth element
-# @param Sigma.g variance estimate of gammas
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param V spatial random effects
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return log- posterior density of betas
-#
-# @export
+#' @title gammas.post2
+#' @description log-posterior distribution of gammas with pth element fixed as gammas.p
+#'
+#' @param gammas.p current value of the pth element of gammas
+#' @param p pth element
+#' @param Sigma.g variance estimate of gammas
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param V spatial random effects
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param form type of parametric model (Exponential or Weibull)
+#' @param LY last observation year
+#'
+#' @return log- posterior density of betas
+#'
+#' @export
 
 gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, form) {
 
@@ -566,21 +579,22 @@ gammas.post2 <- function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, r
 }
 
 
-# @title rho.post
-# @description log-posterior distribution of rho
-#
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-# @param a shape parameter of gammas prior
-# @param b scale parameter of gammas prior
-#
-# @return log- posterior density of betas
-#
-# @export
+#' @title rho.post
+#' @description log-posterior distribution of rho
+#'
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param a shape parameter of gammas prior
+#' @param b scale parameter of gammas prior
+#' @param LY last observation year
+#'
+#' @return log- posterior density of betas
+#'
+#' @export
 
 rho.post <-  function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
 
@@ -591,24 +605,25 @@ rho.post <-  function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
 
 }
 
-# @title W.post
-# @description log-posterior distribution of W with sth element fixed as W.s
-#
-# @param S spatial information (e.g. district)
-# @param A adjacency information corresponding to spatial information
-# @param lambda CAR parameter
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param X covariates for betas
-# @param W spatial random effects
-# @param betas current value of betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-#
-# @return log- posterior density of W
-#
-# @export
+#' @title W.post
+#' @description log-posterior distribution of W with sth element fixed as W.s
+#'
+#' @param S spatial information (e.g. district)
+#' @param A adjacency information corresponding to spatial information
+#' @param lambda CAR parameter
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param X covariates for betas
+#' @param W spatial random effects
+#' @param betas current value of betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param LY last observation year
+#'
+#' @return log- posterior density of W
+#'
+#' @export
 
 W.post <- function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
 
@@ -642,25 +657,26 @@ W.post <- function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
 }
 
 
-# @title W.MH.sampling
-# @description MH Sampling for W
-#
-# @param S spatial information (e.g. district)
-# @param A adjacency information corresponding to spatial information
-# @param lambda CAR parameter
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param X covariates for betas
-# @param W spatial random effects
-# @param betas current value of betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title W.MH.sampling
+#' @description MH Sampling for W
+#'
+#' @param S spatial information (e.g. district)
+#' @param A adjacency information corresponding to spatial information
+#' @param lambda CAR parameter
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param X covariates for betas
+#' @param W spatial random effects
+#' @param betas current value of betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param prop.var proposal variance for Metropolis-Hastings
+#' @param LY last observation year
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 W.MH.sampling <- function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var) {
 
@@ -684,22 +700,23 @@ W.MH.sampling <- function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, pr
 
 }
 
-# @title W.F.post
-# @description log-posterior distribution of W with sth element fixed as W.s
-#
-# @param S spatial information (e.g. district)
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param X covariates for betas
-# @param W spatial random effects
-# @param betas current value of betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-#
-# @return log- posterior density of W
-#
-# @export
+#' @title W.F.post
+#' @description log-posterior distribution of W with sth element fixed as W.s
+#'
+#' @param S spatial information (e.g. district)
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param X covariates for betas
+#' @param W spatial random effects
+#' @param betas current value of betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param LY last observation year
+#'
+#' @return log- posterior density of W
+#'
+#' @export
 
 W.F.post <- function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
 
@@ -716,23 +733,24 @@ W.F.post <- function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
 }
 
 
-# @title W.F.MH.sampling (Cure Model with Frailties)
-# @description MH sampling for W
-#
-# @param S spatial information (e.g. district)
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param X covariates for betas
-# @param W spatial random effects
-# @param betas current value of betas
-# @param delta probability of true censoring
-# @param C censoring indicator
-# @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title W.F.MH.sampling (Cure Model with Frailties)
+#' @description MH sampling for W
+#'
+#' @param S spatial information (e.g. district)
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param X covariates for betas
+#' @param W spatial random effects
+#' @param betas current value of betas
+#' @param delta probability of true censoring
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param LY last observation year
+#' @param prop.var proposal variance for Metropolis-Hastings
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 W.F.MH.sampling <- function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var) {
 
@@ -755,24 +773,25 @@ W.F.MH.sampling <- function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, p
 }
 
 
-# @title V.post
-# @description log-posterior distribution of W with sth element fixed as W.s
-#
-# @param S spatial information (e.g. district)
-# @param A adjacency information corresponding to spatial information
-# @param lambda CAR parameter
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param V spatial random effects
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-#
-# @return log- posterior density of betas
-#
-# @export
+#' @title V.post
+#' @description log-posterior distribution of W with sth element fixed as W.s
+#'
+#' @param S spatial information (e.g. district)
+#' @param A adjacency information corresponding to spatial information
+#' @param lambda CAR parameter
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param V spatial random effects
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param LY last observation year
+#' @param rho current value of rho
+#'
+#' @return log- posterior density of betas
+#'
+#' @export
 
 V.post <- function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
 
@@ -809,25 +828,26 @@ V.post <- function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
 
 }
 
-# @title V.MH.sampling
-# @description MH sampling for rcpp_log_dmvnorm
-#
-# @param S spatial information (e.g. district)
-# @param A adjacency information corresponding to spatial information
-# @param lambda CAR parameter
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param V spatial random effects
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title V.MH.sampling
+#' @description MH sampling for rcpp_log_dmvnorm
+#'
+#' @param S spatial information (e.g. district)
+#' @param A adjacency information corresponding to spatial information
+#' @param lambda CAR parameter
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param V spatial random effects
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param LY last observation year
+#' @param prop.var proposal variance for Metropolis-Hastings
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 V.MH.sampling <- function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var) {
 
@@ -852,22 +872,23 @@ V.MH.sampling <- function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho, pr
 }
 
 
-# @title V.F.post
-# @description log-posterior distribution of W with sth element fixed as W.s
-#
-# @param S spatial information (e.g. district)
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param V spatial random effects
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-#
-# @return log- posterior density of betas
-#
-# @export
+#' @title V.F.post
+#' @description log-posterior distribution of W with sth element fixed as W.s
+#'
+#' @param S spatial information (e.g. district)
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param V spatial random effects
+#' @param gammas current value of gammas
+#' @param LY last observation year
+#' @param C censoring indicator
+#' @param rho current value of rho
+#'
+#' @return log- posterior density of betas
+#'
+#' @export
 
 V.F.post <- function(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 
@@ -890,23 +911,24 @@ V.F.post <- function(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 
 
 
-# @title V.F.MH.sampling (Cure Model with non-spatial Frailties)
-# @description MH sampling for rcpp_log_dmvnorm
-#
-# @param S spatial information (e.g. district)
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param eXB exponentiated vector of covariates times betas
-# @param Z covariates for gammas
-# @param V spatial random effects
-# @param gammas current value of gammas
-# @param C censoring indicator
-# @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
-#
-# @return One sample update using slice sampling
-#
-# @export
+#' @title V.F.MH.sampling (Cure Model with non-spatial Frailties)
+#' @description MH sampling for rcpp_log_dmvnorm
+#'
+#' @param S spatial information (e.g. district)
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param eXB exponentiated vector of covariates times betas
+#' @param Z covariates for gammas
+#' @param V spatial random effects
+#' @param gammas current value of gammas
+#' @param C censoring indicator
+#' @param rho current value of rho
+#' @param LY last observation year
+#' @param prop.var proposal variance for Metropolis-Hastings
+#'
+#' @return One sample update using slice sampling
+#'
+#' @export
 
 V.F.MH.sampling <- function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop.var) {
 
@@ -931,19 +953,19 @@ V.F.MH.sampling <- function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, pro
 }
 
 
-# @title lambda.gibbs.sampling2
-# @description log-posterior distribution of rho
-#
-# @param S spatial information (e.g. district)
-# @param A adjacency information corresponding to spatial information
-# @param W spatial random effects
-# @param V spatial random effects
-# @param a shape parameter of gammas prior
-# @param b scale parameter of gammas prior
-#
-# @return log- posterior density of betas
-#
-# @export
+#' @title lambda.gibbs.sampling2
+#' @description log-posterior distribution of rho
+#'
+#' @param S spatial information (e.g. district)
+#' @param A adjacency information corresponding to spatial information
+#' @param W spatial random effects
+#' @param V spatial random effects
+#' @param a shape parameter of gammas prior
+#' @param b scale parameter of gammas prior
+#'
+#' @return log- posterior density of betas
+#'
+#' @export
 
 lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
 
@@ -988,24 +1010,24 @@ lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
 
 
 
-# @title mcmcSP
-# @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties
-#
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param C censoring indicator
-# @param X covariates for betas
-# @param Z covariates for gammas
-# @param N number of MCMC iterations
-# @param burn burn-in to be discarded
-# @param thin thinning to prevent from autocorrelation
-# @param w size of the slice in the slice sampling for (betas, gammas, rho)
-# @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-# @param form type of parametric model (Exponential or Weibull)
-#
-# @return chain of the variables of interest
-#
-# @export
+#' @title mcmcSP
+#' @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties
+#'
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param C censoring indicator
+#' @param X covariates for betas
+#' @param Z covariates for gammas
+#' @param N number of MCMC iterations
+#' @param burn burn-in to be discarded
+#' @param thin thinning to prevent from autocorrelation
+#' @param w size of the slice in the slice sampling for (betas, gammas, rho)
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param form type of parametric model (Exponential or Weibull)
+#'
+#' @return chain of the variables of interest
+#'
+#' @export
 
 mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, form) {
 
@@ -1056,28 +1078,28 @@ mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, for
 }
 
 
-# @title mcmcspatialSP
-# @description Markov Chain Monte Carlo (MCMC) routine for Bayesian spatial split population survival model
-#
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param C censoring indicator
-# @param LY last observation year
-# @param X covariates for betas
-# @param Z covariates for gammas
-# @param S spatial information (e.g. district)
-# @param A adjacency information corresponding to spatial information
-# @param N number of MCMC iterations
-# @param burn burn-in to be discarded
-# @param thin thinning to prevent from autocorrelation
-# @param w size of the slice in the slice sampling for (betas, gammas, rho)
-# @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-# @param form type of parametric model (Exponential or Weibull)
-# @param prop.var proposal variance for Metropolis-Hastings
-#
-# @return chain of the variables of interest
-#
-# @export
+#' @title mcmcspatialSP
+#' @description Markov Chain Monte Carlo (MCMC) routine for Bayesian spatial split population survival model
+#'
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param C censoring indicator
+#' @param LY last observation year
+#' @param X covariates for betas
+#' @param Z covariates for gammas
+#' @param S spatial information (e.g. district)
+#' @param A adjacency information corresponding to spatial information
+#' @param N number of MCMC iterations
+#' @param burn burn-in to be discarded
+#' @param thin thinning to prevent from autocorrelation
+#' @param w size of the slice in the slice sampling for (betas, gammas, rho)
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param form type of parametric model (Exponential or Weibull)
+#' @param prop.var proposal variance for Metropolis-Hastings
+#'
+#' @return chain of the variables of interest
+#'
+#' @export
 
 mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var) {
 
@@ -1141,28 +1163,28 @@ mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1)
 
 
 
-# @title mcmcfrailtySP
-# @description Markov Chain Monte Carlo (MCMC) routine to run Bayesian non-spatial frailties split population survival model
-#
-# @param Y the time (duration) dependent variable for the survival stage (t)
-# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-# @param C censoring indicator
-# @param LY last observation year
-# @param X covariates for betas
-# @param Z covariates for gammas
-# @param S spatial information (e.g. district)
-# @param A adjacency information corresponding to spatial information
-# @param N number of MCMC iterations
-# @param burn burn-in to be discarded
-# @param thin thinning to prevent from autocorrelation
-# @param w size of the slice in the slice sampling for (betas, gammas, rho)
-# @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-# @param form type of parametric model (Exponential or Weibull)
-# @param prop.var proposal variance for Metropolis-Hastings
-#
-# @return chain of the variables of interest
-#
-# @export
+#' @title mcmcfrailtySP
+#' @description Markov Chain Monte Carlo (MCMC) routine to run Bayesian non-spatial frailties split population survival model
+#'
+#' @param Y the time (duration) dependent variable for the survival stage (t)
+#' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+#' @param C censoring indicator
+#' @param LY last observation year
+#' @param X covariates for betas
+#' @param Z covariates for gammas
+#' @param S spatial information (e.g. district)
+#' @param A adjacency information corresponding to spatial information
+#' @param N number of MCMC iterations
+#' @param burn burn-in to be discarded
+#' @param thin thinning to prevent from autocorrelation
+#' @param w size of the slice in the slice sampling for (betas, gammas, rho)
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param form type of parametric model (Exponential or Weibull)
+#' @param prop.var proposal variance for Metropolis-Hastings
+#'
+#' @return chain of the variables of interest
+#'
+#' @export
 
 mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var) {
 
