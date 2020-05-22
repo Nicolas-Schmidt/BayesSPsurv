@@ -22,7 +22,7 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-`r badger::badge_devel("Nicolas-Schmidt/IntRo", "blue")`
+`r badger::badge_devel("Nicolas-Schmidt/BayesMFSurv", "blue")`
 <!-- badges: end -->
 
 Bayesian Spatial Split Population Survival Model
@@ -59,7 +59,7 @@ net_str_f <- function(package){
     stack(l2) %>% tidyr::separate(col = 'values', into = paste("func", 1:6), sep = "--", remove = FALSE) %>% 
         .[, c(ncol(.), 2:(ncol(.)-1))]
     out[is.na(out)] <- ''
-    out[,-7] %>% as.tibble() %>% print(n = Inf)
+    out[,-7] %>% as_tibble() %>% print(n = Inf)
     
     
 }

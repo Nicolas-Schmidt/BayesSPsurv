@@ -12,7 +12,7 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![](https://img.shields.io/badge/devel%20version-1.4.0-blue.svg)](https://github.com/Nicolas-Schmidt/IntRo)
+[![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/Nicolas-Schmidt/BayesMFSurv)
 <!-- badges: end -->
 
 Bayesian Spatial Split Population Survival Model
