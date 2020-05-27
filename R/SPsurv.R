@@ -7,6 +7,7 @@
 #' @param immune ...
 #' @param data ...
 #' @param N number of MCMC iterations
+#' @param S ...
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
@@ -17,7 +18,7 @@
 #'
 #' @export
 
-SPsurv <- function(duration, immune, Y0, LY, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form) {
+SPsurv <- function(duration, immune, Y0, LY, data = list(), N, S, burn, thin, w = c(1, 1, 1), m = 10, form) {
 
     data <- data
     equation1 <- as.character(duration)

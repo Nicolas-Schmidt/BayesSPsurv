@@ -11,6 +11,7 @@ SPsurv(
   LY,
   data = list(),
   N,
+  S,
   burn,
   thin,
   w = c(1, 1, 1),
@@ -30,6 +31,8 @@ SPsurv(
 \item{data}{...}
 
 \item{N}{number of MCMC iterations}
+
+\item{S}{...}
 
 \item{burn}{burn-in to be discarded}
 
