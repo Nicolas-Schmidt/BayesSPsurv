@@ -5,13 +5,12 @@
 \title{frailtySPsurv}
 \usage{
 frailtySPsurv(
-  formula,
   duration,
   immune,
   Y0,
   LY,
   S,
-  data = list(),
+  data,
   N,
   burn,
   thin,
@@ -22,8 +21,6 @@ frailtySPsurv(
 )
 }
 \arguments{
-\item{formula}{...}
-
 \item{duration}{...}
 
 \item{immune}{...}

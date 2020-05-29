@@ -2,7 +2,6 @@
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian non-spatial frailty split population survival model
 #'
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-#' @param formula ...
 #' @param LY last observation year
 #' @param duration ...
 #' @param immune ...
@@ -20,47 +19,49 @@
 #'
 #' @export
 
-frailtySPsurv <- function(formula,duration, immune, Y0, LY, S, data = list(), N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
 
-    data <- data
+frailtySPsurv <- function(duration,
+                          immune,
+                          Y0,
+                          LY,
+                          S,
+                          data,
+                          N,
+                          burn,
+                          thin,
+                          w = c(1, 1, 1),
+                          m = 10,
+                          form,
+                          prop.var) {
 
-    equation1 <- as.character(duration)
-    equation2<-as.character(immune)
-    formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
-    formula2<-paste(equation2[2],equation2[1],equation2[3],sep="")
-    mf1 <- model.frame(formula=as.formula(formula1), data=data)
-    mf2 <- model.frame(formula=as.formula(formula2), data=data)
-    X <- model.matrix(attr(mf1, "terms"), data=mf1)
-    Z <- model.matrix(attr(mf2, "terms"), data=mf2)
+    cll <- match.call() # return print and summary
+    #dis <- match.arg(form) # distribution, add value argument (se puede omitir esta linea si pasa a la documemtacion la descripcion!)
+
+    formula1 <- as.formula(duration) # duration
+    formula2 <- as.formula(immune)   # immune
+    variable <- unique(c(all.vars(formula1), all.vars(formula2))) #combine ~
+
+    mf1 <- model.frame(formula = duration, data = data)
+    mf2 <- model.frame(formula = immune,   data = data)
+
+    X <- model.matrix(attr(mf1, "terms"), data = mf1)
+    Z <- model.matrix(attr(mf2, "terms"), data = mf2)
+
     Y <- as.matrix(model.response(mf1))
     C <- as.matrix(model.response(mf2))
 
-    Y0 <- as.character(Y0)
-    LY <- as.character(LY)
-    S <- as.character(S)
+    Y0 <- data[,Y0]
+    LY <- data[,LY]
+    S  <- data[, S]
 
-    dat <- subset(data, select=c(Y0, LY, S))
-
-    Y0 <- dat[,1]
-    LY <- dat[,2]
-    S <- dat[,3]
-
-    burn = burn
-    if(is.null(w)){
-        w = c(1,1,1)
-    } else{
-        w=w
-    }
-    if(is.null(m)){
-        m = 10
-    } else{
-        m=m
-    }
-    form = form
-    prop.var = prop.var
+    burn <-  burn
+    if (is.null(w)) w <- c(1,1,1) else w <- w
+    if (is.null(m)) m <- 10 else m <- m
+    form <-  form
+    prop.var <-  prop.var
 
     dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
-    dataset  <- na.omit(dataset)
+    dataset <- na.omit(dataset) # check other options!
     col <- ncol(dataset)
 
     Y  <- as.matrix(dataset[,1])
@@ -68,10 +69,10 @@ frailtySPsurv <- function(formula,duration, immune, Y0, LY, S, data = list(), N,
     C  <- as.matrix(dataset[,3])
     LY <- as.matrix(dataset[,4])
     S  <- as.matrix(dataset[,5])
-    X  <- as.matrix(dataset[,6:5+ncol(X)])
+    X  <- as.matrix(dataset[,6:(5+ncol(X))]) # fatal error!!!
     Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
 
-    results <- mcmcfrailtySP(Y, Y0,C, LY, X, Z, S, N, burn, thin, w, m , form, prop.var)
-    return(results)
+    results <- mcmcfrailtySP(Y, Y0, C, LY, X, Z, S, N, burn, thin, w, m, form, prop.var)
+    results
 
 }

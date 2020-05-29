@@ -42,6 +42,44 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 
 
 
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+source('data-raw/fsps.r')
+```
+
+### Data
+```{r}
+str(walter2015)
+```
+
+### Example: `frailtySPsurv`
+```{r}
+library(spatialSPsurv)
+
+set.seed(782566)
+tch <- 
+    frailtySPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter2015,
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "weibull",
+        prop.var = 0.00001
+    )
+
+str(tch)
+
+```
+
+
+
+### Internal check (omit)
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
 net_str_f <- function(package){
