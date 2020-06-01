@@ -10,14 +10,14 @@ spatialSPsurv(
   Y0,
   LY,
   S,
-  data = list(),
   A,
+  data,
   N,
   burn,
   thin,
   w = c(1, 1, 1),
   m = 10,
-  form,
+  form = c("Weibull", "exponential", "loglog"),
   prop.var
 )
 }
@@ -32,9 +32,9 @@ spatialSPsurv(
 
 \item{S}{spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information}
 
-\item{data}{...}
-
 \item{A}{Spatial Matrix (load separate spatial weights matrix file)}
+
+\item{data}{...}
 
 \item{N}{number of MCMC iterations}
 

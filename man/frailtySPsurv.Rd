@@ -16,7 +16,7 @@ frailtySPsurv(
   thin,
   w = c(1, 1, 1),
   m = 10,
-  form,
+  form = c("Weibull", "exponential", "loglog"),
   prop.var
 )
 }

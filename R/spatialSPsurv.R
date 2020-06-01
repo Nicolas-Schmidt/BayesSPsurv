@@ -20,6 +20,7 @@
 #'
 #' @export
 #'
+
 spatialSPsurv<- function(duration,
                          immune,
                          Y0,
@@ -32,20 +33,19 @@ spatialSPsurv<- function(duration,
                          thin,
                          w = c(1, 1, 1),
                          m = 10,
-                         form = c('weibull', 'exponential', 'loglog'),
+                         form = c('Weibull', 'exponential', 'loglog'),
                          prop.var)
 {
 
     cll <- match.call()
     dis <- match.arg(form)
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
-                    C = C, LY = LY, X = X, Z = Z, S = S, N = N, burn = burn, thin = thin,
-                    w = w, m = m, form = dis, prop.var = prop.var, A = A,
-                    model = 'spatialSPsurv')
+                    LY = LY, S = S, N = N, burn = burn, thin = thin, w = w, m = m,
+                    form = dis, prop.var = prop.var, A = A, model = 'spatialSPsurv')
 
     results <- mcmcspatialSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
-                             S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
-                             m  = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
+                             S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
+                             m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
 
     results
 

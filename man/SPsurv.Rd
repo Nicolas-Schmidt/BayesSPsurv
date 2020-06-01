@@ -9,14 +9,13 @@ SPsurv(
   immune,
   Y0,
   LY,
-  data = list(),
+  data,
   N,
-  S,
   burn,
   thin,
   w = c(1, 1, 1),
   m = 10,
-  form
+  form = c("Weibull", "exponential", "loglog")
 )
 }
 \arguments{
@@ -31,8 +30,6 @@ SPsurv(
 \item{data}{...}
 
 \item{N}{number of MCMC iterations}
-
-\item{S}{...}
 
 \item{burn}{burn-in to be discarded}
 
