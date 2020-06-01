@@ -15,6 +15,86 @@ NULL
 
 
 
+formcall <- function(duration,
+                 immune,
+                 Y0,
+                 LY,
+                 C = NULL,
+                 X,
+                 Z,
+                 S = NULL,
+                 A = NULL,
+                 data,
+                 N,
+                 burn,
+                 thin,
+                 w = c(1, 1, 1),
+                 m = 10,
+                 form,
+                 prop.var = NULL,
+                 model = character())
+{
+
+  formula1 <- as.formula(duration)
+  formula2 <- as.formula(immune)
+  variable <- unique(c(all.vars(formula1), all.vars(formula2)))
+  mf1 <- model.frame(formula = duration, data = data)
+  mf2 <- model.frame(formula = immune,   data = data)
+  X <- model.matrix(attr(mf1, "terms"), data = mf1)
+  Z <- model.matrix(attr(mf2, "terms"), data = mf2)
+  Y <- as.matrix(model.response(mf1))
+  C <- as.matrix(model.response(mf2))
+  Y0 <- data[,Y0]
+  LY <- data[,LY]
+  burn <-  burn
+  if (is.null(w)) w <- c(1,1,1) else w <- w
+  if (is.null(m)) m <- 10 else m <- m
+  form <-  form
+
+  if(model == "SPsurv"){
+
+    dataset <- data.frame(cbind(Y, Y0, C, LY, X, Z))
+    dataset <- na.omit(dataset)
+    col <- ncol(dataset)
+    Y  <- as.matrix(dataset[,1])
+    Y0 <- as.matrix(dataset[,2])
+    C  <- as.matrix(dataset[,3])
+    LY <- as.matrix(dataset[,4])
+    X  <- as.matrix(dataset[,4:(4+ncol(X))])
+    Z  <- as.matrix(dataset[,(5+ncol(X)):ncol(dataset)])
+
+    fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, N = N, burn = burn,
+               thin = thin, w = w, m = m, form = form)
+
+  } else {
+
+    prop.var <-  prop.var
+    S  <- data[, S]
+    dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
+    dataset <- na.omit(dataset)
+    col <- ncol(dataset)
+    Y  <- as.matrix(dataset[,1])
+    Y0 <- as.matrix(dataset[,2])
+    C  <- as.matrix(dataset[,3])
+    LY <- as.matrix(dataset[,4])
+    S  <- as.matrix(dataset[,5])
+    X  <- as.matrix(dataset[,6:(5+ncol(X))])
+    Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
+
+    fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, S = S, N = N, burn = burn,
+               thin = thin, w = w, m = m, form = form, prop.var = prop.var)
+
+  }
+
+  if(!is.null(A)) fm$A <- as.matrix(A)
+
+  return(fm)
+
+}
+
+
+
+
 
 # @title mcmcfrailtySP
 # @description Markov Chain Monte Carlo (MCMC) routine to run Bayesian non-spatial frailties split population survival model

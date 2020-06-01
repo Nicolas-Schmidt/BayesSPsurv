@@ -74,7 +74,9 @@ str(walter2015)
 #>  $ sp_id        : int  1 1 1 1 1 1 1 1 1 1 ...
 ```
 
-### Example: `frailtySPsurv`
+### Example
+
+#### `frailtySPsurv`
 
 ``` r
 library(spatialSPsurv)
@@ -94,7 +96,7 @@ tch <-
         w        = c(1,1,1),
         m        = 10,
         form     = "weibull",
-        prop.var = 0.00001
+        prop.var = 1e-05
     )
 
 str(tch)
@@ -106,6 +108,68 @@ str(tch)
 #>  $ delta : num [1:9] 0.805 0.827 0.884 0.876 0.888 ...
 #>  $ W     : num [1:9, 1:46] 0.013 0.0209 0.0119 0.0175 0.0275 ...
 #>  $ V     : num [1:9, 1:46] -0.00228 -0.0096 -0.00237 -0.01511 -0.02977 ...
+```
+
+#### `SPsurv`
+
+``` r
+set.seed(782566)
+
+tch2 <- 
+    SPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        data     = walter2015,
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "weibull"
+    )
+
+str(tch2)
+#> List of 4
+#>  $ betas : num [1:9, 1:10] -15.2 -14.5 -17.4 -15.7 -16 ...
+#>  $ gammas: num [1:9, 1:3] -1.0953 0.9355 -1.3253 0.0522 2.8179 ...
+#>  $ rho   : num [1:9] 1 1 1 1 1 1 1 1 1
+#>  $ delta : num [1:9] 1.10e-05 4.83e-04 2.92e-09 1.10e-04 1.85e-03 ...
+```
+
+#### `spatialSPsurv`
+
+``` r
+set.seed(782566)
+
+tch3 <- 
+    spatialSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter2015,
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "weibull",
+        prop.var = 1e-05,
+        A        = A
+    )
+
+str(tch3)
+#> List of 7
+#>  $ betas : num [1:9, 1:9] 1.18962 0.00801 -0.4171 0.20069 -0.10316 ...
+#>  $ gammas: num [1:9, 1:4] 0.978 1.472 1.645 2.099 1.095 ...
+#>  $ rho   : num [1:9] 1 1 1 1 1 1 1 1 1
+#>  $ lambda: num [1:9] 56.6 37.7 39 48.4 34.8 ...
+#>  $ delta : num [1:9] 0.853 0.883 0.862 0.901 0.882 ...
+#>  $ W     : num [1:9, 1:46] 0.00268 0.01029 0.00498 -0.01074 -0.02172 ...
+#>  $ V     : num [1:9, 1:46] 0.0158 0.0269 0.0298 0.0158 0.0156 ...
 ```
 
 ### Internal check (omit)
@@ -120,18 +184,18 @@ net_str_f('spatialSPsurv')
 #> Registered S3 method overwritten by 'pryr':
 #>   method      from
 #>   print.bytes Rcpp
-#> # A tibble: 24 x 6
+#> # A tibble: 25 x 6
 #>    ind         `func 1`        `func 2`       `func 3`     `func 4`   `func 5`  
 #>    <fct>       <chr>           <chr>          <chr>        <chr>      <chr>     
 #>  1 betas.post  ""              ""             ""           ""         ""        
 #>  2 betas.slic~ "univ.betas.sl~ ""             ""           ""         ""        
-#>  3 gammas.post ""              ""             ""           ""         ""        
-#>  4 gammas.pos~ ""              ""             ""           ""         ""        
-#>  5 gammas.sli~ "univ.gammas.s~ ""             ""           ""         ""        
+#>  3 formcall    ""              ""             ""           ""         ""        
+#>  4 gammas.post ""              ""             ""           ""         ""        
+#>  5 gammas.pos~ ""              ""             ""           ""         ""        
 #>  6 gammas.sli~ "univ.gammas.s~ ""             ""           ""         ""        
-#>  7 mcmcfrailt~ "betas.slice.s~ "gammas.slice~ "rho.slice.~ "V.F.MH.s~ "W.F.MH.s~
-#>  8 mcmcSP      "betas.slice.s~ "gammas.slice~ "rho.slice.~ ""         ""        
-#>  9 mcmcspatia~ "betas.slice.s~ "gammas.slice~ "rho.slice.~ "V.MH.sam~ "W.MH.sam~
-#> 10 rho.post    ""              ""             ""           ""         ""        
-#> # ... with 14 more rows
+#>  7 lambda.gib~ ""              ""             ""           ""         ""        
+#>  8 mcmcfrailt~ "betas.slice.s~ "rho.slice.sa~ "V.F.MH.sam~ ""         ""        
+#>  9 mcmcSP      "betas.slice.s~ "gammas.slice~ "rho.slice.~ ""         ""        
+#> 10 mcmcspatia~ "betas.slice.s~ "lambda.gibbs~ "rho.slice.~ "V.MH.sam~ "W.MH.sam~
+#> # ... with 15 more rows
 ```

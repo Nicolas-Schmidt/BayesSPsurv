@@ -20,60 +20,33 @@
 #'
 #' @export
 #'
-spatialSPsurv <- function(duration, immune, Y0, LY, S, data = list(), A,  N, burn, thin, w = c(1, 1, 1), m = 10, form,  prop.var) {
+spatialSPsurv<- function(duration,
+                         immune,
+                         Y0,
+                         LY,
+                         S,
+                         A,
+                         data,
+                         N,
+                         burn,
+                         thin,
+                         w = c(1, 1, 1),
+                         m = 10,
+                         form = c('weibull', 'exponential', 'loglog'),
+                         prop.var)
+{
 
-    data <- data
+    cll <- match.call()
+    dis <- match.arg(form)
+    r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
+                    C = C, LY = LY, X = X, Z = Z, S = S, N = N, burn = burn, thin = thin,
+                    w = w, m = m, form = dis, prop.var = prop.var, A = A,
+                    model = 'spatialSPsurv')
 
-    equation1 <- as.character(duration)
-    equation2<-as.character(immune)
-    formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
-    formula2<-paste(equation2[2],equation2[1],equation2[3],sep="")
-    mf1 <- model.frame(formula=as.formula(formula1), data=data)
-    mf2 <- model.frame(formula=as.formula(formula2), data=data)
-    X <- model.matrix(attr(mf1, "terms"), data=mf1)
-    Z <- model.matrix(attr(mf2, "terms"), data=mf2)
-    Y <- as.matrix(model.response(mf1))
-    C <- as.matrix(model.response(mf2))
+    results <- mcmcspatialSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
+                             S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
+                             m  = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
 
-    Y0 <- as.character(Y0)
-    LY <- as.character(LY)
-    S <- as.character(S)
-
-    dat <- subset(data, select=c(Y0, LY, S))
-
-    Y0 <- dat[,1]
-    LY <- dat[,2]
-    S <- dat[,3]
-
-    A <- as.matrix(A)
-
-    burn = burn
-    if(is.null(w)){
-        w = c(1,1,1)
-    } else{
-        w=w
-    }
-    if(is.null(m)){
-        m = 10
-    } else{
-        m=m
-    }
-    form = form
-    prop.var = prop.var
-
-    dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
-    dataset  <- na.omit(dataset)
-    col <- ncol(dataset)
-
-    Y  <- as.matrix(dataset[,1])
-    Y0 <- as.matrix(dataset[,2])
-    C  <- as.matrix(dataset[,3])
-    LY <- as.matrix(dataset[,4])
-    S  <- as.matrix(dataset[,5])
-    X  <- as.matrix(dataset[,6:5+ncol(X)])
-    Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
-
-    results <- mcmcspatialSP(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w, m , form, prop.var)
-    return(results)
+    results
 
 }

@@ -13,4 +13,4 @@ adj.mat.tiv      <- reshape2::acast(capdistivb, capdistivb$numa ~ capdistivb$num
 diag(adj.mat.tiv)<- 0L
 namesTIV         <- data.frame(ccode = rownames(adj.mat.tiv), sp_id = 1:nrow(adj.mat.tiv))
 walter2015       <- merge(walter2015v2, namesTIV, by = "ccode")
-
+A                <- adj.mat.tiv

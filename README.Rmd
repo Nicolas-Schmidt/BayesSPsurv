@@ -51,7 +51,10 @@ source('data-raw/fsps.r')
 str(walter2015)
 ```
 
-### Example: `frailtySPsurv`
+### Example
+
+#### `frailtySPsurv`
+
 ```{r}
 library(spatialSPsurv)
 
@@ -70,10 +73,62 @@ tch <-
         w        = c(1,1,1),
         m        = 10,
         form     = "weibull",
-        prop.var = 0.00001
+        prop.var = 1e-05
     )
 
 str(tch)
+
+```
+
+#### `SPsurv`
+
+```{r}
+set.seed(782566)
+
+tch2 <- 
+    SPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        data     = walter2015,
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "weibull"
+    )
+
+str(tch2)
+
+```
+
+
+#### `spatialSPsurv`
+
+```{r}
+set.seed(782566)
+
+tch3 <- 
+    spatialSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter2015,
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "weibull",
+        prop.var = 1e-05,
+        A        = A
+    )
+
+str(tch3)
 
 ```
 
