@@ -5,3 +5,7 @@ llikWeibull <- function(Y, Y0, eXB, delta, C, LY, rho) {
     .Call('_spatialSPsurv_llikWeibull', PACKAGE = 'spatialSPsurv', Y, Y0, eXB, delta, C, LY, rho)
 }
 
+llikLoglog <- function(Y, eXB, delta, C, rho) {
+    .Call('_spatialSPsurv_llikLoglog', PACKAGE = 'spatialSPsurv', Y, eXB, delta, C, rho)
+}
+

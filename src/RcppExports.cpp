@@ -23,9 +23,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// llikLoglog
+double llikLoglog(arma::vec Y, arma::vec eXB, arma::vec delta, arma::vec C, double rho);
+RcppExport SEXP _spatialSPsurv_llikLoglog(SEXP YSEXP, SEXP eXBSEXP, SEXP deltaSEXP, SEXP CSEXP, SEXP rhoSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eXB(eXBSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type C(CSEXP);
+    Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
+    rcpp_result_gen = Rcpp::wrap(llikLoglog(Y, eXB, delta, C, rho));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_spatialSPsurv_llikWeibull", (DL_FUNC) &_spatialSPsurv_llikWeibull, 7},
+    {"_spatialSPsurv_llikLoglog", (DL_FUNC) &_spatialSPsurv_llikLoglog, 5},
     {NULL, NULL, 0}
 };
 

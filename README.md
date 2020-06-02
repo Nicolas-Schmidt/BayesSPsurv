@@ -28,7 +28,7 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 
 ### Functions
 
-| arguments  | `spatialSPsurv()`    | `frailtySPsurv()`    | `SPsurv()`           |
+| argument   | `spatialSPsurv()`    | `frailtySPsurv()`    | `SPsurv()`           |
 | ---------- | -------------------- | -------------------- | -------------------- |
 | `duration` | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
 | `immune`   | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
