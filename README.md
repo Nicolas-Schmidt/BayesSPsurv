@@ -26,6 +26,25 @@ Manual
 source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 ```
 
+### Functions
+
+| arguments  | `spatialSPsurv()`    | `frailtySPsurv()`    | `SPsurv()`           |
+| ---------- | -------------------- | -------------------- | -------------------- |
+| `duration` | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `immune`   | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `Y0`       | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `LY`       | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `data`     | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `N`        | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `burn`     | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `thin`     | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `w`        | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `m`        | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `form`     | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
+| `prop.var` | :heavy\_check\_mark: | :heavy\_check\_mark: | :x:                  |
+| `S`        | :heavy\_check\_mark: | :heavy\_check\_mark: | :x:                  |
+| `A`        | :heavy\_check\_mark: | :x:                  | :x:                  |
+
 ### Data
 
 ``` r

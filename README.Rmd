@@ -46,6 +46,36 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 source('data-raw/fsps.r')
 ```
 
+
+### Functions
+
+|argument   |`spatialSPsurv()` |`frailtySPsurv()` |`SPsurv()`        |
+|-----------|------------------|------------------|------------------|
+|`duration` |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`immune`   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`Y0`       |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`LY`       |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`data`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`N`        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`burn`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`thin`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`w`        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`m`        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`form`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|`prop.var` |:heavy_check_mark:|:heavy_check_mark:|:x:               |
+|`S`        |:heavy_check_mark:|:heavy_check_mark:|:x:               |
+|`A`        |:heavy_check_mark:|:x:               |:x:               |
+
+
+
+
+
+
+
+
+
+
+
 ### Data
 ```{r}
 str(walter2015)
