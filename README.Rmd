@@ -164,6 +164,73 @@ str(tch3)
 
 
 
+
+
+
+## check form
+
+```{r}
+
+duration <- duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko
+immune   <- cured ~ fhcompor1 + lgdpl + victory
+Y0       <- 't.0'
+LY       <- 'lastyear'
+S        <- 'sp_id' 
+data     <- walter2015
+N        <- 100
+burn     <- 10
+thin     <- 10
+w        <- c(1,1,1)
+m        <- 10
+prop.var <- 1e-05
+A        <- A
+
+## ~~~~~~~~~~~~~
+## frailtySPsurv
+## ~~~~~~~~~~~~~
+
+set.seed(782566)
+str(frailtySPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
+                  prop.var = prop.var, form = 'Weibull'))
+set.seed(782566)
+str(frailtySPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
+                  prop.var = prop.var, form = 'exponential'))
+
+## ~~~~~~~~~~~~~
+## spatialSPsurv
+## ~~~~~~~~~~~~~
+
+set.seed(782566)
+str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
+                  prop.var = prop.var, A = A, form = 'Weibull'))
+set.seed(782566)
+str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
+                  prop.var = prop.var, A = A, form = 'exponential'))
+
+
+## ~~~~~~~~~~~~~
+## SPsurv
+## ~~~~~~~~~~~~~
+
+set.seed(782566)
+str(SPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
+           N = N, burn = burn, thin = thin, w = w, m = m, form = 'Weibull'))
+set.seed(782566)
+str(SPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
+           N = N, burn = burn, thin = thin, w = w, m = m, form = 'exponential'))
+
+
+```
+
+
+
+---------------
+
+
 ### Internal check (omit)
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -187,6 +254,13 @@ net_str_f <- function(package){
     
 }
 ```
+
+
+
+
+
+
+
 
 ```{r, echo = TRUE, , warning = FALSE}
 ## ---------------------
