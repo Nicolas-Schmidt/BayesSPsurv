@@ -198,6 +198,11 @@ str(frailtySPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S,
                   data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
                   prop.var = prop.var, form = 'exponential'))
 
+set.seed(782566)
+str(frailtySPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
+                  prop.var = prop.var, form = 'loglog'))
+
 ## ~~~~~~~~~~~~~
 ## spatialSPsurv
 ## ~~~~~~~~~~~~~
@@ -211,7 +216,10 @@ str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S,
                   data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
                   prop.var = prop.var, A = A, form = 'exponential'))
 
-
+set.seed(782566)
+str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
+                  prop.var = prop.var, A = A, form = 'loglog'))
 ## ~~~~~~~~~~~~~
 ## SPsurv
 ## ~~~~~~~~~~~~~
@@ -219,6 +227,7 @@ str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S,
 set.seed(782566)
 str(SPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
            N = N, burn = burn, thin = thin, w = w, m = m, form = 'Weibull'))
+
 set.seed(782566)
 str(SPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
            N = N, burn = burn, thin = thin, w = w, m = m, form = 'exponential'))
