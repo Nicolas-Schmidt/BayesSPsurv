@@ -110,7 +110,19 @@ formcall <- function(duration,
 # @return One sample update using slice sampling
 #
 
-betas.slice.sampling = function(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, form) {
+betas.slice.sampling = function(Sigma.b,
+                                Y,
+                                Y0,
+                                X,
+                                W,
+                                betas,
+                                delta,
+                                C,
+                                LY,
+                                rho,
+                                w,
+                                m,
+                                form) {
   p1 = length(betas)
   for (p in sample(1:p1, p1, replace = FALSE)) {
     betas[p] = univ.betas.slice.sampling(betas[p], p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, w, m, form = form)
@@ -169,7 +181,23 @@ betas.slice.sampling2 = function(Sigma.b, Y,  X, W, betas, delta, C,  rho, w, m,
 # @return One sample update using slice sampling
 #
 
-univ.betas.slice.sampling = function(betas.p, p, Sigma.b, Y,Y0, X, W, betas, delta, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+univ.betas.slice.sampling = function(betas.p,
+                                     p,
+                                     Sigma.b,
+                                     Y,
+                                     Y0,
+                                     X,
+                                     W,
+                                     betas,
+                                     delta,
+                                     C,
+                                     LY,
+                                     rho,
+                                     w,
+                                     m,
+                                     lower = -Inf,
+                                     upper = +Inf,
+                                     form) {
   b0 = betas.p
   b.post0 = betas.post(b0, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form)
 
@@ -344,7 +372,18 @@ univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta
 # @return One sample update using slice sampling
 #
 
-gammas.slice.sampling = function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m, form) {
+gammas.slice.sampling = function(Sigma.g,
+                                 Y,
+                                 Y0,
+                                 eXB,
+                                 Z,
+                                 gammas,
+                                 C,
+                                 LY,
+                                 rho,
+                                 w,
+                                 m,
+                                 form) {
   p2 = length(gammas)
   for (p in sample(1:p2, p2, replace = FALSE)) {
     gammas[p] = univ.gammas.slice.sampling(gammas[p], p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, w, m, form = form)
@@ -372,7 +411,19 @@ gammas.slice.sampling = function(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m
 # @return One sample update using slice sampling
 #
 
-gammas.slice.sampling2 = function(Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form) {
+gammas.slice.sampling2 = function(Sigma.g,
+                                  Y,
+                                  Y0,
+                                  eXB,
+                                  Z,
+                                  V,
+                                  gammas,
+                                  C,
+                                  LY,
+                                  rho,
+                                  w,
+                                  m,
+                                  form) {
   p2 = length(gammas)
   for (p in sample(1:p2, p2, replace = FALSE)) {
     gammas[p] = univ.gammas.slice.sampling2(gammas[p], p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form = form)
@@ -458,7 +509,22 @@ gammas.slice.sampling4 = function(Sigma.g, Y, eXB, Z, V, gammas, C,  rho, w, m, 
 # @return One sample update using slice sampling
 #
 
-univ.gammas.slice.sampling2 = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, V, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+univ.gammas.slice.sampling2 = function(gammas.p,
+                                       p, Sigma.g,
+                                       Y,
+                                       Y0,
+                                       eXB,
+                                       Z,
+                                       V,
+                                       gammas,
+                                       C,
+                                       LY,
+                                       rho,
+                                       w,
+                                       m,
+                                       lower = -Inf,
+                                       upper = +Inf,
+                                       form) {
   g0 = gammas.p
   g.post0 = gammas.post2(g0, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, form)
 
@@ -546,7 +612,22 @@ univ.gammas.slice.sampling2 = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, V, ga
 # @return One sample update using slice sampling
 #
 
-univ.gammas.slice.sampling = function(gammas.p, p, Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
+univ.gammas.slice.sampling = function(gammas.p,
+                                      p,
+                                      Sigma.g,
+                                      Y,
+                                      Y0,
+                                      eXB,
+                                      Z,
+                                      gammas,
+                                      C,
+                                      LY,
+                                      rho,
+                                      w,
+                                      m,
+                                      lower = -Inf,
+                                      upper = +Inf,
+                                      form) {
   g0 = gammas.p
   g.post0 = gammas.post(g0, p, Sigma.g, Y, Y0,eXB, Z,gammas, C, LY, rho, form)
 
@@ -811,7 +892,17 @@ univ.gammas.slice.sampling4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gamma
 # @return One sample update using slice sampling
 #
 
-rho.slice.sampling = function(Y,Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, upper = +Inf) {
+rho.slice.sampling = function(Y,
+                              Y0,
+                              eXB,
+                              delta,
+                              C,
+                              LY,
+                              rho,
+                              w,
+                              m,
+                              lower = 0.01,
+                              upper = +Inf) {
   l0 = rho
   l.post0 = rho.post(Y, Y0,eXB, delta, C, LY, l0)
 
@@ -984,7 +1075,18 @@ rho.slice.sampling2 = function(Y, eXB, delta, C,  rho, w, m, lower = 0.01, upper
 # @return log- posterior density of betas
 #
 
-betas.post = function(betas.p, p, Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, form) {
+betas.post = function(betas.p,
+                      p, Sigma.b,
+                      Y,
+                      Y0,
+                      X,
+                      W,
+                      betas,
+                      delta,
+                      C,
+                      LY,
+                      rho,
+                      form) {
   betas[p] = betas.p
   eXB = exp(-(X %*% betas) + W)
   lprior = rcpp_log_dmvnorm(Sigma.b, rep(0, length(betas)), betas, FALSE)
@@ -1036,7 +1138,18 @@ betas.post2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta, C,  rho, form
 # @return log- posterior density of betas
 #
 
-gammas.post = function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, form) {
+gammas.post = function(gammas.p,
+                       p,
+                       Sigma.g,
+                       Y,
+                       Y0,
+                       eXB,
+                       Z,
+                       gammas,
+                       C,
+                       LY,
+                       rho,
+                       form) {
   gammas[p] = gammas.p
   num = exp(Z %*% gammas)
   num[which(is.infinite(num))] <- exp(700)
@@ -1069,7 +1182,12 @@ gammas.post = function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, gammas, C, LY, rho, f
 # @return log- posterior density of betas
 #
 
-gammas.post2 = function(gammas.p, p, Sigma.g, Y,Y0, eXB, Z, V, gammas, C, LY, rho, form) {
+gammas.post2 = function(gammas.p,
+                        p,
+                        Sigma.g,
+                        Y,
+                        Y0,
+                        eXB, Z, V, gammas, C, LY, rho, form) {
   gammas[p] = gammas.p
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -1160,7 +1278,15 @@ gammas.post4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, for
 # @return log- posterior density of betas
 #
 
-rho.post = function(Y, Y0,eXB, delta, C, LY, rho, a = 1, b = 1) {
+rho.post = function(Y,
+                    Y0,
+                    eXB,
+                    delta,
+                    C,
+                    LY,
+                    rho,
+                    a = 1,
+                    b = 1) {
   lprior = dgamma(rho, a, b, log = TRUE)
   lpost = llikWeibull(Y,Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
@@ -1206,7 +1332,18 @@ rho.post2 = function(Y, eXB, delta, C,  rho, a = 1, b = 1) {
 # @return log- posterior density of W (Weibull or exponential)
 #
 
-W.post = function(S, A, lambda, Y,Y0,X, W, betas, delta, C, LY, rho) {
+W.post = function(S,
+                  A,
+                  lambda,
+                  Y,
+                  Y0,
+                  X,
+                  W,
+                  betas,
+                  delta,
+                  C,
+                  LY,
+                  rho) {
   eXB = exp(-(X %*% betas) + W)
   S_uniq = unique(cbind(S, W))
   S_uniq = S_uniq[order(S_uniq[,1]),]
@@ -1300,7 +1437,19 @@ W.post2 = function(S, A, lambda, Y,X, W, betas, delta, C,  rho) {
 # @return One sample update using slice sampling
 #
 
-W.MH.sampling = function(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var) {
+W.MH.sampling = function(S,
+                         A,
+                         lambda,
+                         Y,
+                         Y0,
+                         X,
+                         W,
+                         betas,
+                         delta,
+                         C,
+                         LY,
+                         rho,
+                         prop.var) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
   W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
@@ -1378,7 +1527,17 @@ W.MH.sampling2 = function(S, A, lambda, Y, X, W, betas, delta, C,  rho, prop.var
 # @return log- posterior density of W
 #
 
-W.F.post = function(Sigma.w,S, Y,Y0,X, W, betas, delta, C, LY, rho) {
+W.F.post = function(Sigma.w,
+                    S,
+                    Y,
+                    Y0,
+                    X,
+                    W,
+                    betas,
+                    delta,
+                    C,
+                    LY,
+                    rho) {
   eXB = exp(-(X %*% betas) + W)
   S_uniq = unique(cbind(S, W))
   S_uniq = S_uniq[order(S_uniq[,1]),]
@@ -1437,7 +1596,18 @@ W.F.post2 = function(Sigma.w, S, Y,X, W, betas, delta, C, rho) {
 # @return One sample update using slice sampling
 #
 
-W.F.MH.sampling = function(Sigma.w, S, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var) {
+W.F.MH.sampling = function(Sigma.w,
+                           S,
+                           Y,
+                           Y0,
+                           X,
+                           W,
+                           betas,
+                           delta,
+                           C,
+                           LY,
+                           rho,
+                           prop.var) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
   W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
@@ -1512,7 +1682,18 @@ W.F.MH.sampling2 = function(Sigma.w, S, Y, X, W, betas, delta, C, rho, prop.var)
 # @return log- posterior density of betas
 #
 
-V.post = function(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
+V.post = function(S,
+                  A,
+                  lambda,
+                  Y,
+                  Y0,
+                  eXB,
+                  Z,
+                  V,
+                  gammas,
+                  C,
+                  LY,
+                  rho) {
 
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -1621,7 +1802,19 @@ V.post2 = function(S, A, lambda, Y, eXB, Z, V, gammas, C,  rho) {
 # @return One sample update using slice sampling
 #
 
-V.MH.sampling = function(S, A, lambda, Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop.var) {
+V.MH.sampling = function(S,
+                         A,
+                         lambda,
+                         Y,
+                         Y0,
+                         eXB,
+                         Z,
+                         V,
+                         gammas,
+                         C,
+                         LY,
+                         rho,
+                         prop.var) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
   V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
@@ -1699,7 +1892,17 @@ V.MH.sampling2 = function(S, A, lambda, Y, eXB, Z, V, gammas, C,  rho, prop.var)
 # @return log- posterior density of betas (Weibull and Exponential)
 #
 
-V.F.post = function(Sigma.v,S, Y,Y0, eXB, Z, V, gammas, C, LY, rho) {
+V.F.post = function(Sigma.v,
+                    S,
+                    Y,
+                    Y0,
+                    eXB,
+                    Z,
+                    V,
+                    gammas,
+                    C,
+                    LY,
+                    rho) {
 
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -1771,7 +1974,18 @@ V.F.post2 = function(Sigma.v, S, Y, eXB, Z, V, gammas, C, rho) {
 # @return One sample update using slice sampling
 #
 
-V.F.MH.sampling = function(Sigma.v,S,  Y, Y0,eXB, Z, V, gammas, C, LY, rho, prop.var) {
+V.F.MH.sampling = function(Sigma.v,
+                           S,
+                           Y,
+                           Y0,
+                           eXB,
+                           Z,
+                           V,
+                           gammas,
+                           C,
+                           LY,
+                           rho,
+                           prop.var) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
   V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
@@ -1843,7 +2057,12 @@ V.F.MH.sampling2 = function(Sigma.v, S,  Y, eXB, Z, V, gammas, C,  rho, prop.var
 # @return log- posterior density of betas
 #
 
-lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
+lambda.gibbs.sampling2 <- function(S,
+                                   A,
+                                   W,
+                                   V,
+                                   a = 1,
+                                   b = 1) {
   S_uniq = unique(cbind(S, W, V))
   S_uniq = S_uniq[order(S_uniq[,1]),]
   J = nrow(S_uniq)
@@ -1902,7 +2121,18 @@ lambda.gibbs.sampling2 <- function(S, A, W, V, a = 1, b = 1) {
 # @return chain of the variables of interest
 #
 
-mcmcSP <- function(Y, Y0,C, LY, X, Z, N, burn, thin, w = c(1, 1, 1), m = 10, form, propvar) {
+mcmcSP <- function(Y,
+                   Y0,
+                   C,
+                   LY,
+                   X,
+                   Z,
+                   N,
+                   burn,
+                   thin,
+                   w = c(1, 1, 1),
+                   m = 10,
+                   form, propvar) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2032,7 +2262,20 @@ mcmcSPlog <- function(Y, C,  X, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
 # @return chain of the variables of interest
 #
 
-mcmcspatialSP <- function(Y, Y0,C, LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var) {
+mcmcspatialSP <- function(Y,
+                          Y0,
+                          C,
+                          LY,
+                          X,
+                          Z,
+                          S,
+                          A,
+                          N,
+                          burn,
+                          thin, w = c(1, 1, 1),
+                          m = 10,
+                          form,
+                          prop.var) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2193,7 +2436,19 @@ mcmcSpatialLog <- function(Y, C,  X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m, 
 # @return chain of the variables of interest
 #
 
-mcmcfrailtySP <- function(Y, Y0,C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m, form, prop.var) {
+mcmcfrailtySP <- function(Y,
+                          Y0,
+                          C,
+                          LY,
+                          X,
+                          Z,
+                          S,
+                          N,
+                          burn,
+                          thin, w = c(1, 1, 1),
+                          m,
+                          form,
+                          prop.var) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   p3 = length(unique(S))
@@ -2336,6 +2591,362 @@ mcmcfrailtySPlog <- function(Y ,C, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 1
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp,  W = W.samp, V = V.samp))
 }
+
+
+
+
+# @title llFun
+# @description Log-likelihood function for exchnageable and spatial frailty split population models
+#
+# @param est parameter estimates from the model
+# @param Y the time (duration) dependent variable for the survival stage (t)
+# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+# @param C immunity indicator
+# @param X covariates for betas
+# @param Z covariates for gammas
+# @param W survival stage (spatial) frailty parameter estimates
+# @param V split stage (spatial) frailty parameter estimates
+# @param data data that contains the variables of interest
+#
+# @return Log-likelihood of the exchangeable or the spatial split population survial model
+#
+
+llFun <- function(est,
+                  Y,
+                  Y0,
+                  C,
+                  X,
+                  Z,
+                  W,
+                  V,
+                  data){		#Note the extra variable Y0 passed to the time varying MF Weibull
+
+  n     <- nrow(data)
+  llik  <- matrix(0, nrow = n, ncol = 1)
+  gamma <- est[1:ncol(Z)]
+  beta  <- est[(ncol(Z)+1):(ncol(Z)+ncol(X))]
+  p     <- est[length(est)]
+  XB    <- X %*% beta
+  ZG    <- Z %*% gamma
+  phi   <- exp(-ZG + V)/(1+exp(-ZG + V))
+  eXB   <- exp(-XB + W)
+  llik  <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
+  one   <- nrow(llik)
+  llik  <- subset(llik, is.finite(llik))
+  two   <- nrow(llik)
+  llik  <- subset(llik, llik[,1] > -1000)
+  three <- nrow(llik)
+  llik  <- -1*sum(llik)
+  list(llik = llik, one = one, two = two, three = three)
+
+}
+
+# @title rllFun
+# @description Log-likelihood function for pooled split population models
+#
+# @param est parameter estimates from the model
+# @param Y the time (duration) dependent variable for the survival stage (t)
+# @param Y0 the elapsed time since inception until the beginning of time period (t-1)
+# @param C immunity indicator
+# @param X covariates for betas
+# @param Z covariates for gammas
+# @param data data that contains the variables of interest
+#
+# @return Log-likelihood of the poold slit population survival model
+#
+
+rllFun <- function(est,
+                   Y,
+                   Y0,
+                   C,
+                   X,
+                   Z,
+                   data){		#Note the extra variable Y0 passed to the time varying MF Weibull
+
+  n     <- nrow(data)
+  llik  <- matrix(0, nrow = n, ncol = 1)
+  gamma <- est[1:ncol(Z)]
+  beta  <- est[(ncol(Z)+1):(ncol(Z)+ncol(X))]
+  p     <- est[length(est)]
+  XB    <- X %*% beta
+  ZG    <- Z %*% gamma
+  phi   <- exp(-ZG )/(1+exp(-ZG ))
+  eXB   <- exp(-XB )
+  llik  <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
+  one   <- nrow(llik)
+  llik  <- subset(llik, is.finite(llik))
+  two   <- nrow(llik)
+  llik  <- subset(llik, llik[,1] > -1000)
+  three <- nrow(llik)
+  llik  <- -1*sum(llik)
+  list(llik = llik, one = one, two = two, three = three)
+
+}
+
+
+
+
+# @title exchangeSPsurv
+# @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties
+#
+#
+# @param duration Survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failrue or cencoring
+# @param immune Split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity
+# @param Y0 The elapsed time since inception until the beginning of time period (t-1)
+# @param LY Last observation year (coded as 1; 0 otherwise) due to censoring or failure
+# @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information
+# @param N Number of MCMC iterations
+# @param burn Burn-in to be discarded
+# @param thin Thinning to prevent autocorrelation
+# @param w Size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
+# @param m Limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+# @param form The type of parametric model (Exponential or Weibull)
+# @param prop.var Proposed variance for Metropolis-Hastings
+#
+# @return chain of the variables of interest
+#
+exchangeSPsurv<- function(duration,
+                          immune,
+                          Y0,
+                          LY,
+                          S,
+                          data=list(),
+                          N,
+                          burn,
+                          thin,
+                          w = c(1, 1, 1),
+                          m = 10,
+                          form,
+                          prop.var) {
+  data <- data
+
+  equation1 <- as.character(duration)
+  equation2<-as.character(immune)
+  formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
+  formula2<-paste(equation2[2],equation2[1],equation2[3],sep="")
+  mf1 <- model.frame(formula=as.formula(formula1), data=data)
+  mf2 <- model.frame(formula=as.formula(formula2), data=data)
+  X <- model.matrix(attr(mf1, "terms"), data=mf1)
+  Z <- model.matrix(attr(mf2, "terms"), data=mf2)
+  Y <- as.matrix(model.response(mf1))
+  C <- as.matrix(model.response(mf2))
+
+  Y0 <- as.numeric(Y0)
+  LY <- as.numeric(LY)
+  S <- as.numeric(S)
+
+  burn = burn
+  if(is.null(w)){
+    w = c(1,1,1)
+  } else{
+    w=w
+  }
+  if(is.null(m)){
+    m = 10
+  } else{
+    m=m
+  }
+  form = form
+  prop.var = prop.var
+
+  dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
+  dataset  <- na.omit(dataset)
+  col <- ncol(dataset)
+
+  Y <- as.matrix(dataset[,1])
+  Y0 <- as.matrix(dataset[,2])
+  C <- as.matrix(dataset[,3])
+  LY <- as.matrix(dataset[,4])
+  S <- as.matrix(dataset[,5])
+  X <- as.matrix(dataset[,6:5+ncol(X)])
+  Z <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
+
+  results <- mcmcfrailtySP(Y, Y0,C, LY, X, Z, S, N, burn, thin, w, m , form, prop.var)
+  return(results)
+
+}
+
+
+
+
+# @title pooledSPsurv
+# @description Markov Chain Monte Carlo (MCMC) to run Bayesian pooled split population survival model (no frailties)
+#
+# @param duration Survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failrue or cencoring
+# @param immune Split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity
+# @param Y0 The elapsed time since inception until the beginning of time period (t-1)
+# @param LY Last observation year (coded as 1; 0 otherwise) due to censoring or failure
+# @param N Number of MCMC iterations
+# @param burn Burn-in to be discarded
+# @param thin Thinning to prevent autocorrelation
+# @param w Size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
+# @param m Limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+# @param form The type of parametric model (Exponential or Weibull)
+#
+# @return chain of the variables of interest
+#
+#
+#
+pooledSPsurv<- function(duration,
+                        immune,
+                        Y0,
+                        LY,
+                        data=list(),
+                        N,
+                        burn,
+                        thin,
+                        w = c(1, 1, 1),
+                        m = 10,
+                        form) {
+  data <- data
+
+  equation1 <- as.character(duration)
+  equation2<-as.character(immune)
+  formula1<-paste(equation1[2],equation1[1],equation1[3],sep="")
+  formula2<-paste(equation2[2],equation2[1],equation2[3],sep="")
+  mf1 <- model.frame(formula=as.formula(formula1), data=data)
+  mf2 <- model.frame(formula=as.formula(formula2), data=data)
+  X <- model.matrix(attr(mf1, "terms"), data=mf1)
+  Z <- model.matrix(attr(mf2, "terms"), data=mf2)
+  Y <- as.matrix(model.response(mf1))
+  C <- as.matrix(model.response(mf2))
+
+  Y0 <- as.numeric(Y0)
+  LY <- as.numeric(LY)
+
+  burn = burn
+  if(is.null(w)){
+    w = c(1,1,1)
+  } else{
+    w=w
+  }
+  if(is.null(m)){
+    m = 10
+  } else{
+    m=m
+  }
+  form = form
+
+  dataset <- data.frame(cbind(Y, Y0, C, LY, X, Z))
+  dataset  <- na.omit(dataset)
+  col <- ncol(dataset)
+
+  Y <- as.matrix(dataset[,1])
+  Y0 <- as.matrix(dataset[,2])
+  C <- as.matrix(dataset[,3])
+  LY <- as.matrix(dataset[,4])
+  X <- as.matrix(dataset[,5:4+ncol(X)])
+  Z <- as.matrix(dataset[,(5+ncol(X)):ncol(dataset)])
+
+  results <- mcmcSP(Y, Y0,C, LY, X, Z, N, burn, thin, w, m , form)
+  return(results)
+
+}
+
+
+
+# @title SP.stats
+# @description A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts of pooled,
+# exchangeable, and spatial Split Population survival models for which a log-likelihood can be obtained, according to the formula
+# \emph{DIC = -2 * (L - P)}, where \emph{L} is the log likelihood of the data given the posterior means of the parameter and
+# \emph{P} is the  estimate of the effective number of parameters in the model.
+# @param object An object of the output of pooled, exchangeable, or spatial Split Population survival model .
+#
+# @return List.
+#
+# @exportlib
+
+SP.stats = function(object){
+
+  #Calculate L
+  X <- as.matrix(object$X)
+  Z <- as.matrix(object$Z)
+  Y <- as.matrix(object$Y)
+  Y0 <- as.matrix(object$Y0)
+  C <- as.matrix(object$C)
+
+  if(length(object$S)==0){
+
+    data <- as.data.frame(cbind(object$Y, object$Y0, object$C, object$X, object$Z))
+
+    theta_post = cbind(object$gammas, object$betas, object$rho)
+    theta_hat = apply(theta_post, 2, mean)
+    L = rllFun(theta_hat,Y, Y0,C,X,Z,  data)$llik
+    #Calculate P
+    S = nrow(theta_post) #S = number of iterations
+    #Add up the log likelihoods of each iteration
+    llSum = 0
+    sum1 = 0
+    sum2 = 0
+    sum3 = 0
+    #l <- as.matrix(NA, nrow=S, ncol=1)
+    for (s in 1:S) {
+      theta_s = as.matrix(theta_post[s,])
+      ll <- rllFun(theta_s,Y,Y0,C,X,Z, data)
+      llSum <- llSum + ll$llik
+      sum1 <- sum1 + ll$one
+      sum2 <- sum2 + ll$two
+      sum3 <- sum3 + ll$three
+      #l[s,] <- llFun(theta_s,Y,Y0,C,X,Z,data)
+    }
+    P = 2 * (L - (1 / S * llSum))
+    #Calculate DIC
+    DIC <- -2 * (L - P)
+    all <- sum1/S
+    finite <- sum2/S
+    small <- sum3/S
+    #Return the results
+    list(DIC = DIC, Loglik = L)
+
+  } else{
+
+    SP <- as.matrix(object$S)
+    data <- as.data.frame(cbind(object$Y, object$Y0, object$C, object$X, object$Z, object$S))
+
+    W <- matrix(NA, ncol=1, nrow=nrow(X))
+    V <- matrix(NA, ncol=1, nrow=nrow(X))
+
+    for(i in 1:length(SP)){
+      sid <- SP[i]
+      W[i] <- mean(object$W[,sid])
+      V[i] <- mean(object$V[,sid])
+    }
+
+    data <- as.data.frame(cbind(Y, Y0, C, X, Z))
+    theta_post = cbind(object$gammas, object$betas, object$rho)
+    theta_hat = apply(theta_post, 2, mean)
+    L = llFun(theta_hat,Y, Y0,C,X,Z, W, V, data)$llik
+    #Calculate P
+    S = nrow(theta_post) #S = number of iterations
+    #Add up the log likelihoods of each iteration
+    llSum = 0
+    sum1 = 0
+    sum2 = 0
+    sum3 = 0
+    #l <- as.matrix(NA, nrow=S, ncol=1)
+    for (s in 1:S) {
+      theta_s = as.matrix(theta_post[s,])
+      ll <- llFun(theta_s,Y,Y0,C,X,Z,W, V, data)
+      llSum <- llSum + ll$llik
+      sum1 <- sum1 + ll$one
+      sum2 <- sum2 + ll$two
+      sum3 <- sum3 + ll$three
+      #l[s,] <- llFun(theta_s,Y,Y0,C,X,Z,data)
+    }
+    P = 2 * (L - ((1 / S )* llSum))
+    #Calculate DIC
+    DIC <- -2 * (L - P)
+    all <- sum1/S
+    finite <- sum2/S
+    small <- sum3/S
+    #Return the results
+    list(DIC = DIC, Loglik = L)}
+}
+
+
+
+
+
 
 
 
