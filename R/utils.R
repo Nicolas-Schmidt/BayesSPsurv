@@ -2218,9 +2218,9 @@ mcmcSPlog <- function(Y, C,  X, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
     }
-    betas = betas.slice.sampling2(Sigma.b, Y, X, W, betas, delta, C,  rho, w[1], m, form = form)
-    eXB = exp((X %*% betas))
-    gammas = gammas.slice.sampling3(Sigma.g, Y, eXB, Z, gammas, C,  rho, w[2], m, form = form)
+    betas = betas.slice.sampling2(Sigma.b, Y, X, W, betas, delta, C,  rho, w[1], m, form = form) ## ...sampling2
+    eXB = exp((X %*% betas)) ## check!
+    gammas = gammas.slice.sampling3(Sigma.g, Y, eXB, Z, gammas, C,  rho, w[2], m, form = form) ## ...sampling3
     num = exp(Z %*% gammas)
     num[which(is.infinite(num))] <- exp(700)
     denom = (1 + exp(Z %*% gammas))
