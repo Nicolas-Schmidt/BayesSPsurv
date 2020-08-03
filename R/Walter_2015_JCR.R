@@ -2,10 +2,7 @@
 #'
 #'Time-series-cross-sectional (TSCS) dataset extracted from \href{http://t.ly/F7KK}{Walter (2015)}.
 #'It has precisely dated duration data of internal conflict as well as geographic data.
-#'Variables Y, Y0 and C were later added by \href{http://bit.ly/38eDsnG}{Bagozzi et al. (2019)}.
-#'It is used to estimate the Bayesian Misclassified Failure (MF) Weibull model
-#'presented in \href{http://bit.ly/38eDsnG}{Bagozzi et al. (2019)}.
-#'
+#'Complete description with variables that were added by authors. 
 #'
 #'\describe{
 #'    \item{duration}{.}
