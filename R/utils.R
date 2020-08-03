@@ -148,11 +148,10 @@ betas.slice.sampling = function(Sigma.b,
 #
 # @return One sample update using slice sampling
 #
-
-betas.slice.sampling2 = function(Sigma.b, Y,  X, W, betas, delta, C,  rho, w, m, form) {
+betas.slice.sampling2 = function(Sigma.b, Y, Y0, X, W, betas, delta, C,  LY, rho, w, m, form) {
   p1 = length(betas)
   for (p in sample(1:p1, p1, replace = FALSE)) {
-    betas[p] = univ.betas.slice.sampling2(betas[p], p, Sigma.b, Y, X, W, betas, delta, C,  rho, w, m, form = form)
+    betas[p] = univ.betas.slice.sampling2(betas[p], p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, form = form)
   }
   return(betas)
 }
@@ -286,10 +285,9 @@ univ.betas.slice.sampling = function(betas.p,
 #
 # @return One sample update using slice sampling
 #
-
-univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta, C,  rho, w, m, lower = -Inf, upper = +Inf, form) {
+univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
   b0 = betas.p
-  b.post0 = betas.post2(b0, p, Sigma.b, Y,  X, W, betas, delta, C,  rho, form)
+  b.post0 = betas.post2(b0, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form)
 
   e.b.post0 = exp(b.post0)
   if (is.infinite(e.b.post0)){e.b.post0 = exp(700)}
@@ -302,13 +300,13 @@ univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta
   if (is.infinite(m)) {
     repeat
     { if (L <= lower) break
-      if (betas.post2(L, p, Sigma.b, Y,  X, W, betas, delta, C,  rho, form) <= b.post0) break
+      if (betas.post2(L, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
       L = L - w
     }
     repeat
     {
       if (R >= upper) break
-      if (betas.post2(R, p, Sigma.b, Y, X, W, betas, delta, C,  rho, form) <= b.post0) break
+      if (betas.post2(R, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
       R = R + w
     }
   } else if (m > 1) {
@@ -317,14 +315,14 @@ univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta
 
     while (J > 0) {
       if (L <= lower) break
-      if (betas.post2(L, p, Sigma.b, Y, X, W, betas, delta, C,  rho, form) <= b.post0) break
+      if (betas.post2(L, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
       L = L - w
       J = J - 1
     }
 
     while (K > 0) {
       if (R >= upper) break
-      if (betas.post2(R, p, Sigma.b, Y, X, W, betas, delta, C,  rho, form) <= b.post0) break
+      if (betas.post2(R, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) <= b.post0) break
       R = R + w
       K = K - 1
     }
@@ -340,7 +338,7 @@ univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta
   repeat
   {
     b1 = runif(1, L, R)
-    b.post1 = betas.post2(b1, p, Sigma.b, Y, X, W, betas, delta, C,  rho, form)
+    b.post1 = betas.post2(b1, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form)
 
     if (b.post1 >= b.post0) break
     if (b1 > b0) {
@@ -351,6 +349,7 @@ univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta
   }
   return(b1)
 }
+
 
 
 
@@ -449,14 +448,13 @@ gammas.slice.sampling2 = function(Sigma.g,
 # @return One sample update using slice sampling
 #
 
-gammas.slice.sampling3 = function(Sigma.g, Y, eXB, Z, gammas, C,  rho, w, m, form) {
+gammas.slice.sampling3 = function(Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w, m, form) {
   p2 = length(gammas)
   for (p in sample(1:p2, p2, replace = FALSE)) {
-    gammas[p] = univ.gammas.slice.sampling3(gammas[p], p, Sigma.g, Y, eXB, Z, gammas, C,  rho, w, m, form = form)
+    gammas[p] = univ.gammas.slice.sampling3(gammas[p], p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w, m, form = form)
   }
   return(gammas)
 }
-
 # @title gammas.slice.sampling4
 # @description slice sampling for gammas
 #
@@ -476,10 +474,10 @@ gammas.slice.sampling3 = function(Sigma.g, Y, eXB, Z, gammas, C,  rho, w, m, for
 # @return One sample update using slice sampling
 #
 
-gammas.slice.sampling4 = function(Sigma.g, Y, eXB, Z, V, gammas, C,  rho, w, m, form) {
+gammas.slice.sampling4 = function(Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form) {
   p2 = length(gammas)
   for (p in sample(1:p2, p2, replace = FALSE)) {
-    gammas[p] = univ.gammas.slice.sampling4(gammas[p], p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, w, m, form = form)
+    gammas[p] = univ.gammas.slice.sampling4(gammas[p], p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w, m, form = form)
   }
   return(gammas)
 }
@@ -716,10 +714,9 @@ univ.gammas.slice.sampling = function(gammas.p,
 #
 # @return One sample update using slice sampling
 #
-
-univ.gammas.slice.sampling3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, w, m, lower = -Inf, upper = +Inf, form) {
+univ.gammas.slice.sampling3 = function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
   g0 = gammas.p
-  g.post0 = gammas.post3(g0, p, Sigma.g, Y, eXB, Z,gammas, C,  rho, form)
+  g.post0 = gammas.post3(g0, p, Sigma.g, Y, Y0, eXB, Z,gammas, C, LY, rho, form)
 
   e.g.post0 = exp(g.post0)
 
@@ -734,13 +731,13 @@ univ.gammas.slice.sampling3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, 
   if (is.infinite(m)) {
     repeat
     { if (L <= lower) break
-      if (gammas.post3(L, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post3(L, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       L = L - w
     }
     repeat
     {
       if (R >= upper) break
-      if (gammas.post3(R, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post3(R, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       R = R + w
     }
   } else if (m > 1) {
@@ -749,14 +746,14 @@ univ.gammas.slice.sampling3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, 
 
     while (J > 0) {
       if (L <= lower) break
-      if (gammas.post3(L, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post3(L, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       L = L - w
       J = J - 1
     }
 
     while (K > 0) {
       if (R >= upper) break
-      if (gammas.post3(R, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post3(R, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) <= g.post0) break
       R = R + w
       K = K - 1
     }
@@ -772,7 +769,7 @@ univ.gammas.slice.sampling3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, 
   repeat
   {
     g1 = runif(1, L, R)
-    g.post1 = gammas.post3(g1, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form)
+    g.post1 = gammas.post3(g1, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form)
 
     if (g.post1 >= g.post0) break
     if (g1 > g0) {
@@ -806,10 +803,9 @@ univ.gammas.slice.sampling3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, 
 #
 # @return One sample update using slice sampling
 #
-
-univ.gammas.slice.sampling4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, w, m, lower = -Inf, upper = +Inf, form) {
+univ.gammas.slice.sampling4 = function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w, m, lower = -Inf, upper = +Inf, form) {
   g0 = gammas.p
-  g.post0 = gammas.post4(g0, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, form)
+  g.post0 = gammas.post4(g0, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, form)
 
   e.g.post0 = exp(g.post0)
 
@@ -823,13 +819,13 @@ univ.gammas.slice.sampling4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gamma
   if (is.infinite(m)) {
     repeat
     { if (L <= lower) break
-      if (gammas.post4(L, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post4(L, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, form) <= g.post0) break
       L = L - w
     }
     repeat
     {
       if (R >= upper) break
-      if (gammas.post4(R, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post4(R, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, form) <= g.post0) break
       R = R + w
     }
   } else if (m > 1) {
@@ -838,14 +834,14 @@ univ.gammas.slice.sampling4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gamma
 
     while (J > 0) {
       if (L <= lower) break
-      if (gammas.post4(L, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post4(L, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C,  LY, rho, form) <= g.post0) break
       L = L - w
       J = J - 1
     }
 
     while (K > 0) {
       if (R >= upper) break
-      if (gammas.post4(R, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, form) <= g.post0) break
+      if (gammas.post4(R, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, form) <= g.post0) break
       R = R + w
       K = K - 1
     }
@@ -861,7 +857,7 @@ univ.gammas.slice.sampling4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gamma
   repeat
   {
     g1 = runif(1, L, R)
-    g.post1 = gammas.post4(g1, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, form)
+    g.post1 = gammas.post4(g1, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, form)
 
     if (g.post1 >= g.post0) break
     if (g1 > g0) {
@@ -987,10 +983,9 @@ rho.slice.sampling = function(Y,
 #
 # @return One sample update using slice sampling
 #
-
-rho.slice.sampling2 = function(Y, eXB, delta, C,  rho, w, m, lower = 0.01, upper = +Inf) {
+rho.slice.sampling2 = function(Y, Y0, eXB, delta, C, LY, rho, w, m, lower = 0.01, upper = +Inf) {
   l0 = rho
-  l.post0 = rho.post2(Y, eXB, delta, C,  l0)
+  l.post0 = rho.post2(Y, Y0, eXB, delta, C, LY, l0)
 
   e.l.post0 = exp(l.post0)
   if (is.infinite(e.l.post0)){e.l.post0 = exp(700)}
@@ -1004,14 +999,14 @@ rho.slice.sampling2 = function(Y, eXB, delta, C,  rho, w, m, lower = 0.01, upper
   if (is.infinite(m)) {
     repeat
     { if (L <= lower) break
-      if (rho.post2(Y, eXB, delta, C,  L) <= l.post0) break
+      if (rho.post2(Y, Y0, eXB, delta, C, LY, L) <= l.post0) break
       L = L - w
     }
     repeat
     {
       if (R >= upper) break
-      if (is.na(rho.post2(Y, eXB, delta, C,  R))) #browser()
-        if (rho.post2(Y, eXB, delta, C,  R) <= l.post0) break
+      if (is.na(rho.post2(Y, Y0, eXB, delta, C, LY, R))) #browser()
+        if (rho.post2(Y, Y0, eXB, delta, C, LY, R) <= l.post0) break
       R = R + w
     }
   } else if (m > 1) {
@@ -1020,15 +1015,15 @@ rho.slice.sampling2 = function(Y, eXB, delta, C,  rho, w, m, lower = 0.01, upper
 
     while (J > 0) {
       if (L <= lower) break
-      if (rho.post2(Y, eXB, delta, C,  L) <= l.post0) break
+      if (rho.post2(Y, Y0, eXB, delta, C, LY, L) <= l.post0) break
       L = L - w
       J = J - 1
     }
 
     while (K > 0) {
       if (R >= upper) break
-      if (is.na(rho.post2(Y, eXB, delta, C,  R))) #browser()
-        if (rho.post2(Y, eXB, delta, C,  R) <= l.post0) break
+      if (is.na(rho.post2(Y, Y0, eXB, delta, C, LY, R))) #browser()
+        if (rho.post2(Y, Y0, eXB, delta, C, LY, R) <= l.post0) break
       R = R + w
       K = K - 1
     }
@@ -1044,7 +1039,7 @@ rho.slice.sampling2 = function(Y, eXB, delta, C,  rho, w, m, lower = 0.01, upper
   repeat
   {
     l1 = runif(1, L, R)
-    l.post1 = rho.post2(Y, eXB, delta, C,  l1)
+    l.post1 = rho.post2(Y, Y0, eXB, delta, C, LY, l1)
 
     if (l.post1 >= l.post0) break
     if (l1 > l0) {
@@ -1111,15 +1106,13 @@ betas.post = function(betas.p,
 #
 # @return log- posterior density of betas
 #
-
-betas.post2 = function(betas.p, p, Sigma.b, Y, X, W, betas, delta, C,  rho, form) {
+betas.post2 = function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form) {
   betas[p] = betas.p
-  eXB = exp((X %*% betas) + W)
+  eXB = exp(-(X %*% betas) + W)
   lprior = rcpp_log_dmvnorm(Sigma.b, rep(0, length(betas)), betas, FALSE)
-  lpost = llikLoglog(Y, eXB, delta, C,  rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
-
 # @title gammas.post
 # @description log-posterior distribution of gammas with pth element fixed as gammas.p
 #
@@ -1218,7 +1211,7 @@ gammas.post2 = function(gammas.p,
 # @return log- posterior density of betas
 #
 
-gammas.post3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form) {
+gammas.post3 = function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, form) {
   gammas[p] = gammas.p
   num = exp(Z %*% gammas)
   num[which(is.infinite(num))] <- exp(700)
@@ -1227,7 +1220,7 @@ gammas.post3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form) 
   delta = num/denom
 
   lprior = rcpp_log_dmvnorm(Sigma.g, rep(0, length(gammas)), gammas, FALSE)
-  lpost = llikLoglog(Y, eXB, delta, C,  rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
 
@@ -1250,7 +1243,7 @@ gammas.post3 = function(gammas.p, p, Sigma.g, Y, eXB, Z, gammas, C,  rho, form) 
 # @return log- posterior density of betas
 #
 
-gammas.post4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, form) {
+gammas.post4 = function(gammas.p, p, Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, form) {
   gammas[p] = gammas.p
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -1259,7 +1252,7 @@ gammas.post4 = function(gammas.p, p, Sigma.g, Y, eXB, Z, V, gammas, C,  rho, for
   delta = num/denom
 
   lprior = rcpp_log_dmvnorm(Sigma.g, rep(0, length(gammas)), gammas, FALSE)
-  lpost = llikLoglog(Y, eXB, delta, C,  rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
 
@@ -1308,9 +1301,9 @@ rho.post = function(Y,
 #
 
 
-rho.post2 = function(Y, eXB, delta, C,  rho, a = 1, b = 1) {
+rho.post2 = function(Y, Y0, eXB, delta, C, LY, rho, a = 1, b = 1) {
   lprior = dgamma(rho, a, b, log = TRUE)
-  lpost = llikLoglog(Y, eXB, delta, C,  rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
 
@@ -1389,9 +1382,8 @@ W.post = function(S,
 #
 # @return log- posterior density of W (Log likelihood)
 #
-
-W.post2 = function(S, A, lambda, Y,X, W, betas, delta, C,  rho) {
-  eXB = exp((X %*% betas) + W)
+W.post2 = function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
+  eXB = exp(-(X %*% betas) + W)
   S_uniq = unique(cbind(S, W))
   S_uniq = S_uniq[order(S_uniq[,1]),]
   lprior = 0
@@ -1413,9 +1405,10 @@ W.post2 = function(S, A, lambda, Y,X, W, betas, delta, C,  rho) {
 
     lprior = lprior + dnorm(S_uniq[s, 2], W_j_bar, sqrt(1/(lambda * m_j)), log = TRUE)
   }
-  lpost = llikLoglog(Y, eXB, delta, C,  rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
+
 
 
 # @title W.MH.sampling
@@ -1488,17 +1481,16 @@ W.MH.sampling = function(S,
 #
 # @return One sample update using slice sampling
 #
-
-W.MH.sampling2 = function(S, A, lambda, Y, X, W, betas, delta, C,  rho, prop.var) {
+W.MH.sampling2 = function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
   W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
   W_new = W_new - mean(W_new)
   u = log(runif(1))
-  w1 = W.post2(S, A, lambda, Y, X, W_new[S], betas, delta, C,  rho)
+  w1 = W.post2(S, A, lambda, Y, Y0, X, W_new[S], betas, delta, C, LY, rho)
   #w1[which(w1==-Inf)] <- -740
   #w1[which(w1==Inf)] <- exp(700)
-  w2 = W.post2(S, A, lambda, Y, X, W_old[S], betas, delta, C,  rho)
+  w2 = W.post2(S, A, lambda, Y, Y0, X, W_old[S], betas, delta, C, LY, rho)
   #w2[which(w2==Inf)] <- exp(700)
   temp = w1- w2
   alpha = min(0, temp)
@@ -1509,7 +1501,6 @@ W.MH.sampling2 = function(S, A, lambda, Y, X, W, betas, delta, C,  rho, prop.var
   }
   return(W)
 }
-
 
 # @title W.F.post
 # @description log-posterior distribution of W with sth element fixed as W.s
@@ -1564,20 +1555,18 @@ W.F.post = function(Sigma.w,
 #
 # @return log- posterior density of W
 #
-
-W.F.post2 = function(Sigma.w, S, Y,X, W, betas, delta, C, rho) {
-  eXB = exp((X %*% betas) + W)
+W.F.post2 = function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho) {
+  eXB = exp(-(X %*% betas) + W)
   S_uniq = unique(cbind(S, W))
   S_uniq = S_uniq[order(S_uniq[,1]),]
   lprior = 0
   for (s in 1:length(unique(S))){
-  lprior = lprior + dnorm(S_uniq[s, 2], 0, Sigma.w[s,s])
+    lprior = lprior + dnorm(S_uniq[s, 2], 0, Sigma.w[s,s])
 
   }
-  lpost = llikLoglog(Y, eXB, delta, C, rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
-
 
 # @title W.F.MH.sampling (Cure Model with Frailties)
 # @description MH sampling for W
@@ -1641,16 +1630,15 @@ W.F.MH.sampling = function(Sigma.w,
 #
 # @return One sample update using slice sampling
 #
-
-W.F.MH.sampling2 = function(Sigma.w, S, Y, X, W, betas, delta, C, rho, prop.var) {
+W.F.MH.sampling2 = function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
   W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
   W_new = W_new - mean(W_new)
   u = log(runif(1))
-  w1 = W.F.post2(Sigma.w, S, Y, X, W_new[S], betas, delta, C, rho)
+  w1 = W.F.post2(Sigma.w, S, Y, Y0, X, W_new[S], betas, delta, C, LY, rho)
   w1[which(w1==-Inf)] <- -740
-  w2 = W.F.post2(Sigma.w, S,  Y, X, W_old[S], betas, delta, C, rho)
+  w2 = W.F.post2(Sigma.w, S,  Y, Y0, X, W_old[S], betas, delta, C, LY, rho)
   w2[which(w2==-Inf)] <- -740
   temp = w1- w2
   alpha = min(0, temp)
@@ -1744,8 +1732,7 @@ V.post = function(S,
 #
 # @return log- posterior density of betas (log likelihood)
 #
-
-V.post2 = function(S, A, lambda, Y, eXB, Z, V, gammas, C,  rho) {
+V.post2 = function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -1776,9 +1763,10 @@ V.post2 = function(S, A, lambda, Y, eXB, Z, V, gammas, C,  rho) {
 
     lprior = lprior + dnorm(S_uniq[s, 2], V_j_bar, sqrt(1/(lambda * m_j)), log = TRUE)
   }
-  lpost = llikLoglog(Y, eXB, delta, C,  rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
+
 
 
 
@@ -1852,17 +1840,16 @@ V.MH.sampling = function(S,
 #
 # @return One sample update using slice sampling
 #
-
-V.MH.sampling2 = function(S, A, lambda, Y, eXB, Z, V, gammas, C,  rho, prop.var) {
+V.MH.sampling2 = function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
   V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
   V_new = V_new - mean(V_new)
   u = log(runif(1))
-  v1 = V.post2(S, A, lambda, Y, eXB, Z, V_new[S], gammas, C,  rho)
+  v1 = V.post2(S, A, lambda, Y, Y0, eXB, Z, V_new[S], gammas, C, LY, rho)
   #v1[which(v1==-Inf)] <- -740
   #V1[which(V1==Inf)] <- exp(700)
-  v2 = V.post2(S, A, lambda, Y, eXB, Z, V_old[S], gammas, C,  rho)
+  v2 = V.post2(S, A, lambda, Y, Y0, eXB, Z, V_old[S], gammas, C, LY, rho)
   #v2[which(v2==-Inf)] <- -740
   #v2[which(v2==Inf)] <- exp(700)
   temp = v1- v2
@@ -1874,6 +1861,7 @@ V.MH.sampling2 = function(S, A, lambda, Y, eXB, Z, V, gammas, C,  rho, prop.var)
   }
   return(V)
 }
+
 
 
 # @title V.F.post
@@ -1936,7 +1924,7 @@ V.F.post = function(Sigma.v,
 # @return log- posterior density of betas (log likelihood)
 #
 
-V.F.post2 = function(Sigma.v, S, Y, eXB, Z, V, gammas, C, rho) {
+V.F.post2 = function(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 
   num = exp(Z %*% gammas + V)
   num[which(is.infinite(num))] <- exp(700)
@@ -1951,10 +1939,9 @@ V.F.post2 = function(Sigma.v, S, Y, eXB, Z, V, gammas, C, rho) {
   for (s in 1:length(unique(S))){
     lprior = lprior + dnorm(S_uniq[s, 2], 0, Sigma.v[s,s])
   }
-  lpost = llikLoglog(Y, eXB, delta, C, rho) + lprior
+  lpost = llikLoglog(Y, Y0, eXB, delta, C, LY, rho) + lprior
   return(lpost)
 }
-
 
 
 # @title V.F.MH.sampling (Cure Model with non-spatial Frailties)
@@ -2021,16 +2008,15 @@ V.F.MH.sampling = function(Sigma.v,
 #
 # @return One sample update using slice sampling (log likelihood)
 #
-
-V.F.MH.sampling2 = function(Sigma.v, S,  Y, eXB, Z, V, gammas, C,  rho, prop.var) {
+V.F.MH.sampling2 = function(Sigma.v, S,  Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
   V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
   V_new = V_new - mean(V_new)
   u = log(runif(1))
-  v1 = V.F.post2(Sigma.v, S, Y, eXB, Z, V_new[S], gammas, C, rho)
+  v1 = V.F.post2(Sigma.v, S, Y, Y0, eXB, Z, V_new[S], gammas, C, LY, rho)
   #v1[which(v1==-Inf)] <- -740
-  v2 = V.F.post2(Sigma.v, S, Y,eXB, Z, V_old[S], gammas, C, rho)
+  v2 = V.F.post2(Sigma.v, S, Y, Y0, eXB, Z, V_old[S], gammas, C, LY, rho)
   #v2[which(v2==-Inf)] <- -740
   temp = v1- v2
   alpha = min(0, temp)
@@ -2041,7 +2027,6 @@ V.F.MH.sampling2 = function(Sigma.v, S,  Y, eXB, Z, V, gammas, C,  rho, prop.var
   }
   return(V)
 }
-
 
 
 # @title lambda.gibbs.sampling2
@@ -2195,8 +2180,7 @@ mcmcSP <- function(Y,
 #
 # @return chain of the variables of interest
 #
-
-mcmcSPlog <- function(Y, C,  X, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
+mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2213,14 +2197,14 @@ mcmcSPlog <- function(Y, C,  X, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
   gammas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p2)
   rho.samp = rep(NA, (N - burn) / thin)
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter)
+    if (iter %% 1000 == 0) print(iter)F
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
     }
-    betas = betas.slice.sampling2(Sigma.b, Y, X, W, betas, delta, C,  rho, w[1], m, form = form) ## ...sampling2
-    eXB = exp((X %*% betas)) ## check!
-    gammas = gammas.slice.sampling3(Sigma.g, Y, eXB, Z, gammas, C,  rho, w[2], m, form = form) ## ...sampling3
+    betas = betas.slice.sampling2(Sigma.b, Y, Y0, X, W, betas, delta, C,  LY, rho, w[1], m, form = form)
+    eXB = exp((X %*% betas))
+    gammas = gammas.slice.sampling3(Sigma.g, Y, Y0, eXB, Z, gammas, C, LY, rho, w[2], m, form = form)
     num = exp(Z %*% gammas)
     num[which(is.infinite(num))] <- exp(700)
     denom = (1 + exp(Z %*% gammas))
@@ -2228,7 +2212,7 @@ mcmcSPlog <- function(Y, C,  X, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
     delta = num/denom
 
     if (form %in% "loglog") {
-      rho = rho.slice.sampling2(Y, eXB, delta, C,  rho, w[3], m)
+      rho = rho.slice.sampling2(Y, Y0, eXB, delta, C, LY, rho, w[3], m)
     }
     if (iter > burn & (iter - burn) %% thin == 0) {
       betas.samp[(iter - burn) / thin, ] = betas
@@ -2238,6 +2222,7 @@ mcmcSPlog <- function(Y, C,  X, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp))
 }
+
 
 
 # @title mcmcspatialSP
@@ -2355,7 +2340,7 @@ mcmcspatialSP <- function(Y,
 # @return chain of the variables of interest
 #
 
-mcmcSpatialLog <- function(Y, C,  X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m, form, prop.var = .00001) {
+mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m, form, prop.var = .00001) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2373,6 +2358,7 @@ mcmcSpatialLog <- function(Y, C,  X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m, 
   gammas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p2)
   rho.samp = rep(NA, (N - burn) / thin)
   lambda.samp = rep(NA, (N - burn) / thin)
+  delta.samp = rep(NA, (N - burn) / thin)
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   for (iter in 1:N) {
@@ -2383,11 +2369,11 @@ mcmcSpatialLog <- function(Y, C,  X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m, 
     }
     #CAR model
     lambda = lambda.gibbs.sampling2(S, A, W, V)
-    W = W.MH.sampling2(S, A, lambda, Y, X, W, betas, delta, C,  rho, prop.var)
-    betas = betas.slice.sampling2(Sigma.b, Y, X, W, betas, delta, C,  rho, w[1], m, form = form)
+    W = W.MH.sampling2(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var)
+    betas = betas.slice.sampling2(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w[1], m, form = form)
     eXB = exp((X %*% betas) + W)
-    V = V.MH.sampling2(S, A, lambda, Y, eXB, Z, V, gammas, C,  rho, prop.var)
-    gammas = gammas.slice.sampling4(Sigma.g, Y, eXB, Z, V, gammas, C,  rho, w[2], m, form = form)
+    V = V.MH.sampling2(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C,  LY, rho, prop.var)
+    gammas = gammas.slice.sampling4(Sigma.g, Y, Y0, eXB, Z, V, gammas, C,  LY, rho, w[2], m, form = form)
     num = exp(Z %*% gammas + V)
     num[which(is.infinite(num))] <- exp(700)
     denom = (1 + exp(Z %*% gammas + V))
@@ -2397,21 +2383,25 @@ mcmcSpatialLog <- function(Y, C,  X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m, 
     #delta = exp(Z %*% gammas + V)/ (1 + exp(Z %*% gammas + V))
 
     if (form == "loglog") {
-      rho = rho.slice.sampling2(Y, eXB, delta, C,  rho, w[3], m)
+      rho = rho.slice.sampling2(Y, Y0, eXB, delta, C, LY, rho, w[3], m)
     }
+    print(delta)
     if (iter > burn & (iter - burn) %% thin == 0) {
       betas.samp[(iter - burn) / thin, ] = betas
       gammas.samp[(iter - burn) / thin, ] = gammas
       rho.samp[(iter - burn) / thin] = rho
       lambda.samp[(iter - burn) / thin] = lambda
+      delta.samp[(iter - burn) / thin] = mean(delta)
       S_uniq = unique(cbind(S, W, V))
       S_uniq = S_uniq[order(S_uniq[,1]),]
       W.samp[(iter - burn) / thin, ] = S_uniq[,2]
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
+      print(100)
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, W = W.samp, V = V.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp))
 }
+
 
 
 # @title mcmcfrailtySP
@@ -2531,7 +2521,7 @@ mcmcfrailtySP <- function(Y,
 # @return chain of the variables of interest
 #
 
-mcmcfrailtySPlog <- function(Y ,C, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var=0.1) {
+mcmcfrailtySPlog <- function(Y, Y0, C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var= .00001) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   p3 = length(unique(S))
@@ -2540,6 +2530,7 @@ mcmcfrailtySPlog <- function(Y ,C, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 1
   betas = rep(0, p1)
   gammas = rep(0, p2)
   rho = 1
+  lambda = 1
   W = rep(0, length(Y))
   V = rep(0, length(Y))
   WS = rep(0, p3)
@@ -2554,6 +2545,8 @@ mcmcfrailtySPlog <- function(Y ,C, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 1
   betas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p1)
   gammas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p2)
   rho.samp = rep(NA, (N - burn) / thin)
+  lambda.samp = rep(NA, (N - burn) / thin)
+  delta.samp = rep(NA, (N - burn) / thin)
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   for (iter in 1:N) {
@@ -2565,11 +2558,11 @@ mcmcfrailtySPlog <- function(Y ,C, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 1
       Sigma.v = riwish(1 + p4, VS %*% t(VS) + p4 * diag(p4))
     }
     #non-spatial Frailty model.
-    W = W.F.MH.sampling2(Sigma.w, S,Y, X, W, betas, delta, C, rho, prop.var)
-    betas = betas.slice.sampling2(Sigma.b, Y,X, W, betas, delta, C,  rho, w[1], m, form = form)
-    eXB = exp((X %*% betas) + W)
-    V = V.F.MH.sampling2(Sigma.v, S, Y, eXB, Z, V, gammas, C, rho, prop.var)
-    gammas = gammas.slice.sampling4(Sigma.g, Y, eXB, Z, V, gammas, C,  rho, w[2], m, form = form)
+    W = W.F.MH.sampling2(Sigma.w, S,Y, Y0, X, W, betas, delta, C, LY, rho, prop.var)
+    betas = betas.slice.sampling2(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w[1], m, form = form)
+    eXB = exp(-(X %*% betas) + W)
+    V = V.F.MH.sampling2(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var)
+    gammas = gammas.slice.sampling4(Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w[2], m, form = form)
     num = exp(Z %*% gammas + V)
     num[which(is.infinite(num))] <- exp(700)
     denom = (1 + exp(Z %*% gammas + V))
@@ -2577,19 +2570,21 @@ mcmcfrailtySPlog <- function(Y ,C, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 1
     delta = num/denom
 
     if (form == "loglog") {
-      rho = rho.slice.sampling2(Y, eXB, delta, C,  rho, w[3], m)
+      rho = rho.slice.sampling2(Y, Y0, eXB, delta, C, LY, rho, w[3], m)
     }
     if (iter > burn & (iter - burn) %% thin == 0) {
       betas.samp[(iter - burn) / thin, ] = betas
       gammas.samp[(iter - burn) / thin, ] = gammas
       rho.samp[(iter - burn) / thin] = rho
+      lambda.samp[(iter - burn) / thin] = lambda
+      delta.samp[(iter - burn) / thin] = mean(delta)
       S_uniq = unique(cbind(S, W, V))
       S_uniq = S_uniq[order(S_uniq[,1]),]
       W.samp[(iter - burn) / thin, ] = S_uniq[,2]
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp,  W = W.samp, V = V.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp))
 }
 
 
