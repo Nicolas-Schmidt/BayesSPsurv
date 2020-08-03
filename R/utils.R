@@ -2197,7 +2197,7 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form
   gammas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p2)
   rho.samp = rep(NA, (N - burn) / thin)
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter)F
+    if (iter %% 1000 == 0) print(iter) #F
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
@@ -2677,9 +2677,6 @@ rllFun <- function(est,
   list(llik = llik, one = one, two = two, three = three)
 
 }
-
-
-
 
 
 
