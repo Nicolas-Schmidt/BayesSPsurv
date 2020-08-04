@@ -17,7 +17,7 @@
 #'
 #' @export
 
-SPsurv<- function(duration,
+pooledSPsurv <- function(duration,
                   immune,
                   Y0,
                   LY,

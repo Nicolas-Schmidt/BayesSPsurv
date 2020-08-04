@@ -20,7 +20,7 @@
 #' @export
 
 
-frailtySPsurv <- function(duration,
+exchangeSPsurv <- function(duration,
                           immune,
                           Y0,
                           LY,
