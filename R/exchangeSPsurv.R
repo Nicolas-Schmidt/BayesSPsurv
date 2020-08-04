@@ -41,9 +41,16 @@ exchangeSPsurv <- function(duration,
                   LY = LY, S = S, N = N, burn = burn, thin = thin, w = w, m = m,
                   form = dis, prop.var = prop.var, model = 'frailtySPsurv')
 
-    results <- mcmcfrailtySP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
+    if(form == 'loglog'){
+        results <- mcmcfrailtySPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
+                                 S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
+                                 m  = r$m, form = r$form, prop.var = r$prop.var)
+    } else {
+        results <- mcmcfrailtySP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
                              m  = r$m, form = r$form, prop.var = r$prop.var)
+    }
+
 
     results
 

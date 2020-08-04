@@ -36,9 +36,15 @@ pooledSPsurv <- function(duration,
                     LY = LY, N = N, burn = burn, thin = thin, w = w,
                     m = m, form = dis, model = 'SPsurv')
 
-    results <- mcmcSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
+    if(form == 'loglog') {
+        results <- mcmcSPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
+                          N = r$N, burn = r$burn, thin = r$thin, w  = r$w, m  = r$m,
+                          form = r$form)
+    } else {
+        results <- mcmcSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                       N = r$N, burn = r$burn, thin = r$thin, w  = r$w, m  = r$m,
                       form = r$form)
+    }
 
     results
 

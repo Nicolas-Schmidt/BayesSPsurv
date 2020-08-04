@@ -49,7 +49,7 @@ source('data-raw/fsps.r')
 
 ### Functions
 
-|argument   |`spatialSPsurv()` |`frailtySPsurv()` |`SPsurv()`        |
+|argument   |`spatialSPsurv()` |`exchangeSPsurv()` |`pooledSPsurv()`        |
 |-----------|------------------|------------------|------------------|
 |`duration` |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |`immune`   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
@@ -83,14 +83,14 @@ str(walter2015)
 
 ### Example
 
-#### `frailtySPsurv`
+#### `exchangeSPsurv`
 
 ```{r}
 library(spatialSPsurv)
 
 set.seed(782566)
 tch <- 
-    frailtySPsurv(
+    exchangeSPsurv(
         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
@@ -110,13 +110,13 @@ str(tch)
 
 ```
 
-#### `SPsurv`
+#### `pooledSPsurv`
 
 ```{r}
 set.seed(782566)
 
 tch2 <- 
-    SPsurv(
+    pooledSPsurv(
         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
@@ -186,20 +186,20 @@ prop.var <- 1e-05
 A        <- A
 
 ## ~~~~~~~~~~~~~
-## frailtySPsurv
+## exchangeSPsurv
 ## ~~~~~~~~~~~~~
 
 set.seed(782566)
-str(frailtySPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+str(exchangeSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
                   data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
                   prop.var = prop.var, form = 'Weibull'))
 set.seed(782566)
-str(frailtySPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+str(exchangeSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
                   data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
                   prop.var = prop.var, form = 'exponential'))
 
 set.seed(782566)
-str(frailtySPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
+str(exchangeSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
                   data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
                   prop.var = prop.var, form = 'loglog'))
 
@@ -225,13 +225,16 @@ str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S,
 ## ~~~~~~~~~~~~~
 
 set.seed(782566)
-str(SPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
+str(pooledSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
            N = N, burn = burn, thin = thin, w = w, m = m, form = 'Weibull'))
 
 set.seed(782566)
-str(SPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
+str(pooledSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
            N = N, burn = burn, thin = thin, w = w, m = m, form = 'exponential'))
 
+set.seed(782566)
+str(pooledSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
+           N = N, burn = burn, thin = thin, w = w, m = m, form = 'loglog'))
 
 ```
 

@@ -43,9 +43,15 @@ spatialSPsurv<- function(duration,
                     LY = LY, S = S, N = N, burn = burn, thin = thin, w = w, m = m,
                     form = dis, prop.var = prop.var, A = A, model = 'spatialSPsurv')
 
-    results <- mcmcspatialSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
+    if(form == 'loglog') {
+        results <- mcmcSpatialLog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
+                                 S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
+                                 m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
+    } else {
+        results <- mcmcspatialSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
                              m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
+    }
 
     results
 

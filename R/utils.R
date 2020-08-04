@@ -2135,7 +2135,7 @@ mcmcSP <- function(Y,
   rho.samp = rep(NA, (N - burn) / thin)
   delta.samp = rep(NA, (N - burn) / thin)
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter)
+    # if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
@@ -2197,7 +2197,7 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form
   gammas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p2)
   rho.samp = rep(NA, (N - burn) / thin)
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter) #F
+    #if (iter %% 1000 == 0) print(iter) #F #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
@@ -2281,7 +2281,7 @@ mcmcspatialSP <- function(Y,
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter)
+    #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
@@ -2362,7 +2362,7 @@ mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1,
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter)
+    #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
@@ -2385,7 +2385,7 @@ mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1,
     if (form == "loglog") {
       rho = rho.slice.sampling2(Y, Y0, eXB, delta, C, LY, rho, w[3], m)
     }
-    print(delta)
+    # print(delta) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn & (iter - burn) %% thin == 0) {
       betas.samp[(iter - burn) / thin, ] = betas
       gammas.samp[(iter - burn) / thin, ] = gammas
@@ -2396,7 +2396,7 @@ mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1,
       S_uniq = S_uniq[order(S_uniq[,1]),]
       W.samp[(iter - burn) / thin, ] = S_uniq[,2]
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
-      print(100)
+      # print(100) #### ***** #### ***** #### ***** #### ***** ####
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp))
@@ -2465,7 +2465,7 @@ mcmcfrailtySP <- function(Y,
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter)
+    #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
@@ -2550,7 +2550,7 @@ mcmcfrailtySPlog <- function(Y, Y0, C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   for (iter in 1:N) {
-    if (iter %% 1000 == 0) print(iter)
+    #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
