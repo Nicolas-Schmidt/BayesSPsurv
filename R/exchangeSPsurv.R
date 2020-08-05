@@ -1,19 +1,19 @@
-#' @title frailtySPsurv
-#' @description Markov Chain Monte Carlo (MCMC) to run Bayesian non-spatial frailty split population survival model
+#' @title exchangeSPsurv
+#' @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties
 #'
+#' @param duration Survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failrue or cencoring
+#' @param immune Split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-#' @param LY last observation year
-#' @param duration ...
-#' @param immune ...
-#' @param data ...
-#' @param prop.var ...
+#' @param LY Last observation year (coded as 1; 0 otherwise) due to censoring or failure
 #' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information
+#' @param data dataframe 
 #' @param N number of MCMC iterations
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-#' @param form type of parametric model (Exponential or Weibull)
+#' @param form type of parametric model ("Weibull", "exponential" or "lolglog")
+#' @param prop.var Proposed variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
 #'
