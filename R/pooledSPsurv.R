@@ -4,7 +4,7 @@
 #' @param duration survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring
 #' @param immune split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-#' @param LY ast observation year (coded as 1; 0 otherwise) due to censoring or failure
+#' @param LY last observation year (coded as 1; 0 otherwise) due to censoring or failure
 #' @param data dataframe
 #' @param N number of MCMC iterations
 #' @param burn burn-in to be discarded
