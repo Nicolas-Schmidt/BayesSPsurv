@@ -2502,7 +2502,7 @@ mcmcfrailtySP <- function(Y,
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
-         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, , S = S)))
+         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S)))
 }
 
 # @title mcmc Cure with Non-spatial frailties
