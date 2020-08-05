@@ -5,8 +5,8 @@
 #'Authors of this package later added the following variables: duration, cured, t.0, lastyear, S and A. 
 #'
 #'\describe{
-#'    \item{duration}{duration of post-war peace among the wars at risk of reocurrence.}
-#'    \item{cured}{peace consolidation, dummy variable.}
+#'    \item{duration}{duration until failure or censoring.}
+#'    \item{immune}{binary indicator of immunity.}
 #'    \item{fhcompor1}{Freedom House civil liberties index.}
 #'    \item{lgdpl}{log of per capita GDP in 2005 dollars.}
 #'    \item{comprehensive}{combatants signed comprehensive peace agreement.}
