@@ -2140,7 +2140,7 @@ mcmcSP <- function(Y,
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
       Sigma.g = riwish(1 + p2, gammas %*% t(gammas) + p2 * diag(p2))
     }
-    betas = betas.slice.sampling(Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, w[1], m, form = form)
+    betas = betas.slice.sampling(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w[1], m, form = form)
     eXB = exp(-(X %*% betas))
     gammas = gammas.slice.sampling(Sigma.g, Y, Y0,eXB, Z, gammas, C, LY, rho, w[2], m, form = form)
     num = exp(Z %*% gammas)
@@ -2160,7 +2160,8 @@ mcmcSP <- function(Y,
 
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C)))
 }
 
 # @title mcmcSPlog
@@ -2220,7 +2221,8 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form
       rho.samp[(iter - burn) / thin] = rho
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C)))
 }
 
 
@@ -2499,7 +2501,8 @@ mcmcfrailtySP <- function(Y,
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
+         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, , S = S)))
 }
 
 # @title mcmc Cure with Non-spatial frailties
@@ -2584,7 +2587,8 @@ mcmcfrailtySPlog <- function(Y, Y0, C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
+         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S)))
 }
 
 

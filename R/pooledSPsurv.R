@@ -32,9 +32,10 @@ pooledSPsurv <- function(duration,
 
     cll <- match.call()
     dis <- match.arg(form)
+    model <- 'SPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
                     LY = LY, N = N, burn = burn, thin = thin, w = w,
-                    m = m, form = dis, model = 'SPsurv')
+                    m = m, form = dis, model = model)
 
     if(form == 'loglog') {
         results <- mcmcSPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
@@ -46,6 +47,7 @@ pooledSPsurv <- function(duration,
                       form = r$form)
     }
 
+    class(results) <- c(class(results), model)
     results
 
 }

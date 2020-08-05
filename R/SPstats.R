@@ -12,19 +12,19 @@
 SPstats = function(object){
 
     #Calculate L
-    X <- as.matrix(object$X)
-    Z <- as.matrix(object$Z)
-    Y <- as.matrix(object$Y)
-    Y0 <- as.matrix(object$Y0)
-    C <- as.matrix(object$C)
+    X  <- as.matrix(object$spstats$X)
+    Z  <- as.matrix(object$spstats$Z)
+    Y  <- as.matrix(object$spstats$Y)
+    Y0 <- as.matrix(object$spstats$Y0)
+    C  <- as.matrix(object$spstats$C)
 
-    if(length(object$S)==0){
+    if(length(class(object)) == 2){
 
-        data <- as.data.frame(cbind(object$Y, object$Y0, object$C, object$X, object$Z))
+        data <- as.data.frame(cbind(Y, Y0, C, X, Z))
 
         theta_post = cbind(object$gammas, object$betas, object$rho)
         theta_hat = apply(theta_post, 2, mean)
-        L = rllFun(theta_hat,Y, Y0,C,X,Z,  data)$llik
+        L = rllFun(theta_hat,Y, Y0,C,X,Z,data)$llik
         #Calculate P
         S = nrow(theta_post) #S = number of iterations
         #Add up the log likelihoods of each iteration
@@ -51,10 +51,11 @@ SPstats = function(object){
         #Return the results
         list(DIC = DIC, Loglik = L)
 
-    } else{
+    } else {
 
-        SP <- as.matrix(object$S)
-        data <- as.data.frame(cbind(object$Y, object$Y0, object$C, object$X, object$Z, object$S))
+        S <- object$spstats$S
+        SP <- as.matrix(S)
+        data <- as.data.frame(cbind(Y, Y0, C, X, Z, S))
 
         W <- matrix(NA, ncol=1, nrow=nrow(X))
         V <- matrix(NA, ncol=1, nrow=nrow(X))
