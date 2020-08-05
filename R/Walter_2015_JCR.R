@@ -1,12 +1,12 @@
 #' Walter_2015_JCR
 #'
 #'Time-series-cross-sectional (TSCS) dataset extracted from \href{http://t.ly/F7KK}{Walter (2015)}.
-#'It has precisely dated duration data of internal conflict as well as geographic data.
-#'Complete description with variables that were added by authors. 
+#'It has data on duration of civil war as well as information on other relevant economic and political data.
+#'Authors of this package later added the following variables: duration, cured, t.0, lastyear, S and A. 
 #'
 #'\describe{
-#'    \item{duration}{.}
-#'    \item{cured}{.}
+#'    \item{duration}{duration of post-war peace among the wars at risk of reocurrence.}
+#'    \item{cured}{peace consolidation, dummy variable.}
 #'    \item{fhcompor1}{Freedom House civil liberties index.}
 #'    \item{lgdpl}{log of per capita GDP in 2005 dollars.}
 #'    \item{comprehensive}{combatants signed comprehensive peace agreement.}
@@ -18,7 +18,7 @@
 #'    \item{t.0}{duration of peace spell.}
 #'    \item{lastyear}{year of last country observation in dataset.}
 #'    \item{sp_id}{country unique id.}
-#'    \item{A}{adjacency matrix}
+#'    \item{A}{time-invariant binary adjacency matrix}
 #' }
 #' @docType data
 #' @keywords datasets
