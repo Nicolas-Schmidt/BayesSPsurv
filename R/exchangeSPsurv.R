@@ -1,7 +1,7 @@
 #' @title exchangeSPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties
 #'
-#' @param duration Survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failrue or cencoring
+#' @param duration Survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring
 #' @param immune Split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
 #' @param LY Last observation year (coded as 1; 0 otherwise) due to censoring or failure
@@ -12,7 +12,7 @@
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-#' @param form type of parametric model ("Weibull", "exponential" or "lolglog")
+#' @param form type of parametric model (Weibull, Exponential or Log-Logistic)
 #' @param prop.var Proposed variance for Metropolis-Hastings
 #'
 #' @return chain of the variables of interest
