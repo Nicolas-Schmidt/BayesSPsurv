@@ -1,13 +1,13 @@
 #' @title spatialSPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties
 #'
-#' @param duration Survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring
-#' @param immune Split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity
+#' @param duration survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring
+#' @param immune split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1)
-#' @param LY Last observation year (coded as 1; 0 otherwise) due to censoring or failure
+#' @param LY last observation year (coded as 1; 0 otherwise) due to censoring or failure
 #' @param data dataframe
 #' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information
-#' @param A An a \times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file
+#' @param A an a \times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file
 #' @param N number of MCMC iterations
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
