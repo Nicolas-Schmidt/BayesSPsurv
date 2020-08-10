@@ -2,7 +2,7 @@
 #'
 #'Time-series-cross-sectional (TSCS) dataset extracted from \href{http://t.ly/F7KK}{Walter (2015)}.
 #'It has data on duration of civil war as well as information on other relevant economic and political data.
-#'Authors of this package later added the following variables: duration, cured, t.0, lastyear, S and A. 
+#'Authors of this package later added the following variables: duration, cured, t.0, lastyear, S and A.
 #'
 #'\describe{
 #'    \item{duration}{duration until failure or censoring.}
@@ -26,4 +26,4 @@
 #' @usage data(Walter_2015_JCR)
 #' @format A data frame with 1562 rows and 13 variables
 #' @source Walter, Barbara F. (2015), Why Bad Governance Leads to Repeat Civil War,  Journal of Conflict Resolution 59(7), 1242 - 1272.
-"Walter_2015_JCR"
+

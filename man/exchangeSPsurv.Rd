@@ -2,7 +2,7 @@
 % Please edit documentation in R/exchangeSPsurv.R
 \name{exchangeSPsurv}
 \alias{exchangeSPsurv}
-\title{frailtySPsurv}
+\title{exchangeSPsurv}
 \usage{
 exchangeSPsurv(
   duration,
@@ -21,17 +21,17 @@ exchangeSPsurv(
 )
 }
 \arguments{
-\item{duration}{...}
+\item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
 
-\item{immune}{...}
+\item{immune}{split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity}
 
 \item{Y0}{the elapsed time since inception until the beginning of time period (t-1)}
 
-\item{LY}{last observation year}
+\item{LY}{last observation year (coded as 1; 0 otherwise) due to censoring or failure}
 
 \item{S}{spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information}
 
-\item{data}{...}
+\item{data}{dataframe}
 
 \item{N}{number of MCMC iterations}
 
@@ -43,13 +43,13 @@ exchangeSPsurv(
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
-\item{form}{type of parametric model (Exponential or Weibull)}
+\item{form}{type of parametric model (Weibull, Exponential or Log-Logistic)}
 
-\item{prop.var}{...}
+\item{prop.var}{Proposed variance for Metropolis-Hastings}
 }
 \value{
 chain of the variables of interest
 }
 \description{
-Markov Chain Monte Carlo (MCMC) to run Bayesian non-spatial frailty split population survival model
+Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties
 }

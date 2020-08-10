@@ -19,15 +19,15 @@ pooledSPsurv(
 )
 }
 \arguments{
-\item{duration}{...}
+\item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
 
-\item{immune}{...}
+\item{immune}{split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity}
 
 \item{Y0}{the elapsed time since inception until the beginning of time period (t-1)}
 
-\item{LY}{last observation year}
+\item{LY}{last observation year (coded as 1; 0 otherwise) due to censoring or failure}
 
-\item{data}{...}
+\item{data}{dataframe}
 
 \item{N}{number of MCMC iterations}
 
@@ -39,7 +39,7 @@ pooledSPsurv(
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
-\item{form}{type of parametric model (Exponential or Weibull)}
+\item{form}{type of parametric model (Exponential, Weibull or Log-Logistic)}
 }
 \value{
 chain of the variables of interest
