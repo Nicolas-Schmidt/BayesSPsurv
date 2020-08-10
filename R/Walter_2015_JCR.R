@@ -26,4 +26,4 @@
 #' @usage data(Walter_2015_JCR)
 #' @format A data frame with 1562 rows and 13 variables
 #' @source Walter, Barbara F. (2015), Why Bad Governance Leads to Repeat Civil War,  Journal of Conflict Resolution 59(7), 1242 - 1272.
-
+NULL
