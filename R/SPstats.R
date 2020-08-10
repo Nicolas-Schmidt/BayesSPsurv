@@ -1,5 +1,6 @@
-#' @title SP.stats
-#' @description A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts of pooled,
+#' @title SPstats
+#' @description A function to calculate the deviance information criterion (DIC)
+#'      and Log-likelihood for fitted model oupts of pooled,
 #' exchangeable, and spatial Split Population survival models for which a log-likelihood can be obtained, according to the formula
 #' \emph{DIC = -2 * (L - P)}, where \emph{L} is the log likelihood of the data given the posterior means of the parameter and
 #' \emph{P} is the  estimate of the effective number of parameters in the model.
