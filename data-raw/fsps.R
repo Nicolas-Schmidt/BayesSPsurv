@@ -14,3 +14,20 @@ diag(adj.mat.tiv)<- 0L
 namesTIV         <- data.frame(ccode = rownames(adj.mat.tiv), sp_id = 1:nrow(adj.mat.tiv))
 walter2015       <- merge(walter2015v2, namesTIV, by = "ccode")
 A                <- adj.mat.tiv
+
+
+
+
+
+Walter_2015_JCR  <- read.csv("data-raw/walterhotdeck.csv")
+capdist          <- read.csv("data-raw/capdist.csv")
+
+
+save(Walter_2015_JCR, file = "Walter_2015_JCR.rda")
+save(capdist, file = "capdist.rda")
+
+
+
+
+
+

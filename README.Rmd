@@ -43,7 +43,8 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
-source('data-raw/fsps.r')
+#source('data-raw/fsps.r')
+library(spduration)
 ```
 
 
@@ -77,8 +78,11 @@ source('data-raw/fsps.r')
 
 
 ### Data
-```{r}
-str(walter2015)
+```{r, warning=FALSE}
+library(spatialSPsurv)
+
+walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", unitID = "id", tID = "year", freq = "year", ongoing = FALSE)
+walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 ```
 
 ### Example
@@ -86,7 +90,6 @@ str(walter2015)
 #### `exchangeSPsurv`
 
 ```{r}
-library(spatialSPsurv)
 
 set.seed(782566)
 tch <- 
@@ -96,7 +99,7 @@ tch <-
         Y0       = 't.0',
         LY       = 'lastyear',
         S        = 'sp_id' ,
-        data     = walter2015,
+        data     = walter[[1]],
         N        = 100,
         burn     = 10,
         thin     = 10,
@@ -121,7 +124,7 @@ tch2 <-
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',
-        data     = walter2015,
+        data     = walter[[1]],
         N        = 100,
         burn     = 10,
         thin     = 10,
@@ -147,7 +150,7 @@ tch3 <-
         Y0       = 't.0',
         LY       = 'lastyear',
         S        = 'sp_id' ,
-        data     = walter2015,
+        data     = walter[[1]],
         N        = 100,
         burn     = 10,
         thin     = 10,
@@ -155,7 +158,7 @@ tch3 <-
         m        = 10,
         form     = "Weibull",
         prop.var = 1e-05,
-        A        = A
+        A        = walter[[2]]
     )
 
 str(tch3)
@@ -176,14 +179,14 @@ immune   <- cured ~ fhcompor1 + lgdpl + victory
 Y0       <- 't.0'
 LY       <- 'lastyear'
 S        <- 'sp_id' 
-data     <- walter2015
+data     <- walter[[1]]
 N        <- 100
 burn     <- 10
 thin     <- 10
 w        <- c(1,1,1)
 m        <- 10
 prop.var <- 1e-05
-A        <- A
+A        <- walter[[2]]
 
 ## ~~~~~~~~~~~~~
 ## exchangeSPsurv
@@ -280,7 +283,7 @@ net_str_f <- function(package){
 ## ---------------------
 
 
-net_str_f('spatialSPsurv')
+#net_str_f('spatialSPsurv')
 
 ```
 

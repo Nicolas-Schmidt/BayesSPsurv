@@ -32,7 +32,7 @@ spatialSPsurv(
 
 \item{S}{spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information}
 
-\item{A}{an a \times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file}
+\item{A}{an a times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file}
 
 \item{data}{dataframe}
 

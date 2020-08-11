@@ -7,6 +7,8 @@
 #' @importFrom MCMCpack riwish
 #' @importFrom coda mcmc
 #' @importFrom FastGP rcpp_rmvnorm rcpp_log_dmvnorm
+#' @importFrom dplyr distinct
+#' @importFrom reshape2 acast
 NULL
 
 .onUnload <- function (libpath) {

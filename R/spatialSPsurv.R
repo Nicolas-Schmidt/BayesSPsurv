@@ -7,7 +7,7 @@
 #' @param LY last observation year (coded as 1; 0 otherwise) due to censoring or failure
 #' @param data dataframe
 #' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information
-#' @param A an a \times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file
+#' @param A an a times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file
 #' @param N number of MCMC iterations
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
