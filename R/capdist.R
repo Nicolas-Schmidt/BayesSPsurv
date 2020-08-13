@@ -1,6 +1,7 @@
 #' Gleditsch and Ward Distance data
 #'
-#' Gleditsch and Ward Distance data
+#' Dyadic dataset extracted from \href{t.ly/bGE9}{Gleditsch and Ward (2001). The dataset contains information on the distace between capital cities among independent nation-states. 
+#'
 #'
 #'\describe{
 #'    \item{numa}{COW code -- country A}
