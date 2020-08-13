@@ -16,5 +16,5 @@
 #' @name capdist
 #' @usage data(capdist)
 #' @format A data frame with 41006 rows and 6 variables
-#' @source ...
+#' @source Gleditsch, Kristian S., and Michael D. Ward. (2001). "Measuring Space: A Minimum-Distance Database and Applications to International Studies." Journal of Conflict Resolution 38(6): 739-758. 
 NULL
