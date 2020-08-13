@@ -100,6 +100,14 @@ str(tch)
 #>   ..$ Y0: num [1:1237, 1] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ C : num [1:1237, 1] 1 1 1 1 1 1 1 1 1 1 ...
 #>   ..$ S : num [1:1237, 1] 1 1 1 1 1 1 1 1 1 1 ...
+
+
+SPstats(tch)
+#> $DIC
+#> [1] -48940.28
+#> 
+#> $Loglik
+#> [1] 25584.5
 ```
 
 #### `pooledSPsurv`
@@ -141,6 +149,14 @@ str(tch2)
 #>   ..$ Y0: num [1:1237, 1] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ C : num [1:1237, 1] 1 1 1 1 1 1 1 1 1 1 ...
 #>  - attr(*, "class")= chr [1:2] "list" "SPsurv"
+
+
+SPstats(tch2)
+#> $DIC
+#> [1] -34438.21
+#> 
+#> $Loglik
+#> [1] 22929.24
 ```
 
 #### `spatialSPsurv`
@@ -275,6 +291,7 @@ str(exchangeSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S
 #>   ..$ Y0: num [1:1237, 1] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ C : num [1:1237, 1] 1 1 1 1 1 1 1 1 1 1 ...
 #>   ..$ S : num [1:1237, 1] 1 1 1 1 1 1 1 1 1 1 ...
+
 
 ## ~~~~~~~~~~~~~
 ## spatialSPsurv

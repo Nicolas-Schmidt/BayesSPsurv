@@ -9,17 +9,17 @@
 #'
 #' @export
 #'
-
 spatial_SA <- function(data, var_ccode, threshold = 800L) {
 
     names(data)[which(names(data) == var_ccode)] <- 'ccode'
     ccodes    <- unique(data$ccode)
+    data(capdist)
     # internal spatialSPsurv
-    distcc    <- dplyr::distinct(spatialSPsurv::capdist,
-                                 spatialSPsurv::capdist$numa,
-                                 spatialSPsurv::capdist$numb,
-                                 spatialSPsurv::capdist$kmdist,
-                                 spatialSPsurv::capdist$midist) ## Gleditsch and Ward Distance data
+    distcc    <- dplyr::distinct(capdist,
+                                 numa,
+                                 numb,
+                                 kmdist,
+                                 midist) ## Gleditsch and Ward Distance data
     distcc$km <- ifelse(distcc$kmdist > threshold, 0, 1)
     distcc_a  <- distcc[which(distcc$numa %in% ccodes),]
     distcc_b  <- distcc_a[which(distcc_a$numb %in% ccodes),]
@@ -28,24 +28,10 @@ spatial_SA <- function(data, var_ccode, threshold = 800L) {
     diag(matA)<- 0L
     # S
     buildS    <- data.frame(
-                      ccode = rownames(matA),
-                      sp_id = 1:nrow(matA)
-                      )
+        ccode = rownames(matA),
+        sp_id = 1:nrow(matA)
+    )
     outdata   <- merge(data, buildS, by = "ccode")
     return(list(data_sp = outdata, matrixA = matA))
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
