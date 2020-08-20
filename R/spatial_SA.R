@@ -13,7 +13,6 @@ spatial_SA <- function(data, var_ccode, threshold = 800L) {
 
     names(data)[which(names(data) == var_ccode)] <- 'ccode'
     ccodes    <- unique(data$ccode)
-    data(capdist)
     # internal spatialSPsurv
     distcc    <- dplyr::distinct(capdist,
                                  numa,

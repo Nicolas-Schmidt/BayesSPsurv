@@ -16,6 +16,14 @@ NULL
 }
 
 
+nameob <- c('capdist', 'numa', 'numb', 'kmdist', 'midist')
+
+if(getRversion() >= "2.15.1"){
+  utils::globalVariables(c(nameob))
+  utils::suppressForeignCheck(c(nameob))
+}
+
+
 
 formcall <- function(duration,
                      immune,
@@ -2675,7 +2683,7 @@ rllFun <- function(est,
   phi   <- exp(-ZG )/(1+exp(-ZG ))
   eXB   <- exp(-XB )
   llik  <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
-  ## lliklog <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2))  
+  ## lliklog <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2))
   one   <- nrow(llik)
   llik  <- subset(llik, is.finite(llik))
   two   <- nrow(llik)

@@ -139,6 +139,9 @@ tch2 <-
 str(tch2)
 
 
+summary(tch2, parameter = 'betas')
+
+
 SPstats(tch2)
 
 ```

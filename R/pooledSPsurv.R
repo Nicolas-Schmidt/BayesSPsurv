@@ -51,3 +51,36 @@ pooledSPsurv <- function(duration,
     results
 
 }
+
+
+#' @title summary.SPsurv
+#' @description Returns a summary of a SPsurv object via \code{\link[coda]{summary.mcmc}}.
+#' @param object an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.
+#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".
+#' @param ... additional parameter
+#' @return list. Empirical mean, standard deviation and quantiles for each variable.
+#' @rdname pooledSPsurv
+#' @export
+#'
+#'
+
+summary.SPsurv <- function(object, parameter = c("betas", "gammas", "lambda"), ...){
+
+    if (parameter == "betas")  sum <- summary(mcmc(object$betas),  ...)
+    if (parameter == "gammas") sum <- summary(mcmc(object$gammas), ...)
+    if (parameter == "lambda") sum <- summary(mcmc(object$lambda), ...)
+    sum
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
