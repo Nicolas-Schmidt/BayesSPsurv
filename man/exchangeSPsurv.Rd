@@ -2,6 +2,7 @@
 % Please edit documentation in R/exchangeSPsurv.R
 \name{exchangeSPsurv}
 \alias{exchangeSPsurv}
+\alias{summary.frailtySPsurv}
 \title{exchangeSPsurv}
 \usage{
 exchangeSPsurv(
@@ -19,6 +20,8 @@ exchangeSPsurv(
   form = c("Weibull", "exponential", "loglog"),
   prop.var
 )
+
+\method{summary}{frailtySPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
@@ -46,10 +49,20 @@ exchangeSPsurv(
 \item{form}{type of parametric model (Weibull, Exponential or Log-Logistic)}
 
 \item{prop.var}{Proposed variance for Metropolis-Hastings}
+
+\item{object}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
+
+\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".}
+
+\item{...}{additional parameter}
 }
 \value{
 chain of the variables of interest
+
+list. Empirical mean, standard deviation and quantiles for each variable.
 }
 \description{
 Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties
+
+Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 }

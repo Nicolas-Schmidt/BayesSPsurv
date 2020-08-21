@@ -109,7 +109,7 @@ tch <-
         prop.var = 1e-05
     )
 
-str(tch)
+summary(tch, parameter = 'betas')
 
 
 SPstats(tch)
@@ -136,7 +136,6 @@ tch2 <-
         form     = "Weibull"
     )
 
-str(tch2)
 
 
 summary(tch2, parameter = 'betas')
@@ -170,7 +169,7 @@ tch3 <-
         A        = walter[[2]]
     )
 
-str(tch3)
+summary(tch3, parameter = 'betas')
 
 ```
 
@@ -179,123 +178,7 @@ str(tch3)
 
 
 
-## check form
 
-```{r}
-
-duration <- duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko
-immune   <- cured ~ fhcompor1 + lgdpl + victory
-Y0       <- 't.0'
-LY       <- 'lastyear'
-S        <- 'sp_id' 
-data     <- walter[[1]]
-N        <- 100
-burn     <- 10
-thin     <- 10
-w        <- c(1,1,1)
-m        <- 10
-prop.var <- 1e-05
-A        <- walter[[2]]
-
-## ~~~~~~~~~~~~~
-## exchangeSPsurv
-## ~~~~~~~~~~~~~
-
-set.seed(782566)
-str(exchangeSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
-                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
-                  prop.var = prop.var, form = 'Weibull'))
-set.seed(782566)
-str(exchangeSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
-                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
-                  prop.var = prop.var, form = 'exponential'))
-
-set.seed(782566)
-str(exchangeSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
-                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
-                  prop.var = prop.var, form = 'loglog'))
-
-
-## ~~~~~~~~~~~~~
-## spatialSPsurv
-## ~~~~~~~~~~~~~
-
-set.seed(782566)
-str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
-                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
-                  prop.var = prop.var, A = A, form = 'Weibull'))
-set.seed(782566)
-str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
-                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
-                  prop.var = prop.var, A = A, form = 'exponential'))
-
-set.seed(782566)
-str(spatialSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, S = S, 
-                  data = data, N = N, burn = burn, thin = thin, w = w, m = m, 
-                  prop.var = prop.var, A = A, form = 'loglog'))
-## ~~~~~~~~~~~~~
-## SPsurv
-## ~~~~~~~~~~~~~
-
-set.seed(782566)
-str(pooledSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
-           N = N, burn = burn, thin = thin, w = w, m = m, form = 'Weibull'))
-
-set.seed(782566)
-str(pooledSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
-           N = N, burn = burn, thin = thin, w = w, m = m, form = 'exponential'))
-
-set.seed(782566)
-str(pooledSPsurv(duration = duration, immune = immune, Y0 = Y0, LY = LY, data = data, 
-           N = N, burn = burn, thin = thin, w = w, m = m, form = 'loglog'))
-
-```
-
-
-
----------------
-
-
-### Internal check (omit)
-```{r, echo = FALSE, message = FALSE, warning = FALSE}
-library(tidyverse)
-net_str_f <- function(package){
-    init <- ls(pos = 1)
-    package <- 'spatialSPsurv'
-    suppressMessages(require(package, character.only = TRUE)) 
-    source(here::here('R', 'utils.r')) 
-    visible_fun_pack <- ls(search()[search() == paste0("package:", package)]) 
-    all_fun_pack <- setdiff(ls(pos = 1), init)[-c(7, 21)]
-    all   <- c(all_fun_pack, visible_fun_pack) 
-    l1 <- purrr::map(all, function(x){pryr::fun_calls(body(x))})
-    l2 <- purrr::map(l1, function(x) paste(paste0(all[all %in% x], "--"), collapse = ""))
-    names(l2) <- all
-    out <- 
-    stack(l2) %>% tidyr::separate(col = 'values', into = paste("func", 1:6), sep = "--", remove = FALSE) %>% 
-        .[, c(ncol(.), 2:(ncol(.)-1))]
-    out[is.na(out)] <- ''
-    out[,-7] %>% as_tibble() #%>% print(n = Inf)
-    
-    
-}
-```
-
-
-
-
-
-
-
-
-```{r, echo = TRUE, , warning = FALSE}
-## ---------------------
-## LOCAL CHECK!
-## ---------------------
-
-
-#net_str_f('spatialSPsurv')
-
-```
 
 
 ```{r, echo = FALSE, message = FALSE}

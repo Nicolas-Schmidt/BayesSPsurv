@@ -65,7 +65,7 @@ spatialSPsurv <- function(duration,
 #' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
-#' @rdname exchangeSPsurv
+#' @rdname spatialSPsurv
 #' @export
 #'
 #'

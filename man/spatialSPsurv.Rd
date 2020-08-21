@@ -2,6 +2,7 @@
 % Please edit documentation in R/spatialSPsurv.R
 \name{spatialSPsurv}
 \alias{spatialSPsurv}
+\alias{summary.spatialSPsurv}
 \title{spatialSPsurv}
 \usage{
 spatialSPsurv(
@@ -20,6 +21,8 @@ spatialSPsurv(
   form = c("Weibull", "exponential", "loglog"),
   prop.var
 )
+
+\method{summary}{spatialSPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
@@ -49,10 +52,20 @@ spatialSPsurv(
 \item{form}{type of parametric model (Exponential, Weibull or Log-Logistic)}
 
 \item{prop.var}{proposal variance for Metropolis-Hastings}
+
+\item{object}{an object of class \code{spatialSPsurv}, the output of \code{\link{exchangeSPsurv}}.}
+
+\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".}
+
+\item{...}{additional parameter}
 }
 \value{
 chain of the variables of interest
+
+list. Empirical mean, standard deviation and quantiles for each variable.
 }
 \description{
 Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties
+
+Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 }
