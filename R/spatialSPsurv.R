@@ -21,7 +21,7 @@
 #' @export
 #'
 
-spatialSPsurv<- function(duration,
+spatialSPsurv <- function(duration,
                          immune,
                          Y0,
                          LY,
@@ -39,6 +39,7 @@ spatialSPsurv<- function(duration,
 
     cll <- match.call()
     dis <- match.arg(form)
+    model <- 'spatialSPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
                     LY = LY, S = S, N = N, burn = burn, thin = thin, w = w, m = m,
                     form = dis, prop.var = prop.var, A = A, model = 'spatialSPsurv')
@@ -52,7 +53,32 @@ spatialSPsurv<- function(duration,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
                              m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
     }
-
+    class(results) <- c(class(results), model)
     results
 
 }
+
+
+#' @title summary.spatialSPsurv
+#' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
+#' @param object an object of class \code{spatialSPsurv}, the output of \code{\link{exchangeSPsurv}}.
+#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".
+#' @param ... additional parameter
+#' @return list. Empirical mean, standard deviation and quantiles for each variable.
+#' @rdname exchangeSPsurv
+#' @export
+#'
+#'
+
+summary.spatialSPsurv <- function(object, parameter = c("betas", "gammas", "lambda"), ...){
+
+    if (parameter == "betas")  sum <- summary(mcmc(object$betas),  ...)
+    if (parameter == "gammas") sum <- summary(mcmc(object$gammas), ...)
+    if (parameter == "lambda") sum <- summary(mcmc(object$lambda), ...)
+    sum
+}
+
+
+
+
+
