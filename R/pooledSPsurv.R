@@ -1,4 +1,4 @@
-#' @title SPsurv
+#' @title pooledSPsurv
 #' @description Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties
 #'
 #' @param duration survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring

@@ -28,6 +28,15 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 
 ### Functions
 
+| Function         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `exchangeSPsurv` | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties.                                                                                                                                                                                                                                                                                                                                   |
+| `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties                                                                                                                                                                                                                                                                                                                                              |
+| `spatialSPsurv`  | Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties.                                                                                                                                                                                                                                                                                                                           |
+| `summary`        | returns a summary of aexchangeSPsurv, pooledSPsurv or spatialSPsurv object via `coda::summary.mcmc`.                                                                                                                                                                                                                                                                                                                                           |
+| `spatial_SA`     |                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts of pooled, exchangeable, and spatial Split Population survival models for which a log-likelihood can be obtained, according to the formula `DIC = -2 * (L - P)`, where `L` is the log likelihood of the data given the posterior means of the parameter and `P` is the estimate of the effective number of parameters in the model. |
+
 | argument   | `spatialSPsurv()`    | `exchangeSPsurv()`   | `pooledSPsurv()`     |
 | ---------- | -------------------- | -------------------- | -------------------- |
 | `duration` | :heavy\_check\_mark: | :heavy\_check\_mark: | :heavy\_check\_mark: |
@@ -45,16 +54,18 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 | `S`        | :heavy\_check\_mark: | :heavy\_check\_mark: | :x:                  |
 | `A`        | :heavy\_check\_mark: | :x:                  | :x:                  |
 
-### Data
+### Example
+
+#### Data
 
 ``` r
 library(spatialSPsurv)
 
-walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", unitID = "id", tID = "year", freq = "year", ongoing = FALSE)
+walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
+                                   unitID = "id", tID = "year", 
+                                   freq = "year", ongoing = FALSE)
 walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 ```
-
-### Example
 
 #### `exchangeSPsurv`
 
