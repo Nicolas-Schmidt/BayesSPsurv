@@ -3,7 +3,7 @@
 \name{pooledSPsurv}
 \alias{pooledSPsurv}
 \alias{summary.SPsurv}
-\title{SPsurv}
+\title{pooledSPsurv}
 \usage{
 pooledSPsurv(
   duration,

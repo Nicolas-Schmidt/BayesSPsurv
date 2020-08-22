@@ -2,7 +2,7 @@
 #'
 #'Time-series-cross-sectional (TSCS) dataset extracted from \href{http://t.ly/F7KK}{Walter (2015)}.
 #'It has data on duration of civil war as well as information on other relevant economic and political data.
-#'The variables duration, cured, t.0, lastyear, S and A were later added by the authors of this package. 
+#'The variables duration, cured, t.0 and lastyear added by the authors of this package.
 #'
 #'\describe{
 #'    \item{duration}{duration until failure or censoring.}
