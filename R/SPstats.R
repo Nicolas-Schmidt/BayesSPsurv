@@ -18,14 +18,14 @@ SPstats = function(object){
     Y  <- as.matrix(object$spstats$Y)
     Y0 <- as.matrix(object$spstats$Y0)
     C  <- as.matrix(object$spstats$C)
-
+    form <- object$spstats$form
     if(length(class(object)) == 2){
 
         data <- as.data.frame(cbind(Y, Y0, C, X, Z))
 
         theta_post = cbind(object$gammas, object$betas, object$rho)
         theta_hat = apply(theta_post, 2, mean)
-        L = rllFun(theta_hat,Y, Y0,C,X,Z,data)$llik
+        L = rllFun(theta_hat,Y, Y0, C, X, Z, data, form)$llik
         #Calculate P
         S = nrow(theta_post) #S = number of iterations
         #Add up the log likelihoods of each iteration
@@ -36,7 +36,7 @@ SPstats = function(object){
         #l <- as.matrix(NA, nrow=S, ncol=1)
         for (s in 1:S) {
             theta_s = as.matrix(theta_post[s,])
-            ll <- rllFun(theta_s,Y,Y0,C,X,Z, data)
+            ll <- rllFun(theta_s, Y, Y0, C, X, Z, data, form)
             llSum <- llSum + ll$llik
             sum1 <- sum1 + ll$one
             sum2 <- sum2 + ll$two
@@ -58,8 +58,8 @@ SPstats = function(object){
         SP <- as.matrix(S)
         data <- as.data.frame(cbind(Y, Y0, C, X, Z, S))
 
-        W <- matrix(NA, ncol=1, nrow=nrow(X))
-        V <- matrix(NA, ncol=1, nrow=nrow(X))
+        W <- matrix(NA, ncol = 1, nrow = nrow(X))
+        V <- matrix(NA, ncol = 1, nrow = nrow(X))
 
         for(i in 1:length(SP)){
             sid <- SP[i]
@@ -70,7 +70,7 @@ SPstats = function(object){
         data <- as.data.frame(cbind(Y, Y0, C, X, Z))
         theta_post = cbind(object$gammas, object$betas, object$rho)
         theta_hat = apply(theta_post, 2, mean)
-        L = llFun(theta_hat,Y, Y0,C,X,Z, W, V, data)$llik
+        L = llFun(theta_hat,Y, Y0, C, X, Z, W, V, data, form)$llik
         #Calculate P
         S = nrow(theta_post) #S = number of iterations
         #Add up the log likelihoods of each iteration
@@ -81,7 +81,7 @@ SPstats = function(object){
         #l <- as.matrix(NA, nrow=S, ncol=1)
         for (s in 1:S) {
             theta_s = as.matrix(theta_post[s,])
-            ll <- llFun(theta_s,Y,Y0,C,X,Z,W, V, data)
+            ll <- llFun(theta_s, Y, Y0, C, X, Z, W, V, data, form)
             llSum <- llSum + ll$llik
             sum1 <- sum1 + ll$one
             sum2 <- sum2 + ll$two

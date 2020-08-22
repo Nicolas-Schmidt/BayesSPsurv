@@ -2127,7 +2127,8 @@ mcmcSP <- function(Y,
                    thin,
                    w = c(1, 1, 1),
                    m = 10,
-                   form, propvar) {
+                   form,
+                   propvar) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2171,7 +2172,7 @@ mcmcSP <- function(Y,
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp,
-              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C)))
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form)))
 }
 
 # @title mcmcSPlog
@@ -2232,7 +2233,7 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp,
-              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C)))
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form)))
 }
 
 
@@ -2327,7 +2328,9 @@ mcmcspatialSP <- function(Y,
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp,
+              delta = delta.samp, W = W.samp, V = V.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
 }
 
 
@@ -2411,7 +2414,8 @@ mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1,
       # print(100) #### ***** #### ***** #### ***** #### ***** ####
     }
   }
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp))
+  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
 }
 
 
@@ -2512,7 +2516,7 @@ mcmcfrailtySP <- function(Y,
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
-         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S)))
+         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
 }
 
 # @title mcmc Cure with Non-spatial frailties
@@ -2598,7 +2602,7 @@ mcmcfrailtySPlog <- function(Y, Y0, C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1
     }
   }
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
-         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S)))
+         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
 }
 
 
@@ -2628,7 +2632,8 @@ llFun <- function(est,
                   Z,
                   W,
                   V,
-                  data){		#Note the extra variable Y0 passed to the time varying MF Weibull
+                  data,
+                  form){		#Note the extra variable Y0 passed to the time varying MF Weibull
 
   n     <- nrow(data)
   llik  <- matrix(0, nrow = n, ncol = 1)
@@ -2639,8 +2644,11 @@ llFun <- function(est,
   ZG    <- Z %*% gamma
   phi   <- exp(-ZG + V)/(1+exp(-ZG + V))
   eXB   <- exp(-XB + W)
-  llik  <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
-  ## lliklog <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2))
+  if(form == "loglog"){
+    llik <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2)
+  } else {
+    llik <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
+  }
   one   <- nrow(llik)
   llik  <- subset(llik, is.finite(llik))
   two   <- nrow(llik)
@@ -2671,7 +2679,8 @@ rllFun <- function(est,
                    C,
                    X,
                    Z,
-                   data){		#Note the extra variable Y0 passed to the time varying MF Weibull
+                   data,
+                   form){		#Note the extra variable Y0 passed to the time varying MF Weibull
 
   n     <- nrow(data)
   llik  <- matrix(0, nrow = n, ncol = 1)
@@ -2682,8 +2691,11 @@ rllFun <- function(est,
   ZG    <- Z %*% gamma
   phi   <- exp(-ZG )/(1+exp(-ZG ))
   eXB   <- exp(-XB )
-  llik  <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
-  ## lliklog <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2))
+  if(form == "loglog"){
+    llik <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2)
+  } else {
+    llik <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
+  }
   one   <- nrow(llik)
   llik  <- subset(llik, is.finite(llik))
   two   <- nrow(llik)
