@@ -70,6 +70,9 @@ walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshol
 #### `exchangeSPsurv`
 
 ``` r
+## ~~~~~~~~~~~~~~~
+## Weibull
+## ~~~~~~~~~~~~~~~
 
 set.seed(782566)
 tch <- 
@@ -123,18 +126,86 @@ summary(tch, parameter = 'betas')
 #> var8 -0.984960 -0.95241 -0.26043  0.1259  0.4998
 #> var9 -0.486518 -0.06530  0.24375  0.3606  0.8204
 
-
 SPstats(tch)
 #> $DIC
 #> [1] -49028.11
 #> 
 #> $Loglik
 #> [1] 25580.83
+
+
+## ~~~~~~~~~~~~~~~
+## loglog
+## ~~~~~~~~~~~~~~~
+
+set.seed(782566)
+tchll <- 
+    exchangeSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "loglog",
+        prop.var = 1e-05
+    )
+
+summary(tchll, parameter = 'betas')
+#> 
+#> Iterations = 1:9
+#> Thinning interval = 1 
+#> Number of chains = 1 
+#> Sample size per chain = 9 
+#> 
+#> 1. Empirical mean and standard deviation for each variable,
+#>    plus standard error of the mean:
+#> 
+#>          Mean     SD Naive SE Time-series SE
+#>  [1,]  1.4999 0.9001   0.3000         0.3000
+#>  [2,]  0.5559 1.1298   0.3766         0.3766
+#>  [3,] -5.8422 2.9264   0.9755         2.4633
+#>  [4,] -1.8697 2.3461   0.7820         1.6770
+#>  [5,] -3.1098 2.7434   0.9145         1.8981
+#>  [6,] -3.1831 1.3680   0.4560         0.4560
+#>  [7,] -5.0530 0.8327   0.2776         0.2776
+#>  [8,]  1.7067 0.8989   0.2996         0.2996
+#>  [9,] -2.1157 1.5530   0.5177         0.5177
+#> 
+#> 2. Quantiles for each variable:
+#> 
+#>          2.5%     25%     50%     75%   97.5%
+#> var1  0.07721  1.1036  1.5510  2.3520  2.4959
+#> var2 -0.79491 -0.2574  0.5039  1.0811  2.5726
+#> var3 -9.72957 -8.5017 -5.2135 -3.7653 -2.0812
+#> var4 -4.44965 -3.8574 -2.4058 -0.2003  1.6950
+#> var5 -7.00491 -4.6375 -2.9053 -2.1140  0.8307
+#> var6 -4.84136 -4.0936 -3.4438 -2.4374 -1.1369
+#> var7 -6.49586 -5.5276 -4.8353 -4.6782 -3.9489
+#> var8  0.16972  1.4844  2.0950  2.2457  2.6278
+#> var9 -4.45054 -2.7112 -2.2761 -1.0324  0.1700
+
+SPstats(tchll)
+#> $DIC
+#> [1] 239856.7
+#> 
+#> $Loglik
+#> [1] -96931.16
 ```
 
 #### `pooledSPsurv`
 
 ``` r
+
+## ~~~~~~~~~~~~~~~
+## Weibull
+## ~~~~~~~~~~~~~~~
+
 set.seed(782566)
 
 tch2 <- 
@@ -190,18 +261,89 @@ summary(tch2, parameter = 'betas')
 #> var9  -0.5346 -0.09968  0.240612  0.64984  1.0848
 #> var10 -0.3278  0.11562  0.493585  0.72870  2.3084
 
-
 SPstats(tch2)
 #> $DIC
 #> [1] -34438.21
 #> 
 #> $Loglik
 #> [1] 22929.24
+
+## ~~~~~~~~~~~~~~~
+## loglog
+## ~~~~~~~~~~~~~~~
+
+set.seed(782566)
+
+tchll2 <- 
+    pooledSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "loglog"
+    )
+
+
+
+summary(tchll2, parameter = 'betas')
+#> 
+#> Iterations = 1:9
+#> Thinning interval = 1 
+#> Number of chains = 1 
+#> Sample size per chain = 9 
+#> 
+#> 1. Empirical mean and standard deviation for each variable,
+#>    plus standard error of the mean:
+#> 
+#>           Mean     SD Naive SE Time-series SE
+#>  [1,] -11.6249 3.6426   1.2142         2.4079
+#>  [2,]  -0.6143 1.1622   0.3874         0.3874
+#>  [3,]  -1.6773 1.4480   0.4827         0.8427
+#>  [4,]  -3.7047 2.0706   0.6902         1.6593
+#>  [5,]  -2.8794 1.1608   0.3869         0.3869
+#>  [6,]   6.0637 1.6001   0.5334         0.5334
+#>  [7,]   4.1333 2.5187   0.8396         1.8903
+#>  [8,]   0.3184 0.6982   0.2327         0.1305
+#>  [9,]   5.5183 2.1958   0.7319         1.7093
+#> [10,]   3.7195 2.3394   0.7798         1.7639
+#> 
+#> 2. Quantiles for each variable:
+#> 
+#>           2.5%      25%      50%     75%   97.5%
+#> var1  -16.3716 -13.7863 -12.3474 -9.1716 -5.9555
+#> var2   -2.1622  -1.3398  -0.8206  0.4841  1.0142
+#> var3   -3.6950  -2.6456  -1.6090 -0.5459  0.4046
+#> var4   -6.5035  -4.8808  -3.6916 -2.9836 -0.6197
+#> var5   -4.6020  -3.5791  -3.0807 -1.9252 -1.4050
+#> var6    3.4021   5.4641   5.5308  7.4524  8.0014
+#> var7    1.6262   2.2469   3.0047  6.1237  8.2656
+#> var8   -0.7511  -0.1037   0.3682  0.6752  1.4159
+#> var9    2.1223   3.3819   6.5907  6.8747  7.5226
+#> var10   0.2116   1.5568   3.8004  5.6092  6.4169
+
+SPstats(tchll2)
+#> $DIC
+#> [1] 313923.1
+#> 
+#> $Loglik
+#> [1] -128299.2
 ```
 
 #### `spatialSPsurv`
 
 ``` r
+
+
+## ~~~~~~~~~~~~~~~
+## Weibull
+## ~~~~~~~~~~~~~~~
+
 set.seed(782566)
 
 tch3 <- 
@@ -255,4 +397,77 @@ summary(tch3, parameter = 'betas')
 #> var7  0.1155  0.16180  0.19295  0.23038  0.3328
 #> var8 -1.5323 -0.59677 -0.40156 -0.29580  0.4168
 #> var9 -0.1959  0.27252  0.92698  1.34895  1.5827
+
+SPstats(tch3)
+#> $DIC
+#> [1] 0
+#> 
+#> $Loglik
+#> [1] 0
+
+## ~~~~~~~~~~~~~~~
+## loglog
+## ~~~~~~~~~~~~~~~
+
+
+set.seed(782566)
+
+tchll3 <- 
+    spatialSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "loglog",
+        prop.var = 1e-05,
+        A        = walter[[2]]
+    )
+
+summary(tchll3, parameter = 'betas')
+#> 
+#> Iterations = 1:9
+#> Thinning interval = 1 
+#> Number of chains = 1 
+#> Sample size per chain = 9 
+#> 
+#> 1. Empirical mean and standard deviation for each variable,
+#>    plus standard error of the mean:
+#> 
+#>          Mean     SD Naive SE Time-series SE
+#>  [1,]  0.9978 1.0149   0.3383         0.7407
+#>  [2,] -4.0951 1.8803   0.6268         1.2766
+#>  [3,] -1.9909 1.0394   0.3465         0.8131
+#>  [4,] -9.3394 4.1228   1.3743         2.9403
+#>  [5,]  0.3753 0.6356   0.2119         0.1313
+#>  [6,]  1.5198 0.6755   0.2252         0.2252
+#>  [7,]  0.9864 0.4919   0.1640         0.3482
+#>  [8,]  1.2304 0.7936   0.2645         0.2645
+#>  [9,]  3.6146 1.9527   0.6509         1.1303
+#> 
+#> 2. Quantiles for each variable:
+#> 
+#>           2.5%       25%      50%     75%   97.5%
+#> var1  -0.18389   0.06547   1.2954  1.6824  2.3334
+#> var2  -6.64971  -5.43311  -3.8534 -2.9842 -1.1993
+#> var3  -3.70941  -2.42676  -1.6402 -1.1902 -0.9037
+#> var4 -13.85590 -12.10579 -10.4624 -7.3451 -2.5241
+#> var5  -0.57764   0.07917   0.2469  0.8927  1.2393
+#> var6   0.47572   1.03511   1.6726  1.9030  2.3717
+#> var7   0.55220   0.62912   0.7100  1.2758  1.7747
+#> var8   0.01502   0.94962   1.0960  1.7605  2.4447
+#> var9   0.91661   2.44076   3.8508  4.5397  6.7167
+
+SPstats(tchll3)
+#> $DIC
+#> [1] -2977.48
+#> 
+#> $Loglik
+#> [1] 17200
 ```

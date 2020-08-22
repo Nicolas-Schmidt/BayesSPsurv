@@ -106,6 +106,9 @@ walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshol
 #### `exchangeSPsurv`
 
 ```{r}
+## ~~~~~~~~~~~~~~~
+## Weibull
+## ~~~~~~~~~~~~~~~
 
 set.seed(782566)
 tch <- 
@@ -127,14 +130,48 @@ tch <-
 
 summary(tch, parameter = 'betas')
 
-
 SPstats(tch)
+
+
+## ~~~~~~~~~~~~~~~
+## loglog
+## ~~~~~~~~~~~~~~~
+
+set.seed(782566)
+tchll <- 
+    exchangeSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "loglog",
+        prop.var = 1e-05
+    )
+
+summary(tchll, parameter = 'betas')
+
+SPstats(tchll)
+
+
+
 
 ```
 
 #### `pooledSPsurv`
 
 ```{r}
+
+## ~~~~~~~~~~~~~~~
+## Weibull
+## ~~~~~~~~~~~~~~~
+
 set.seed(782566)
 
 tch2 <- 
@@ -156,8 +193,36 @@ tch2 <-
 
 summary(tch2, parameter = 'betas')
 
-
 SPstats(tch2)
+
+## ~~~~~~~~~~~~~~~
+## loglog
+## ~~~~~~~~~~~~~~~
+
+set.seed(782566)
+
+tchll2 <- 
+    pooledSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "loglog"
+    )
+
+
+
+summary(tchll2, parameter = 'betas')
+
+SPstats(tchll2)
+
+
 
 ```
 
@@ -165,6 +230,12 @@ SPstats(tch2)
 #### `spatialSPsurv`
 
 ```{r}
+
+
+## ~~~~~~~~~~~~~~~
+## Weibull
+## ~~~~~~~~~~~~~~~
+
 set.seed(782566)
 
 tch3 <- 
@@ -186,6 +257,39 @@ tch3 <-
     )
 
 summary(tch3, parameter = 'betas')
+
+SPstats(tch3)
+
+## ~~~~~~~~~~~~~~~
+## loglog
+## ~~~~~~~~~~~~~~~
+
+
+set.seed(782566)
+
+tchll3 <- 
+    spatialSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "loglog",
+        prop.var = 1e-05,
+        A        = walter[[2]]
+    )
+
+summary(tchll3, parameter = 'betas')
+
+SPstats(tchll3)
+
+
 
 ```
 

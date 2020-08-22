@@ -2645,7 +2645,7 @@ llFun <- function(est,
   phi   <- exp(-ZG + V)/(1+exp(-ZG + V))
   eXB   <- exp(-XB + W)
   if(form == "loglog"){
-    llik <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2)
+    llik <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*(1+((eXB*Y0)^(p)))/(1+exp(-(eXB*Y)^(p)))^2)+(1-C)*(log(phi+(1-phi)*(1+((eXB*Y0)^p)))^2/(1+((eXB*Y)^p)))^2)
   } else {
     llik <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
   }
@@ -2692,7 +2692,7 @@ rllFun <- function(est,
   phi   <- exp(-ZG )/(1+exp(-ZG ))
   eXB   <- exp(-XB )
   if(form == "loglog"){
-    llik <- C*(log((1-phi)*eXB*p*((eXBY)^(p-1))*(1+((eXBY0)^(p)))/(1+exp(-(eXBY)^(p)))^2)+(1-C)(log(phi+(1-phi)*(1+((eXBY0)^p)))^2/(1+((eXBY)^p)))^2)
+    llik <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*(1+((eXB*Y0)^(p)))/(1+exp(-(eXB*Y)^(p)))^2)+(1-C)*(log(phi+(1-phi)*(1+((eXB*Y0)^p)))^2/(1+((eXB*Y)^p)))^2)
   } else {
     llik <- C*(log((1-phi)*eXB*p*((eXB*Y)^(p-1))*exp(-(eXB*Y))^p/exp(-(eXB*Y0))^p))+(1-C)*(log(phi+(1-phi)*((exp(-eXB*Y))^p)/((exp(-eXB*Y0))^p)))
   }
