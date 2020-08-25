@@ -90,8 +90,6 @@ library(spduration)
 ### Example
 
 
-
-
 #### Data
 ```{r, warning=FALSE}
 library(spatialSPsurv)
