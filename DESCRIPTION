@@ -1,7 +1,7 @@
 Package: spatialSPsurv
 Type: Package
 Title: Bayesian Spatial Split Population Survival Model
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: c(person(given = "Sergio",
                     family = "Bejar",
                     role = c("aut")),

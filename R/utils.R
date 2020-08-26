@@ -57,19 +57,21 @@ formcall <- function(duration,
   if (is.null(w)) w <- c(1,1,1) else w <- w
   if (is.null(m)) m <- 10 else m <- m
   form <-  form
+  cnx <- colnames(X)
+  cnz <- colnames(Z)
 
   if(model == "SPsurv"){
 
     dataset <- data.frame(cbind(Y, Y0, C, LY, X, Z))
     dataset <- na.omit(dataset)
-    col <- ncol(dataset)
     Y  <- as.matrix(dataset[,1])
     Y0 <- as.matrix(dataset[,2])
     C  <- as.matrix(dataset[,3])
     LY <- as.matrix(dataset[,4])
-    X  <- as.matrix(dataset[,4:(4+ncol(X))])
+    X  <- as.matrix(dataset[,5:(4+ncol(X))])
     Z  <- as.matrix(dataset[,(5+ncol(X)):ncol(dataset)])
-
+    colnames(X) <- cnx
+    colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, N = N, burn = burn,
                thin = thin, w = w, m = m, form = form)
 
@@ -79,7 +81,6 @@ formcall <- function(duration,
     S  <- data[, S]
     dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
     dataset <- na.omit(dataset)
-    col <- ncol(dataset)
     Y  <- as.matrix(dataset[,1])
     Y0 <- as.matrix(dataset[,2])
     C  <- as.matrix(dataset[,3])
@@ -87,7 +88,8 @@ formcall <- function(duration,
     S  <- as.matrix(dataset[,5])
     X  <- as.matrix(dataset[,6:(5+ncol(X))])
     Z  <- as.matrix(dataset[,(6+ncol(X)):ncol(dataset)])
-
+    colnames(X) <- cnx
+    colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, S = S, N = N, burn = burn,
                thin = thin, w = w, m = m, form = form, prop.var = prop.var)
 
@@ -2171,6 +2173,8 @@ mcmcSP <- function(Y,
 
     }
   }
+  colnames(betas.samp)  <- colnames(X) #adc
+  colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form)))
 }
@@ -2232,6 +2236,8 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form
       rho.samp[(iter - burn) / thin] = rho
     }
   }
+  colnames(betas.samp)  <- colnames(X) #adc
+  colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form)))
 }
@@ -2328,6 +2334,8 @@ mcmcspatialSP <- function(Y,
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
+  colnames(betas.samp)  <- colnames(X) #adc
+  colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp,
               delta = delta.samp, W = W.samp, V = V.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
@@ -2414,6 +2422,8 @@ mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1,
       # print(100) #### ***** #### ***** #### ***** #### ***** ####
     }
   }
+  colnames(betas.samp)  <- colnames(X) #adc
+  colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
 }
@@ -2515,6 +2525,8 @@ mcmcfrailtySP <- function(Y,
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
+  colnames(betas.samp)  <- colnames(X) #adc
+  colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
          spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
 }
@@ -2601,6 +2613,8 @@ mcmcfrailtySPlog <- function(Y, Y0, C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
+  colnames(betas.samp)  <- colnames(X) #adc
+  colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
          spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
 }
