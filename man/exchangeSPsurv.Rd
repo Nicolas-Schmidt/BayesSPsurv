@@ -3,6 +3,7 @@
 \name{exchangeSPsurv}
 \alias{exchangeSPsurv}
 \alias{summary.frailtySPsurv}
+\alias{print.frailtySPsurv}
 \title{exchangeSPsurv}
 \usage{
 exchangeSPsurv(
@@ -22,6 +23,8 @@ exchangeSPsurv(
 )
 
 \method{summary}{frailtySPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
+
+\method{print}{frailtySPsurv}(x, ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
@@ -55,6 +58,8 @@ exchangeSPsurv(
 \item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".}
 
 \item{...}{additional parameter}
+
+\item{x}{an x of class \code{frailtySPsurv} (output of \code{\link{exchangeSPsurv}}).}
 }
 \value{
 chain of the variables of interest
@@ -65,4 +70,6 @@ list. Empirical mean, standard deviation and quantiles for each variable.
 Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties
 
 Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
+
+Print method for a \code{\link{exchangeSPsurv}} x.
 }

@@ -201,9 +201,7 @@ tch1 <-
         prop.var = 1e-05
     )
 
-summary(tch1, parameter = 'betas')
-
-summary(tch1, parameter = 'gammas')
+tch1
 
 SPstats(tch1)
 
@@ -230,9 +228,8 @@ tchll1 <-
         prop.var = 1e-05
     )
 
-summary(tchll1, parameter = 'betas')
+tchll1
 
-summary(tchll1, parameter = 'gammas')
 
 SPstats(tchll1)
 

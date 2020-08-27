@@ -277,70 +277,49 @@ tch1 <-
         prop.var = 1e-05
     )
 
-summary(tch1, parameter = 'betas')
+tch1
+#> Call:
+#> exchangeSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
+#>     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
+#>     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
+#>     S = "sp_id", data = walter[[1]], N = 100, burn = 10, thin = 10, 
+#>     w = c(1, 1, 1), m = 10, form = "Weibull", prop.var = 1e-05)
+#> 
 #> 
 #> Iterations = 1:9
 #> Thinning interval = 1 
 #> Number of chains = 1 
 #> Sample size per chain = 9 
 #> 
-#> 1. Empirical mean and standard deviation for each variable,
-#>    plus standard error of the mean:
+#> Empirical mean and standard deviation for each variable,
+#> plus standard error of the mean:
 #> 
-#>                  Mean      SD Naive SE Time-series SE
-#> (Intercept)    0.8758 0.48395  0.16132        0.31032
-#> fhcompor1     -0.9048 0.51359  0.17120        0.14001
-#> lgdpl          0.1127 0.04766  0.01589        0.01589
-#> comprehensive -0.6483 0.26599  0.08866        0.08866
-#> victory        0.3980 0.34520  0.11507        0.11507
-#> instabl        0.6219 0.17494  0.05831        0.05831
-#> intensityln    0.0944 0.06109  0.02036        0.03646
-#> ethfrac       -0.3124 0.61862  0.20621        0.14250
-#> unpko          0.1607 0.42516  0.14172        0.14172
 #> 
-#> 2. Quantiles for each variable:
+#> Duration equation: 
+#>                      Mean         SD   Naive SE Time-series SE
+#> (Intercept)    0.87579434 0.48394958 0.16131653     0.31032008
+#> fhcompor1     -0.90480541 0.51358784 0.17119595     0.14000853
+#> lgdpl          0.11274546 0.04765930 0.01588643     0.01588643
+#> comprehensive -0.64829301 0.26599359 0.08866453     0.08866453
+#> victory        0.39796089 0.34520180 0.11506727     0.11506727
+#> instabl        0.62194670 0.17493675 0.05831225     0.05831225
+#> intensityln    0.09439582 0.06109327 0.02036442     0.03645641
+#> ethfrac       -0.31243011 0.61862030 0.20620677     0.14249965
+#> unpko          0.16069329 0.42515578 0.14171859     0.14171859
 #> 
-#>                    2.5%      25%      50%     75%   97.5%
-#> (Intercept)    0.336840  0.43877  0.75507  1.3576  1.4238
-#> fhcompor1     -1.672967 -1.14096 -0.91476 -0.6310 -0.1372
-#> lgdpl          0.061453  0.08372  0.09148  0.1433  0.1909
-#> comprehensive -0.948800 -0.77307 -0.68803 -0.5759 -0.1355
-#> victory       -0.154085  0.25268  0.45572  0.5545  0.9240
-#> instabl        0.366075  0.53061  0.57892  0.8093  0.8221
-#> intensityln   -0.008357  0.09833  0.10550  0.1404  0.1568
-#> ethfrac       -0.984960 -0.95241 -0.26043  0.1259  0.4998
-#> unpko         -0.486518 -0.06530  0.24375  0.3606  0.8204
-
-summary(tch1, parameter = 'gammas')
-#> 
-#> Iterations = 1:9
-#> Thinning interval = 1 
-#> Number of chains = 1 
-#> Sample size per chain = 9 
-#> 
-#> 1. Empirical mean and standard deviation for each variable,
-#>    plus standard error of the mean:
-#> 
-#>                Mean    SD Naive SE Time-series SE
-#> (Intercept) -0.7988 1.561   0.5203         0.3203
-#> fhcompor1    1.2493 2.148   0.7159         0.3948
-#> lgdpl       -2.2302 1.189   0.3964         0.3964
-#> victory     -0.3072 1.447   0.4825         0.4825
-#> 
-#> 2. Quantiles for each variable:
-#> 
-#>               2.5%     25%      50%       75%   97.5%
-#> (Intercept) -3.431 -1.4002 -1.08752  0.008882  1.4116
-#> fhcompor1   -1.293 -0.2158  0.79024  2.081411  5.1503
-#> lgdpl       -3.813 -3.2259 -1.94155 -1.040735 -0.8171
-#> victory     -2.758 -0.4586  0.03466  0.638916  1.3024
+#> Inmune equation: 
+#>                   Mean       SD  Naive SE Time-series SE
+#> (Intercept) -0.7987628 1.560920 0.5203068      0.3202784
+#> fhcompor1    1.2492989 2.147772 0.7159239      0.3947657
+#> lgdpl       -2.2302276 1.189085 0.3963618      0.3963618
+#> victory     -0.3072006 1.447433 0.4824778      0.4824778
 
 SPstats(tch1)
 #> $DIC
-#> [1] -49028.11
+#> [1] -48940.28
 #> 
 #> $Loglik
-#> [1] 25580.83
+#> [1] 25584.5
 
 
 ## ~~~~~~~~~~~~~~~
@@ -365,70 +344,50 @@ tchll1 <-
         prop.var = 1e-05
     )
 
-summary(tchll1, parameter = 'betas')
+tchll1
+#> Call:
+#> exchangeSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
+#>     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
+#>     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
+#>     S = "sp_id", data = walter[[1]], N = 100, burn = 10, thin = 10, 
+#>     w = c(1, 1, 1), m = 10, form = "loglog", prop.var = 1e-05)
+#> 
 #> 
 #> Iterations = 1:9
 #> Thinning interval = 1 
 #> Number of chains = 1 
 #> Sample size per chain = 9 
 #> 
-#> 1. Empirical mean and standard deviation for each variable,
-#>    plus standard error of the mean:
+#> Empirical mean and standard deviation for each variable,
+#> plus standard error of the mean:
 #> 
-#>                  Mean     SD Naive SE Time-series SE
-#> (Intercept)    1.4999 0.9001   0.3000         0.3000
-#> fhcompor1      0.5559 1.1298   0.3766         0.3766
-#> lgdpl         -5.8422 2.9264   0.9755         2.4633
-#> comprehensive -1.8697 2.3461   0.7820         1.6770
-#> victory       -3.1098 2.7434   0.9145         1.8981
-#> instabl       -3.1831 1.3680   0.4560         0.4560
-#> intensityln   -5.0530 0.8327   0.2776         0.2776
-#> ethfrac        1.7067 0.8989   0.2996         0.2996
-#> unpko         -2.1157 1.5530   0.5177         0.5177
 #> 
-#> 2. Quantiles for each variable:
+#> Duration equation: 
+#>                     Mean        SD  Naive SE Time-series SE
+#> (Intercept)    1.4998773 0.9001035 0.3000345      0.3000345
+#> fhcompor1      0.5559016 1.1297885 0.3765962      0.3765962
+#> lgdpl         -5.8421503 2.9264300 0.9754767      2.4633292
+#> comprehensive -1.8697152 2.3460962 0.7820321      1.6769531
+#> victory       -3.1098076 2.7434201 0.9144734      1.8980999
+#> instabl       -3.1831150 1.3679548 0.4559849      0.4559849
+#> intensityln   -5.0530350 0.8327241 0.2775747      0.2775747
+#> ethfrac        1.7066805 0.8988828 0.2996276      0.2996276
+#> unpko         -2.1157316 1.5529595 0.5176532      0.5176532
 #> 
-#>                   2.5%     25%     50%     75%   97.5%
-#> (Intercept)    0.07721  1.1036  1.5510  2.3520  2.4959
-#> fhcompor1     -0.79491 -0.2574  0.5039  1.0811  2.5726
-#> lgdpl         -9.72957 -8.5017 -5.2135 -3.7653 -2.0812
-#> comprehensive -4.44965 -3.8574 -2.4058 -0.2003  1.6950
-#> victory       -7.00491 -4.6375 -2.9053 -2.1140  0.8307
-#> instabl       -4.84136 -4.0936 -3.4438 -2.4374 -1.1369
-#> intensityln   -6.49586 -5.5276 -4.8353 -4.6782 -3.9489
-#> ethfrac        0.16972  1.4844  2.0950  2.2457  2.6278
-#> unpko         -4.45054 -2.7112 -2.2761 -1.0324  0.1700
+#> Inmune equation: 
+#>                  Mean        SD  Naive SE Time-series SE
+#> (Intercept) -1.510808 2.1240376 0.7080125      1.6098136
+#> fhcompor1   -2.833182 0.9554854 0.3184951      0.3184951
+#> lgdpl        1.334424 1.6739737 0.5579912      1.2635753
+#> victory      2.381123 0.9427260 0.3142420      0.3142420
 
-summary(tchll1, parameter = 'gammas')
-#> 
-#> Iterations = 1:9
-#> Thinning interval = 1 
-#> Number of chains = 1 
-#> Sample size per chain = 9 
-#> 
-#> 1. Empirical mean and standard deviation for each variable,
-#>    plus standard error of the mean:
-#> 
-#>               Mean     SD Naive SE Time-series SE
-#> (Intercept) -1.511 2.1240   0.7080         1.6098
-#> fhcompor1   -2.833 0.9555   0.3185         0.3185
-#> lgdpl        1.334 1.6740   0.5580         1.2636
-#> victory      2.381 0.9427   0.3142         0.3142
-#> 
-#> 2. Quantiles for each variable:
-#> 
-#>               2.5%      25%    50%     75%  97.5%
-#> (Intercept) -4.711 -2.45131 -1.046 -0.6931  1.297
-#> fhcompor1   -3.912 -3.52964 -2.963 -2.1617 -1.204
-#> lgdpl       -1.246  0.07312  2.182  2.4349  3.013
-#> victory      1.001  1.84597  2.375  2.5951  3.935
 
 SPstats(tchll1)
 #> $DIC
-#> [1] 239856.7
+#> [1] 239864.5
 #> 
 #> $Loglik
-#> [1] -96931.16
+#> [1] -96935.59
 ```
 
 #### `pooledSPsurv`
