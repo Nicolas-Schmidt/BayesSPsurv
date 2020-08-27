@@ -37,7 +37,6 @@ spatialSPsurv <- function(duration,
                          prop.var)
 {
 
-    cll <- match.call()
     dis <- match.arg(form)
     model <- 'spatialSPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
@@ -53,6 +52,7 @@ spatialSPsurv <- function(duration,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
                              m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
     }
+    results$call   <- match.call()
     class(results) <- c(class(results), model)
     results
 
@@ -77,6 +77,53 @@ summary.spatialSPsurv <- function(object, parameter = c("betas", "gammas", "lamb
     if (parameter == "lambda") sum <- summary(mcmc(object$lambda), ...)
     sum
 }
+
+
+
+#' @title print.spatialSPsurv
+#' @description Print method for a \code{\link{spatialSPsurv}} x.
+#' @param x an x of class \code{spatialSPsurv} (output of \code{\link{spatialSPsurv}}).
+#' @rdname spatialSPsurv
+#' @export
+
+print.spatialSPsurv <- function(x, ...){
+
+    cat('Call:\n')
+    print(x$call)
+    cat('\n')
+    x2 <- summary(x, parameter = 'betas')
+    cat("\n", "Iterations = ", x2$start, ":", x2$end, "\n", sep = "")     # coda::mcmc
+    cat("Thinning interval =", x2$thin, "\n")                             # coda::mcmc
+    cat("Number of chains =", x2$nchain, "\n")                            # coda::mcmc
+    cat("Sample size per chain =", (x2$end - x2$start)/x2$thin + 1, "\n") # coda::mcmc
+    cat("\nEmpirical mean and standard deviation for each variable,")     # coda::mcmc
+    cat("\nplus standard error of the mean:\n\n")
+    cat('\n')
+    cat('Duration equation: \n')
+    print(summary(x, parameter = 'betas')$statistics)
+    cat('\n')
+    cat('Inmune equation: \n')
+    print(summary(x, parameter = 'gammas')$statistics)
+    cat('\n')
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

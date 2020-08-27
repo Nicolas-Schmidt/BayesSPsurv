@@ -114,7 +114,8 @@ set.seed(782566)
 
 tch <- 
     spatialSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',
@@ -130,9 +131,7 @@ tch <-
         A        = walter[[2]]
     )
 
-summary(tch, parameter = 'betas')
-
-summary(tch, parameter = 'gammas')
+tch
 
 SPstats(tch)
 
@@ -145,7 +144,8 @@ set.seed(782566)
 
 tchll <- 
     spatialSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',
@@ -161,14 +161,9 @@ tchll <-
         A        = walter[[2]]
     )
 
-summary(tchll, parameter = 'betas')
-
-summary(tchll, parameter = 'gammas')
+tch
 
 SPstats(tchll)
-
-
-
 ```
 
 
@@ -186,7 +181,8 @@ SPstats(tchll)
 set.seed(782566)
 tch1 <- 
     exchangeSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',
@@ -213,7 +209,8 @@ SPstats(tch1)
 set.seed(782566)
 tchll1 <- 
     exchangeSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',
@@ -232,11 +229,8 @@ tchll1
 
 
 SPstats(tchll1)
-
-
-
-
 ```
+
 
 #### `pooledSPsurv`
 
@@ -250,7 +244,8 @@ set.seed(782566)
 
 tch2 <- 
     pooledSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',
@@ -264,10 +259,7 @@ tch2 <-
     )
 
 
-
-summary(tch2, parameter = 'betas')
-
-summary(tch2, parameter = 'gammas')
+tch2
 
 SPstats(tch2)
 
@@ -279,7 +271,8 @@ set.seed(782566)
 
 tchll2 <- 
     pooledSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + instabl + intensityln + ethfrac + unpko,
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',
@@ -292,16 +285,9 @@ tchll2 <-
         form     = "loglog"
     )
 
-
-
-summary(tchll2, parameter = 'betas')
-
-summary(tchll2, parameter = 'gammas')
+tchll2
 
 SPstats(tchll2)
-
-
-
 ```
 
 

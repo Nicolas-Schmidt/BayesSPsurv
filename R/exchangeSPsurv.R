@@ -95,7 +95,7 @@ print.frailtySPsurv <- function(x, ...){
     cat("Thinning interval =", x2$thin, "\n")                             # coda::mcmc
     cat("Number of chains =", x2$nchain, "\n")                            # coda::mcmc
     cat("Sample size per chain =", (x2$end - x2$start)/x2$thin + 1, "\n") # coda::mcmc
-    cat("\nEmpirical mean and standard deviation for each variable,")    # coda::mcmc
+    cat("\nEmpirical mean and standard deviation for each variable,")     # coda::mcmc
     cat("\nplus standard error of the mean:\n\n")
     cat('\n')
     cat('Duration equation: \n')
