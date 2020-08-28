@@ -87,7 +87,7 @@ tch <-
         LY       = 'lastyear',
         S        = 'sp_id' ,
         data     = walter[[1]],
-        N        = 100,
+        N        = 500,
         burn     = 10,
         thin     = 10,
         w        = c(1,1,1),
@@ -97,50 +97,57 @@ tch <-
         A        = walter[[2]]
     )
 
-tch
+print(tch)
 #> Call:
 #> spatialSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
 #>     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
 #>     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
-#>     S = "sp_id", A = walter[[2]], data = walter[[1]], N = 100, 
+#>     S = "sp_id", A = walter[[2]], data = walter[[1]], N = 500, 
 #>     burn = 10, thin = 10, w = c(1, 1, 1), m = 10, form = "Weibull", 
 #>     prop.var = 1e-05)
 #> 
 #> 
-#> Iterations = 1:9
+#> Iterations = 1:49
 #> Thinning interval = 1 
 #> Number of chains = 1 
-#> Sample size per chain = 9 
+#> Sample size per chain = 49 
 #> 
 #> Empirical mean and standard deviation for each variable,
 #> plus standard error of the mean:
 #> 
 #> 
 #> Duration equation: 
-#>                      Mean         SD   Naive SE Time-series SE
-#> (Intercept)    1.60439375 1.13144972 0.37714991     0.84170995
-#> fhcompor1     -0.55873580 0.33698861 0.11232954     0.11232954
-#> lgdpl         -0.02919562 0.12317179 0.04105726     0.08717809
-#> comprehensive -0.98398620 0.15571509 0.05190503     0.05190503
-#> victory        0.26793396 0.49944209 0.16648070     0.10515461
-#> instabl        0.88129522 0.49950483 0.16650161     0.16650161
-#> intensityln    0.20160193 0.07131882 0.02377294     0.02170146
-#> ethfrac       -0.50093022 0.67300942 0.22433647     0.22433647
-#> unpko          0.75478234 0.66777218 0.22259073     0.22259073
+#>                     Mean         SD    Naive SE Time-series SE
+#> (Intercept)    1.5463805 0.82766390 0.118237700     0.27559357
+#> fhcompor1     -0.7085419 0.43598722 0.062283888     0.07810104
+#> lgdpl         -0.0775318 0.08339529 0.011913613     0.02298703
+#> comprehensive -0.7879095 0.29557936 0.042225623     0.04222562
+#> victory        0.3020210 0.43003924 0.061434177     0.06599743
+#> instabl        0.6061754 0.43418382 0.062026260     0.06202626
+#> intensityln    0.2241309 0.06531212 0.009330304     0.01594854
+#> ethfrac       -0.3194989 0.61694154 0.088134505     0.11343036
+#> unpko          0.5637305 0.55782828 0.079689755     0.07968975
 #> 
 #> Inmune equation: 
 #>                   Mean        SD  Naive SE Time-series SE
-#> (Intercept) -27.958109  8.777120 2.9257067      5.5637299
-#> fhcompor1     7.315922  3.499431 1.1664769      2.1344546
-#> lgdpl       -14.575347 10.213927 3.4046425      7.8422316
-#> victory      -6.283357  2.446477 0.8154924      0.8154924
+#> (Intercept) -10.571952 15.156688 2.1652411       9.124592
+#> fhcompor1     1.833617  3.995950 0.5708499       1.384355
+#> lgdpl        -7.219672  8.557581 1.2225116       5.394051
+#> victory      -2.867696  4.902532 0.7003617       1.744085
 
 SPstats(tch)
 #> $DIC
-#> [1] 0
+#> [1] -40494.5
 #> 
 #> $Loglik
 #> [1] 0
+
+plot(tch)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" /><img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" /><img src="man/figures/README-unnamed-chunk-4-3.png" width="100%" />
+
+``` r
 
 ## ~~~~~~~~~~~~~~~
 ## loglog
@@ -158,7 +165,7 @@ tchll <-
         LY       = 'lastyear',
         S        = 'sp_id' ,
         data     = walter[[1]],
-        N        = 100,
+        N        = 500,
         burn     = 10,
         thin     = 10,
         w        = c(1,1,1),
@@ -168,51 +175,55 @@ tchll <-
         A        = walter[[2]]
     )
 
-tch
+print(tchll)
 #> Call:
 #> spatialSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
 #>     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
 #>     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
-#>     S = "sp_id", A = walter[[2]], data = walter[[1]], N = 100, 
-#>     burn = 10, thin = 10, w = c(1, 1, 1), m = 10, form = "Weibull", 
+#>     S = "sp_id", A = walter[[2]], data = walter[[1]], N = 500, 
+#>     burn = 10, thin = 10, w = c(1, 1, 1), m = 10, form = "loglog", 
 #>     prop.var = 1e-05)
 #> 
 #> 
-#> Iterations = 1:9
+#> Iterations = 1:49
 #> Thinning interval = 1 
 #> Number of chains = 1 
-#> Sample size per chain = 9 
+#> Sample size per chain = 49 
 #> 
 #> Empirical mean and standard deviation for each variable,
 #> plus standard error of the mean:
 #> 
 #> 
 #> Duration equation: 
-#>                      Mean         SD   Naive SE Time-series SE
-#> (Intercept)    1.60439375 1.13144972 0.37714991     0.84170995
-#> fhcompor1     -0.55873580 0.33698861 0.11232954     0.11232954
-#> lgdpl         -0.02919562 0.12317179 0.04105726     0.08717809
-#> comprehensive -0.98398620 0.15571509 0.05190503     0.05190503
-#> victory        0.26793396 0.49944209 0.16648070     0.10515461
-#> instabl        0.88129522 0.49950483 0.16650161     0.16650161
-#> intensityln    0.20160193 0.07131882 0.02377294     0.02170146
-#> ethfrac       -0.50093022 0.67300942 0.22433647     0.22433647
-#> unpko          0.75478234 0.66777218 0.22259073     0.22259073
+#>                     Mean       SD  Naive SE Time-series SE
+#> (Intercept)     0.366719 2.288175 0.3268821      1.3615709
+#> fhcompor1      -6.164064 2.484757 0.3549652      1.0883163
+#> lgdpl          -7.065474 3.347268 0.4781812      2.2677624
+#> comprehensive -18.894019 6.575919 0.9394170      4.1424634
+#> victory        -1.697208 2.065578 0.2950826      0.9950245
+#> instabl         3.192351 2.224242 0.3177488      0.8147801
+#> intensityln     2.827479 1.332139 0.1903055      0.5087400
+#> ethfrac         1.031417 1.085811 0.1551158      0.3136554
+#> unpko          10.612899 4.179155 0.5970221      2.6226135
 #> 
 #> Inmune equation: 
-#>                   Mean        SD  Naive SE Time-series SE
-#> (Intercept) -27.958109  8.777120 2.9257067      5.5637299
-#> fhcompor1     7.315922  3.499431 1.1664769      2.1344546
-#> lgdpl       -14.575347 10.213927 3.4046425      7.8422316
-#> victory      -6.283357  2.446477 0.8154924      0.8154924
+#>                   Mean       SD  Naive SE Time-series SE
+#> (Intercept)  8.9685897 4.405826 0.6294037      3.2149975
+#> fhcompor1   -0.7415713 4.350933 0.6215619      3.6932354
+#> lgdpl       -3.7276698 1.306414 0.1866306      0.3863354
+#> victory     -3.5637919 2.492473 0.3560675      1.4399093
 
 SPstats(tchll)
 #> $DIC
-#> [1] -2977.48
+#> [1] 343542.6
 #> 
 #> $Loglik
-#> [1] 17200
+#> [1] -157358.9
+
+plot(tchll)
 ```
+
+<img src="man/figures/README-unnamed-chunk-4-4.png" width="100%" /><img src="man/figures/README-unnamed-chunk-4-5.png" width="100%" /><img src="man/figures/README-unnamed-chunk-4-6.png" width="100%" />
 
 #### `exchangeSPsurv`
 

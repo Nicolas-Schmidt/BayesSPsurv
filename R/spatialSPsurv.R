@@ -53,7 +53,7 @@ spatialSPsurv <- function(duration,
                              m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
     }
     results$call   <- match.call()
-    class(results) <- c(class(results), model)
+    class(results) <- model
     results
 
 }
@@ -61,7 +61,7 @@ spatialSPsurv <- function(duration,
 
 #' @title summary.spatialSPsurv
 #' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
-#' @param object an object of class \code{spatialSPsurv}, the output of \code{\link{exchangeSPsurv}}.
+#' @param object an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.
 #' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
@@ -111,9 +111,21 @@ print.spatialSPsurv <- function(x, ...){
 
 
 
+#' @title plot.spatialSPsurv
+#' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
+#' @param x an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.
+#' @param ... additional parameter
+#' @return list. Empirical mean, standard deviation and quantiles for each variable.
+#' @rdname spatialSPsurv
+#' @export
+#'
 
+plot.spatialSPsurv <- function(x, ...){
 
-
+    op <- par(no.readonly = TRUE)
+    plot((coda::mcmc(x$betas)), ...)
+    par(op)
+}
 
 
 
