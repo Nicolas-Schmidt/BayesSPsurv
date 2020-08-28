@@ -81,5 +81,5 @@ Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}
 
 Print method for a \code{\link{spatialSPsurv}} x.
 
-Returns a summary of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
+Returns a plot of a spatialSPsurv object via \code{\link[coda]{plot.mcmc}}.
 }

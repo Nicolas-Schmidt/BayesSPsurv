@@ -4,6 +4,7 @@
 \alias{pooledSPsurv}
 \alias{summary.SPsurv}
 \alias{print.SPsurv}
+\alias{plot.SPsurv}
 \title{pooledSPsurv}
 \usage{
 pooledSPsurv(
@@ -23,6 +24,8 @@ pooledSPsurv(
 \method{summary}{SPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
 
 \method{print}{SPsurv}(x, ...)
+
+\method{plot}{SPsurv}(x, ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
@@ -53,10 +56,12 @@ pooledSPsurv(
 
 \item{...}{additional parameter}
 
-\item{x}{an x of class \code{SPsurv} (output of \code{\link{pooledSPsurv}}).}
+\item{x}{an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.}
 }
 \value{
 chain of the variables of interest
+
+list. Empirical mean, standard deviation and quantiles for each variable.
 
 list. Empirical mean, standard deviation and quantiles for each variable.
 }
@@ -66,4 +71,6 @@ Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model 
 Returns a summary of a SPsurv object via \code{\link[coda]{summary.mcmc}}.
 
 Print method for a \code{\link{pooledSPsurv}} x.
+
+Returns a plot of a pooledSPsurv object via \code{\link[coda]{plot.mcmc}}.
 }

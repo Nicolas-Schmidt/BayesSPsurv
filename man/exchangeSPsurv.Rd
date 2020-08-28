@@ -4,6 +4,7 @@
 \alias{exchangeSPsurv}
 \alias{summary.frailtySPsurv}
 \alias{print.frailtySPsurv}
+\alias{plot.frailtySPsurv}
 \title{exchangeSPsurv}
 \usage{
 exchangeSPsurv(
@@ -25,6 +26,8 @@ exchangeSPsurv(
 \method{summary}{frailtySPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
 
 \method{print}{frailtySPsurv}(x, ...)
+
+\method{plot}{frailtySPsurv}(x, ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
@@ -59,10 +62,12 @@ exchangeSPsurv(
 
 \item{...}{additional parameter}
 
-\item{x}{an x of class \code{frailtySPsurv} (output of \code{\link{exchangeSPsurv}}).}
+\item{x}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 }
 \value{
 chain of the variables of interest
+
+list. Empirical mean, standard deviation and quantiles for each variable.
 
 list. Empirical mean, standard deviation and quantiles for each variable.
 }
@@ -72,4 +77,6 @@ Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model 
 Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 
 Print method for a \code{\link{exchangeSPsurv}} x.
+
+Returns a plot of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
 }

@@ -109,6 +109,21 @@ print.frailtySPsurv <- function(x, ...){
 
 
 
+#' @title plot.frailtySPsurv
+#' @description Returns a plot of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
+#' @param x an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.
+#' @param ... additional parameter
+#' @return list. Empirical mean, standard deviation and quantiles for each variable.
+#' @rdname exchangeSPsurv
+#' @export
+#'
+
+plot.frailtySPsurv <- function(x, ...){
+
+    op <- par(no.readonly = TRUE)
+    plot((coda::mcmc(x$betas)), ...)
+    par(op)
+}
 
 
 

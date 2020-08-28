@@ -112,7 +112,7 @@ print.spatialSPsurv <- function(x, ...){
 
 
 #' @title plot.spatialSPsurv
-#' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
+#' @description Returns a plot of a spatialSPsurv object via \code{\link[coda]{plot.mcmc}}.
 #' @param x an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.

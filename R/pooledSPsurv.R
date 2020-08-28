@@ -104,6 +104,21 @@ print.SPsurv <- function(x, ...){
 
 
 
+#' @title plot.SPsurv
+#' @description Returns a plot of a pooledSPsurv object via \code{\link[coda]{plot.mcmc}}.
+#' @param x an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.
+#' @param ... additional parameter
+#' @return list. Empirical mean, standard deviation and quantiles for each variable.
+#' @rdname pooledSPsurv
+#' @export
+#'
+
+plot.SPsurv <- function(x, ...){
+
+    op <- par(no.readonly = TRUE)
+    plot((coda::mcmc(x$betas)), ...)
+    par(op)
+}
 
 
 
