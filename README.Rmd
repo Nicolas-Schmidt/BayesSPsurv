@@ -170,10 +170,16 @@ SPstats(tchll)
 plot(tchll)
 ```
 
+```{r}
+## W
+
+tch$W
+
+## V
+tch$V
 
 
-
-
+```
 
 #### `exchangeSPsurv`
 
