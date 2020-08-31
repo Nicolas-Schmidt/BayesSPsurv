@@ -13,7 +13,7 @@ Authors@R: c(person(given = "Sergio",
                     role = c("aut", "cre"), 
                     email = "nschmidt@cienciassociales.edu.uy")
                     )
-Description: Contains functions to fit Bayesian spatial survival model for split population.
+Description: Bayesian parametric spatial split-populiation survival models for clustered event processes. They account for both structural and spatial heterogeneity among "at risk" and "immune" populations, and incorporates time-varying covariates. This package currently implements Weibull, Exponential and Loglogistic forms for the duration component.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
