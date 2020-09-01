@@ -11,7 +11,7 @@
 #' @param burn burn-in to be discarded
 #' @param thin thinning to prevent from autocorrelation
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)
-#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho
 #' @param form type of parametric model (Weibull, Exponential or Log-Logistic)
 #' @param prop.var Proposed variance for Metropolis-Hastings
 #'
