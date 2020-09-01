@@ -9,8 +9,8 @@
 #'    \item{ida}{Three letter ISO code -- country A}
 #'    \item{numb}{COW code -- country B}
 #'    \item{idb}{Three letter ISO code -- country B}
-#'    \item{kmdist}{...}
-#'    \item{midist}{...}
+#'    \item{kmdist}{Distance between capital cities in the kilometers}
+#'    \item{midist}{Minimal distance between capital cities in the kilometers}
 #' }
 #'
 #' @docType data
