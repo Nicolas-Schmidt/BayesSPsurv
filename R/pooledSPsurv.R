@@ -5,13 +5,13 @@
 #' @param immune split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity.
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1).
 #' @param LY last observation year (coded as 1; 0 otherwise) due to censoring or failure.
-#' @param data dataframe.
+#' @param data data.frame.
 #' @param N number of MCMC iterations.
 #' @param burn burn-in to be discarded.
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-#' @param form type of parametric model (Exponential, Weibull or Log-Logistic).
+#' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #'
 #' @return chain of the variables of interest
 #'
@@ -56,7 +56,7 @@ pooledSPsurv <- function(duration,
 #' @title summary.SPsurv
 #' @description Returns a summary of a SPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.
-#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".
+#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname pooledSPsurv
@@ -107,7 +107,7 @@ print.SPsurv <- function(x, ...){
 #' @title plot.SPsurv
 #' @description Returns a plot of a pooledSPsurv object via \code{\link[coda]{plot.mcmc}}.
 #' @param x an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.
-#' @param ... additional parameter
+#' @param ... additional parameter.
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname pooledSPsurv
 #' @export
