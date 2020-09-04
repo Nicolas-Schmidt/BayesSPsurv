@@ -63,52 +63,19 @@ library(spduration)
 
 
 
-
-|argument   |`spatialSPsurv()` |`exchangeSPsurv()` |`pooledSPsurv()`        |
-|-----------|------------------|------------------|------------------|
-|`duration` |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`immune`   |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`Y0`       |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`LY`       |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`data`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`N`        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`burn`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`thin`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`w`        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`m`        |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`form`     |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|`prop.var` |:heavy_check_mark:|:heavy_check_mark:|:x:               |
-|`S`        |:heavy_check_mark:|:heavy_check_mark:|:x:               |
-|`A`        |:heavy_check_mark:|:x:               |:x:               |
-
-
-
-
-
-
-
 ### Example
 
 
-#### Data
-```{r, warning=FALSE}
+```{r, fig.width = 13, fig.height = 10}
+
 library(spatialSPsurv)
 
+## Data
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
                                    unitID = "id", tID = "year", 
                                    freq = "year", ongoing = FALSE)
 walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
-```
 
-
-#### `spatialSPsurv`
-
-```{r, fig.width = 13, fig.height = 10}
-
-
-## ~~~~~~~~~~~~~~~
-## Weibull
-## ~~~~~~~~~~~~~~~
 
 set.seed(782566)
 
@@ -135,39 +102,6 @@ print(tch)
 
 SPstats(tch)
 
-plot(tch)
-
-## ~~~~~~~~~~~~~~~
-## loglog
-## ~~~~~~~~~~~~~~~
-
-
-set.seed(782566)
-
-tchll <- 
-    spatialSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                              instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'sp_id' ,
-        data     = walter[[1]],
-        N        = 500,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "loglog",
-        prop.var = 1e-05,
-        A        = walter[[2]]
-    )
-
-print(tchll)
-
-SPstats(tchll)
-
-plot(tchll)
 ```
 
 ## MAP
@@ -181,133 +115,6 @@ map   <- rworldmap::joinCountryData2Map(spw, joinCode = "ISO3", nameJoinColumn =
 rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
 
 ```
-
-#### `exchangeSPsurv`
-
-```{r}
-## ~~~~~~~~~~~~~~~
-## Weibull
-## ~~~~~~~~~~~~~~~
-
-set.seed(782566)
-tch1 <- 
-    exchangeSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                              instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'sp_id' ,
-        data     = walter[[1]],
-        N        = 100,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "Weibull",
-        prop.var = 1e-05
-    )
-
-tch1
-
-SPstats(tch1)
-
-
-## ~~~~~~~~~~~~~~~
-## loglog
-## ~~~~~~~~~~~~~~~
-
-set.seed(782566)
-tchll1 <- 
-    exchangeSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                              instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'sp_id' ,
-        data     = walter[[1]],
-        N        = 100,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "loglog",
-        prop.var = 1e-05
-    )
-
-tchll1
-
-
-SPstats(tchll1)
-```
-
-
-#### `pooledSPsurv`
-
-```{r}
-
-## ~~~~~~~~~~~~~~~
-## Weibull
-## ~~~~~~~~~~~~~~~
-
-set.seed(782566)
-
-tch2 <- 
-    pooledSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                              instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        data     = walter[[1]],
-        N        = 100,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "Weibull"
-    )
-
-
-tch2
-
-SPstats(tch2)
-
-## ~~~~~~~~~~~~~~~
-## loglog
-## ~~~~~~~~~~~~~~~
-
-set.seed(782566)
-
-tchll2 <- 
-    pooledSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                              instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        data     = walter[[1]],
-        N        = 100,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "loglog"
-    )
-
-tchll2
-
-SPstats(tchll2)
-```
-
-
-
-
-
-
-
-
 
 
 
