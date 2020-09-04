@@ -6,16 +6,16 @@
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1).
 #' @param LY last observation year (coded as 1; 0 otherwise) due to censoring or failure.
 #' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information.
-#' @param data dataframe.
+#' @param data data.frame.
 #' @param N number of MCMC iterations.
-#' @param burn burn-in to be discarded
+#' @param burn burn-in to be discarded.
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential or Log-Logistic).
-#' @param prop.var Proposed variance for Metropolis-Hastings.
+#' @param prop.var proposed variance for Metropolis-Hastings.
 #'
-#' @return chain of the variables of interest
+#' @return chain of the variables of interest.
 #'
 #' @export
 
@@ -62,7 +62,7 @@ exchangeSPsurv <- function(duration,
 #' @title summary.frailtySPsurv
 #' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.
-#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".
+#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname exchangeSPsurv
