@@ -17,6 +17,44 @@
 #'
 #' @return chain of the variables of interest.
 #'
+#' @examples
+#' \donttest{
+#'
+#' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
+#'                                    unitID = "id", tID = "year",
+#'                                    freq = "year", ongoing = FALSE)
+#'
+#' # add S
+#' walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
+#'
+#' set.seed(782566)
+#'
+#' model <-
+#'     exchangeSPsurv(
+#'            duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+#'            instabl + intensityln + ethfrac + unpko,
+#'            immune   = cured ~ fhcompor1 + lgdpl + victory,
+#'            Y0       = 't.0',
+#'            LY       = 'lastyear',
+#'            S        = 'sp_id' ,
+#'            data     = walter[[1]],
+#'            N        = 100,
+#'            burn     = 10,
+#'            thin     = 10,
+#'            w        = c(1,1,1),
+#'            m        = 10,
+#'            form     = "loglog",
+#'            prop.var = 1e-05
+#' )
+#'
+#' print(model)
+#'
+#' summary(model, parameter = "betas")
+#'
+#' plot(model)
+#'
+#' }
+#'
 #' @export
 
 

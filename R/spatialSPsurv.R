@@ -29,7 +29,7 @@
 #'
 #' set.seed(782566)
 #'
-#' tch <-
+#' model <-
 #'     spatialSPsurv(
 #'         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
 #'                    instabl + intensityln + ethfrac + unpko,
@@ -48,11 +48,11 @@
 #'         A        = walter[[2]]
 #'     )
 #'
-#' print(tch)
+#' print(model)
 #'
-#' summary(tch, parameter = "betas")
+#' summary(model, parameter = "betas")
 #'
-#' plot(tch)
+#' plot(model)
 #'
 #' }
 #'

@@ -14,6 +14,39 @@
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #'
 #' @return chain of the variables of interest
+#' @examples
+#' \donttest{
+#'
+#' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
+#'                                    unitID = "id", tID = "year",
+#'                                    freq = "year", ongoing = FALSE)
+#'
+#' set.seed(782566)
+#'
+#' model <-
+#'     pooledSPsurv(
+#'         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+#'             instabl + intensityln + ethfrac + unpko,
+#'         immune   = cured ~ fhcompor1 + lgdpl + victory,
+#'         Y0       = 't.0',
+#'         LY       = 'lastyear',
+#'         data     = walter,
+#'         N        = 100,
+#'         burn     = 10,
+#'         thin     = 10,
+#'         w        = c(1,1,1),
+#'         m        = 10,
+#'         form     = "Weibull"
+#'     )
+#'
+#'
+#' print(model)
+#'
+#' summary(model, parameter = "betas")
+#'
+#' plot(model)
+#'
+#' }
 #'
 #' @export
 

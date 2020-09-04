@@ -40,11 +40,11 @@ exchangeSPsurv(
 
 \item{S}{spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information.}
 
-\item{data}{dataframe.}
+\item{data}{data.frame.}
 
 \item{N}{number of MCMC iterations.}
 
-\item{burn}{burn-in to be discarded}
+\item{burn}{burn-in to be discarded.}
 
 \item{thin}{thinning to prevent from autocorrelation.}
 
@@ -52,20 +52,20 @@ exchangeSPsurv(
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
-\item{form}{type of parametric model (Weibull, Exponential or Log-Logistic).}
+\item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
-\item{prop.var}{Proposed variance for Metropolis-Hastings.}
+\item{prop.var}{proposed variance for Metropolis-Hastings.}
 
 \item{object}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 
-\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".}
+\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."}
 
-\item{...}{additional parameter}
+\item{...}{additional parameter.}
 
 \item{x}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 }
 \value{
-chain of the variables of interest
+chain of the variables of interest.
 
 list. Empirical mean, standard deviation and quantiles for each variable.
 
@@ -79,4 +79,43 @@ Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}
 Print method for a \code{\link{exchangeSPsurv}} x.
 
 Returns a plot of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
+}
+\examples{
+\donttest{
+
+walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
+                                   unitID = "id", tID = "year",
+                                   freq = "year", ongoing = FALSE)
+
+# add S
+walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
+
+set.seed(782566)
+
+model <-
+    exchangeSPsurv(
+           duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+           instabl + intensityln + ethfrac + unpko,
+           immune   = cured ~ fhcompor1 + lgdpl + victory,
+           Y0       = 't.0',
+           LY       = 'lastyear',
+           S        = 'sp_id' ,
+           data     = walter[[1]],
+           N        = 100,
+           burn     = 10,
+           thin     = 10,
+           w        = c(1,1,1),
+           m        = 10,
+           form     = "loglog",
+           prop.var = 1e-05
+)
+
+print(model)
+
+summary(model, parameter = "betas")
+
+plot(model)
+
+}
+
 }

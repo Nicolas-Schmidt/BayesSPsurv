@@ -36,7 +36,7 @@ pooledSPsurv(
 
 \item{LY}{last observation year (coded as 1; 0 otherwise) due to censoring or failure.}
 
-\item{data}{dataframe.}
+\item{data}{data.frame.}
 
 \item{N}{number of MCMC iterations.}
 
@@ -48,13 +48,13 @@ pooledSPsurv(
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
-\item{form}{type of parametric model (Exponential, Weibull or Log-Logistic).}
+\item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
 \item{object}{an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.}
 
-\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".}
+\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."}
 
-\item{...}{additional parameter}
+\item{...}{additional parameter.}
 
 \item{x}{an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.}
 }
@@ -73,4 +73,39 @@ Returns a summary of a SPsurv object via \code{\link[coda]{summary.mcmc}}.
 Print method for a \code{\link{pooledSPsurv}} x.
 
 Returns a plot of a pooledSPsurv object via \code{\link[coda]{plot.mcmc}}.
+}
+\examples{
+\donttest{
+
+walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
+                                   unitID = "id", tID = "year",
+                                   freq = "year", ongoing = FALSE)
+
+set.seed(782566)
+
+model <-
+    pooledSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+            instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        data     = walter,
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "Weibull"
+    )
+
+
+print(model)
+
+summary(model, parameter = "betas")
+
+plot(model)
+
+}
+
 }
