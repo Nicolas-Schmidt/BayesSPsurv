@@ -15,7 +15,14 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 [![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/Nicolas-Schmidt/BayesMFSurv)
 <!-- badges: end -->
 
-Bayesian Spatial Split Population Survival Model
+Bayesian parametric spatial split-populiation survival models for
+clustered event processes. The models account for both structural and
+spatial heterogeneity among “at risk” and “immune” populations, and
+incorporates time-varying covariates. This package currently implements
+Weibull, Exponential and Loglogistic forms for the duration component.
+It allows for the creation of spatial weights matrix objects from point
+patterns by distance and presents a series of diagnostic tests and plots
+for easy visual diagnostics of convergence and spatial effects.
 
 Manual
 [**here**](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_spatialSPsurv.pdf).
