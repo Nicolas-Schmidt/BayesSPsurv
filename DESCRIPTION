@@ -37,4 +37,5 @@ Imports:
 	RcppArmadillo,
 	coda, 
 	dplyr, 
-	reshape2
+	reshape2, 
+	spduration
