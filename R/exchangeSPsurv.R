@@ -12,7 +12,7 @@
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-#' @param form type of parametric model (Weibull, Exponential or Log-Logistic).
+#' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposed variance for Metropolis-Hastings.
 #'
 #' @return chain of the variables of interest.
@@ -112,7 +112,7 @@ print.frailtySPsurv <- function(x, ...){
 #' @title plot.frailtySPsurv
 #' @description Returns a plot of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
 #' @param x an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.
-#' @param ... additional parameter
+#' @param ... additional parameter.
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname exchangeSPsurv
 #' @export
