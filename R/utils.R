@@ -2334,6 +2334,9 @@ mcmcspatialSP <- function(Y,
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
+
+  colnames(V.samp) <- colnames(A)           #ADC
+  colnames(W.samp) <- colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp,
@@ -2422,6 +2425,8 @@ mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1,
       # print(100) #### ***** #### ***** #### ***** #### ***** ####
     }
   }
+  colnames(V.samp) <- colnames(A)           #ADC
+  colnames(W.samp) <- colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp,

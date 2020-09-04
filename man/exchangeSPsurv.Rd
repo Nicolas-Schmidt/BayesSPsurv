@@ -30,31 +30,31 @@ exchangeSPsurv(
 \method{plot}{frailtySPsurv}(x, ...)
 }
 \arguments{
-\item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring}
+\item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring.}
 
-\item{immune}{split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity}
+\item{immune}{split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity.}
 
-\item{Y0}{the elapsed time since inception until the beginning of time period (t-1)}
+\item{Y0}{the elapsed time since inception until the beginning of time period (t-1).}
 
-\item{LY}{last observation year (coded as 1; 0 otherwise) due to censoring or failure}
+\item{LY}{last observation year (coded as 1; 0 otherwise) due to censoring or failure.}
 
-\item{S}{spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information}
+\item{S}{spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information.}
 
-\item{data}{dataframe}
+\item{data}{dataframe.}
 
-\item{N}{number of MCMC iterations}
+\item{N}{number of MCMC iterations.}
 
 \item{burn}{burn-in to be discarded}
 
-\item{thin}{thinning to prevent from autocorrelation}
+\item{thin}{thinning to prevent from autocorrelation.}
 
-\item{w}{size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1)}
+\item{w}{size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).}
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
-\item{form}{type of parametric model (Weibull, Exponential or Log-Logistic)}
+\item{form}{type of parametric model (Weibull, Exponential or Log-Logistic).}
 
-\item{prop.var}{Proposed variance for Metropolis-Hastings}
+\item{prop.var}{Proposed variance for Metropolis-Hastings.}
 
 \item{object}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 
@@ -72,7 +72,7 @@ list. Empirical mean, standard deviation and quantiles for each variable.
 list. Empirical mean, standard deviation and quantiles for each variable.
 }
 \description{
-Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties
+Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties.
 
 Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 

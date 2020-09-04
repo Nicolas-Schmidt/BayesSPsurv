@@ -19,12 +19,12 @@ The dataset contains information on the distace between capital cities among ind
 }
 \details{
 \describe{
-   \item{numa}{COW code -- country A}
-   \item{ida}{Three letter ISO code -- country A}
-   \item{numb}{COW code -- country B}
-   \item{idb}{Three letter ISO code -- country B}
-   \item{kmdist}{...}
-   \item{midist}{...}
+   \item{numa}{COW code -- country A.}
+   \item{ida}{Three letter ISO code -- country A.}
+   \item{numb}{COW code -- country B.}
+   \item{idb}{Three letter ISO code -- country B.}
+   \item{kmdist}{Distance between capital cities in the kilometers.}
+   \item{midist}{Minimal distance between capital cities in the kilometers.}
 }
 }
 \keyword{datasets}
