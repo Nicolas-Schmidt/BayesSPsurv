@@ -43,7 +43,7 @@ spatialSPsurv(
 
 \item{A}{an a times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file.}
 
-\item{data}{dataframe.}
+\item{data}{data.frame.}
 
 \item{N}{number of MCMC iterations.}
 
@@ -55,20 +55,20 @@ spatialSPsurv(
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
-\item{form}{type of parametric model (Exponential, Weibull or Log-Logistic).}
+\item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
 \item{prop.var}{proposal variance for Metropolis-Hastings.}
 
 \item{object}{an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.}
 
-\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".}
+\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."}
 
-\item{...}{additional parameter}
+\item{...}{additional parameter.}
 
 \item{x}{an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.}
 }
 \value{
-chain of the variables of interest
+chain of the variables of interest.
 
 list. Empirical mean, standard deviation and quantiles for each variable.
 
