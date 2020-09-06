@@ -5,7 +5,7 @@
 \alias{Walter_2015_JCR}
 \title{Walter_2015_JCR}
 \format{
-A data frame with 1562 rows and 13 variables
+A data frame with 1237 rows and 8 variables
 }
 \source{
 Walter, Barbara F. (2015), Why Bad Governance Leads to Repeat Civil War,  Journal of Conflict Resolution 59(7), 1242 - 1272.
@@ -20,8 +20,6 @@ The variables duration, cured, t.0 and lastyear added by the authors of this pac
 }
 \details{
 \describe{
-   \item{duration}{duration until failure or censoring.}
-   \item{immune}{binary indicator of immunity.}
    \item{fhcompor1}{Freedom House civil liberties index.}
    \item{lgdpl}{log of per capita GDP in 2005 dollars.}
    \item{comprehensive}{combatants signed comprehensive peace agreement.}
@@ -30,10 +28,6 @@ The variables duration, cured, t.0 and lastyear added by the authors of this pac
    \item{intensityln}{deaths per year -- logged.}
    \item{ethfrac}{index of ethnic fractionalization.}
    \item{unpko}{number of UN peacekeepers on the ground.}
-   \item{t.0}{duration of peace spell.}
-   \item{lastyear}{year of last country observation in dataset.}
-   \item{sp_id}{country unique id.}
-   \item{A}{time-invariant binary adjacency matrix}
 }
 }
 \keyword{datasets}

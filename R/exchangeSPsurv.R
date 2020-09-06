@@ -27,7 +27,7 @@
 #' # add S
 #' walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 #'
-#' set.seed(782566)
+#' set.seed(123456)
 #'
 #' model <-
 #'     exchangeSPsurv(

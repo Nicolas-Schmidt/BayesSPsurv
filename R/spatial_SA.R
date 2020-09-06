@@ -3,10 +3,23 @@
 #'
 #' @param data data.frame.
 #' @param var_ccode name of the variable that contains the country codes.
-#' @param threshold distance in kilometers. 
+#' @param threshold distance in kilometers.
 #'
-#' @return list. Contains database with variable sp_id (S) and matrix A
+#' @return list. Contains database with variable sp_id (S) and matrix A.
 #'
+#' @examples
+#' \donttest{
+#'
+#' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
+#'                                    unitID = "id",
+#'                                    tID = "year",
+#'                                    freq = "year",
+#'                                    ongoing = FALSE)
+#'
+#' walter <- spatial_SA(data = walter,
+#'                      var_ccode = "ccode",
+#'                      threshold = 800L)
+#' }
 #' @export
 #'
 spatial_SA <- function(data, var_ccode, threshold = 800L) {

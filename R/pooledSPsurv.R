@@ -21,7 +21,7 @@
 #'                                    unitID = "id", tID = "year",
 #'                                    freq = "year", ongoing = FALSE)
 #'
-#' set.seed(782566)
+#' set.seed(123456)
 #'
 #' model <-
 #'     pooledSPsurv(

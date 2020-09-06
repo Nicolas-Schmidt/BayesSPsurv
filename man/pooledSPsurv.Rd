@@ -81,7 +81,7 @@ walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
                                    unitID = "id", tID = "year",
                                    freq = "year", ongoing = FALSE)
 
-set.seed(782566)
+set.seed(123456)
 
 model <-
     pooledSPsurv(

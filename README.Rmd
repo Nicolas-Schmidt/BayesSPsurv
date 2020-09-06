@@ -66,7 +66,7 @@ library(spduration)
 ### Example
 
 
-```{r, fig.width = 13, fig.height = 10}
+```{r, fig.width = 13, fig.height = 10, warning = FALSE}
 
 library(spatialSPsurv)
 
@@ -77,7 +77,7 @@ walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
 walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 
 
-set.seed(782566)
+set.seed(123456)
 
 tch <- 
     spatialSPsurv(

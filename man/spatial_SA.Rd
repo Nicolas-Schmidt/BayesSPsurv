@@ -14,8 +14,22 @@ spatial_SA(data, var_ccode, threshold = 800L)
 \item{threshold}{distance in kilometers.}
 }
 \value{
-list. Contains database with variable sp_id (S) and matrix A
+list. Contains database with variable sp_id (S) and matrix A.
 }
 \description{
 matrix A and sp_id (S)
+}
+\examples{
+\donttest{
+
+walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
+                                   unitID = "id",
+                                   tID = "year",
+                                   freq = "year",
+                                   ongoing = FALSE)
+
+walter <- spatial_SA(data = walter,
+                     var_ccode = "ccode",
+                     threshold = 800L)
+}
 }

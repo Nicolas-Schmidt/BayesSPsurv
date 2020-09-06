@@ -92,7 +92,7 @@ walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
 
 walter <- spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 
-set.seed(782566)
+set.seed(123456)
 
 model <-
     spatialSPsurv(

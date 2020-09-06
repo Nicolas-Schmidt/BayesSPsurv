@@ -54,12 +54,10 @@ library(spatialSPsurv)
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
                                    unitID = "id", tID = "year", 
                                    freq = "year", ongoing = FALSE)
-#> Warning in attempt_date(data[, tID], freq): Converting to 'Date' class with
-#> yyyy-06-30
 walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 
 
-set.seed(782566)
+set.seed(123456)
 
 tch <- 
     spatialSPsurv(
@@ -100,30 +98,30 @@ print(tch)
 #> 
 #> 
 #> Duration equation: 
-#>                     Mean         SD    Naive SE Time-series SE
-#> (Intercept)    1.5463805 0.82766390 0.118237700     0.27559357
-#> fhcompor1     -0.7085419 0.43598722 0.062283888     0.07810104
-#> lgdpl         -0.0775318 0.08339529 0.011913613     0.02298703
-#> comprehensive -0.7879095 0.29557936 0.042225623     0.04222562
-#> victory        0.3020210 0.43003924 0.061434177     0.06599743
-#> instabl        0.6061754 0.43418382 0.062026260     0.06202626
-#> intensityln    0.2241309 0.06531212 0.009330304     0.01594854
-#> ethfrac       -0.3194989 0.61694154 0.088134505     0.11343036
-#> unpko          0.5637305 0.55782828 0.079689755     0.07968975
+#>                      Mean        SD   Naive SE Time-series SE
+#> (Intercept)    1.89866255 1.2509396 0.17870566     0.69851236
+#> fhcompor1     -0.84446607 0.4951659 0.07073799     0.10104511
+#> lgdpl         -0.05316238 0.1215603 0.01736575     0.05212821
+#> comprehensive -0.70682520 0.3301436 0.04716337     0.04716337
+#> victory        0.55708089 0.4137637 0.05910910     0.05910910
+#> instabl        0.72133602 0.4690292 0.06700417     0.08781194
+#> intensityln    0.12217226 0.1173725 0.01676750     0.04682825
+#> ethfrac       -0.18496279 0.5341137 0.07630195     0.07630195
+#> unpko          0.39261930 0.4932459 0.07046371     0.07046371
 #> 
 #> Inmune equation: 
-#>                   Mean        SD  Naive SE Time-series SE
-#> (Intercept) -10.571952 15.156688 2.1652411       9.124592
-#> fhcompor1     1.833617  3.995950 0.5708499       1.384355
-#> lgdpl        -7.219672  8.557581 1.2225116       5.394051
-#> victory      -2.867696  4.902532 0.7003617       1.744085
+#>                   Mean       SD  Naive SE Time-series SE
+#> (Intercept)  0.1519895 2.578951 0.3684215      0.3684215
+#> fhcompor1   -0.2427989 2.900525 0.4143607      0.6365760
+#> lgdpl       -1.8897132 1.402490 0.2003557      0.2003557
+#> victory     -2.0062225 4.957126 0.7081608      0.9911410
 
 SPstats(tch)
 #> $DIC
-#> [1] -40494.5
+#> [1] -29831.72
 #> 
 #> $Loglik
-#> [1] 0
+#> [1] 20960.79
 ```
 
 ## MAP
