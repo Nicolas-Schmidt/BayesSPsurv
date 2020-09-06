@@ -1,4 +1,4 @@
-Package: spatialSPsurv
+Package: BayesSPsurv
 Type: Package
 Title: Bayesian Spatial Split Population Survival Model
 Version: 0.1.8
