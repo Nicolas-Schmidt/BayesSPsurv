@@ -5,7 +5,7 @@
 #' @param immune split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity.
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1).
 #' @param LY last observation year (coded as 1; 0 otherwise) due to censoring or failure.
-#' @param data dataframe.
+#' @param data data.frame.
 #' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information.
 #' @param A an a times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file.
 #' @param N number of MCMC iterations.
@@ -13,10 +13,10 @@
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-#' @param form type of parametric model (Exponential, Weibull or Log-Logistic).
+#' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposal variance for Metropolis-Hastings.
 #'
-#' @return chain of the variables of interest
+#' @return chain of the variables of interest.
 #'
 #' @examples
 #' \donttest{
@@ -100,8 +100,8 @@ spatialSPsurv <- function(duration,
 #' @title summary.spatialSPsurv
 #' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.
-#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas", "gammas" or "lambda".
-#' @param ... additional parameter
+#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."
+#' @param ... additional parameter.
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname spatialSPsurv
 #' @export
@@ -152,7 +152,7 @@ print.spatialSPsurv <- function(x, ...){
 #' @title plot.spatialSPsurv
 #' @description Returns a plot of a spatialSPsurv object via \code{\link[coda]{plot.mcmc}}.
 #' @param x an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.
-#' @param ... additional parameter
+#' @param ... additional parameter.
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname spatialSPsurv
 #' @export
