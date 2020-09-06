@@ -2,17 +2,23 @@ Package: spatialSPsurv
 Type: Package
 Title: Bayesian Spatial Split Population Survival Model
 Version: 0.1.8
-Authors@R: c(person(given = "Nicolas", 
+Authors@R: c(person(given = "Brandon L.",
+                    family = "Bolte",
+                    role = c("aut")),
+             person(given = "Nicolas", 
                     family = "Schmidt", 
                     role = c("aut", "cre"), 
                     email = "nschmidt@cienciassociales.edu.uy"), 
-            person(given = "Brandon L.",
-                    family = "Bolte",
-                    role = c("aut")),		    
-            person(given = "Sergio",
+	     person(given = "Nguyen K.",
+                    family = "Huynh",
+                    role = c("aut")),            
+             person(given = "Minnie M.",
+                    family = "Joo",
+                    role = c("aut")),
+             person(given = "Sergio",
                     family = "Bejar",
                     role = c("aut")),
-            person(given = "Bumba", 
+             person(given = "Bumba", 
                     family = "Mukherjee", 
                     role = c("aut"))
                     )
