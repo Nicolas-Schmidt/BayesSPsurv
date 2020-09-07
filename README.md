@@ -30,7 +30,7 @@ Manual
 ## Installation
 
 ``` r
-source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
+source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 ```
 
 ### Functions
