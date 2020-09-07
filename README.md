@@ -25,7 +25,7 @@ patterns by distance and presents a series of diagnostic tests and plots
 for easy visual diagnostics of convergence and spatial effects.
 
 Manual
-[**here**](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_spatialSPsurv.pdf).
+[**here**](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_BayesSPsurv.pdf).
 
 ## Installation
 

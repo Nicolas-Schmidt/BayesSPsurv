@@ -30,7 +30,7 @@ Bayesian parametric spatial split-populiation survival models for clustered even
 
 
 
-Manual [__here__](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_spatialSPsurv.pdf).
+Manual [__here__](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_BayesSPsurv.pdf).
 
 
 
