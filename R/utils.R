@@ -1,4 +1,4 @@
-#' @useDynLib spatialSPsurv
+#' @useDynLib BayesSPsurv
 #' @importFrom stats dgamma runif rgamma dnorm model.frame as.formula model.matrix model.response na.omit
 #' @import grDevices
 #' @import graphics
@@ -12,7 +12,7 @@
 NULL
 
 .onUnload <- function (libpath) {
-  library.dynam.unload("spatialSPsurv", libpath)
+  library.dynam.unload("BayesSPsurv", libpath)
 }
 
 

@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 llikWeibull <- function(Y, Y0, eXB, delta, C, LY, rho) {
-    .Call('_spatialSPsurv_llikWeibull', PACKAGE = 'spatialSPsurv', Y, Y0, eXB, delta, C, LY, rho)
+    .Call('_BayesSPsurv_llikWeibull', PACKAGE = 'BayesSPsurv', Y, Y0, eXB, delta, C, LY, rho)
 }
 
 llikLoglog <- function(Y, Y0, eXB, delta, C, LY, rho) {
-    .Call('_spatialSPsurv_llikLoglog', PACKAGE = 'spatialSPsurv', Y, Y0, eXB, delta, C, LY, rho)
+    .Call('_BayesSPsurv_llikLoglog', PACKAGE = 'BayesSPsurv', Y, Y0, eXB, delta, C, LY, rho)
 }
 

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# spatialSPsurv
+# BayesSPsurv
 
 <!-- badges: start -->
 
@@ -48,18 +48,29 @@ source("https://install-github.me/Nicolas-Schmidt/spatialSPsurv")
 
 ``` r
 
-library(spatialSPsurv)
+library(BayesSPsurv)
 
 ## Data
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
                                    unitID = "id", tID = "year", 
                                    freq = "year", ongoing = FALSE)
 walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
+#> Registered S3 methods overwritten by 'spatialSPsurv':
+#>   method                from       
+#>   plot.SPsurv           BayesSPsurv
+#>   plot.frailtySPsurv    BayesSPsurv
+#>   plot.spatialSPsurv    BayesSPsurv
+#>   print.SPsurv          BayesSPsurv
+#>   print.frailtySPsurv   BayesSPsurv
+#>   print.spatialSPsurv   BayesSPsurv
+#>   summary.SPsurv        BayesSPsurv
+#>   summary.frailtySPsurv BayesSPsurv
+#>   summary.spatialSPsurv BayesSPsurv
 
 
 set.seed(123456)
 
-tch <- 
+model <- 
     spatialSPsurv(
         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
                               instabl + intensityln + ethfrac + unpko,
@@ -78,7 +89,7 @@ tch <-
         A        = walter[[2]]
     )
 
-print(tch)
+print(model)
 #> Call:
 #> spatialSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
 #>     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
@@ -116,7 +127,7 @@ print(tch)
 #> lgdpl       -1.8897132 1.402490 0.2003557      0.2003557
 #> victory     -2.0062225 4.957126 0.7081608      0.9911410
 
-SPstats(tch)
+SPstats(model)
 #> $DIC
 #> [1] -29831.72
 #> 
@@ -124,11 +135,11 @@ SPstats(tch)
 #> [1] 20960.79
 ```
 
-## MAP
+## Map
 
 ``` r
-spw   <- matrix(apply(tch$W, 2, mean), ncol = 1, nrow = ncol(tch$W))
-ccode <- colnames(tch$W)
+spw   <- matrix(apply(model$W, 2, mean), ncol = 1, nrow = ncol(model$W))
+ccode <- colnames(model$W)
 ISO3  <- countrycode::countrycode(ccode,'gwn','iso3c')
 spw   <- data.frame(ccode = ccode, ISO3 = ISO3, spw = spw) 
 map   <- rworldmap::joinCountryData2Map(spw, joinCode = "ISO3", nameJoinColumn = "ISO3")

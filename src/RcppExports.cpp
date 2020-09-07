@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // llikWeibull
 double llikWeibull(arma::vec Y, arma::vec Y0, arma::vec eXB, arma::vec delta, arma::vec C, arma::vec LY, double rho);
-RcppExport SEXP _spatialSPsurv_llikWeibull(SEXP YSEXP, SEXP Y0SEXP, SEXP eXBSEXP, SEXP deltaSEXP, SEXP CSEXP, SEXP LYSEXP, SEXP rhoSEXP) {
+RcppExport SEXP _BayesSPsurv_llikWeibull(SEXP YSEXP, SEXP Y0SEXP, SEXP eXBSEXP, SEXP deltaSEXP, SEXP CSEXP, SEXP LYSEXP, SEXP rhoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -25,7 +25,7 @@ END_RCPP
 }
 // llikLoglog
 double llikLoglog(arma::vec Y, arma::vec Y0, arma::vec eXB, arma::vec delta, arma::vec C, arma::vec LY, double rho);
-RcppExport SEXP _spatialSPsurv_llikLoglog(SEXP YSEXP, SEXP Y0SEXP, SEXP eXBSEXP, SEXP deltaSEXP, SEXP CSEXP, SEXP LYSEXP, SEXP rhoSEXP) {
+RcppExport SEXP _BayesSPsurv_llikLoglog(SEXP YSEXP, SEXP Y0SEXP, SEXP eXBSEXP, SEXP deltaSEXP, SEXP CSEXP, SEXP LYSEXP, SEXP rhoSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -42,12 +42,12 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_spatialSPsurv_llikWeibull", (DL_FUNC) &_spatialSPsurv_llikWeibull, 7},
-    {"_spatialSPsurv_llikLoglog", (DL_FUNC) &_spatialSPsurv_llikLoglog, 7},
+    {"_BayesSPsurv_llikWeibull", (DL_FUNC) &_BayesSPsurv_llikWeibull, 7},
+    {"_BayesSPsurv_llikLoglog", (DL_FUNC) &_BayesSPsurv_llikLoglog, 7},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_spatialSPsurv(DllInfo *dll) {
+RcppExport void R_init_BayesSPsurv(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

@@ -2,6 +2,7 @@ Package: BayesSPsurv
 Type: Package
 Title: Bayesian Spatial Split Population Survival Model
 Version: 0.1.8
+Author: Brandon L. Bolte [aut], Nicolas Schmidt [aut, cre], Nguyen K. Huynh [aut], Minnie M. Joo [aut], Sergio Bejar[aut], Bumba Mukherjee [aut]
 Authors@R: c(person(given = "Brandon L.",
                     family = "Bolte",
                     role = c("aut")),
@@ -9,7 +10,7 @@ Authors@R: c(person(given = "Brandon L.",
                     family = "Schmidt", 
                     role = c("aut", "cre"), 
                     email = "nschmidt@cienciassociales.edu.uy"), 
-	     person(given = "Nguyen K.",
+	         person(given = "Nguyen K.",
                     family = "Huynh",
                     role = c("aut")),            
              person(given = "Minnie M.",

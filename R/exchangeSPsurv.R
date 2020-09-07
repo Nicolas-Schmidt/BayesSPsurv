@@ -25,7 +25,7 @@
 #'                                    freq = "year", ongoing = FALSE)
 #'
 #' # add S
-#' walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
+#' walter <- spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 #'
 #' set.seed(123456)
 #'

@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# spatialSPsurv
+# BayesSPsurv
 
 <!-- badges: start -->
 [![R build status](https://github.com/Nicolas-Schmidt/spatialSPsurv/workflows/R-CMD-check/badge.svg)](https://github.com/Nicolas-Schmidt/spatialSPsurv/actions)
@@ -68,7 +68,7 @@ library(spduration)
 
 ```{r, fig.width = 13, fig.height = 10, warning = FALSE}
 
-library(spatialSPsurv)
+library(BayesSPsurv)
 
 ## Data
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
@@ -79,7 +79,7 @@ walter <- spatialSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshol
 
 set.seed(123456)
 
-tch <- 
+model <- 
     spatialSPsurv(
         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
                               instabl + intensityln + ethfrac + unpko,
@@ -98,17 +98,17 @@ tch <-
         A        = walter[[2]]
     )
 
-print(tch)
+print(model)
 
-SPstats(tch)
+SPstats(model)
 
 ```
 
-## MAP
+## Map
 
 ```{r}
-spw   <- matrix(apply(tch$W, 2, mean), ncol = 1, nrow = ncol(tch$W))
-ccode <- colnames(tch$W)
+spw   <- matrix(apply(model$W, 2, mean), ncol = 1, nrow = ncol(model$W))
+ccode <- colnames(model$W)
 ISO3  <- countrycode::countrycode(ccode,'gwn','iso3c')
 spw   <- data.frame(ccode = ccode, ISO3 = ISO3, spw = spw) 
 map   <- rworldmap::joinCountryData2Map(spw, joinCode = "ISO3", nameJoinColumn = "ISO3")
@@ -127,7 +127,7 @@ manual <- function(){
     devtools::build_manual(path = path)
     sink()
     setwd(path)
-    invisible(file.rename(list.files(pattern="^spatialSPsurv"), 'manual_spatialSPsurv.pdf'))
+    invisible(file.rename(list.files(pattern="^BayesSPsurv"), 'manual_BayesSPsurv.pdf'))
     setwd(old)
     invisible(file.remove('noise.txt'))
 }
