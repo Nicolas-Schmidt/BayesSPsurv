@@ -19,13 +19,13 @@
 #' @return spatialSPsurv returns an object of class \code{"spatSPsurv"}.
 #'
 #' A \code{"spatSPsurv"} object has the following elements:
-#' \item{betas}{integer, posterior for betas.}
-#' \item{gammas}{integer, posterior for gammas.}
-#' \item{rho}{.}
+#' \item{betas}{integer, posterior mean estimates for betas.}
+#' \item{gammas}{integer, posterior mean estimates for gammas.}
+#' \item{rho}{integer.}
 #' \item{lambda}{integer.}
-#' \item{delta}{.}
-#' \item{W}{integer, posterior for Ws.}
-#' \item{V}{integer, posterior for Vs.}
+#' \item{delta}{integer.}
+#' \item{W}{integer, posterior mean estimates for Ws.}
+#' \item{V}{integer, posterior mean estimates for Vs.}
 #' \item{X}{matrix X's variables.}
 #' \item{Z}{the vector of `Z'.}
 #' \item{Y}{the vector of `Y'.}
