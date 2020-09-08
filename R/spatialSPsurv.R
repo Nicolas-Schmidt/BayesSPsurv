@@ -16,26 +16,24 @@
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposal variance for Metropolis-Hastings.
 #'
-#' @return spatialSPsurv returns an object of class \code{"spatSPsurv"}.
+#' @return spatialSPsurv returns an object of class \code{"spatialSPsurv"}.
 #'
-#' A \code{"spatSPsurv"} object has the following elements:
-#' \item{betas}{integer, posterior mean estimates for betas.}
-#' \item{gammas}{integer, posterior mean estimates for gammas.}
-#' \item{rho}{integer.}
-#' \item{lambda}{integer.}
-#' \item{delta}{integer.}
-#' \item{W}{integer, posterior mean estimates for Ws.}
-#' \item{V}{integer, posterior mean estimates for Vs.}
+#' A \code{"spatialSPsurv"} object has the following elements:
+#' \item{betas}{integer, posterior mean estimates for betas (survival stage).}
+#' \item{gammas}{integer, posterior mean estimates for gammas (split stage).}
+#' \item{rho}{integer, vector of values for rho.}
+#' \item{lambda}{integer, vector of values for lambda.}
+#' \item{delta}{integer, vector of values for delta.}
+#' \item{W}{integer, posterior mean estimates for frailty vector W (survival stage).}
+#' \item{V}{integer, posterior mean estimates for frailty vector V (split stage).}
 #' \item{X}{matrix X's variables.}
-#' \item{Z}{the vector of `Z'.}
+#' \item{Z}{matrix of Z's variables.}
 #' \item{Y}{the vector of `Y'.}
 #' \item{Y0}{the vector of `Y0'.}
 #' \item{C}{the vector of `C'.}
 #' \item{S}{the vector of `S'.}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
-
-
 #'
 #' @examples
 #' \donttest{
