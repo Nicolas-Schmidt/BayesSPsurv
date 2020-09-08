@@ -16,7 +16,29 @@
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposal variance for Metropolis-Hastings.
 #'
-#' @return chain of the variables of interest.
+#' @return spatialSPsurv returns an object of class \code{"spatSPsurv"}.
+#'
+#' A \code{"spatSPsurv"} object has the following elements:
+#' \item{Y}{the vector of `Y'.}
+#' \item{Y0}{the vector of `Y0'.}
+#' \item{C}{the vector of `C'.}
+#' \item{X}{matrix X's variables.}
+#' \item{Z}{the vector of `Z'.}
+#' \item{betas}{data.frame,  X.intercept and X variables.}
+#' \item{gammas}{data.frame, Z.intercept and Z variables.}
+#' \item{lambda}{integer.}
+#' \item{post}{integer.}
+#' \item{iterations}{number of MCMC iterations.}
+#' \item{burn_in}{burn-ins to be discarded.}
+#' \item{thinning}{integer.}
+#' \item{betan}{integer, length of posterior sample for betas.}
+#' \item{gamman}{integer, length of posterior sample for gammas.}
+#' \item{distribution}{character, type of distribution.}
+#' \item{call}{the call.}
+#' \item{formula}{description for the model to be estimated.}
+
+
+
 #'
 #' @examples
 #' \donttest{
