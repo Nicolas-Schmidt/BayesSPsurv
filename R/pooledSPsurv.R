@@ -13,7 +13,21 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #'
-#' @return chain of the variables of interest
+#' @return pooledSPsurv returns an object of class \code{"pooledSPsurv"}.
+#'
+#' A \code{"pooledSPsurv"} object has the following elements:
+#' \item{betas}{integer, posterior mean estimates for betas (survival stage).}
+#' \item{gammas}{integer, posterior mean estimates for gammas (split stage).}
+#' \item{rho}{integer, vector of values for rho.}
+#' \item{delta}{integer, vector of values for delta.}
+#' \item{X}{matrix X's variables.}
+#' \item{Z}{matrix of Z's variables.}
+#' \item{Y}{the vector of `Y'.}
+#' \item{Y0}{the vector of `Y0'.}
+#' \item{C}{the vector of `C'.}
+#' \item{form}{character, type of distribution.}
+#' \item{call}{description for the model to be estimated.}
+#'
 #' @examples
 #' \donttest{
 #'
