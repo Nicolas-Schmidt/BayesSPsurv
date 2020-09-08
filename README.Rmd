@@ -116,6 +116,63 @@ rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
 
 ```
 
+```{r, echo = FALSE}
+# == == == == == == == == == == == == == == == == == == == == == =
+set.seed(782566)
+exchangeSPsurv <- 
+    exchangeSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        S        = 'sp_id' ,
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "Weibull",
+        prop.var = 1e-05
+    )
+
+set.seed(782566)
+
+pooledSPsurv <- 
+    pooledSPsurv(
+        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                              instabl + intensityln + ethfrac + unpko,
+        immune   = cured ~ fhcompor1 + lgdpl + victory,
+        Y0       = 't.0',
+        LY       = 'lastyear',
+        data     = walter[[1]],
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
+        w        = c(1,1,1),
+        m        = 10,
+        form     = "Weibull"
+    )
+
+# == == == == == == == == == == == == == == == == == == == == == =
+```
+
+
+
+```{r, }
+# == == == == == == == == == == == == == == == == == == == == == =
+str(model) # spatialSPsurv
+#
+#
+#
+str(exchangeSPsurv)
+#
+#
+#
+str(pooledSPsurv)
+# == == == == == == == == == == == == == == == == == == == == == =
+```
 
 
 
