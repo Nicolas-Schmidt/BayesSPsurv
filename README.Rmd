@@ -31,11 +31,6 @@ Bayesian parametric spatial split-population survival models for clustered event
 
 
 
-
-Manual [__here__](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_BayesSPsurv.pdf).
-
-
-
 ## Installation
 
 ``` r
@@ -43,11 +38,6 @@ source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 ```
 
 
-
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
-#source('data-raw/fsps.r')
-library(spduration)
-```
 
 
 ### Functions
@@ -116,24 +106,6 @@ spw   <- data.frame(ccode = ccode, ISO3 = ISO3, spw = spw)
 map   <- rworldmap::joinCountryData2Map(spw, joinCode = "ISO3", nameJoinColumn = "ISO3")
 rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
 
-```
-
-
-```{r echo=FALSE, message=FALSE}
-
-
-manual <- function(){
-    old <- here::here()
-    path <- here::here('man', 'figures')
-    sink('noise.txt')
-    devtools::build_manual(path = path)
-    sink()
-    setwd(path)
-    invisible(file.rename(list.files(pattern="^BayesSPsurv"), 'manual_BayesSPsurv.pdf'))
-    setwd(old)
-    invisible(file.remove('noise.txt'))
-}
-manual()
 ```
 
 

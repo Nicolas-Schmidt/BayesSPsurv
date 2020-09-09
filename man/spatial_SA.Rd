@@ -17,7 +17,7 @@ spatial_SA(data, var_ccode, threshold = 800L)
 list. Contains database with variable sp_id (S) and matrix A.
 }
 \description{
-matrix A and sp_id (S)
+Generates a spatial weights matrix (A) and sp_id (S). User defines units and adjacencies.
 }
 \examples{
 \donttest{
