@@ -65,7 +65,24 @@ exchangeSPsurv(
 \item{x}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 }
 \value{
-chain of the variables of interest.
+exchangeSPsurv returns an object of class \code{"exchangeSPsurv"}.
+
+A \code{"exchangeSPsurv"} object has the following elements:
+\item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}
+\item{gammas}{matrix, numeric values of the posterior for each variable in the immune equation.}
+\item{rho}{numeric vector of values for rho.}
+\item{lambda}{numeric, vector of values for lambda.}
+\item{delta}{numeric, vector of values for delta.}
+\item{W}{matrix, numeric values of the posterior for Ws}
+\item{V}{matrix, numeric values of the posterior for Vs }
+\item{X}{matrix X's variables.}
+\item{Z}{matrix of Z's variables.}
+\item{Y}{the vector of `Y'.}
+\item{Y0}{the vector of `Y0'.}
+\item{C}{the vector of `C'.}
+\item{S}{the vector of `S'.}
+\item{form}{character, type of distribution.}
+\item{call}{description for the model to be estimated.}
 
 list. Empirical mean, standard deviation and quantiles for each variable.
 
