@@ -18,13 +18,13 @@
 #' @return exchangeSPsurv returns an object of class \code{"exchangeSPsurv"}.
 #'
 #' A \code{"exchangeSPsurv"} object has the following elements:
-#' \item{betas}{matrix, integer values (n) for each variable in the duration equation .}
-#' \item{gammas}{matrix, integer values (n) for each variable in the immune equation.}
+#' \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}
+#' \item{gammas}{matrix, numeric values of the posterior for each variable in the immune equation.}
 #' \item{rho}{numeric vector of values for rho.}
-#' \item{lambda}{numeric vector of values for lambda.}
-#' \item{delta}{numeric vector of values for delta.}
-#' \item{W}{matrix, numeric values for Ws}
-#' \item{V}{matrix, numeric values for Vs }
+#' \item{lambda}{numeric, vector of values for lambda.}
+#' \item{delta}{numeric, vector of values for delta.}
+#' \item{W}{matrix, numeric values of the posterior for Ws}
+#' \item{V}{matrix, numeric values of the posterior for Vs }
 #' \item{X}{matrix X's variables.}
 #' \item{Z}{matrix of Z's variables.}
 #' \item{Y}{the vector of `Y'.}
