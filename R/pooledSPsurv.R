@@ -18,15 +18,15 @@
 #' A \code{"pooledSPsurv"} object has the following elements:
 #' \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}
 #' \item{gammas}{matrix, numeric values of the posterior for each variable in the immune equation.}
-#' \item{rho}{numeric vector of values for rho.}
-#' \item{delta}{numeric, vector of values for delta.}
-#' \item{W}{matrix, numeric values of the posterior for Ws}
-#' \item{V}{matrix, numeric values of the posterior for Vs }
-#' \item{X}{matrix X's variables.}
+#' \item{rho}{vector, numeric values of rho.}
+#' \item{delta}{vector, numeric values of delta.}
+#' \item{W}{matrix, numeric values of the posterior for Ws.}
+#' \item{V}{matrix, numeric values of the posterior for Vs.}
+#' \item{X}{matrix of X's variables.}
 #' \item{Z}{matrix of Z's variables.}
-#' \item{Y}{the vector of `Y'.}
-#' \item{Y0}{the vector of `Y0'.}
-#' \item{C}{the vector of `C'.}
+#' \item{Y}{vector of `Y'.}
+#' \item{Y0}{vector of `Y0'.}
+#' \item{C}{vector of `C'.}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
 #'
