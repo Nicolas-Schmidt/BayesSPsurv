@@ -20,8 +20,6 @@
 #' \item{gammas}{matrix, numeric values of the posterior for each variable in the immune equation.}
 #' \item{rho}{vector, numeric values of rho.}
 #' \item{delta}{vector, numeric values of delta.}
-#' \item{W}{matrix, numeric values of the posterior for Ws.}
-#' \item{V}{matrix, numeric values of the posterior for Vs.}
 #' \item{X}{matrix of X's variables.}
 #' \item{Z}{matrix of Z's variables.}
 #' \item{Y}{vector of `Y'.}
@@ -105,7 +103,7 @@ pooledSPsurv <- function(duration,
 #' @title summary.SPsurv
 #' @description Returns a summary of a SPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.
-#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."
+#' @param parameter one of three parameters of the \code{\link{pooledSPsurv}} output. Indicate either "betas," "gammas," or "lambda."
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname pooledSPsurv
