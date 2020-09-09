@@ -117,7 +117,7 @@ spatialSPsurv <- function(duration,
 #' @title summary.spatialSPsurv
 #' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.
-#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."
+#' @param parameter one of three parameters of the \code{\link{spatialSPsurv)) output. Indicate either "betas," "gammas," or "lambda."
 #' @param ... additional parameter.
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname spatialSPsurv
