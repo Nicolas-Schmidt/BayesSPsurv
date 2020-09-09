@@ -1,5 +1,5 @@
 #' @title spatial_SA
-#' @description matrix A and sp_id (S)
+#' @description Generates a spatial weights matrix (A) and sp_id (S). User defines units and adjacencies. 
 #'
 #' @param data data.frame.
 #' @param var_ccode name of the variable that contains the country codes.
