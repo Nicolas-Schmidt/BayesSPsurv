@@ -2,7 +2,7 @@ Package: BayesSPsurv
 Type: Package
 Title: Bayesian Spatial Split Population Survival Model
 Version: 0.1.8
-Author: Brandon L. Bolte [aut], Nicolas Schmidt [aut, cre], Nguyen K. Huynh [aut], Minnie M. Joo [aut], Sergio Bejar[aut], Bumba Mukherjee [aut]
+Author: Brandon L. Bolte [aut], Nicolas Schmidt [aut, cre], Sergio Bejar [aut], Bumba Mukherjee [aut], Minnie M. Joo [ctb], Nguyen K. Huynh [ctb]
 Authors@R: c(person(given = "Brandon L.",
                     family = "Bolte",
                     role = c("aut")),
@@ -10,18 +10,18 @@ Authors@R: c(person(given = "Brandon L.",
                     family = "Schmidt", 
                     role = c("aut", "cre"), 
                     email = "nschmidt@cienciassociales.edu.uy"), 
-	         person(given = "Nguyen K.",
-                    family = "Huynh",
-                    role = c("aut")),            
-             person(given = "Minnie M.",
-                    family = "Joo",
-                    role = c("aut")),
              person(given = "Sergio",
                     family = "Bejar",
                     role = c("aut")),
              person(given = "Bumba", 
                     family = "Mukherjee", 
-                    role = c("aut"))
+                    role = c("aut")),       
+             person(given = "Minnie M.",
+                    family = "Joo",
+                    role = c("aut")),       
+	         person(given = "Nguyen K.",
+                    family = "Huynh",
+                    role = c("aut"))           
                     )
 Description: Bayesian parametric spatial split-populiation survival models for clustered event processes. 
              The models account for both structural and spatial heterogeneity among "at risk" and "immune" populations, and incorporates time-varying covariates. 
