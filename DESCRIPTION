@@ -29,7 +29,7 @@ Description: Bayesian parametric spatial split-population survival models for
     time-varying covariates. This package currently implements Weibull, Exponential 
     and Log-logistic forms for the duration component. It also includes functions for 
     a series of diagnostic tests and plots to easily visualize convergence and 
-    spatial effects. The user can also create their own spatial weights matrix 
+    spatial effects. Users can create their own spatial weights matrix 
     based on their units and adjacencies of interest, making the use of these 
     models flexible and broadly applicable to a variety of research areas.
 License: MIT + file LICENSE
