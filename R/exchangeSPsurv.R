@@ -117,7 +117,7 @@ exchangeSPsurv <- function(duration,
 #' @title summary.frailtySPsurv
 #' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.
-#' @param parameter one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."
+#' @param parameter one of three parameters of the \code{\link{exchangeSPsurv}} output. Indicate either "betas," "gammas," or "lambda."
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname exchangeSPsurv
