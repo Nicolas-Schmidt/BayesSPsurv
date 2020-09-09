@@ -15,7 +15,7 @@
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposed variance for Metropolis-Hastings.
 #'
-#' @return exchangeSPsurv returns an object of class \code{"exchangeSPsurv"}.
+#' @return exchangeSPsurv returns an object of class \code{"frailtySPsurv"}.
 #'
 #' A \code{"exchangeSPsurv"} object has the following elements:
 #' \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}

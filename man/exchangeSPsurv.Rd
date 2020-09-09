@@ -65,7 +65,7 @@ exchangeSPsurv(
 \item{x}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 }
 \value{
-exchangeSPsurv returns an object of class \code{"exchangeSPsurv"}.
+exchangeSPsurv returns an object of class \code{"frailtySPsurv"}.
 
 A \code{"exchangeSPsurv"} object has the following elements:
 \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}

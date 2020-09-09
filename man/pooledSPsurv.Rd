@@ -59,7 +59,7 @@ pooledSPsurv(
 \item{x}{an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.}
 }
 \value{
-pooledSPsurv returns an object of class \code{"pooledSPsurv"}.
+pooledSPsurv returns an object of class \code{"SPsurv"}.
 
 A \code{"pooledSPsurv"} object has the following elements:
 \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}

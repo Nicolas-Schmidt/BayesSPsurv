@@ -13,7 +13,7 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #'
-#' @return pooledSPsurv returns an object of class \code{"pooledSPsurv"}.
+#' @return pooledSPsurv returns an object of class \code{"SPsurv"}.
 #'
 #' A \code{"pooledSPsurv"} object has the following elements:
 #' \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}
