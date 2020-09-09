@@ -10,19 +10,24 @@ status](https://github.com/Nicolas-Schmidt/spatialSPsurv/workflows/R-CMD-check/b
 [![Project Status: Active â€“ The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/Nicolas-Schmidt/BayesMFSurv)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/Nicolas-Schmidt/BayesMFSurv)
+
 <!-- badges: end -->
 
-Bayesian parametric spatial split-populiation survival models for
+Bayesian parametric spatial split-population survival models for
 clustered event processes. The models account for both structural and
 spatial heterogeneity among “at risk” and “immune” populations, and
 incorporates time-varying covariates. This package currently implements
-Weibull, Exponential and Loglogistic forms for the duration component.
-It allows for the creation of spatial weights matrix objects from point
-patterns by distance and presents a series of diagnostic tests and plots
-for easy visual diagnostics of convergence and spatial effects.
+Weibull, Exponential and Log-logistic forms for the duration component,
+and includes functions for a series of diagnostic tests and plots to
+easily visualize convergence and spatial effects. The user can also
+create their own spatial weights matrix based on their units and
+adjacencies of interest, making the use of these models flexible and
+broadly applicable to a variety of research areas.
 
 Manual
 [**here**](https://github.com/Nicolas-Schmidt/spatialSPsurv/blob/master/man/figures/manual_BayesSPsurv.pdf).
@@ -40,7 +45,7 @@ source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 | `exchangeSPsurv` | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties.         |
 | `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties                    |
 | `spatialSPsurv`  | Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties. |
-| `summary`        | returns a summary of exchangeSPsurv, pooledSPsurv or spatialSPsurv object via `coda::summary.mcmc`.                  |
+| `summary`        | Returns a summary of exchangeSPsurv, pooledSPsurv or spatialSPsurv object via `coda::summary.mcmc`.                  |
 | `spatial_SA`     |                                                                                                                      |
 | `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts.          |
 
