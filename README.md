@@ -46,7 +46,7 @@ source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 | `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties                    |
 | `spatialSPsurv`  | Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties. |
 | `summary`        | Returns a summary of exchangeSPsurv, pooledSPsurv or spatialSPsurv object via `coda::summary.mcmc`.                  |
-| `spatial_SA`     |                                                                                                                      |
+| `spatial_SA`     | Generates a spatial weights matrix with units and adjacencies defined by the user.                                   |
 | `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts.          |
 
 ### Example
