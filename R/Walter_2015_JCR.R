@@ -2,7 +2,7 @@
 #'
 #' Subsetted version of a time-series-cross-sectional (TSCS) dataset  used in \href{http://t.ly/F7KK}{Walter (2015)}.
 #' It has data on duration of post-war peace as well as information on other relevant economic and political data.
-#' The variables duration, cured, t.0 and lastyear added by the authors of this package using the function add_duration.
+#' The variables duration, cured, t.0 and lastyear added by the authors of this package using \code{\link{add_duration}}.
 #'
 #'\describe{
 #'    \item{fhcompor1}{Freedom House civil liberties index.}
