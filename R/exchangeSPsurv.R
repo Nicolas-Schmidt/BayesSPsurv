@@ -17,7 +17,7 @@
 #'
 #' @return exchangeSPsurv returns an object of class \code{"frailtySPsurv"}.
 #'
-#' A \code{"exchangeSPsurv"} object has the following elements:
+#' An \code{"exchangeSPsurv"} object has the following elements:
 #' \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}
 #' \item{gammas}{matrix, numeric values of the posterior for each variable in the immune equation.}
 #' \item{rho}{vector, numeric values of rho.}
