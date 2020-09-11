@@ -32,7 +32,7 @@
 #' \donttest{
 #'
 #' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
-#'                                    unitID = "id", tID = "year",
+#'                                    unitID = "ccode", tID = "year",
 #'                                    freq = "year", ongoing = FALSE)
 #'
 #' set.seed(123456)

@@ -15,7 +15,7 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposal variance for Metropolis-Hastings.
-#' @param id_WV by default is \code{colnames(A)}.
+#' @param id_WV vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{colnames(A)}.
 #'
 #' @return spatialSPsurv returns an object of class \code{"spatialSPsurv"}.
 #'
@@ -40,7 +40,7 @@
 #' \donttest{
 #'
 #' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
-#'                                    unitID = "id", tID = "year",
+#'                                    unitID = "ccode", tID = "year",
 #'                                    freq = "year", ongoing = FALSE)
 #'
 #' walter <- spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)

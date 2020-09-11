@@ -23,7 +23,7 @@ Generates a spatial weights matrix (A) and sp_id (S). User defines units and adj
 \donttest{
 
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
-                                   unitID = "id",
+                                   unitID = "ccode",
                                    tID = "year",
                                    freq = "year",
                                    ongoing = FALSE)

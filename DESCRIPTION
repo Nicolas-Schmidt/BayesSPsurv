@@ -49,4 +49,5 @@ Imports:
 	dplyr, 
 	reshape2
 Suggests:
-    spduration
+    spduration,
+    countrycode

@@ -14,7 +14,8 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposed variance for Metropolis-Hastings.
-#' @param id_WV by default is \code{unique(data[,S])}.
+#' @param id_WV vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{unique(data[,S])}.
+#'
 #'
 #' @return exchangeSPsurv returns an object of class \code{"frailtySPsurv"}.
 #'
@@ -38,8 +39,11 @@
 #' @examples
 #' \donttest{
 #'
+#'
+#' ## 1
+#'
 #' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
-#'                                    unitID = "id", tID = "year",
+#'                                    unitID = "ccode", tID = "year",
 #'                                    freq = "year", ongoing = FALSE)
 #'
 #' # add S
@@ -61,7 +65,7 @@
 #'            thin     = 10,
 #'            w        = c(1,1,1),
 #'            m        = 10,
-#'            form     = "loglog",
+#'            form     = "Weibull",
 #'            prop.var = 1e-05
 #' )
 #'
@@ -70,6 +74,41 @@
 #' summary(model, parameter = "betas")
 #'
 #' plot(model)
+#'
+#'
+#'
+#' ## 2
+#'
+#' walter   <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
+#'                                    unitID = "ccode", tID = "year",
+#'                                    freq = "year", ongoing = FALSE)
+#'
+#' walter$S <- rep(x = 1:length(unique(walter$ccode)), times = rle(walter$ccode)$lengths)
+#' country  <- countrycode::countrycode(unique(walter$ccode),'gwn','iso3c')
+#'
+#' set.seed(123456)
+#'
+#' model <-
+#'     exchangeSPsurv(
+#'        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+#'             instabl + intensityln + ethfrac + unpko,
+#'         immune   = cured ~ fhcompor1 + lgdpl + victory,
+#'         Y0       = 't.0',
+#'         LY       = 'lastyear',
+#'         S        = 'S' ,
+#'         data     = walter,
+#'         N        = 100,
+#'         burn     = 10,
+#'         thin     = 10,
+#'         w        = c(1,1,1),
+#'         m        = 10,
+#'         form     = "loglog",
+#'         prop.var = 1e-05,
+#'         id_WV    = country
+#'     )
+#'
+#' print(model)
+#'
 #'
 #' }
 #'

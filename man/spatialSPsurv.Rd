@@ -60,7 +60,7 @@ spatialSPsurv(
 
 \item{prop.var}{proposal variance for Metropolis-Hastings.}
 
-\item{id_WV}{by default is \code{colnames(A)}.}
+\item{id_WV}{vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{colnames(A)}.}
 
 \item{object}{an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.}
 
@@ -107,7 +107,7 @@ Returns a plot of a spatialSPsurv object via \code{\link[coda]{plot.mcmc}}.
 \donttest{
 
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
-                                   unitID = "id", tID = "year",
+                                   unitID = "ccode", tID = "year",
                                    freq = "year", ongoing = FALSE)
 
 walter <- spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
