@@ -5,7 +5,7 @@
 \alias{Walter_2015_JCR}
 \title{Walter_2015_JCR}
 \format{
-A data frame with 1237 rows and 13 variables
+A data frame with 1237 rows and 12 variables
 }
 \source{
 Walter, Barbara F. (2015), Why Bad Governance Leads to Repeat Civil War,  Journal of Conflict Resolution 59(7), 1242 - 1272.
@@ -19,10 +19,9 @@ It has data on duration of post-war peace as well as information on other releva
 }
 \details{
 \describe{
-   \item{id}{}
    \item{year}{year.}
-   \item{lastyear}{}
-   \item{renewed_war}{}
+   \item{lastyear}{last observation year.}
+   \item{renewed_war}{inary variable coded as 1 if the war was fought.}
    \item{fhcompor1}{Freedom House civil liberties index.}
    \item{lgdpl}{log of per capita GDP in 2005 dollars.}
    \item{comprehensive}{combatants signed comprehensive peace agreement.}

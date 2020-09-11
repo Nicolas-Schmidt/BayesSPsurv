@@ -60,7 +60,7 @@ spatialSPsurv(
 
 \item{prop.var}{proposal variance for Metropolis-Hastings.}
 
-\item{id_WV}{by default is \code{colnames(A)}}
+\item{id_WV}{by default is \code{colnames(A)}.}
 
 \item{object}{an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.}
 

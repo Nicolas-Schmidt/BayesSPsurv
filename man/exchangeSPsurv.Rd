@@ -57,7 +57,7 @@ exchangeSPsurv(
 
 \item{prop.var}{proposed variance for Metropolis-Hastings.}
 
-\item{id_WV}{by default is \code{unique(data[,S]}}
+\item{id_WV}{by default is \code{unique(data[,S])}.}
 
 \item{object}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 

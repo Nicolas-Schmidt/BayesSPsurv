@@ -54,7 +54,7 @@ library(BayesSPsurv)
 
 ## Data
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
-                                   unitID = "id", tID = "year", 
+                                   unitID = "ccode", tID = "year", 
                                    freq = "year", ongoing = FALSE)
 #> Registered S3 method overwritten by 'quantmod':
 #>   method            from
@@ -103,30 +103,30 @@ print(model)
 #> 
 #> 
 #> Duration equation: 
-#>                      Mean        SD   Naive SE Time-series SE
-#> (Intercept)    1.89866255 1.2509396 0.17870566     0.69851236
-#> fhcompor1     -0.84446607 0.4951659 0.07073799     0.10104511
-#> lgdpl         -0.05316238 0.1215603 0.01736575     0.05212821
-#> comprehensive -0.70682520 0.3301436 0.04716337     0.04716337
-#> victory        0.55708089 0.4137637 0.05910910     0.05910910
-#> instabl        0.72133602 0.4690292 0.06700417     0.08781194
-#> intensityln    0.12217226 0.1173725 0.01676750     0.04682825
-#> ethfrac       -0.18496279 0.5341137 0.07630195     0.07630195
-#> unpko          0.39261930 0.4932459 0.07046371     0.07046371
+#>                      Mean         SD   Naive SE Time-series SE
+#> (Intercept)    1.00814151 1.08126022 0.15446575     0.43017597
+#> fhcompor1     -0.86040095 0.51570840 0.07367263     0.09154776
+#> lgdpl          0.01516985 0.11875675 0.01696525     0.05333867
+#> comprehensive -0.75590604 0.31156314 0.04450902     0.03266632
+#> victory        0.47751228 0.37117992 0.05302570     0.02824285
+#> instabl        0.74508684 0.47644646 0.06806378     0.06806378
+#> intensityln    0.13956073 0.09491131 0.01355876     0.02921604
+#> ethfrac        0.10052477 0.52692819 0.07527546     0.07527546
+#> unpko          0.67711562 0.65094311 0.09299187     0.07259810
 #> 
 #> Inmune equation: 
-#>                   Mean       SD  Naive SE Time-series SE
-#> (Intercept)  0.1519895 2.578951 0.3684215      0.3684215
-#> fhcompor1   -0.2427989 2.900525 0.4143607      0.6365760
-#> lgdpl       -1.8897132 1.402490 0.2003557      0.2003557
-#> victory     -2.0062225 4.957126 0.7081608      0.9911410
+#>                  Mean       SD  Naive SE Time-series SE
+#> (Intercept) -2.224744 4.336817 0.6195454      1.1667720
+#> fhcompor1    1.250456 3.846270 0.5494671      0.8986669
+#> lgdpl       -2.313382 2.307048 0.3295783      0.3295783
+#> victory      1.689145 3.135734 0.4479620      0.6556410
 
 SPstats(model)
 #> $DIC
-#> [1] -29831.72
+#> [1] -7501.048
 #> 
 #> $Loglik
-#> [1] 20960.79
+#> [1] 23338.27
 
 # ~~~~~~~~~~~~
 # Map
@@ -149,7 +149,7 @@ rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
 
 ``` r
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
-                                   unitID = "id", tID = "year", 
+                                   unitID = "ccode", tID = "year", 
                                    freq = "year", ongoing = FALSE)
 
 walter$S     <- rep(x = 1:length(unique(walter$ccode)), times = rle(walter$ccode)$lengths)
