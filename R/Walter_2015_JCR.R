@@ -4,10 +4,9 @@
 #' It has data on duration of post-war peace as well as information on other relevant economic and political data.
 #'
 #'\describe{
-#'    \item{id}{}
 #'    \item{year}{year.}
-#'    \item{lastyear}{}
-#'    \item{renewed_war}{}
+#'    \item{lastyear}{last observation year.}
+#'    \item{renewed_war}{inary variable coded as 1 if the war was fought.}
 #'    \item{fhcompor1}{Freedom House civil liberties index.}
 #'    \item{lgdpl}{log of per capita GDP in 2005 dollars.}
 #'    \item{comprehensive}{combatants signed comprehensive peace agreement.}
