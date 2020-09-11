@@ -91,7 +91,7 @@ exchangeSPsurv <- function(duration,
                           prop.var,
                           id_WV = unique(data[,S]))
 {
-    print(id_WV)
+
     dis <- match.arg(form)
     model <- 'frailtySPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,

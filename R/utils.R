@@ -2653,8 +2653,8 @@ mcmcfrailtySPlog <- function(Y,
   }
 
 
-  #colnames(V.samp) <- id_WV #colnames(A)           #ADC
-  #colnames(W.samp) <- id_WV #colnames(A)           #ADC
+  colnames(V.samp) <- id_WV #colnames(A)           #ADC
+  colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
