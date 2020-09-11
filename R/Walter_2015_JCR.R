@@ -6,7 +6,7 @@
 #'\describe{
 #'    \item{year}{year.}
 #'    \item{lastyear}{last observation year.}
-#'    \item{renewed_war}{inary variable coded as 1 if the war was fought.}
+#'    \item{renewed_war}{binary variable coded as 1 if the war was fought.}
 #'    \item{fhcompor1}{Freedom House civil liberties index.}
 #'    \item{lgdpl}{log of per capita GDP in 2005 dollars.}
 #'    \item{comprehensive}{combatants signed comprehensive peace agreement.}
