@@ -5,7 +5,7 @@
 \alias{Walter_2015_JCR}
 \title{Walter_2015_JCR}
 \format{
-A data frame with 1237 rows and 8 variables
+A data frame with 1237 rows and 13 variables
 }
 \source{
 Walter, Barbara F. (2015), Why Bad Governance Leads to Repeat Civil War,  Journal of Conflict Resolution 59(7), 1242 - 1272.
@@ -14,11 +14,15 @@ Walter, Barbara F. (2015), Why Bad Governance Leads to Repeat Civil War,  Journa
 data(Walter_2015_JCR)
 }
 \description{
-Subsetted version of a time-series-cross-sectional (TSCS) dataset  used in \href{http://t.ly/F7KK}{Walter (2015)}.
+Subsetted version of a time-series-cross-sectional (TSCS) dataset  used in \href{https://bit.ly/2Zpa2QJ}{Walter (2015)}.
 It has data on duration of post-war peace as well as information on other relevant economic and political data.
 }
 \details{
 \describe{
+   \item{id}{}
+   \item{year}{year.}
+   \item{lastyear}{}
+   \item{renewed_war}{}
    \item{fhcompor1}{Freedom House civil liberties index.}
    \item{lgdpl}{log of per capita GDP in 2005 dollars.}
    \item{comprehensive}{combatants signed comprehensive peace agreement.}
@@ -27,6 +31,7 @@ It has data on duration of post-war peace as well as information on other releva
    \item{intensityln}{deaths per year -- logged.}
    \item{ethfrac}{index of ethnic fractionalization.}
    \item{unpko}{number of UN peacekeepers on the ground.}
+   \item{ccode}{country code.}
 }
 }
 \keyword{datasets}

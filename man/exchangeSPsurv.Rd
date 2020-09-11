@@ -58,7 +58,7 @@ exchangeSPsurv(
 
 \item{object}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 
-\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."}
+\item{parameter}{one of three parameters of the \code{\link{exchangeSPsurv}} output. Indicate either "betas," "gammas," or "lambda."}
 
 \item{...}{additional parameter.}
 
@@ -67,7 +67,7 @@ exchangeSPsurv(
 \value{
 exchangeSPsurv returns an object of class \code{"frailtySPsurv"}.
 
-A \code{"exchangeSPsurv"} object has the following elements:
+An \code{"exchangeSPsurv"} object has the following elements:
 \item{betas}{matrix, numeric values of the posterior for each variable in the duration equation .}
 \item{gammas}{matrix, numeric values of the posterior for each variable in the immune equation.}
 \item{rho}{vector, numeric values of rho.}

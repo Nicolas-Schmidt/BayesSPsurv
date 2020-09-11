@@ -61,7 +61,7 @@ spatialSPsurv(
 
 \item{object}{an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.}
 
-\item{parameter}{one of three parameters of the pooledSPsurv output. Indicate either "betas," "gammas," or "lambda."}
+\item{parameter}{one of three parameters of the \code{\link{spatialSPsurv}} output. Indicate either "betas," "gammas," or "lambda."}
 
 \item{...}{additional parameter.}
 

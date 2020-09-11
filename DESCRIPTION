@@ -44,8 +44,7 @@ Imports:
 	MCMCpack,
 	FastGP,
 	stats,
-	Rcpp,
-	RcppArmadillo,
+	Rcpp (>= 1.0.3),
 	coda, 
 	dplyr, 
 	reshape2

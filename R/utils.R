@@ -1,15 +1,14 @@
 #' @useDynLib BayesSPsurv
 #' @importFrom stats dgamma runif rgamma dnorm model.frame as.formula model.matrix model.response na.omit
-#' @import grDevices
-#' @import graphics
-#' @import RcppArmadillo
-#' @importFrom Rcpp sourceCpp
 #' @importFrom MCMCpack riwish
 #' @importFrom coda mcmc
+#' @import grDevices
+#' @import graphics
 #' @importFrom FastGP rcpp_rmvnorm rcpp_log_dmvnorm
 #' @importFrom dplyr distinct
 #' @importFrom reshape2 acast
-NULL
+#' @importFrom utils packageDescription person
+#' @export
 
 .onUnload <- function (libpath) {
   library.dynam.unload("BayesSPsurv", libpath)
@@ -1614,8 +1613,8 @@ W.F.MH.sampling = function(Sigma.w,
   W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
   W_new = W_new - mean(W_new)
   u = log(runif(1))
-  w1 = W.F.post(Sigma.w,S, Y, Y0,X, W_new[S], betas, delta, C, LY, rho)
-  w2 = W.F.post(Sigma.w,S,  Y,Y0, X, W_old[S], betas, delta, C, LY, rho)
+  w1 = W.F.post(Sigma.w, S, Y, Y0, X, W_new[S], betas, delta, C, LY, rho)
+  w2 = W.F.post(Sigma.w, S, Y, Y0, X, W_old[S], betas, delta, C, LY, rho)
   temp = w1- w2
   alpha = min(0, temp)
   if (u <= alpha) {
@@ -2727,3 +2726,14 @@ rllFun <- function(est,
 
 
 
+Authors <- function(){
+  paste(
+    person(given = "Brandon L.", family = "Bolte",     role = c("aut")),
+    person(given = "Nicolas",    family = "Schmidt",   role = c("aut", "cre")),
+    person(given = "Sergio",     family = "Bejar",     role = c("aut")),
+    person(given = "Bumba",      family = "Mukherjee", role = c("aut")),
+    person(given = "Minnie M.",  family = "Joo",       role = c("ctb")),
+    person(given = "Nguyen K.",  family = "Huynh",     role = c("ctb")),
+    sep = "\n  "
+  )
+}
