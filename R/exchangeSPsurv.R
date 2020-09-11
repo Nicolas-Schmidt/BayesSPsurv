@@ -14,7 +14,7 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposed variance for Metropolis-Hastings.
-#' @param id_WV by default is \code{unique(data[,S]}
+#' @param id_WV by default is \code{unique(data[,S])}.
 #'
 #' @return exchangeSPsurv returns an object of class \code{"frailtySPsurv"}.
 #'
