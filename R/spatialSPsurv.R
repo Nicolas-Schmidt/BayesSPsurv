@@ -15,7 +15,7 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposal variance for Metropolis-Hastings.
-#' @param id_WV by default is \code{colnames(A)}
+#' @param id_WV by default is \code{colnames(A)}.
 #'
 #' @return spatialSPsurv returns an object of class \code{"spatialSPsurv"}.
 #'
