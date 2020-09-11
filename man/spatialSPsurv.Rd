@@ -21,7 +21,8 @@ spatialSPsurv(
   w = c(1, 1, 1),
   m = 10,
   form = c("Weibull", "exponential", "loglog"),
-  prop.var
+  prop.var,
+  id_WV = colnames(A)
 )
 
 \method{summary}{spatialSPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
@@ -58,6 +59,8 @@ spatialSPsurv(
 \item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
 \item{prop.var}{proposal variance for Metropolis-Hastings.}
+
+\item{id_WV}{by default is \code{colnames(A)}}
 
 \item{object}{an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.}
 

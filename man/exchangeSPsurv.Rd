@@ -20,7 +20,8 @@ exchangeSPsurv(
   w = c(1, 1, 1),
   m = 10,
   form = c("Weibull", "exponential", "loglog"),
-  prop.var
+  prop.var,
+  id_WV = unique(data[, S])
 )
 
 \method{summary}{frailtySPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
@@ -55,6 +56,8 @@ exchangeSPsurv(
 \item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
 \item{prop.var}{proposed variance for Metropolis-Hastings.}
+
+\item{id_WV}{by default is \code{unique(data[,S]}}
 
 \item{object}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 

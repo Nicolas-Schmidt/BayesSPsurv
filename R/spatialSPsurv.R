@@ -15,6 +15,7 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposal variance for Metropolis-Hastings.
+#' @param id_WV by default is \code{colnames(A)}
 #'
 #' @return spatialSPsurv returns an object of class \code{"spatialSPsurv"}.
 #'
@@ -89,7 +90,8 @@ spatialSPsurv <- function(duration,
                          w = c(1, 1, 1),
                          m = 10,
                          form = c('Weibull', 'exponential', 'loglog'),
-                         prop.var)
+                         prop.var,
+                         id_WV = colnames(A))
 {
 
     dis <- match.arg(form)
@@ -101,11 +103,13 @@ spatialSPsurv <- function(duration,
     if(form == 'loglog') {
         results <- mcmcSpatialLog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                                  S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
-                                 m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
+                                 m = r$m, form = r$form, prop.var = r$prop.var, A = r$A,
+                                 id_WV = id_WV)
     } else {
         results <- mcmcspatialSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
-                             m = r$m, form = r$form, prop.var = r$prop.var, A = r$A)
+                             m = r$m, form = r$form, prop.var = r$prop.var, A = r$A,
+                             id_WV = id_WV)
     }
     results$call   <- match.call()
     class(results) <- model

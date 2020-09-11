@@ -14,6 +14,7 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.var proposed variance for Metropolis-Hastings.
+#' @param id_WV by default is \code{unique(data[,S]}
 #'
 #' @return exchangeSPsurv returns an object of class \code{"frailtySPsurv"}.
 #'
@@ -87,9 +88,10 @@ exchangeSPsurv <- function(duration,
                           w = c(1, 1, 1),
                           m = 10,
                           form = c('Weibull', 'exponential', 'loglog'),
-                          prop.var)
+                          prop.var,
+                          id_WV = unique(data[,S]))
 {
-
+    print(id_WV)
     dis <- match.arg(form)
     model <- 'frailtySPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
@@ -99,13 +101,14 @@ exchangeSPsurv <- function(duration,
     if(form == 'loglog'){
         results <- mcmcfrailtySPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                                  S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
-                                 m  = r$m, form = r$form, prop.var = r$prop.var)
+                                 m  = r$m, form = r$form, prop.var = r$prop.var,
+                                 id_WV = id_WV)
     } else {
         results <- mcmcfrailtySP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
-                             m  = r$m, form = r$form, prop.var = r$prop.var)
+                             m  = r$m, form = r$form, prop.var = r$prop.var,
+                             id_WV = id_WV)
     }
-
 
     results$call   <- match.call()
     class(results) <- c(model)

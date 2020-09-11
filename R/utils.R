@@ -7,7 +7,6 @@
 #' @importFrom FastGP rcpp_rmvnorm rcpp_log_dmvnorm
 #' @importFrom dplyr distinct
 #' @importFrom reshape2 acast
-#' @importFrom utils packageDescription person
 #' @export
 
 .onUnload <- function (libpath) {
@@ -2278,7 +2277,8 @@ mcmcspatialSP <- function(Y,
                           thin, w = c(1, 1, 1),
                           m = 10,
                           form,
-                          prop.var) {
+                          prop.var,
+                          id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2334,8 +2334,8 @@ mcmcspatialSP <- function(Y,
     }
   }
 
-  colnames(V.samp) <- colnames(A)           #ADC
-  colnames(W.samp) <- colnames(A)           #ADC
+  colnames(V.samp) <- id_WV #colnames(A)           #ADC
+  colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp,
@@ -2365,7 +2365,22 @@ mcmcspatialSP <- function(Y,
 # @return chain of the variables of interest
 #
 
-mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1, 1), m, form, prop.var = .00001) {
+mcmcSpatialLog <- function(Y,
+                           Y0,
+                           C,
+                           LY,
+                           X,
+                           Z,
+                           S,
+                           A,
+                           N,
+                           burn,
+                           thin,
+                           w = c(1, 1, 1),
+                           m,
+                           form,
+                           prop.var = .00001,
+                           id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2424,8 +2439,8 @@ mcmcSpatialLog <- function(Y, Y0, C,  LY, X, Z, S, A, N, burn, thin, w = c(1, 1,
       # print(100) #### ***** #### ***** #### ***** #### ***** ####
     }
   }
-  colnames(V.samp) <- colnames(A)           #ADC
-  colnames(W.samp) <- colnames(A)           #ADC
+  colnames(V.samp) <- id_WV #colnames(A)           #ADC
+  colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp,
@@ -2468,7 +2483,8 @@ mcmcfrailtySP <- function(Y,
                           thin, w = c(1, 1, 1),
                           m,
                           form,
-                          prop.var) {
+                          prop.var,
+                          id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   p3 = length(unique(S))
@@ -2529,6 +2545,10 @@ mcmcfrailtySP <- function(Y,
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
+
+
+  colnames(V.samp) <- id_WV #colnames(A)           #ADC
+  colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
@@ -2554,7 +2574,21 @@ mcmcfrailtySP <- function(Y,
 # @return chain of the variables of interest
 #
 
-mcmcfrailtySPlog <- function(Y, Y0, C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1), m = 10, form, prop.var= .00001) {
+mcmcfrailtySPlog <- function(Y,
+                             Y0,
+                             C,
+                             LY,
+                             X,
+                             Z,
+                             S,
+                             N,
+                             burn,
+                             thin,
+                             w = c(1, 1, 1),
+                             m = 10,
+                             form,
+                             prop.var= .00001,
+                             id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   p3 = length(unique(S))
@@ -2617,6 +2651,10 @@ mcmcfrailtySPlog <- function(Y, Y0, C, LY, X, Z, S, N, burn, thin, w = c(1, 1, 1
       V.samp[(iter - burn) / thin, ] = S_uniq[,3]
     }
   }
+
+
+  #colnames(V.samp) <- id_WV #colnames(A)           #ADC
+  #colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
@@ -2725,15 +2763,3 @@ rllFun <- function(est,
 }
 
 
-
-Authors <- function(){
-  paste(
-    person(given = "Brandon L.", family = "Bolte",     role = c("aut")),
-    person(given = "Nicolas",    family = "Schmidt",   role = c("aut", "cre")),
-    person(given = "Sergio",     family = "Bejar",     role = c("aut")),
-    person(given = "Bumba",      family = "Mukherjee", role = c("aut")),
-    person(given = "Minnie M.",  family = "Joo",       role = c("ctb")),
-    person(given = "Nguyen K.",  family = "Huynh",     role = c("ctb")),
-    sep = "\n  "
-  )
-}

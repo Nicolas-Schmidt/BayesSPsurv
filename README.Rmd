@@ -56,6 +56,11 @@ source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 
 
 ### Example
+```{r, echo = FALSE}
+library(spduration)
+```
+
+
 
 
 ```{r, fig.width = 13, fig.height = 10, warning = FALSE}

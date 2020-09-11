@@ -48,6 +48,10 @@ source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 
 ### Example
 
+    #> Registered S3 method overwritten by 'quantmod':
+    #>   method            from
+    #>   as.zoo.data.frame zoo
+
 ``` r
 
 library(BayesSPsurv)
@@ -56,9 +60,6 @@ library(BayesSPsurv)
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
                                    unitID = "id", tID = "year", 
                                    freq = "year", ongoing = FALSE)
-#> Registered S3 method overwritten by 'quantmod':
-#>   method            from
-#>   as.zoo.data.frame zoo
 walter <- BayesSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 
 
@@ -143,4 +144,4 @@ map   <- rworldmap::joinCountryData2Map(spw, joinCode = "ISO3", nameJoinColumn =
 rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
