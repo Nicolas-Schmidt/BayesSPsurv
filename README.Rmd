@@ -56,11 +56,6 @@ source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 
 
 ### Example
-```{r, echo = FALSE}
-library(spduration)
-```
-
-
 
 
 ```{r, fig.width = 13, fig.height = 10, warning = FALSE}
@@ -99,11 +94,10 @@ print(model)
 
 SPstats(model)
 
-```
+# ~~~~~~~~~~~~
+# Map
+# ~~~~~~~~~~~~
 
-## Map
-
-```{r}
 spw   <- matrix(apply(model$W, 2, mean), ncol = 1, nrow = ncol(model$W))
 ccode <- colnames(model$W)
 ISO3  <- countrycode::countrycode(ccode,'gwn','iso3c')
