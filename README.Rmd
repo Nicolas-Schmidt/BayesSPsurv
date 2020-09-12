@@ -54,7 +54,6 @@ source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
 
 
 
-
 ### Example
 
 
