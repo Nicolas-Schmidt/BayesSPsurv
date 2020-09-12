@@ -1,6 +1,6 @@
 #' Gleditsch and Ward Distance data
 #'
-#' Dyadic dataset extracted from \href{t.ly/bGE9}{Gleditsch and Ward (2001)}.
+#' Dyadic dataset extracted from \href{https://journals.sagepub.com/doi/10.1177/0022343301038006006}{Gleditsch and Ward (2001)}.
 #' The dataset contains information on the distace between capital cities among independent nation-states.
 #'
 #'
