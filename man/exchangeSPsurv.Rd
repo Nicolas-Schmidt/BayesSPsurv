@@ -139,7 +139,7 @@ summary(model, parameter = "betas")
 
 plot(model)
 
-
+}
 
 ## 2
 
@@ -161,11 +161,11 @@ model <-
         LY       = 'lastyear',
         S        = 'S' ,
         data     = walter,
-        N        = 100,
-        burn     = 10,
-        thin     = 10,
+        N        = 30,
+        burn     = 5,
+        thin     = 5,
         w        = c(1,1,1),
-        m        = 10,
+        m        = 5,
         form     = "loglog",
         prop.var = 1e-05,
         id_WV    = country
@@ -173,7 +173,5 @@ model <-
 
 print(model)
 
-
-}
 
 }

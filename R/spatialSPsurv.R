@@ -37,7 +37,6 @@
 #' \item{call}{description for the model to be estimated.}
 #'
 #' @examples
-#' \donttest{
 #'
 #' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
 #'                                    unitID = "ccode", tID = "year",
@@ -56,11 +55,11 @@
 #'         LY       = 'lastyear',
 #'         S        = 'sp_id' ,
 #'         data     = walter[[1]],
-#'         N        = 500,
-#'         burn     = 10,
-#'         thin     = 10,
+#'         N        = 30,
+#'         burn     = 5,
+#'         thin     = 5,
 #'         w        = c(1,1,1),
-#'         m        = 10,
+#'         m        = 5,
 #'         form     = "Weibull",
 #'         prop.var = 1e-05,
 #'         A        = walter[[2]]
@@ -72,7 +71,6 @@
 #'
 #' plot(model)
 #'
-#' }
 #'
 #' @export
 #'
@@ -180,10 +178,7 @@ print.spatialSPsurv <- function(x, ...){
 #'
 
 plot.spatialSPsurv <- function(x, ...){
-
-    op <- par(no.readonly = TRUE)
     plot((coda::mcmc(x$betas)), ...)
-    par(op)
 }
 
 

@@ -88,7 +88,6 @@ Print method for a \code{\link{pooledSPsurv}} x.
 Returns a plot of a pooledSPsurv object via \code{\link[coda]{plot.mcmc}}.
 }
 \examples{
-\donttest{
 
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
                                    unitID = "ccode", tID = "year",
@@ -104,11 +103,11 @@ model <-
         Y0       = 't.0',
         LY       = 'lastyear',
         data     = walter,
-        N        = 100,
-        burn     = 10,
-        thin     = 10,
+        N        = 30,
+        burn     = 5,
+        thin     = 5,
         w        = c(1,1,1),
-        m        = 10,
+        m        = 5,
         form     = "Weibull"
     )
 
@@ -119,6 +118,6 @@ summary(model, parameter = "betas")
 
 plot(model)
 
-}
+
 
 }

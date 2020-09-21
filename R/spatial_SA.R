@@ -8,7 +8,6 @@
 #' @return list. Contains database with variable sp_id (S) and matrix A.
 #'
 #' @examples
-#' \donttest{
 #'
 #' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
 #'                                    unitID = "ccode",
@@ -19,7 +18,6 @@
 #' walter <- spatial_SA(data = walter,
 #'                      var_ccode = "ccode",
 #'                      threshold = 800L)
-#' }
 #' @export
 #'
 spatial_SA <- function(data, var_ccode, threshold = 800L) {
