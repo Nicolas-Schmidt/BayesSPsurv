@@ -25,7 +25,7 @@ Authors@R: c(person(given = "Brandon L.",
 Description: Bayesian parametric spatial split-population survival models for 
     clustered event processes. The models account for structural and spatial 
     heterogeneity among “at risk” and “immune” populations, and incorporate 
-    time-varying covariates. This package currently implements Weibull, Exponential 
+    time-varying covariates as described in Joo et. al. (2020). This package currently implements Weibull, Exponential 
     and Log-logistic forms for the duration component. It also includes functions for 
     a series of diagnostic tests and plots to easily visualize convergence and 
     spatial effects. Users can create their own spatial weights matrix 
