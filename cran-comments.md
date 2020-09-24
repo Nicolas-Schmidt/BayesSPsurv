@@ -2,8 +2,8 @@
 ## Resubmission
 
 * Remove par(). 
-* Add excamples. 
-* Add reference paper in DESCRIPTION file
+* Add examples. 
+* Add reference paper in DESCRIPTION file.
 
 ## Test environments
 * local Windows, R 4.0.2
