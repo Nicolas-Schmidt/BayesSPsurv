@@ -31,9 +31,7 @@ Description: Parametric spatial split-population (SP) survival models for
     spatial effects. Users can create their own spatial weights matrix 
     based on their units and adjacencies of interest, making the use of these 
     models flexible and broadly applicable to a variety of research areas.  
-    Joo et al. (2020) <https://github.com/Nicolas-Schmidt/BayesSPsurv/blob/master/man/figures/SPcureMerged1.pdf>
-    describe the estimators included in this package. 
-    
+    Joo et al. (2020) <https://bit.ly/2RVUHmA> describe the estimators included in this package. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
