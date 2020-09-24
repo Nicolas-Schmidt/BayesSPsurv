@@ -6,7 +6,7 @@
 * Add reference paper in DESCRIPTION file
 
 ## Test environments
-* local Windows,, R 4.0.2
+* local Windows, R 4.0.2
 * ubuntu 16.04, R 4.0.2
 * win-builder (devel)
 
