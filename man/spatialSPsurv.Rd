@@ -104,7 +104,7 @@ Print method for a \code{\link{spatialSPsurv}} x.
 Returns a plot of a spatialSPsurv object via \code{\link[coda]{plot.mcmc}}.
 }
 \examples{
-
+\donttest{
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
                                    unitID = "ccode", tID = "year",
                                    freq = "year", ongoing = FALSE)
@@ -122,11 +122,11 @@ model <-
         LY       = 'lastyear',
         S        = 'sp_id' ,
         data     = walter[[1]],
-        N        = 30,
-        burn     = 5,
-        thin     = 5,
+        N        = 100,
+        burn     = 10,
+        thin     = 10,
         w        = c(1,1,1),
-        m        = 5,
+        m        = 10,
         form     = "Weibull",
         prop.var = 1e-05,
         A        = walter[[2]]
@@ -138,5 +138,5 @@ summary(model, parameter = "betas")
 
 plot(model)
 
-
+}
 }

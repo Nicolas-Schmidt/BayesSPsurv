@@ -29,7 +29,7 @@
 #' \item{call}{description for the model to be estimated.}
 #'
 #' @examples
-#'
+#' \donttest{
 #' walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
 #'                                    unitID = "ccode", tID = "year",
 #'                                    freq = "year", ongoing = FALSE)
@@ -44,11 +44,11 @@
 #'         Y0       = 't.0',
 #'         LY       = 'lastyear',
 #'         data     = walter,
-#'         N        = 30,
-#'         burn     = 5,
-#'         thin     = 5,
+#'         N        = 100,
+#'         burn     = 10,
+#'         thin     = 10,
 #'         w        = c(1,1,1),
-#'         m        = 5,
+#'         m        = 10,
 #'         form     = "Weibull"
 #'     )
 #'
@@ -60,6 +60,7 @@
 #' plot(model)
 #'
 #'
+#'}
 #'
 #' @export
 

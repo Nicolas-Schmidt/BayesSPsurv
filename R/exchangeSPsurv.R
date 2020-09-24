@@ -75,7 +75,6 @@
 #'
 #' plot(model)
 #'
-#' }
 #'
 #' ## 2
 #'
@@ -97,18 +96,18 @@
 #'         LY       = 'lastyear',
 #'         S        = 'S' ,
 #'         data     = walter,
-#'         N        = 30,
-#'         burn     = 5,
-#'         thin     = 5,
+#'         N        = 100,
+#'         burn     = 10,
+#'         thin     = 10,
 #'         w        = c(1,1,1),
-#'         m        = 5,
+#'         m        = 10,
 #'         form     = "loglog",
 #'         prop.var = 1e-05,
 #'         id_WV    = country
 #'     )
 #'
 #' print(model)
-#'
+#'}
 #'
 #' @export
 

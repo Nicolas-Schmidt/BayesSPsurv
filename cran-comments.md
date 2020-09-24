@@ -2,7 +2,7 @@
 ## Resubmission
 
 * Remove par(). 
-* Add examples. 
+* \donttes{} is kept in the examples module since the execution time exceeds 5 seconds.
 * Add reference paper in DESCRIPTION file.
 
 ## Test environments
