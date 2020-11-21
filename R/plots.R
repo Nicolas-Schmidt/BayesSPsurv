@@ -1,5 +1,5 @@
 #' @title plot_Moran.I
-#' @description ...
+#' @description Measures overall spatial autocorrelation in a dataset by evaluating how similar a unit is to those surrounding it (Cliff and Ord, 1981).  Positive values indicate spatial clustering of similar values. 
 #'
 #' @param data data
 #' @param var_duration ...
@@ -68,7 +68,7 @@ plot_Moran.I <- function(data,
 
 
 #' @title plot_JoinCount
-#' @description ...
+#' @description Allows to assess whether the number of pairs of incongruent neighbors is lower than what is expected by chance (Cliff and Ord, 1981).  Negative values indicate positive spatial clustering. 
 #'
 #' @param data data
 #' @param var_cured ...
