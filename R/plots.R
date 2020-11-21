@@ -1,5 +1,5 @@
 #' @title plot_Moran.I
-#' @description ...
+#' @description Measures overall spatial autocorrelation in a dataset by evaluating how similar a unit is to those surrounding it.  Positive values indicate spatial clustering of similar values. 
 #'
 #' @param data data
 #' @param var_duration ...
