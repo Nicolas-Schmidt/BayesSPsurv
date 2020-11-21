@@ -13,7 +13,7 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![](https://img.shields.io/badge/devel%20version-0.1.0-blue.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv)
+[![](https://img.shields.io/badge/devel%20version-0.1.1-blue.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -30,10 +30,15 @@ create their own spatial weights matrix based on their units and
 adjacencies of interest, making the use of these models flexible and
 broadly applicable to a variety of research areas.
 
-## Installation
+### Installation
 
 ``` r
-source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
+# Install speech from CRAN
+install.packages("BayesSPsurv")
+
+# The development version from GitHub:
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 ```
 
 ### Functions

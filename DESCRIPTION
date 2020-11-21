@@ -1,7 +1,7 @@
 Package: BayesSPsurv
 Type: Package
 Title: Bayesian Spatial Split Population Survival Model
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person(given = "Brandon L.",
                     family = "Bolte",
                     role = c("aut")),
@@ -48,7 +48,9 @@ Imports:
 	Rcpp (>= 1.0.3),
 	coda, 
 	dplyr, 
-	reshape2
+	reshape2, 
+	ggplot2,
+	ape
 Suggests:
     spduration,
     countrycode

@@ -349,7 +349,6 @@ univ.betas.slice.sampling2 = function(betas.p, p, Sigma.b, Y, Y0, X, W, betas, d
   {
     b1 = runif(1, L, R)
     b.post1 = betas.post2(b1, p, Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, form)
-
     if (b.post1 >= b.post0) break
     if (b1 > b0) {
       R = b1
@@ -2056,8 +2055,8 @@ lambda.gibbs.sampling2 <- function(S,
                                    A,
                                    W,
                                    V,
-                                   a = 1,
-                                   b = 1) {
+                                   a = 1,    # prior
+                                   b = 1) {  # prior
   S_uniq = unique(cbind(S, W, V))
   S_uniq = S_uniq[order(S_uniq[,1]),]
   J = nrow(S_uniq)
@@ -2761,5 +2760,60 @@ rllFun <- function(est,
   list(llik = llik, one = one, two = two, three = three)
 
 }
+
+
+JointCount<- function(X, W) {
+  PB<- mean (X)
+  PW<- 1- mean(X)
+  PBB<- PB*PB
+  PWW<- PW*PW
+  PBW<- 2*PB*(1-PB)
+  n<-length(X)
+  nB<-sum(X)
+  EBB<- 0.5*sum(W)*PBB
+  EWW<- 0.5*sum(W)*PWW
+  EBW<- 0.5*sum(W)*PBW
+  s.2j<-rep(NA,ncol(W))
+  s.2i<-rep(NA,nrow(W))
+  s.3j<-rep(NA,ncol(W))
+  s.3i<-rep(NA,nrow(W))
+  s_2<-matrix(NA,nrow(W),ncol(W))
+  bb<-matrix(NA,nrow(W),ncol(W))
+  ww<-matrix(NA,nrow(W),ncol(W))
+  bw<-matrix(NA,nrow(W),ncol(W))
+  for (i in 1:nrow(W)){
+    for (j in 1:ncol(W)){
+      s_2[i,j]<-(W[i,j]+W[j,i])^2
+      bb[i,j]<-W[i,j]*X[i]*X[j]
+      ww[i,j]<-W[i,j]*(1-X[i])*(1-X[j])
+      bw[i,j]<-W[i,j]*((X[i]-X[j])^2)
+    }
+    s.3j[i]<-(sum(W[i,])+ sum(W[,i]))^2
+  }
+  BB<-0.5*sum(bb)
+  WW<-0.5*sum(ww)
+  BW<-0.5*sum(bw)
+  s2<-sum(s_2)*0.5
+  s3<-sum(s.3j)
+  s1<-sum(W)
+  varBW<-0.25*(((2*s2*nB*(n-nB))/(n*(n-1)))+(((s3-s1)*nB*(n-nB))/(n*(n-1)))+((4*(s1^2+s2-s3)*nB*(nB-1)*(n-nB)*(n-nB-1))/(n*(n-1)*(n-2)*(n-3)) ))-(EBW^2)
+  ZBW<-(BW-EBW)/sqrt(varBW)
+  out<-data.frame(BW,EBW,sqrt(varBW),ZBW)
+  colnames(out)<-c("Obs","Exp","sd","Z")
+  return(out)
+}
+
+data_plots <- function(data, var_id = character(), var_time = character(), n = 0){
+
+  dat  <- lapply(split(data, data[,var_time]), function(x){x[!duplicated(x[, var_id]), ]})
+  dat  <- dat[sapply(dat, nrow) >= n]
+  mats <- lapply(dat, function(x){BayesSPsurv::spatial_SA(x, var_ccode = var_id)$matrixA})
+  w2 <- list()
+  for(i in 1:length(dat)){w2[[i]] <- dat[[i]][order(dat[[i]][, var_id]),]}
+  list(mats = mats, w2 = w2)
+
+}
+
+
 
 

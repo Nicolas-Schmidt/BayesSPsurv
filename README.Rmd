@@ -32,12 +32,16 @@ Bayesian parametric spatial split-population survival models for clustered event
 
 
 
-## Installation
+### Installation
 
-``` r
-source("https://install-github.me/Nicolas-Schmidt/BayesSPsurv")
+```r
+# Install speech from CRAN
+install.packages("BayesSPsurv")
+
+# The development version from GitHub:
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 ```
-
 
 
 
