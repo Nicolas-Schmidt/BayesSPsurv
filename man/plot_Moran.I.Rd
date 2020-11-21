@@ -24,7 +24,7 @@ plot_Moran.I(
 
 \item{n}{...}
 
-\item{t...}{}
+\item{t}{...}
 }
 \value{
 A ggplot object
@@ -33,17 +33,21 @@ A ggplot object
 ...
 }
 \examples{
-\donttest{
+
 library(BayesSPsurv)
-datos  <- spduration::add_duration(data = BayesSPsurv::Walter_2015_JCR,
-                                    y = "renewed_war", unitID = "ccode", tID = "year", freq = "year", ongoing = FALSE)
+dataw <- spduration::add_duration(data = BayesSPsurv::Walter_2015_JCR,
+                                  y = "renewed_war",
+                                  unitID = "ccode",
+                                  tID = "year",
+                                  freq = "year",
+                                  ongoing = FALSE)
 
 
-plot_Moran.I(data = datos,
+plot_Moran.I(data = dataw ,
             var_duration = "duration",
             var_id = "ccode",
             var_time = "year",
             n = 12)
-}
+
 
 }
