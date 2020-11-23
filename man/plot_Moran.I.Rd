@@ -14,23 +14,23 @@ plot_Moran.I(
 )
 }
 \arguments{
-\item{data}{data}
+\item{data}{data.}
 
-\item{var_duration}{...}
+\item{var_duration}{variable that measures duration until censoring or failure.}
 
-\item{var_id}{...}
+\item{var_id}{ID's unique identifier.}
 
-\item{var_time}{...}
+\item{var_time}{variable that measures time.}
 
-\item{n}{...}
+\item{n}{number of observation per id.}
 
-\item{t}{...}
+\item{t}{value of the confidence interval.}
 }
 \value{
 A ggplot object
 }
 \description{
-...
+Implements Global Moran I test to evaluate spatial autocorrelation in a units' risk propensity in the data.  Positive values indicate spatial clustering of similar values.
 }
 \examples{
 

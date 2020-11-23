@@ -1,12 +1,13 @@
 #' @title plot_Moran.I
-#' @description Measures overall spatial autocorrelation in a dataset by evaluating how similar a unit is to those surrounding it (Cliff and Ord, 1981).  Positive values indicate spatial clustering of similar values. 
+#' @description Implements Global Moran I test to evaluate spatial autocorrelation in a units' risk propensity in the data.  Positive values indicate spatial clustering of similar values.
 #'
-#' @param data data
-#' @param var_duration ...
-#' @param var_id ...
-#' @param var_time ...
-#' @param n ...
-#' @param t ...
+#' @param data data.
+#' @param var_duration variable that measures duration until censoring or failure.
+#' @param var_id ID's unique identifier.
+#' @param var_time variable that measures time.
+#' @param n number of observation per id.
+#' @param t value of the confidence interval.
+#'
 #'
 #' @return A ggplot object
 #'
@@ -68,14 +69,14 @@ plot_Moran.I <- function(data,
 
 
 #' @title plot_JoinCount
-#' @description Allows to assess whether the number of pairs of incongruent neighbors is lower than what is expected by chance (Cliff and Ord, 1981).  Negative values indicate positive spatial clustering. 
+#' @description Uses Joint Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering.
 #'
-#' @param data data
-#' @param var_cured ...
-#' @param var_id ...
-#' @param var_time ...
-#' @param n ...
-#' @param t ...
+#' @param data data.
+#' @param var_cured Binary indicator of immunity.
+#' @param var_id ID's unique identifier.
+#' @param var_time variable that measures time.
+#' @param n number of observation per id.
+#' @param t value of the confidence interval.
 #'
 #' @return A ggplot object
 #'

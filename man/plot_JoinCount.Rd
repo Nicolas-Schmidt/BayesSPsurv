@@ -14,23 +14,23 @@ plot_JoinCount(
 )
 }
 \arguments{
-\item{data}{data}
+\item{data}{data.}
 
-\item{var_cured}{...}
+\item{var_cured}{Binary indicator of immunity.}
 
-\item{var_id}{...}
+\item{var_id}{ID's unique identifier.}
 
-\item{var_time}{...}
+\item{var_time}{variable that measures time.}
 
-\item{n}{...}
+\item{n}{number of observation per id.}
 
-\item{t}{...}
+\item{t}{value of the confidence interval.}
 }
 \value{
 A ggplot object
 }
 \description{
-...
+Uses Joint Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering.
 }
 \examples{
 
