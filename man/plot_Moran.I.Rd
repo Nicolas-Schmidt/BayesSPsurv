@@ -9,7 +9,7 @@ plot_Moran.I(
   var_duration = character(),
   var_id = character(),
   var_time = character(),
-  n = 0,
+  n = 1,
   t = 1.645
 )
 }
