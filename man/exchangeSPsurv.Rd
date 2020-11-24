@@ -137,7 +137,7 @@ print(model)
 
 summary(model, parameter = "betas")
 
-plot(model)
+# plot(model)
 
 
 ## 2
