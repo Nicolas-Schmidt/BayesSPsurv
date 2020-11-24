@@ -72,7 +72,7 @@ plot_Moran.I <- function(data,
 #' @description Uses Joint Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering.
 #'
 #' @param data data.
-#' @param var_cured Binary indicator of immunity.
+#' @param var_cured binary indicator of immunity.
 #' @param var_id ID's unique identifier.
 #' @param var_time variable that measures time.
 #' @param n number of observation per id.
