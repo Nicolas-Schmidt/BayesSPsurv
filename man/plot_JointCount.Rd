@@ -16,7 +16,7 @@ plot_JointCount(
 \arguments{
 \item{data}{data.}
 
-\item{var_cured}{Binary indicator of immunity.}
+\item{var_cured}{binary indicator of immunity.}
 
 \item{var_id}{ID's unique identifier.}
 
