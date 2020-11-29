@@ -60,13 +60,13 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 
 we illustrate the functionality of `BayesSPsurv` using data from Walter (2015) that is included and described in the package. 
 
-### Bayesian Spatial Split-Population (SP) model
+### Bayesian Spatial Split-Population (SP) Survival Model
 
 `spatialSPsurv` estimates the Bayesian Spatial split-population survival (cure) model, which includes not only time-varying covariates but also spatially autocorrelated frailties in the model’s split and survival stage. To allow for easy replication, the examples below run a low number of iterations (N).  
 
-`spatialSP` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
+`spatialSPsurv` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
-`spatialSP` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+`spatialSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
 
 ``` r
 
@@ -149,7 +149,7 @@ SPstats(model)
 #> [1] 23338.27
 
 # ~~~~~~~~~~~~
-# Map
+# Choropleth Map
 # ~~~~~~~~~~~~
 
 spw   <- matrix(apply(model$W, 2, mean), ncol = 1, nrow = ncol(model$W))
@@ -165,7 +165,14 @@ rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
-## exchangeSPsurv
+### Bayesian Exchangeable Split-Population (SP) Survival Model
+
+This model includes nonspatial unit-specific i.i.d frailties in the model’s split-stage (Vi) and survival stage (Wi) as well as time-varying covariates in each of these two stages.
+
+`exchangeSPsurv` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
+
+`exchangeSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+
 
 ``` r
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
