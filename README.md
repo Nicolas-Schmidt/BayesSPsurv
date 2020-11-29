@@ -56,10 +56,13 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 | `spatial_SA`     | Generates a spatial weights matrix with units and adjacencies defined by the user.                                   |
 | `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model outputs.        |
 
-### Using the package
+### Data
 
-we illustrate the functionality of `BayesSPsurv` using data from Walter (2015) that is included and described in the package. To allow for easy replication, the examples below 
-run a low number of iterations (N).  
+we illustrate the functionality of `BayesSPsurv` using data from Walter (2015) that is included and described in the package. 
+
+### Bayesian Spatial Split-Population (SP) model
+
+`spatialSPsurv` estimates the Bayesian Spatial split-population survival (cure) model, which includes not only time-varying covariates but also spatially autocorrelated frailties in the model’s split and survival stage. To allow for easy replication, the examples below run a low number of iterations (N).  
 
 `spatialSP` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
