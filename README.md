@@ -61,8 +61,7 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 we illustrate the functionality of `BayesSPsurv` using data from Walter (2015) that is included and described in the package. To allow for easy replication, the examples below 
 run a low number of iterations (N).  
 
-Results from models with a higher number of iterations (N = 15,000) can be found here:
-Weibull
+`spatialSP` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 Log-Log
 
 ``` r
