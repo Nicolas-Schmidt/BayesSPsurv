@@ -62,7 +62,7 @@ we illustrate the functionality of `BayesSPsurv` using data from Walter (2015) t
 run a low number of iterations (N).  
 
 `spatialSP` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
-Log-Log
+`spatialSP` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
 
 ``` r
 
