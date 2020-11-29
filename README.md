@@ -25,18 +25,21 @@ spatial heterogeneity among “at risk” and “immune” populations, and
 incorporates time-varying covariates. This package currently implements
 Weibull, Exponential and Log-logistic forms for the duration component,
 and includes functions for a series of diagnostic tests and plots to
-easily visualize convergence and spatial effects. The user can also
+easily visualize autocorrelation, convergence and spatial effects. The user can also
 create their own spatial weights matrix based on their units and
 adjacencies of interest, making the use of these models flexible and
 broadly applicable to a variety of research areas.
 
 ### Installation
+From [CRAN R](https://cran.r-project.org/web/packages/BayesSPsurv/index.html:)
 
 ``` r
-# Install speech from CRAN
 install.packages("BayesSPsurv")
+```
 
-# The development version from GitHub:
+The development version from GitHub:
+
+``` r
 if (!require("remotes")) install.packages("remotes")
 remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 ```
@@ -47,8 +50,9 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 | ---------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `spatialSPsurv`  | Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties. |
 | `exchangeSPsurv` | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties.         |
-| `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties                    |
-| `summary`        | Returns a summary of exchangeSPsurv, pooledSPsurv or spatialSPsurv object via `coda::summary.mcmc`.                  |
+| `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties.                   |
+| `plot_JointCount`|Conducts Join Count tests to assess spatial clustering or dispersion of categorical variables in the data.            |
+| `plot_Moran.I`   | Implements Global Moran I test to evaluate spatial autocorrelation in units’ risk propensity in the data.            |
 | `spatial_SA`     | Generates a spatial weights matrix with units and adjacencies defined by the user.                                   |
 | `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts.          |
 
