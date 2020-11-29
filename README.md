@@ -31,7 +31,7 @@ adjacencies of interest, making the use of these models flexible and
 broadly applicable to a variety of research areas.
 
 ### Installation
-From [CRAN R](https://cran.r-project.org/web/packages/BayesSPsurv/index.html:)
+The latest version of the package is available on [CRAN R](https://cran.r-project.org/web/packages/BayesSPsurv/index.html):
 
 ``` r
 install.packages("BayesSPsurv")
