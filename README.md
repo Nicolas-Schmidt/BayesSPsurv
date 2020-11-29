@@ -31,13 +31,13 @@ adjacencies of interest, making the use of these models flexible and
 broadly applicable to a variety of research areas.
 
 ### Installation
-The latest version of the package is available on [CRAN R](https://cran.r-project.org/web/packages/BayesSPsurv/index.html):
+The latest version of the package (`0.1.1`) is available on [CRAN R](https://cran.r-project.org/web/packages/BayesSPsurv/index.html):
 
 ``` r
 install.packages("BayesSPsurv")
 ```
 
-To install the development version from GitHub:
+Alternatively, you can install the development version from GitHub:
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
