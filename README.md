@@ -37,7 +37,7 @@ The latest version of the package is available on [CRAN R](https://cran.r-projec
 install.packages("BayesSPsurv")
 ```
 
-The development version from GitHub:
+To install the development version from GitHub:
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
@@ -56,7 +56,14 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 | `spatial_SA`     | Generates a spatial weights matrix with units and adjacencies defined by the user.                                   |
 | `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model outputs.        |
 
-### Example
+### Using the package
+
+we illustrate the functionality of `BayesSPsurv` using data from Walter (2015) that is included and described in the package. To allow for easy replication, the examples below 
+run a low number of iterations (N).  
+
+Results from models with a higher number of iterations (N = 15,000) can be found here:
+Weibull
+Log-Log
 
 ``` r
 
