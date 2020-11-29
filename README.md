@@ -54,7 +54,7 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 | `plot_JointCount`|Conducts Join Count tests to assess spatial clustering or dispersion of categorical variables in the data.            |
 | `plot_Moran.I`   | Implements Global Moran I test to evaluate spatial autocorrelation in units’ risk propensity in the data.            |
 | `spatial_SA`     | Generates a spatial weights matrix with units and adjacencies defined by the user.                                   |
-| `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts.          |
+| `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model outputs.        |
 
 ### Example
 
