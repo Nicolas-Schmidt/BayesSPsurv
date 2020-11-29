@@ -58,7 +58,7 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 
 ### Data
 
-we illustrate the functionality of `BayesSPsurv` using data from Walter (2015) that is included and described in the package. 
+We illustrate the functionality of `BayesSPsurv` using data from Walter (2015) that is included and described in the package. 
 
 ### Bayesian Spatial Split-Population (SP) Survival Model
 
