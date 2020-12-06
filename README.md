@@ -54,7 +54,9 @@ remotes::install_github("Nicolas-Schmidt/BayesSPsurv")
 | ---------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `spatialSPsurv`  | Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties. |
 | `exchangeSPsurv` | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties.         |
-| `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties                    |
+| `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties.                   |
+| `plot_JointCount`| Conducts Join Count tests to assess spatial clustering or dispersion of categorical variables in the data.           |
+| `plot_Moran.I`   | Implements Global Moran I test to evaluate spatial autocorrelation in units’ risk propensity in the data.            | 
 | `summary`        | Returns a summary of exchangeSPsurv, pooledSPsurv or spatialSPsurv object via `coda::summary.mcmc`.                  |
 | `spatial_SA`     | Generates a spatial weights matrix with units and adjacencies defined by the user.                                   |
 | `SPstats`        | A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupUts.         |
@@ -229,8 +231,15 @@ ggplot(w_country, aes(x = reorder(factor(name), value, FUN = median), y =  value
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
-## pooledSPsurv
+## Bayesian Pooled Split-Population (SP) Survival Model 
 
+Bayesian SP survival model without unit-specific i.i.d frailties.
+
+`pooledSPsurv` Weibull model with N = 15,000 is
+[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
+
+`pooledSPsurv` Log-Logistic model with N = 15,000 is
+[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
 ``` r
 
 
