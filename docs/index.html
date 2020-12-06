@@ -17,7 +17,7 @@
     “at risk” and “immune” populations, and incorporate time-varying covariates. 
     This package currently implements Weibull, Exponential and Log-logistic forms for 
     the duration component. It also includes functions for a series of diagnostic 
-    tests and plots to easily visualize convergence and spatial effects. Users can 
+    tests and plots to easily visualize spatial autocorrelation, convergence, and spatial effects. Users can 
     create their own spatial weights matrix based on their units and adjacencies of 
     interest, making the use of these models flexible and broadly applicable to a 
     variety of research areas. Joo et al. (2020) &lt;https://github.com/Nicolas-Schmidt/BayesSPsurv/blob/master/man/figures/SPcure.pdf&gt; describe 
@@ -59,7 +59,14 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -77,15 +84,18 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>Bayesian parametric spatial split-population survival models for clustered event processes. The models account for both structural and spatial heterogeneity among “at risk” and “immune” populations, and incorporates time-varying covariates. This package currently implements Weibull, Exponential and Log-logistic forms for the duration component, and includes functions for a series of diagnostic tests and plots to easily visualize convergence and spatial effects. The user can also create their own spatial weights matrix based on their units and adjacencies of interest, making the use of these models flexible and broadly applicable to a variety of research areas.</p>
+<div id="description" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description" class="anchor"></a>Description</h3>
+<p>Parametric spatial split-population (SP) survival models for clustered event processes. The models account for both structural and spatial heterogeneity among “at risk” and “immune” populations, and incorporates time-varying covariates. This package currently implements Weibull, Exponential and Log-logistic forms for the duration component, and includes functions for a series of diagnostic tests and plots to easily visualize autocorrelation, convergence and spatial effects. The user can also create their own spatial weights matrix based on their units and adjacencies of interest, making the use of these models flexible and broadly applicable to a variety of research areas.</p>
+</div>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># Install speech from CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BayesSPsurv"</span>)
-
-<span class="co"># The development version from GitHub:</span>
-<span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"remotes"</span>)) <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
+<p>The latest version of the package (<code>0.1.1</code>) is available on <a href="https://cran.r-project.org/web/packages/BayesSPsurv/index.html">CRAN R</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BayesSPsurv"</span>)</pre></div>
+<p>To install the development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"remotes"</span>)) <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
 <span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"Nicolas-Schmidt/BayesSPsurv"</span>)</pre></div>
 </div>
 <div id="functions" class="section level3">
@@ -123,7 +133,7 @@
 </tr>
 <tr class="even">
 <td><code>SPstats</code></td>
-<td>A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupts.</td>
+<td>A function to calculate the deviance information criterion (DIC) and Log-likelihood for fitted model oupUts.</td>
 </tr>
 </tbody>
 </table>
@@ -131,7 +141,20 @@
 <div id="example" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h3>
-<div class="sourceCode" id="cb2"><pre class="r">
+</div>
+<div id="data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#data" class="anchor"></a>Data</h3>
+<p>We illustrate the functionality of <code>BayesSPsurv</code> using data from Walter</p>
+<p>(2015) that is included and described in the package.</p>
+</div>
+<div id="bayesian-spatial-split-population-sp-survival-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bayesian-spatial-split-population-sp-survival-model" class="anchor"></a>Bayesian Spatial Split-Population (SP) Survival Model</h3>
+<p><code>spatialSPsurv</code> estimates the Bayesian Spatial split-population survival (cure) model, which includes not only time-varying covariates but also spatially autocorrelated frailties in the model’s split and survival stage. To allow for easy replication, the examples below run a low number of iterations (N).</p>
+<p><code>spatialSPsurv</code> Weibull model with N = 15,000 is <a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw">here</a>.</p>
+<p><code>spatialSPsurv</code> Log-Logistic model with N = 15,000 is <a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog">here</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="r">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">BayesSPsurv</span>)
 
 <span class="co">## Data</span>
@@ -210,9 +233,9 @@
 <span class="co">#&gt; $Loglik</span>
 <span class="co">#&gt; [1] 23338.27</span>
 
-<span class="co"># ~~~~~~~~~~~~</span>
-<span class="co"># Map</span>
-<span class="co"># ~~~~~~~~~~~~</span>
+<span class="co"># ~~~~~~~~~~~~~~~</span>
+<span class="co"># Choropleth Map</span>
+<span class="co"># ~~~~~~~~~~~~~~~</span>
 
 <span class="no">spw</span>   <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">model</span>$<span class="no">W</span>, <span class="fl">2</span>, <span class="no">mean</span>), <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">model</span>$<span class="no">W</span>))
 <span class="no">ccode</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">model</span>$<span class="no">W</span>)
@@ -225,10 +248,13 @@
 <span class="kw pkg">rworldmap</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rworldmap/man/mapCountryData.html">mapCountryData</a></span>(<span class="no">map</span>, <span class="kw">nameColumnToPlot</span> <span class="kw">=</span> <span class="st">'spw'</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
 </div>
-<div id="exchangespsurv" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exchangespsurv" class="anchor"></a>exchangeSPsurv</h2>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">walter</span> <span class="kw">&lt;-</span> <span class="kw pkg">spduration</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/spduration/man/add_duration.html">add_duration</a></span>(<span class="no">Walter_2015_JCR</span>,<span class="st">"renewed_war"</span>,
+<div id="bayesian-exchangeable-split-population-sp-survival-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bayesian-exchangeable-split-population-sp-survival-model" class="anchor"></a>Bayesian Exchangeable Split-Population (SP) Survival Model</h3>
+<p>This model includes nonspatial unit-specific i.i.d frailties in the model’s split-stage (Vi) and survival stage (Wi) as well as time-varying covariates in each of these two stages.</p>
+<p><code>exchangeSPsurv</code> Weibull model with N = 15,000 is <a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw">here</a>.</p>
+<p><code>exchangeSPsurv</code> Log-Logistic model with N = 15,000 is <a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog">here</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">walter</span> <span class="kw">&lt;-</span> <span class="kw pkg">spduration</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/spduration/man/add_duration.html">add_duration</a></span>(<span class="no">Walter_2015_JCR</span>,<span class="st">"renewed_war"</span>,
                                    <span class="kw">unitID</span> <span class="kw">=</span> <span class="st">"ccode"</span>, <span class="kw">tID</span> <span class="kw">=</span> <span class="st">"year"</span>,
                                    <span class="kw">freq</span> <span class="kw">=</span> <span class="st">"year"</span>, <span class="kw">ongoing</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 
@@ -246,7 +272,7 @@
         <span class="kw">LY</span>       <span class="kw">=</span> <span class="st">'lastyear'</span>,
         <span class="kw">S</span>        <span class="kw">=</span> <span class="st">'S'</span> ,
         <span class="kw">data</span>     <span class="kw">=</span> <span class="no">walter</span>,
-        <span class="kw">N</span>        <span class="kw">=</span> <span class="fl">100</span>,
+        <span class="kw">N</span>        <span class="kw">=</span> <span class="fl">500</span>,
         <span class="kw">burn</span>     <span class="kw">=</span> <span class="fl">10</span>,
         <span class="kw">thin</span>     <span class="kw">=</span> <span class="fl">10</span>,
         <span class="kw">w</span>        <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>),
@@ -265,6 +291,66 @@
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="st">'gray'</span>) +  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">""</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">""</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
 </div>
+<div id="pooledspsurv" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pooledspsurv" class="anchor"></a>pooledSPsurv</h2>
+<div class="sourceCode" id="cb5"><pre class="r">
+
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123456</span>)
+
+<span class="no">model</span> <span class="kw">&lt;-</span>
+     <span class="fu"><a href="reference/pooledSPsurv.html">pooledSPsurv</a></span>(
+         <span class="kw">duration</span> <span class="kw">=</span> <span class="no">duration</span> ~ <span class="no">fhcompor1</span> + <span class="no">lgdpl</span> + <span class="no">comprehensive</span> + <span class="no">victory</span> +
+             <span class="no">instabl</span> + <span class="no">intensityln</span> + <span class="no">ethfrac</span> + <span class="no">unpko</span>,
+         <span class="kw">immune</span>   <span class="kw">=</span> <span class="no">cured</span> ~ <span class="no">fhcompor1</span> + <span class="no">lgdpl</span> + <span class="no">victory</span>,
+         <span class="kw">Y0</span>       <span class="kw">=</span> <span class="st">'t.0'</span>,
+         <span class="kw">LY</span>       <span class="kw">=</span> <span class="st">'lastyear'</span>,
+         <span class="kw">data</span>     <span class="kw">=</span> <span class="no">walter</span>,
+         <span class="kw">N</span>        <span class="kw">=</span> <span class="fl">500</span>,
+         <span class="kw">burn</span>     <span class="kw">=</span> <span class="fl">10</span>,
+         <span class="kw">thin</span>     <span class="kw">=</span> <span class="fl">10</span>,
+         <span class="kw">w</span>        <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>),
+         <span class="kw">m</span>        <span class="kw">=</span> <span class="fl">10</span>,
+         <span class="kw">form</span>     <span class="kw">=</span> <span class="st">"Weibull"</span>
+     )
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">model</span>)
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; pooledSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + </span>
+<span class="co">#&gt;     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ </span>
+<span class="co">#&gt;     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", </span>
+<span class="co">#&gt;     data = walter, N = 500, burn = 10, thin = 10, w = c(1, 1, </span>
+<span class="co">#&gt;         1), m = 10, form = "Weibull")</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Iterations = 1:49</span>
+<span class="co">#&gt; Thinning interval = 1 </span>
+<span class="co">#&gt; Number of chains = 1 </span>
+<span class="co">#&gt; Sample size per chain = 49 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Empirical mean and standard deviation for each variable,</span>
+<span class="co">#&gt; plus standard error of the mean:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Duration equation: </span>
+<span class="co">#&gt;                     Mean         SD   Naive SE Time-series SE</span>
+<span class="co">#&gt; (Intercept)    2.3748909 1.38333158 0.19761880     0.64033808</span>
+<span class="co">#&gt; fhcompor1     -0.9225435 0.62636551 0.08948079     0.13530712</span>
+<span class="co">#&gt; lgdpl         -0.1006686 0.12871863 0.01838838     0.05205719</span>
+<span class="co">#&gt; comprehensive -0.8376250 0.40244531 0.05749219     0.05749219</span>
+<span class="co">#&gt; victory        0.3702996 0.44200695 0.06314385     0.06314385</span>
+<span class="co">#&gt; instabl        0.8792065 0.55504640 0.07929234     0.07929234</span>
+<span class="co">#&gt; intensityln    0.1185066 0.09089489 0.01298498     0.02403753</span>
+<span class="co">#&gt; ethfrac       -0.3734596 0.71246591 0.10178084     0.13237277</span>
+<span class="co">#&gt; unpko          0.5947845 0.60326265 0.08618038     0.08618038</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Inmune equation: </span>
+<span class="co">#&gt;                    Mean       SD  Naive SE Time-series SE</span>
+<span class="co">#&gt; (Intercept)  0.01876845 2.163802 0.3091146      0.4111774</span>
+<span class="co">#&gt; fhcompor1    1.25950280 3.002383 0.4289118      0.6366892</span>
+<span class="co">#&gt; lgdpl       -1.86099795 1.670992 0.2387131      0.2986771</span>
+<span class="co">#&gt; victory     -0.24415725 2.435839 0.3479770      0.3479770</span></pre></div>
+</div>
 </div>
   </div>
 
@@ -273,6 +359,10 @@
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=BayesSPsurv">https://​cloud.r-project.org/​package=BayesSPsurv</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/">https://​github.com/​Nicolas-Schmidt/​BayesSPsurv/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/issues">https://​github.com/​Nicolas-Schmidt/​BayesSPsurv/​issues</a>
 </li>
 </ul>
 </div>
