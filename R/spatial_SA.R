@@ -3,7 +3,7 @@
 #'
 #' @param data data.frame.
 #' @param var_ccode name of the variable that contains the country codes.
-#' @param threshold distance in kilometers.
+#' @param threshold distance in kilometers. By default is 800.
 #'
 #' @return list. Contains database with variable sp_id (S) and matrix A.
 #'

@@ -2803,11 +2803,11 @@ JointCount<- function(X, W) {
   return(out)
 }
 
-data_plots <- function(data, var_id = character(), var_time = character(), n = 0){
+data_plots <- function(data, var_id = character(), var_time = character(), n = 0, threshold){
 
   dat  <- lapply(split(data, data[,var_time]), function(x){x[!duplicated(x[, var_id]), ]})
   dat  <- dat[sapply(dat, nrow) >= n]
-  mats <- lapply(dat, function(x){BayesSPsurv::spatial_SA(x, var_ccode = var_id)$matrixA})
+  mats <- lapply(dat, function(x){BayesSPsurv::spatial_SA(x, var_ccode = var_id, threshold = threshold)$matrixA})
   w2 <- list()
   for(i in 1:length(dat)){w2[[i]] <- dat[[i]][order(dat[[i]][, var_id]),]}
   list(mats = mats, w2 = w2)

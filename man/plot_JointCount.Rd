@@ -10,7 +10,8 @@ plot_JointCount(
   var_id = character(),
   var_time = character(),
   n = 1,
-  t = 1.645
+  t = 1.645,
+  threshold = 800L
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ plot_JointCount(
 \item{n}{number of observation per id.}
 
 \item{t}{value of the confidence interval.}
+
+\item{threshold}{distance in kilometers. By default is 800.}
 }
 \value{
 A ggplot object

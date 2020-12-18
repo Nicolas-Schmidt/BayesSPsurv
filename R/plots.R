@@ -7,7 +7,7 @@
 #' @param var_time variable that measures time.
 #' @param n number of observation per id.
 #' @param t value of the confidence interval.
-#'
+#' @param threshold distance in kilometers. By default is 800.
 #'
 #' @return A ggplot object
 #'
@@ -37,9 +37,10 @@ plot_Moran.I <- function(data,
                          var_id = character(),
                          var_time = character(),
                          n = 1,
-                         t = 1.645){
+                         t = 1.645,
+                         threshold = 800L){
 
-    wdata <- data_plots(data = data, var_id = var_id, var_time = var_time, n = n)
+    wdata <- data_plots(data = data, var_id = var_id, var_time = var_time, n = n, threshold = threshold)
     w2   <- wdata[[2]]
     mats <- wdata[[1]]
     t_ <- t
@@ -77,6 +78,7 @@ plot_Moran.I <- function(data,
 #' @param var_time variable that measures time.
 #' @param n number of observation per id.
 #' @param t value of the confidence interval.
+#' @param threshold distance in kilometers. By default is 800.
 #'
 #' @return A ggplot object
 #'
@@ -105,10 +107,11 @@ plot_JointCount <- function(data,
                            var_id = character(),
                            var_time = character(),
                            n = 1,
-                           t = 1.645){
+                           t = 1.645,
+                           threshold = 800L){
 
 
-    wdata <- data_plots(data = data, var_id = var_id, var_time = var_time, n = n)
+    wdata <- data_plots(data = data, var_id = var_id, var_time = var_time, n = n, threshold = threshold)
     w2   <- wdata[[2]]
     mats <- wdata[[1]]
     t_ <- t

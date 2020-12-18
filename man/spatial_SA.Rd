@@ -11,7 +11,7 @@ spatial_SA(data, var_ccode, threshold = 800L)
 
 \item{var_ccode}{name of the variable that contains the country codes.}
 
-\item{threshold}{distance in kilometers.}
+\item{threshold}{distance in kilometers. By default is 800.}
 }
 \value{
 list. Contains database with variable sp_id (S) and matrix A.
