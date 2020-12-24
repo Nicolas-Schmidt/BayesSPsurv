@@ -13,7 +13,7 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![](https://img.shields.io/badge/devel%20version-0.1.1-blue.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv)
+[![](https://img.shields.io/badge/devel%20version-0.1.2-blue.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -80,7 +80,7 @@ number of iterations (N).
 [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
 `spatialSPsurv` Log-Logistic model with N = 15,000 is
-[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw/data-raw-loglog).
 
 ``` r
 
@@ -189,7 +189,7 @@ covariates in each of these two stages.
 [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
 `exchangeSPsurv` Log-Logistic model with N = 15,000 is
-[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw/data-raw-loglog).
 
 ``` r
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", 
@@ -239,7 +239,7 @@ Bayesian SP survical model without unit-specific i.i.d frailties.
 [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
 `pooledSPsurv` Log-Logistic model with N = 15,000 is
-[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+[here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw/data-raw-loglog).
 
 ``` r
 

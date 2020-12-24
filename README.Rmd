@@ -75,7 +75,7 @@ We illustrate the functionality of `BayesSPsurv` using data from Walter (2015) t
 
 `spatialSPsurv` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
-`spatialSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+`spatialSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw/data-raw-loglog).
 
 
 
@@ -136,7 +136,7 @@ This model includes nonspatial unit-specific i.i.d frailties in the model’s sp
 
 `exchangeSPsurv` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
-`exchangeSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+`exchangeSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw/data-raw-loglog).
 
 
 ```{r, fig.width = 6, fig.height = 6, warning = FALSE}
@@ -185,7 +185,7 @@ Bayesian SP survical model without unit-specific i.i.d frailties.
 
 `pooledSPsurv` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
-`pooledSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw-loglog).
+`pooledSPsurv` Log-Logistic model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw/data-raw-loglog).
 
 
 ```{r,  warning = FALSE}
