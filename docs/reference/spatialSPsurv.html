@@ -75,7 +75,7 @@ Returns a plot of a spatialSPsurv object via plot.mcmc." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BayesSPsurv</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -145,13 +145,13 @@ Returns a plot of a spatialSPsurv object via plot.mcmc." />
 )
 
 <span class='co'># S3 method for spatialSPsurv</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"betas"</span>, <span class='st'>"gammas"</span>, <span class='st'>"lambda"</span>), <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)
 
 <span class='co'># S3 method for spatialSPsurv</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for spatialSPsurv</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,7 +222,7 @@ Returns a plot of a spatialSPsurv object via plot.mcmc." />
     </tr>
     <tr>
       <th>parameter</th>
-      <td><p>one of three parameters of the <code>spatialSPsurv</code> output. Indicate either "betas," "gammas," or "lambda."</p></td>
+      <td><p>one of five parameters of the <code>spatialSPsurv</code> output. Indicate either "betas," "gammas," "rho", "lambda" or "delta".</p></td>
     </tr>
     <tr>
       <th>...</th>

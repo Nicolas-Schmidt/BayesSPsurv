@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BayesSPsurv</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -126,7 +126,8 @@
   <span class='kw'>var_id</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(),
   <span class='kw'>var_time</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(),
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>t</span> <span class='kw'>=</span> <span class='fl'>1.645</span>
+  <span class='kw'>t</span> <span class='kw'>=</span> <span class='fl'>1.645</span>,
+  <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>800L</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -155,6 +156,10 @@
     <tr>
       <th>t</th>
       <td><p>value of the confidence interval.</p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>distance in kilometers. By default is 800.</p></td>
     </tr>
     </table>
 
