@@ -21,11 +21,11 @@ pooledSPsurv(
   form = c("Weibull", "exponential", "loglog")
 )
 
-\method{summary}{SPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
+\method{summary}{SPsurv}(object, parameter = character(), ...)
 
 \method{print}{SPsurv}(x, ...)
 
-\method{plot}{SPsurv}(x, ...)
+\method{plot}{SPsurv}(x, parameter = character(), ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring.}
@@ -52,7 +52,7 @@ pooledSPsurv(
 
 \item{object}{an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.}
 
-\item{parameter}{one of three parameters of the \code{\link{pooledSPsurv}} output. Indicate either "betas," "gammas," or "lambda."}
+\item{parameter}{one of Four parameters of the \code{\link{pooledSPsurv}} output. Indicate either "betas," "gammas", "rho" or "delta".}
 
 \item{...}{additional parameter.}
 

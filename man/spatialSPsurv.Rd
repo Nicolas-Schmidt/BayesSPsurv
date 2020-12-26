@@ -25,11 +25,11 @@ spatialSPsurv(
   id_WV = colnames(A)
 )
 
-\method{summary}{spatialSPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
+\method{summary}{spatialSPsurv}(object, parameter = character(), ...)
 
 \method{print}{spatialSPsurv}(x, ...)
 
-\method{plot}{spatialSPsurv}(x, ...)
+\method{plot}{spatialSPsurv}(x, parameter = character(), ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring.}
@@ -64,7 +64,7 @@ spatialSPsurv(
 
 \item{object}{an object of class \code{spatialSPsurv}, the output of \code{\link{spatialSPsurv}}.}
 
-\item{parameter}{one of three parameters of the \code{\link{spatialSPsurv}} output. Indicate either "betas," "gammas," or "lambda."}
+\item{parameter}{one of five parameters of the \code{\link{spatialSPsurv}} output. Indicate either "betas," "gammas," "rho", "lambda" or "delta".}
 
 \item{...}{additional parameter.}
 

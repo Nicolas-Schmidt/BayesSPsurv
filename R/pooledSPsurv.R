@@ -103,7 +103,7 @@ pooledSPsurv <- function(duration,
 #' @title summary.SPsurv
 #' @description Returns a summary of a SPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.
-#' @param parameter one of three parameters of the \code{\link{pooledSPsurv}} output. Indicate either "betas," "gammas," or "lambda."
+#' @param parameter one of Four parameters of the \code{\link{pooledSPsurv}} output. Indicate either "betas," "gammas", "rho" or "delta".
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname pooledSPsurv
@@ -111,12 +111,8 @@ pooledSPsurv <- function(duration,
 #'
 #'
 
-summary.SPsurv <- function(object, parameter = c("betas", "gammas", "lambda"), ...){
-
-    if (parameter == "betas")  sum <- summary(mcmc(object$betas),  ...)
-    if (parameter == "gammas") sum <- summary(mcmc(object$gammas), ...)
-    if (parameter == "lambda") sum <- summary(mcmc(object$lambda), ...)
-    sum
+summary.SPsurv <- function(object, parameter = character(), ...){
+    summary(coda::mcmc(object[[parameter]]), ...)
 }
 
 
@@ -154,14 +150,15 @@ print.SPsurv <- function(x, ...){
 #' @title plot.SPsurv
 #' @description Returns a plot of a pooledSPsurv object via \code{\link[coda]{plot.mcmc}}.
 #' @param x an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.
+#' @param parameter one of Four parameters of the \code{\link{pooledSPsurv}} output. Indicate either "betas," "gammas", "rho" or "delta".
 #' @param ... additional parameter.
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname pooledSPsurv
 #' @export
 #'
 
-plot.SPsurv <- function(x, ...){
-    plot((coda::mcmc(x$betas)), ...)
+plot.SPsurv <- function(x,  parameter = character(), ...){
+    plot((coda::mcmc(x[[parameter]])), ...)
 }
 
 

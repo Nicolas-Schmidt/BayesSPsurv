@@ -156,7 +156,7 @@ exchangeSPsurv <- function(duration,
 #' @title summary.frailtySPsurv
 #' @description Returns a summary of a exchangeSPsurv object via \code{\link[coda]{summary.mcmc}}.
 #' @param object an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.
-#' @param parameter one of three parameters of the \code{\link{exchangeSPsurv}} output. Indicate either "betas," "gammas," or "lambda."
+#' @param parameter one of five parameters of the \code{\link{spatialSPsurv}} output. Indicate either "betas," "gammas," "rho", "lambda" or "delta".
 #' @param ... additional parameter
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname exchangeSPsurv
@@ -164,12 +164,8 @@ exchangeSPsurv <- function(duration,
 #'
 #'
 
-summary.frailtySPsurv <- function(object, parameter = c("betas", "gammas", "lambda"), ...){
-
-    if (parameter == "betas")  sum <- summary(mcmc(object$betas),  ...)
-    if (parameter == "gammas") sum <- summary(mcmc(object$gammas), ...)
-    if (parameter == "lambda") sum <- summary(mcmc(object$lambda), ...)
-    sum
+summary.frailtySPsurv <- function(object, parameter = character(), ...){
+    summary(coda::mcmc(object[[parameter]]), ...)
 }
 
 
@@ -206,14 +202,15 @@ print.frailtySPsurv <- function(x, ...){
 #' @title plot.frailtySPsurv
 #' @description Returns a plot of a exchangeSPsurv object via \code{\link[coda]{plot.mcmc}}.
 #' @param x an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.
+#' @param parameter one of five parameters of the \code{\link{spatialSPsurv}} output. Indicate either "betas," "gammas," "rho", "lambda" or "delta".
 #' @param ... additional parameter.
 #' @return list. Empirical mean, standard deviation and quantiles for each variable.
 #' @rdname exchangeSPsurv
 #' @export
 #'
 
-plot.frailtySPsurv <- function(x, ...){
-    plot((coda::mcmc(x$betas)), ...)
+plot.frailtySPsurv <- function(x,  parameter = character(), ...){
+    plot((coda::mcmc(x[[parameter]])), ...)
 }
 
 

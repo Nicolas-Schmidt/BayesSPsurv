@@ -24,11 +24,11 @@ exchangeSPsurv(
   id_WV = unique(data[, S])
 )
 
-\method{summary}{frailtySPsurv}(object, parameter = c("betas", "gammas", "lambda"), ...)
+\method{summary}{frailtySPsurv}(object, parameter = character(), ...)
 
 \method{print}{frailtySPsurv}(x, ...)
 
-\method{plot}{frailtySPsurv}(x, ...)
+\method{plot}{frailtySPsurv}(x, parameter = character(), ...)
 }
 \arguments{
 \item{duration}{survival stage equation written in a formula of the form Y ~ X1 + X2 + ... where Y is duration until failure or censoring.}
@@ -61,7 +61,7 @@ exchangeSPsurv(
 
 \item{object}{an object of class \code{frailtySPsurv}, the output of \code{\link{exchangeSPsurv}}.}
 
-\item{parameter}{one of three parameters of the \code{\link{exchangeSPsurv}} output. Indicate either "betas," "gammas," or "lambda."}
+\item{parameter}{one of five parameters of the \code{\link{spatialSPsurv}} output. Indicate either "betas," "gammas," "rho", "lambda" or "delta".}
 
 \item{...}{additional parameter.}
 
