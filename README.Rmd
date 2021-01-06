@@ -34,7 +34,7 @@ Parametric spatial split-population (SP) survival models for clustered event pro
 
 ### Installation
 
-The latest version of the package (`0.1.1`) is available on [CRAN R](https://cran.r-project.org/web/packages/BayesSPsurv/index.html):
+The latest version of the package (`0.1.1`) is available on [CRAN R](https://CRAN.R-project.org/package=BayesSPsurv):
 ```r
 install.packages("BayesSPsurv")
 ```

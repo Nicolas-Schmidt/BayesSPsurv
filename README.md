@@ -35,7 +35,7 @@ broadly applicable to a variety of research areas.
 ### Installation
 
 The latest version of the package (`0.1.1`) is available on [CRAN
-R](https://cran.r-project.org/web/packages/BayesSPsurv/index.html):
+R](https://CRAN.R-project.org/package=BayesSPsurv):
 
 ``` r
 install.packages("BayesSPsurv")

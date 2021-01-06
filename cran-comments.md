@@ -1,3 +1,7 @@
+## Resubmission BayesSPsurv
+
+URL change in README.md file. Before: https://cran.r-project.org/web/packages/BayesSPsurv/index.html, now: https://CRAN.R-project.org/package=BayesSPsurv
+
 
 ## Test environments
 * local Windows, R 4.0.2
