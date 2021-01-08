@@ -69,7 +69,7 @@ plot_Moran.I <- function(data,
 }
 
 
-#' @title plot_JointCount
+#' @title plot_JoinCount
 #' @description Uses Joint Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering.
 #'
 #' @param data data.
@@ -93,7 +93,7 @@ plot_Moran.I <- function(data,
 #'                                    ongoing = FALSE)
 #'
 #'
-#' plot_JointCount(data = dataw,
+#' plot_JoinCount(data = dataw,
 #'                var_cured = "cured",
 #'                var_id = "ccode",
 #'                var_time = "year",
@@ -102,7 +102,7 @@ plot_Moran.I <- function(data,
 #'
 #' @export
 
-plot_JointCount <- function(data,
+plot_JoinCount <- function(data,
                            var_cured = character(),
                            var_id = character(),
                            var_time = character(),
@@ -142,5 +142,3 @@ plot_JointCount <- function(data,
         ggplot2::theme_bw() +
         ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(size=15, face = "bold"))
 }
-
-
