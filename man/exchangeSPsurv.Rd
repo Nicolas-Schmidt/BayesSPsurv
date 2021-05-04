@@ -20,7 +20,8 @@ exchangeSPsurv(
   w = c(1, 1, 1),
   m = 10,
   form = c("Weibull", "exponential", "loglog"),
-  prop.var,
+  prop.varV,
+  prop.varW,
   id_WV = unique(data[, S])
 )
 
@@ -55,7 +56,9 @@ exchangeSPsurv(
 
 \item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
-\item{prop.var}{proposed variance for Metropolis-Hastings.}
+\item{prop.varV}{proposed variance for Metropolis-Hastings.}
+
+\item{prop.varW}{proposed variance for Metropolis-Hastings.}
 
 \item{id_WV}{vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{unique(data[,S])}.}
 
@@ -117,20 +120,21 @@ set.seed(123456)
 
 model <-
     exchangeSPsurv(
-           duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-           instabl + intensityln + ethfrac + unpko,
-           immune   = cured ~ fhcompor1 + lgdpl + victory,
-           Y0       = 't.0',
-           LY       = 'lastyear',
-           S        = 'sp_id' ,
-           data     = walter[[1]],
-           N        = 100,
-           burn     = 10,
-           thin     = 10,
-           w        = c(1,1,1),
-           m        = 10,
-           form     = "Weibull",
-           prop.var = 1e-05
+           duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+                       instabl + intensityln + ethfrac + unpko,
+           immune    = cured ~ fhcompor1 + lgdpl + victory,
+           Y0        = 't.0',
+           LY        = 'lastyear',
+           S         = 'sp_id' ,
+           data      = walter[[1]],
+           N         = 100,
+           burn      = 10,
+           thin      = 10,
+           w         = c(1,1,1),
+           m         = 10,
+           form      = "Weibull",
+           prop.varV = 1e-05,
+           prop.varW = 1e-05,
 )
 
 print(model)
@@ -153,21 +157,22 @@ set.seed(123456)
 
 model <-
     exchangeSPsurv(
-       duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-            instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'S' ,
-        data     = walter,
-        N        = 100,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "loglog",
-        prop.var = 1e-05,
-        id_WV    = country
+        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+                    instabl + intensityln + ethfrac + unpko,
+        immune    = cured ~ fhcompor1 + lgdpl + victory,
+        Y0        = 't.0',
+        LY        = 'lastyear',
+        S         = 'S' ,
+        data      = walter,
+        N         = 100,
+        burn      = 10,
+        thin      = 10,
+        w         = c(1,1,1),
+        m         = 10,
+        form      = "loglog",
+        prop.varV = 1e-05,
+        prop.varW = 1e-05,
+        id_WV     = country
     )
 
 print(model)

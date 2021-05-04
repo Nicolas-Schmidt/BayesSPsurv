@@ -36,7 +36,8 @@ formcall <- function(duration,
                      w = c(1, 1, 1),
                      m = 10,
                      form,
-                     prop.var = NULL,
+                     prop.varV = NULL,
+                     prop.varW = NULL,
                      model = character())
 {
 
@@ -75,7 +76,8 @@ formcall <- function(duration,
 
   } else {
 
-    prop.var <-  prop.var
+    prop.varV <-  prop.varV
+    prop.varW <-  prop.varW
     S  <- data[, S]
     dataset <- data.frame(cbind(Y, Y0, C, LY, S, X, Z))
     dataset <- na.omit(dataset)
@@ -89,7 +91,7 @@ formcall <- function(duration,
     colnames(X) <- cnx
     colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, S = S, N = N, burn = burn,
-               thin = thin, w = w, m = m, form = form, prop.var = prop.var)
+               thin = thin, w = w, m = m, form = form, prop.varV = prop.varV, prop.varW = prop.varW)
 
   }
 
@@ -1434,7 +1436,7 @@ W.post2 = function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho) {
 # @param delta probability of true censoring
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling
 #
@@ -1451,10 +1453,10 @@ W.MH.sampling = function(S,
                          C,
                          LY,
                          rho,
-                         prop.var) {
+                         prop.varW) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
-  W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
+  W_new = rcpp_rmvnorm(1, prop.varW * diag(length(W_old)), W_old)
   W_new = W_new - mean(W_new)
   u = log(runif(1))
   w1 = W.post(S, A, lambda, Y, Y0,X, W_new[S], betas, delta, C, LY, rho)
@@ -1486,14 +1488,14 @@ W.MH.sampling = function(S,
 # @param delta probability of true censoring
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling
 #
-W.MH.sampling2 = function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var) {
+W.MH.sampling2 = function(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho, prop.varW) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
-  W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
+  W_new = rcpp_rmvnorm(1, prop.varW * diag(length(W_old)), W_old)
   W_new = W_new - mean(W_new)
   u = log(runif(1))
   w1 = W.post2(S, A, lambda, Y, Y0, X, W_new[S], betas, delta, C, LY, rho)
@@ -1589,7 +1591,7 @@ W.F.post2 = function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho) {
 # @param delta probability of true censoring
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling
 #
@@ -1605,10 +1607,10 @@ W.F.MH.sampling = function(Sigma.w,
                            C,
                            LY,
                            rho,
-                           prop.var) {
+                           prop.varW) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
-  W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
+  W_new = rcpp_rmvnorm(1, prop.varW * diag(length(W_old)), W_old)
   W_new = W_new - mean(W_new)
   u = log(runif(1))
   w1 = W.F.post(Sigma.w, S, Y, Y0, X, W_new[S], betas, delta, C, LY, rho)
@@ -1635,14 +1637,14 @@ W.F.MH.sampling = function(Sigma.w,
 # @param delta probability of true censoring
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling
 #
-W.F.MH.sampling2 = function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var) {
+W.F.MH.sampling2 = function(Sigma.w, S, Y, Y0, X, W, betas, delta, C, LY, rho, prop.varW) {
   S_uniq = unique(cbind(S, W))
   W_old = S_uniq[order(S_uniq[,1]), 2]
-  W_new = rcpp_rmvnorm(1, prop.var * diag(length(W_old)), W_old)
+  W_new = rcpp_rmvnorm(1, prop.varW * diag(length(W_old)), W_old)
   W_new = W_new - mean(W_new)
   u = log(runif(1))
   w1 = W.F.post2(Sigma.w, S, Y, Y0, X, W_new[S], betas, delta, C, LY, rho)
@@ -1794,7 +1796,7 @@ V.post2 = function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 # @param gammas current value of gammas
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling
 #
@@ -1811,10 +1813,10 @@ V.MH.sampling = function(S,
                          C,
                          LY,
                          rho,
-                         prop.var) {
+                         prop.varV) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
-  V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
+  V_new = rcpp_rmvnorm(1, prop.varV * diag(length(V_old)), V_old)
   V_new = V_new - mean(V_new)
   u = log(runif(1))
   v1 = V.post(S, A, lambda, Y,Y0, eXB, Z, V_new[S], gammas, C, LY, rho)
@@ -1845,14 +1847,14 @@ V.MH.sampling = function(S,
 # @param gammas current value of gammas
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling
 #
-V.MH.sampling2 = function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var) {
+V.MH.sampling2 = function(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.varV) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
-  V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
+  V_new = rcpp_rmvnorm(1, prop.varV * diag(length(V_old)), V_old)
   V_new = V_new - mean(V_new)
   u = log(runif(1))
   v1 = V.post2(S, A, lambda, Y, Y0, eXB, Z, V_new[S], gammas, C, LY, rho)
@@ -1965,7 +1967,7 @@ V.F.post2 = function(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho) {
 # @param gammas current value of gammas
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling
 #
@@ -1981,10 +1983,10 @@ V.F.MH.sampling = function(Sigma.v,
                            C,
                            LY,
                            rho,
-                           prop.var) {
+                           prop.varV) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
-  V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
+  V_new = rcpp_rmvnorm(1, prop.varV * diag(length(V_old)), V_old)
   V_new = V_new - mean(V_new)
   u = log(runif(1))
   v1 = V.F.post(Sigma.v,S, Y,Y0, eXB, Z, V_new[S], gammas, C, LY, rho)
@@ -2013,14 +2015,14 @@ V.F.MH.sampling = function(Sigma.v,
 # @param gammas current value of gammas
 # @param C censoring indicator
 # @param rho current value of rho
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
 #
 # @return One sample update using slice sampling (log likelihood)
 #
-V.F.MH.sampling2 = function(Sigma.v, S,  Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var) {
+V.F.MH.sampling2 = function(Sigma.v, S,  Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.varV) {
   S_uniq = unique(cbind(S, V))
   V_old = S_uniq[order(S_uniq[,1]), 2]
-  V_new = rcpp_rmvnorm(1, prop.var * diag(length(V_old)), V_old)
+  V_new = rcpp_rmvnorm(1, prop.varV * diag(length(V_old)), V_old)
   V_new = V_new - mean(V_new)
   u = log(runif(1))
   v1 = V.F.post2(Sigma.v, S, Y, Y0, eXB, Z, V_new[S], gammas, C, LY, rho)
@@ -2258,7 +2260,8 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form
 # @param w size of the slice in the slice sampling for (betas, gammas, rho)
 # @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 # @param form type of parametric model (Exponential or Weibull)
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return chain of the variables of interest
 #
@@ -2276,7 +2279,8 @@ mcmcspatialSP <- function(Y,
                           thin, w = c(1, 1, 1),
                           m = 10,
                           form,
-                          prop.var,
+                          prop.varV,
+                          prop.varW,
                           id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
@@ -2305,10 +2309,10 @@ mcmcspatialSP <- function(Y,
     }
     #CAR model
     lambda = lambda.gibbs.sampling2(S, A, W, V)
-    W = W.MH.sampling(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, prop.var)
+    W = W.MH.sampling(S, A, lambda, Y, Y0,X, W, betas, delta, C, LY, rho, prop.varW)
     betas = betas.slice.sampling(Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, w[1], m, form = form)
     eXB = exp(-(X %*% betas) + W)
-    V = V.MH.sampling(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho, prop.var)
+    V = V.MH.sampling(S, A, lambda, Y,Y0, eXB, Z, V, gammas, C, LY, rho, prop.varV)
  	  gammas = gammas.slice.sampling2(Sigma.g, Y, Y0,eXB, Z, V, gammas, C, LY, rho, w[2], m, form = form)
  	  num = exp(Z %*% gammas + V)
  	  num[which(is.infinite(num))] <- exp(700)
@@ -2359,7 +2363,8 @@ mcmcspatialSP <- function(Y,
 # @param w size of the slice in the slice sampling for (betas, gammas, rho)
 # @param m limit on steps in the slice sampling
 # @param form type of parametric model (Exponential or Weibull)
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return chain of the variables of interest
 #
@@ -2378,7 +2383,8 @@ mcmcSpatialLog <- function(Y,
                            w = c(1, 1, 1),
                            m,
                            form,
-                           prop.var = .00001,
+                           prop.varV = .00001,
+                           prop.varW = .00001,
                            id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
@@ -2408,10 +2414,10 @@ mcmcSpatialLog <- function(Y,
     }
     #CAR model
     lambda = lambda.gibbs.sampling2(S, A, W, V)
-    W = W.MH.sampling2(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho, prop.var)
+    W = W.MH.sampling2(S, A, lambda, Y, Y0, X, W, betas, delta, C, LY, rho, prop.varW)
     betas = betas.slice.sampling2(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w[1], m, form = form)
     eXB = exp((X %*% betas) + W)
-    V = V.MH.sampling2(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C,  LY, rho, prop.var)
+    V = V.MH.sampling2(S, A, lambda, Y, Y0, eXB, Z, V, gammas, C,  LY, rho, prop.varV)
     gammas = gammas.slice.sampling4(Sigma.g, Y, Y0, eXB, Z, V, gammas, C,  LY, rho, w[2], m, form = form)
     num = exp(Z %*% gammas + V)
     num[which(is.infinite(num))] <- exp(700)
@@ -2465,7 +2471,8 @@ mcmcSpatialLog <- function(Y,
 # @param w size of the slice in the slice sampling for (betas, gammas, rho)
 # @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 # @param form type of parametric model (Exponential or Weibull)
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return chain of the variables of interest
 #
@@ -2482,7 +2489,8 @@ mcmcfrailtySP <- function(Y,
                           thin, w = c(1, 1, 1),
                           m,
                           form,
-                          prop.var,
+                          prop.varV,
+                          prop.varW,
                           id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
@@ -2518,10 +2526,10 @@ mcmcfrailtySP <- function(Y,
       Sigma.v = riwish(1 + p4, VS %*% t(VS) + p4 * diag(p4))
     }
     #non-spatial Frailty model
-    W = W.F.MH.sampling(Sigma.w, S,Y, Y0,X, W, betas, delta, C, LY, rho, prop.var)
+    W = W.F.MH.sampling(Sigma.w, S,Y, Y0,X, W, betas, delta, C, LY, rho, prop.varW)
     betas = betas.slice.sampling(Sigma.b, Y, Y0,X, W, betas, delta, C, LY, rho, w[1], m, form = form)
     eXB = exp(-(X %*% betas) + W)
-    V = V.F.MH.sampling(Sigma.v, S, Y,Y0, eXB, Z, V, gammas, C, LY, rho, prop.var)
+    V = V.F.MH.sampling(Sigma.v, S, Y,Y0, eXB, Z, V, gammas, C, LY, rho, prop.varV)
     gammas = gammas.slice.sampling2(Sigma.g, Y, Y0,eXB, Z, V, gammas, C, LY, rho, w[2], m, form = form)
     num = exp(Z %*% gammas + V)
     num[which(is.infinite(num))] <- exp(700)
@@ -2568,7 +2576,8 @@ mcmcfrailtySP <- function(Y,
 # @param w size of the slice in the slice sampling for (betas, gammas, rho)
 # @param m limit on steps in the slice sampling
 # @param form type of parametric model (Exponential or Weibull)
-# @param prop.var proposal variance for Metropolis-Hastings
+# @param prop.varV proposal variance for Metropolis-Hastings
+# @param prop.varW proposal variance for Metropolis-Hastings
 #
 # @return chain of the variables of interest
 #
@@ -2586,7 +2595,8 @@ mcmcfrailtySPlog <- function(Y,
                              w = c(1, 1, 1),
                              m = 10,
                              form,
-                             prop.var= .00001,
+                             prop.varV = .00001,
+                             prop.varW = .00001,
                              id_WV) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
@@ -2602,7 +2612,8 @@ mcmcfrailtySPlog <- function(Y,
   WS = rep(0, p3)
   VS = rep(0, p4)
   delta = exp(Z %*% gammas + V)/ (1 + exp(Z %*% gammas + V))
-  prop.var = prop.var
+  prop.varV = prop.varV
+  prop.varW = prop.varW
   #delta = 1/(1 + exp(-Z %*% gammas + V))
   Sigma.b = 5 * p1 * diag(p1)
   Sigma.g = 5 * p2 * diag(p2)
@@ -2624,10 +2635,10 @@ mcmcfrailtySPlog <- function(Y,
       Sigma.v = riwish(1 + p4, VS %*% t(VS) + p4 * diag(p4))
     }
     #non-spatial Frailty model.
-    W = W.F.MH.sampling2(Sigma.w, S,Y, Y0, X, W, betas, delta, C, LY, rho, prop.var)
+    W = W.F.MH.sampling2(Sigma.w, S,Y, Y0, X, W, betas, delta, C, LY, rho, prop.varW)
     betas = betas.slice.sampling2(Sigma.b, Y, Y0, X, W, betas, delta, C, LY, rho, w[1], m, form = form)
     eXB = exp(-(X %*% betas) + W)
-    V = V.F.MH.sampling2(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.var)
+    V = V.F.MH.sampling2(Sigma.v, S, Y, Y0, eXB, Z, V, gammas, C, LY, rho, prop.varV)
     gammas = gammas.slice.sampling4(Sigma.g, Y, Y0, eXB, Z, V, gammas, C, LY, rho, w[2], m, form = form)
     num = exp(Z %*% gammas + V)
     num[which(is.infinite(num))] <- exp(700)

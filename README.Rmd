@@ -95,21 +95,22 @@ set.seed(123456)
 
 model <- 
     spatialSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                              instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'sp_id' ,
-        data     = walter[[1]],
-        N        = 500,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "Weibull",
-        prop.var = 1e-05,
-        A        = walter[[2]]
+        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                    instabl + intensityln + ethfrac + unpko,
+        immune    = cured ~ fhcompor1 + lgdpl + victory,
+        Y0        = 't.0',
+        LY        = 'lastyear',
+        S         = 'sp_id' ,
+        data      = walter[[1]],
+        N         = 500,
+        burn      = 10,
+        thin      = 10,
+        w         = c(1,1,1),
+        m         = 10,
+        form      = "Weibull",
+        prop.varV = 1e-05,
+        prop.varW = 1e-03,
+        A         = walter[[2]]
     )
 
 print(model)
@@ -151,20 +152,21 @@ set.seed(123456)
 
 model <-
     exchangeSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-            instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'S' ,
-        data     = walter,
-        N        = 500,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "loglog",
-        prop.var = 1e-05,
+        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+                    instabl + intensityln + ethfrac + unpko,
+        immune    = cured ~ fhcompor1 + lgdpl + victory,
+        Y0        = 't.0',
+        LY        = 'lastyear',
+        S         = 'S' ,
+        data      = walter,
+        N         = 500,
+        burn      = 10,
+        thin      = 10,
+        w         = c(1,1,1),
+        m         = 10,
+        form      = "loglog",
+        prop.varV = 1e-05,
+        prop.varW = 1e-03,
         id_WV    = country
     )
 

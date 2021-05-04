@@ -13,7 +13,8 @@
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
-#' @param prop.var proposed variance for Metropolis-Hastings.
+#' @param prop.varV proposed variance for Metropolis-Hastings.
+#' @param prop.varW proposed variance for Metropolis-Hastings.
 #' @param id_WV vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{unique(data[,S])}.
 #'
 #'
@@ -53,20 +54,21 @@
 #'
 #' model <-
 #'     exchangeSPsurv(
-#'            duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-#'            instabl + intensityln + ethfrac + unpko,
-#'            immune   = cured ~ fhcompor1 + lgdpl + victory,
-#'            Y0       = 't.0',
-#'            LY       = 'lastyear',
-#'            S        = 'sp_id' ,
-#'            data     = walter[[1]],
-#'            N        = 100,
-#'            burn     = 10,
-#'            thin     = 10,
-#'            w        = c(1,1,1),
-#'            m        = 10,
-#'            form     = "Weibull",
-#'            prop.var = 1e-05
+#'            duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+#'                        instabl + intensityln + ethfrac + unpko,
+#'            immune    = cured ~ fhcompor1 + lgdpl + victory,
+#'            Y0        = 't.0',
+#'            LY        = 'lastyear',
+#'            S         = 'sp_id' ,
+#'            data      = walter[[1]],
+#'            N         = 100,
+#'            burn      = 10,
+#'            thin      = 10,
+#'            w         = c(1,1,1),
+#'            m         = 10,
+#'            form      = "Weibull",
+#'            prop.varV = 1e-05,
+#'            prop.varW = 1e-05,
 #' )
 #'
 #' print(model)
@@ -89,21 +91,22 @@
 #'
 #' model <-
 #'     exchangeSPsurv(
-#'        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-#'             instabl + intensityln + ethfrac + unpko,
-#'         immune   = cured ~ fhcompor1 + lgdpl + victory,
-#'         Y0       = 't.0',
-#'         LY       = 'lastyear',
-#'         S        = 'S' ,
-#'         data     = walter,
-#'         N        = 100,
-#'         burn     = 10,
-#'         thin     = 10,
-#'         w        = c(1,1,1),
-#'         m        = 10,
-#'         form     = "loglog",
-#'         prop.var = 1e-05,
-#'         id_WV    = country
+#'         duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+#'                     instabl + intensityln + ethfrac + unpko,
+#'         immune    = cured ~ fhcompor1 + lgdpl + victory,
+#'         Y0        = 't.0',
+#'         LY        = 'lastyear',
+#'         S         = 'S' ,
+#'         data      = walter,
+#'         N         = 100,
+#'         burn      = 10,
+#'         thin      = 10,
+#'         w         = c(1,1,1),
+#'         m         = 10,
+#'         form      = "loglog",
+#'         prop.varV = 1e-05,
+#'         prop.varW = 1e-05,
+#'         id_WV     = country
 #'     )
 #'
 #' print(model)
@@ -124,7 +127,8 @@ exchangeSPsurv <- function(duration,
                           w = c(1, 1, 1),
                           m = 10,
                           form = c('Weibull', 'exponential', 'loglog'),
-                          prop.var,
+                          prop.varV,
+                          prop.varW,
                           id_WV = unique(data[,S]))
 {
 
@@ -132,17 +136,17 @@ exchangeSPsurv <- function(duration,
     model <- 'frailtySPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
                   LY = LY, S = S, N = N, burn = burn, thin = thin, w = w, m = m,
-                  form = dis, prop.var = prop.var, model = model)
+                  form = dis, prop.varV = prop.varV, prop.varW = prop.varW, model = model)
 
     if(form == 'loglog'){
         results <- mcmcfrailtySPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                                  S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
-                                 m  = r$m, form = r$form, prop.var = r$prop.var,
+                                 m  = r$m, form = r$form, prop.varV = r$prop.varV, prop.varW = r$prop.varW,
                                  id_WV = id_WV)
     } else {
         results <- mcmcfrailtySP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
-                             m  = r$m, form = r$form, prop.var = r$prop.var,
+                             m  = r$m, form = r$form, prop.varV = r$prop.varV, prop.varW = r$prop.varW,
                              id_WV = id_WV)
     }
 

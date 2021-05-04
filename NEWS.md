@@ -1,4 +1,9 @@
 
+
+# BayesSPsurv 0.1.3
+
+* parameter prop.varV and prop.varW are added to `spatialSPsurv()` and `exchangeSPsurv()`
+
 # BayesSPsurv 0.1.2
 
 * threshold argument added to `plot_Moran.I()` and `plot_JoinCount()`

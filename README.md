@@ -13,7 +13,7 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![](https://img.shields.io/badge/devel%20version-0.1.2-blue.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv)
+[![](https://img.shields.io/badge/devel%20version-0.1.3-blue.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -100,21 +100,22 @@ set.seed(123456)
 
 model <- 
     spatialSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                              instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'sp_id' ,
-        data     = walter[[1]],
-        N        = 500,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "Weibull",
-        prop.var = 1e-05,
-        A        = walter[[2]]
+        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
+                    instabl + intensityln + ethfrac + unpko,
+        immune    = cured ~ fhcompor1 + lgdpl + victory,
+        Y0        = 't.0',
+        LY        = 'lastyear',
+        S         = 'sp_id' ,
+        data      = walter[[1]],
+        N         = 500,
+        burn      = 10,
+        thin      = 10,
+        w         = c(1,1,1),
+        m         = 10,
+        form      = "Weibull",
+        prop.varV = 1e-05,
+        prop.varW = 1e-03,
+        A         = walter[[2]]
     )
 
 print(model)
@@ -124,7 +125,7 @@ print(model)
 #>     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
 #>     S = "sp_id", A = walter[[2]], data = walter[[1]], N = 500, 
 #>     burn = 10, thin = 10, w = c(1, 1, 1), m = 10, form = "Weibull", 
-#>     prop.var = 1e-05)
+#>     prop.varV = 1e-05, prop.varW = 0.001)
 #> 
 #> 
 #> Iterations = 1:49
@@ -137,30 +138,30 @@ print(model)
 #> 
 #> 
 #> Duration equation: 
-#>                      Mean         SD   Naive SE Time-series SE
-#> (Intercept)    1.00814151 1.08126022 0.15446575     0.43017597
-#> fhcompor1     -0.86040095 0.51570840 0.07367263     0.09154776
-#> lgdpl          0.01516985 0.11875675 0.01696525     0.05333867
-#> comprehensive -0.75590604 0.31156314 0.04450902     0.03266632
-#> victory        0.47751228 0.37117992 0.05302570     0.02824285
-#> instabl        0.74508684 0.47644646 0.06806378     0.06806378
-#> intensityln    0.13956073 0.09491131 0.01355876     0.02921604
-#> ethfrac        0.10052477 0.52692819 0.07527546     0.07527546
-#> unpko          0.67711562 0.65094311 0.09299187     0.07259810
+#>                      Mean        SD   Naive SE Time-series SE
+#> (Intercept)    1.60141888 1.1448040 0.16354342     0.80272094
+#> fhcompor1     -0.83243707 0.6501499 0.09287856     0.14722825
+#> lgdpl         -0.04870232 0.1333731 0.01905329     0.04302189
+#> comprehensive -0.69398735 0.4195981 0.05994259     0.05994259
+#> victory        0.35331950 0.4792104 0.06845862     0.06845862
+#> instabl        0.67978064 0.4613870 0.06591243     0.06591243
+#> intensityln    0.13055810 0.1126945 0.01609922     0.04378209
+#> ethfrac        0.06897016 0.5616709 0.08023870     0.07794973
+#> unpko          0.60998074 0.5093431 0.07276330     0.07276330
 #> 
 #> Inmune equation: 
-#>                  Mean       SD  Naive SE Time-series SE
-#> (Intercept) -2.224744 4.336817 0.6195454      1.1667720
-#> fhcompor1    1.250456 3.846270 0.5494671      0.8986669
-#> lgdpl       -2.313382 2.307048 0.3295783      0.3295783
-#> victory      1.689145 3.135734 0.4479620      0.6556410
+#>                   Mean       SD  Naive SE Time-series SE
+#> (Intercept) -0.2289340 3.465822 0.4951174      0.6787334
+#> fhcompor1    0.9479438 5.158081 0.7368687      1.7102805
+#> lgdpl       -3.1313566 3.263457 0.4662081      1.5676348
+#> victory      1.6786139 4.043202 0.5776003      1.2420596
 
 SPstats(model)
 #> $DIC
-#> [1] -7501.048
+#> [1] 12980.15
 #> 
 #> $Loglik
-#> [1] 23338.27
+#> [1] 27247.49
 
 # ~~~~~~~~~~~~~~~
 # Choropleth Map
@@ -203,20 +204,21 @@ set.seed(123456)
 
 model <-
     exchangeSPsurv(
-        duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-            instabl + intensityln + ethfrac + unpko,
-        immune   = cured ~ fhcompor1 + lgdpl + victory,
-        Y0       = 't.0',
-        LY       = 'lastyear',
-        S        = 'S' ,
-        data     = walter,
-        N        = 500,
-        burn     = 10,
-        thin     = 10,
-        w        = c(1,1,1),
-        m        = 10,
-        form     = "loglog",
-        prop.var = 1e-05,
+        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+                    instabl + intensityln + ethfrac + unpko,
+        immune    = cured ~ fhcompor1 + lgdpl + victory,
+        Y0        = 't.0',
+        LY        = 'lastyear',
+        S         = 'S' ,
+        data      = walter,
+        N         = 500,
+        burn      = 10,
+        thin      = 10,
+        w         = c(1,1,1),
+        m         = 10,
+        form      = "loglog",
+        prop.varV = 1e-05,
+        prop.varW = 1e-03,
         id_WV    = country
     )
 

@@ -14,7 +14,8 @@
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
-#' @param prop.var proposal variance for Metropolis-Hastings.
+#' @param prop.varV proposal variance for Metropolis-Hastings.
+#' @param prop.varW proposal variance for Metropolis-Hastings.
 #' @param id_WV vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{colnames(A)}.
 #'
 #' @return spatialSPsurv returns an object of class \code{"spatialSPsurv"}.
@@ -48,21 +49,22 @@
 #'
 #' model <-
 #'     spatialSPsurv(
-#'         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-#'                    instabl + intensityln + ethfrac + unpko,
-#'         immune   = cured ~ fhcompor1 + lgdpl + victory,
-#'         Y0       = 't.0',
-#'         LY       = 'lastyear',
-#'         S        = 'sp_id' ,
-#'         data     = walter[[1]],
-#'         N        = 100,
-#'         burn     = 10,
-#'         thin     = 10,
-#'         w        = c(1,1,1),
-#'         m        = 10,
-#'         form     = "Weibull",
-#'         prop.var = 1e-05,
-#'         A        = walter[[2]]
+#'         duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
+#'                     instabl + intensityln + ethfrac + unpko,
+#'         immune    = cured ~ fhcompor1 + lgdpl + victory,
+#'         Y0        = 't.0',
+#'         LY        = 'lastyear',
+#'         S         = 'sp_id' ,
+#'         data      = walter[[1]],
+#'         N         = 100,
+#'         burn      = 10,
+#'         thin      = 10,
+#'         w         = c(1,1,1),
+#'         m         = 10,
+#'         form      = "Weibull",
+#'         prop.varV = 1e-05,
+#'         prop.varW = 1e-05,
+#'         A         = walter[[2]]
 #'     )
 #'
 #' print(model)
@@ -88,7 +90,8 @@ spatialSPsurv <- function(duration,
                          w = c(1, 1, 1),
                          m = 10,
                          form = c('Weibull', 'exponential', 'loglog'),
-                         prop.var,
+                         prop.varV,
+                         prop.varW,
                          id_WV = colnames(A))
 {
 
@@ -96,18 +99,19 @@ spatialSPsurv <- function(duration,
     model <- 'spatialSPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
                     LY = LY, S = S, N = N, burn = burn, thin = thin, w = w, m = m,
-                    form = dis, prop.var = prop.var, A = A, model = 'spatialSPsurv')
+                    form = dis, prop.varV = prop.varV, prop.varW = prop.varW,
+                    A = A, model = 'spatialSPsurv')
 
     if(form == 'loglog') {
         results <- mcmcSpatialLog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                                  S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
-                                 m = r$m, form = r$form, prop.var = r$prop.var, A = r$A,
-                                 id_WV = id_WV)
+                                 m = r$m, form = r$form, prop.varV = r$prop.varV, prop.varW = r$prop.varW,
+                                 A = r$A, id_WV = id_WV)
     } else {
         results <- mcmcspatialSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w = r$w,
-                             m = r$m, form = r$form, prop.var = r$prop.var, A = r$A,
-                             id_WV = id_WV)
+                             m = r$m, form = r$form, prop.varV = r$prop.varV, prop.varW = r$prop.varW,
+                             A = r$A, id_WV = id_WV)
     }
     results$call   <- match.call()
     class(results) <- model
