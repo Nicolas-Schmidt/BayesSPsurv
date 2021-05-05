@@ -74,6 +74,12 @@ pooledSPsurv <- function(duration,
                   thin,
                   w = c(1, 1, 1),
                   m = 10,
+                  ini.beta =  0,
+                  ini.gamma = 0,
+                  rho = 1,
+                  lambda = 1,
+                  ini.W = 0,
+                  ini.V= 0,
                   form = c('Weibull', 'exponential', 'loglog'))
 {
 
@@ -81,15 +87,21 @@ pooledSPsurv <- function(duration,
     model <- 'SPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
                     LY = LY, N = N, burn = burn, thin = thin, w = w,
-                    m = m, form = dis, model = model)
+                    m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho,
+                    lambda = lambda, ini.W = ini.W, ini.V = ini.V,
+                    form = dis, model = model)
 
     if(form == 'loglog') {
         results <- mcmcSPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                           N = r$N, burn = r$burn, thin = r$thin, w  = r$w, m  = r$m,
+                          ini.beta = r$ini.beta, ini.gamma = r$ini.gamma,
+                          rho = r$rho, lambda = r$lambda, ini.W = r$ini.W, ini.V = r$ini.V,
                           form = r$form)
     } else {
         results <- mcmcSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                       N = r$N, burn = r$burn, thin = r$thin, w  = r$w, m  = r$m,
+                      ini.beta = r$ini.beta, ini.gamma = r$ini.gamma,
+                      rho = r$rho, lambda = r$lambda, ini.W = r$ini.W, ini.V = r$ini.V,
                       form = r$form)
     }
 
