@@ -36,6 +36,12 @@ formcall <- function(duration,
                      w = c(1, 1, 1),
                      m = 10,
                      form,
+                     ini.beta =  0,
+                     ini.gamma = 0,
+                     rho = 1,
+                     lambda = 1,
+                     ini.W = 0,
+                     ini.V= 0,
                      prop.varV = NULL,
                      prop.varW = NULL,
                      model = character())
@@ -55,6 +61,12 @@ formcall <- function(duration,
   burn <-  burn
   if (is.null(w)) w <- c(1,1,1) else w <- w
   if (is.null(m)) m <- 10 else m <- m
+  if (is.null(ini.beta)) ini.beta <- 0 else ini.beta <- ini.beta
+  if (is.null(ini.gamma)) ini.gamma <- 0 else ini.gamma <- ini.gamma
+  if (is.null(rho)) rho <- 1 else rho <- rho
+  if (is.null(lambda)) lambda <- 1 else lambda <- lambda
+  if (is.null(ini.W)) ini.W <- 0 else ini.W <- ini.W
+  if (is.null(ini.V)) ini.V <- 0 else ini.V <- ini.V
   form <-  form
   cnx <- colnames(X)
   cnz <- colnames(Z)
@@ -72,7 +84,8 @@ formcall <- function(duration,
     colnames(X) <- cnx
     colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, N = N, burn = burn,
-               thin = thin, w = w, m = m, form = form)
+               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho,
+               lambda = lambda, ini.W = ini.W, ini.V = ini.V, form = form)
 
   } else {
 
@@ -91,7 +104,9 @@ formcall <- function(duration,
     colnames(X) <- cnx
     colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, S = S, N = N, burn = burn,
-               thin = thin, w = w, m = m, form = form, prop.varV = prop.varV, prop.varW = prop.varW)
+               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho,
+               lambda = lambda, ini.W = ini.W, ini.V = ini.V,
+               form = form, prop.varV = prop.varV, prop.varW = prop.varW)
 
   }
 
@@ -2128,17 +2143,21 @@ mcmcSP <- function(Y,
                    thin,
                    w = c(1, 1, 1),
                    m = 10,
+                   ini.beta =  0,
+                   ini.gamma = 0,
+                   rho = 1,
+                   lambda = 1,
+                   ini.W = 0,
+                   ini.V= 0,
                    form,
                    propvar) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
-  betas = rep(0, p1)
-  gammas = rep(0, p2)
-  rho = 1
-  lambda = 1
-  W = rep(0, length(Y))
-  V = rep(0, length(Y))
+  betas = rep(ini.beta, p1)
+  gammas = rep(ini.gamma, p2)
+  W = rep(ini.W, length(Y))
+  V = rep(ini.V, length(Y))
   delta = exp(Z %*% gammas)/ (1 + exp(Z %*% gammas))
   Sigma.b = 10 * p1 * diag(p1)
   Sigma.g = 10 * p2 * diag(p2)
@@ -2199,16 +2218,21 @@ mcmcSP <- function(Y,
 #
 # @return chain of the variables of interest
 #
-mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form) {
+mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m,
+                      ini.beta =  0,
+                      ini.gamma = 0,
+                      rho = 1,
+                      lambda = 1,
+                      ini.W = 0,
+                      ini.V= 0,
+                      form) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
-  betas = rep(0, p1)
-  gammas = rep(0, p2)
-  rho = 1
-  lambda = 1
-  W = rep(0, length(Y))
-  V = rep(0, length(Y))
+  betas = rep(ini.beta, p1)
+  gammas = rep(ini.gamma, p2)
+  W = rep(ini.W, length(Y))
+  V = rep(ini.V, length(Y))
   delta = exp(Z %*% gammas)/ (1 + exp(Z %*% gammas))
   Sigma.b = 5 * p1 * diag(p1)
   Sigma.g = 5 * p2 * diag(p2)
@@ -2286,6 +2310,12 @@ mcmcspatialSP <- function(Y,
                           burn,
                           thin, w = c(1, 1, 1),
                           m = 10,
+                          ini.beta =  0,
+                          ini.gamma = 0,
+                          rho = 1,
+                          lambda = 1,
+                          ini.W = 0,
+                          ini.V= 0,
                           form,
                           prop.varV,
                           prop.varW,
@@ -2293,12 +2323,10 @@ mcmcspatialSP <- function(Y,
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
-  betas = rep(0, p1)
-  gammas = rep(0, p2)
-  rho = 1
-  lambda = 1
-  W = rep(0, length(Y))
-  V = rep(0, length(Y))
+  betas = rep(ini.beta, p1)
+  gammas = rep(ini.gamma, p2)
+  W = rep(ini.W, length(Y))
+  V = rep(ini.V, length(Y))
   delta = exp(Z %*% gammas + V)/ (1 + exp(Z %*% gammas + V))
   Sigma.b = 10 * p1 * diag(p1)
   Sigma.g = 10 * p2 * diag(p2)
@@ -2394,6 +2422,12 @@ mcmcSpatialLog <- function(Y,
                            thin,
                            w = c(1, 1, 1),
                            m,
+                           ini.beta =  0,
+                           ini.gamma = 0,
+                           rho = 1,
+                           lambda = 1,
+                           ini.W = 0,
+                           ini.V= 0,
                            form,
                            prop.varV = .00001,
                            prop.varW = .00001,
@@ -2401,12 +2435,10 @@ mcmcSpatialLog <- function(Y,
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
-  betas = rep(0, p1)
-  gammas = rep(0, p2)
-  rho = 1
-  lambda = 1
-  W = rep(0, length(Y))
-  V = rep(0, length(Y))
+  betas = rep(ini.beta, p1)
+  gammas = rep(ini.gamma, p2)
+  W = rep(ini.W, length(Y))
+  V = rep(ini.V, length(Y))
   delta = exp(Z %*% gammas + V)/ (1 + exp(Z %*% gammas + V))
   #delta = 1/(1 + exp(-Z %*% gammas + V))
   Sigma.b = 5 * p1 * diag(p1)
@@ -2504,6 +2536,12 @@ mcmcfrailtySP <- function(Y,
                           burn,
                           thin, w = c(1, 1, 1),
                           m,
+                          ini.beta =  0,
+                          ini.gamma = 0,
+                          rho = 1,
+                          lambda = 1,
+                          ini.W = 0,
+                          ini.V= 0,
                           form,
                           prop.varV,
                           prop.varW,
@@ -2513,14 +2551,12 @@ mcmcfrailtySP <- function(Y,
   p3 = length(unique(S))
   p4 = length(unique(S))
   # initial values
-  betas = rep(0, p1)
-  gammas = rep(0, p2)
-  rho = 1
-  lambda = 1
-  W = rep(0, length(Y))
-  V = rep(0, length(Y))
-  WS = rep(0, p3)
-  VS = rep(0, p4)
+  betas = rep(ini.beta, p1)
+  gammas = rep(ini.gamma, p2)
+  W = rep(ini.W, length(Y))
+  V = rep(ini.V, length(Y))
+  WS = rep(ini.W, p3)
+  VS = rep(ini.V, p4)
   delta = exp(Z %*% gammas + V)/ (1 + exp(Z %*% gammas + V))
   Sigma.b = 10 * p1 * diag(p1)
   Sigma.g = 10 * p2 * diag(p2)
@@ -2614,6 +2650,12 @@ mcmcfrailtySPlog <- function(Y,
                              thin,
                              w = c(1, 1, 1),
                              m = 10,
+                             ini.beta =  0,
+                             ini.gamma = 0,
+                             rho = 1,
+                             lambda = 1,
+                             ini.W = 0,
+                             ini.V= 0,
                              form,
                              prop.varV = .00001,
                              prop.varW = .00001,
@@ -2623,14 +2665,12 @@ mcmcfrailtySPlog <- function(Y,
   p3 = length(unique(S))
   p4 = length(unique(S))
   # initial values
-  betas = rep(0, p1)
-  gammas = rep(0, p2)
-  rho = 1
-  lambda = 1
-  W = rep(0, length(Y))
-  V = rep(0, length(Y))
-  WS = rep(0, p3)
-  VS = rep(0, p4)
+  betas = rep(ini.beta, p1)
+  gammas = rep(ini.gamma, p2)
+  W = rep(ini.W, length(Y))
+  V = rep(ini.V, length(Y))
+  WS = rep(ini.W, p3)
+  VS = rep(ini.V, p4)
   delta = exp(Z %*% gammas + V)/ (1 + exp(Z %*% gammas + V))
   prop.varV = prop.varV
   prop.varW = prop.varW
