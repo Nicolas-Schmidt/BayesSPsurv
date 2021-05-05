@@ -2146,7 +2146,11 @@ mcmcSP <- function(Y,
   gammas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p2)
   rho.samp = rep(NA, (N - burn) / thin)
   delta.samp = rep(NA, (N - burn) / thin)
-  for (iter in 1:N) {
+
+  pb <- progress::progress_bar$new(total = N)
+    for (iter in 1:N) {
+    pb$tick()
+    Sys.sleep(1/N)
     # if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
@@ -2211,7 +2215,11 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m, form
   betas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p1)
   gammas.samp = matrix(NA, nrow = (N - burn) / thin, ncol = p2)
   rho.samp = rep(NA, (N - burn) / thin)
+
+  pb <- progress::progress_bar$new(total = N)
   for (iter in 1:N) {
+    pb$tick()
+    Sys.sleep(1/N)
     #if (iter %% 1000 == 0) print(iter) #F #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
@@ -2301,7 +2309,11 @@ mcmcspatialSP <- function(Y,
   delta.samp = rep(NA, (N - burn) / thin)
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
+
+  pb <- progress::progress_bar$new(total = N)
   for (iter in 1:N) {
+    pb$tick()
+    Sys.sleep(1/N)
     #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
@@ -2406,7 +2418,11 @@ mcmcSpatialLog <- function(Y,
   delta.samp = rep(NA, (N - burn) / thin)
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = nrow(A))
+
+  pb <- progress::progress_bar$new(total = N)
   for (iter in 1:N) {
+    pb$tick()
+    Sys.sleep(1/N)
     #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
@@ -2517,7 +2533,11 @@ mcmcfrailtySP <- function(Y,
   delta.samp = rep(NA, (N - burn) / thin)
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
+
+  pb <- progress::progress_bar$new(total = N)
   for (iter in 1:N) {
+    pb$tick()
+    Sys.sleep(1/N)
     #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))
@@ -2626,7 +2646,11 @@ mcmcfrailtySPlog <- function(Y,
   delta.samp = rep(NA, (N - burn) / thin)
   W.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
   V.samp = matrix(NA, nrow = (N - burn) / thin, ncol = length(unique(S)))
+
+  pb <- progress::progress_bar$new(total = N)
   for (iter in 1:N) {
+    pb$tick()
+    Sys.sleep(1/N)
     #if (iter %% 1000 == 0) print(iter) #### ***** #### ***** #### ***** #### ***** ####
     if (iter > burn) {
       Sigma.b = riwish(1 + p1, betas %*% t(betas) + p1 * diag(p1))

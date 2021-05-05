@@ -53,7 +53,8 @@ Imports:
 	dplyr, 
 	reshape2, 
 	ggplot2,
-	ape
+	ape,
+	progress
 Suggests:
     spduration,
     countrycode

@@ -3,6 +3,7 @@
 # BayesSPsurv 0.1.3
 
 * parameter prop.varV and prop.varW are added to `spatialSPsurv()` and `exchangeSPsurv()`
+* progress bar
 
 # BayesSPsurv 0.1.2
 
