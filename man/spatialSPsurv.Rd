@@ -20,6 +20,12 @@ spatialSPsurv(
   thin,
   w = c(1, 1, 1),
   m = 10,
+  ini.beta = 0,
+  ini.gamma = 0,
+  rho = 1,
+  lambda = 1,
+  ini.W = 0,
+  ini.V = 0,
   form = c("Weibull", "exponential", "loglog"),
   prop.varV,
   prop.varW,
@@ -57,6 +63,18 @@ spatialSPsurv(
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
+\item{ini.beta}{...}
+
+\item{ini.gamma}{...}
+
+\item{rho}{...}
+
+\item{lambda}{...}
+
+\item{ini.W}{...}
+
+\item{ini.V}{...}
+
 \item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
 \item{prop.varV}{proposal variance for Metropolis-Hastings.}
@@ -90,6 +108,12 @@ A \code{"spatialSPsurv"} object has the following elements:
 \item{Y0}{vector of `Y0'.}
 \item{C}{vector of `C'.}
 \item{S}{vector of `S'.}
+\item{ini.beta}{...}
+\item{ini.gamma}{...}
+\item{rho}{...}
+\item{lambda}{...}
+\item{ini.W}{...}
+\item{ini.V}{...}
 \item{form}{character, type of distribution.}
 \item{call}{description for the model to be estimated.}
 

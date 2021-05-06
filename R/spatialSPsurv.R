@@ -5,14 +5,20 @@
 #' @param immune split stage equation written in a formula of the form C ~ Z1 + Z2 + ... where C is a binary indicator of immunity.
 #' @param Y0 the elapsed time since inception until the beginning of time period (t-1).
 #' @param LY last observation year (coded as 1; 0 otherwise) due to censoring or failure.
-#' @param data data.frame.
 #' @param S spatial information (e.g. district ID) for each observation that matches the spatial matrix row/column information.
 #' @param A an a times a spatial weights matrix where a is the number of unique spatial units (S) load as a separate file.
+#' @param data data.frame.
 #' @param N number of MCMC iterations.
 #' @param burn burn-in to be discarded.
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param ini.beta ...
+#' @param ini.gamma ...
+#' @param rho ...
+#' @param lambda ...
+#' @param ini.W ...
+#' @param ini.V ...
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #' @param prop.varV proposal variance for Metropolis-Hastings.
 #' @param prop.varW proposal variance for Metropolis-Hastings.
@@ -34,6 +40,12 @@
 #' \item{Y0}{vector of `Y0'.}
 #' \item{C}{vector of `C'.}
 #' \item{S}{vector of `S'.}
+#' \item{ini.beta}{...}
+#' \item{ini.gamma}{...}
+#' \item{rho}{...}
+#' \item{lambda}{...}
+#' \item{ini.W}{...}
+#' \item{ini.V}{...}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
 #'

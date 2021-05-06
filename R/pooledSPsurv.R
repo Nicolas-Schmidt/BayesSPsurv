@@ -11,6 +11,12 @@
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
+#' @param ini.beta ...
+#' @param ini.gamma ...
+#' @param rho ...
+#' @param lambda ...
+#' @param ini.W ...
+#' @param ini.V ...
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #'
 #' @return pooledSPsurv returns an object of class \code{"SPsurv"}.
@@ -25,6 +31,12 @@
 #' \item{Y}{vector of `Y'.}
 #' \item{Y0}{vector of `Y0'.}
 #' \item{C}{vector of `C'.}
+#' \item{ini.beta}{...}
+#' \item{ini.gamma}{...}
+#' \item{rho}{...}
+#' \item{lambda}{...}
+#' \item{ini.W}{...}
+#' \item{ini.V}{...}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
 #'

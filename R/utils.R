@@ -2149,8 +2149,7 @@ mcmcSP <- function(Y,
                    lambda = 1,
                    ini.W = 0,
                    ini.V= 0,
-                   form,
-                   propvar) {
+                   form) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
@@ -2197,8 +2196,9 @@ mcmcSP <- function(Y,
   }
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp,
-              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form)))
+  return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form),
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 # @title mcmcSPlog
@@ -2269,8 +2269,9 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m,
   }
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp,
-              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form)))
+  return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form),
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 
@@ -2381,9 +2382,9 @@ mcmcspatialSP <- function(Y,
   colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp,
-              delta = delta.samp, W = W.samp, V = V.samp,
-              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
+  return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 
@@ -2496,8 +2497,9 @@ mcmcSpatialLog <- function(Y,
   colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp,
-              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
+  return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 
@@ -2614,8 +2616,9 @@ mcmcfrailtySP <- function(Y,
   colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
-         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
+  return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 # @title mcmc Cure with Non-spatial frailties
@@ -2731,8 +2734,9 @@ mcmcfrailtySPlog <- function(Y,
   colnames(W.samp) <- id_WV #colnames(A)           #ADC
   colnames(betas.samp)  <- colnames(X) #adc
   colnames(gammas.samp) <- colnames(Z) #adc
-  return(list(betas = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
-         spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form)))
+  return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
+              spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 
