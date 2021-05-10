@@ -41,7 +41,7 @@
 #' \item{ini.beta}{list, initial values of beta.}
 #' \item{ini.gamma}{list, initial values of gamma.}
 #' \item{ini.W}{list, initial values of W.}
-#' \item{ini.V}{list, initial values of V}
+#' \item{ini.V}{list, initial values of V.}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
 #'
