@@ -13,13 +13,13 @@
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-#' @param ini.beta ...
-#' @param ini.gamma ...
-#' @param ini.W ...
-#' @param ini.V ...
+#' @param ini.beta initial value for the parameter vector beta.  By default is 0. 
+#' @param ini.gamma initial value for the parameter vector gamma. By default is 0. 
+#' @param ini.W initial value for the parameter vector W. By default is 0. 
+#' @param ini.V initial value for the parameter vector V.  By default is 0. 
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
-#' @param prop.varV proposal variance for Metropolis-Hastings.
-#' @param prop.varW proposal variance for Metropolis-Hastings.
+#' @param prop.varV proposal for variance of V in Metropolis-Hastings.
+#' @param prop.varW proposal for variance of W in Metropolis-Hastings.
 #' @param id_WV vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{colnames(A)}.
 #'
 #' @return spatialSPsurv returns an object of class \code{"spatialSPsurv"}.
