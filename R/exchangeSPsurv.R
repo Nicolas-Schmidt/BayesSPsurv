@@ -12,13 +12,12 @@
 #' @param thin thinning to prevent from autocorrelation.
 #' @param w size of the slice in the slice sampling for (betas, gammas, rho). Write it as a vector. E.g. c(1,1,1).
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
-#' @param ini.beta ...
-#' @param ini.gamma ...
-#' @param ini.W ...
-#' @param ini.V ...
-#' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
-#' @param prop.varV proposed variance for Metropolis-Hastings.
-#' @param prop.varW proposed variance for Metropolis-Hastings.
+#' @param ini.beta initial value for the parameter vector beta.  By default is 0. 
+#' @param ini.gamma initial value for the parameter vector gamma. By default is 0. 
+#' @param ini.W initial value for the parameter vector W. By default is 0. 
+#' @param ini.V initial value for the parameter vector V.  By default is 0. #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
+#' @param prop.varV proposed variance for V in Metropolis-Hastings.
+#' @param prop.varW proposed variance for W in Metropolis-Hastings.
 #' @param id_WV vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{unique(data[,S])}.
 #'
 #'
@@ -38,10 +37,10 @@
 #' \item{Y0}{vector of `Y0'.}
 #' \item{C}{vector of `C'.}
 #' \item{S}{vector of `S'.}
-#' \item{ini.beta}{...}
-#' \item{ini.gamma}{...}
-#' \item{ini.W}{...}
-#' \item{ini.V}{...}
+#' \item{ini.beta}{list, initial values of beta.}
+#' \item{ini.gamma}{list, initial values of gamma.}
+#' \item{ini.W}{list, initial values of W.}
+#' \item{ini.V}{list, initial values of V.}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
 #'
