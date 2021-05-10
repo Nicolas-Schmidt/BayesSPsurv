@@ -38,8 +38,6 @@ formcall <- function(duration,
                      form,
                      ini.beta =  0,
                      ini.gamma = 0,
-                     rho = 1,
-                     lambda = 1,
                      ini.W = 0,
                      ini.V= 0,
                      prop.varV = NULL,
@@ -63,8 +61,6 @@ formcall <- function(duration,
   if (is.null(m)) m <- 10 else m <- m
   if (is.null(ini.beta)) ini.beta <- 0 else ini.beta <- ini.beta
   if (is.null(ini.gamma)) ini.gamma <- 0 else ini.gamma <- ini.gamma
-  if (is.null(rho)) rho <- 1 else rho <- rho
-  if (is.null(lambda)) lambda <- 1 else lambda <- lambda
   if (is.null(ini.W)) ini.W <- 0 else ini.W <- ini.W
   if (is.null(ini.V)) ini.V <- 0 else ini.V <- ini.V
   form <-  form
@@ -84,8 +80,7 @@ formcall <- function(duration,
     colnames(X) <- cnx
     colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, N = N, burn = burn,
-               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho,
-               lambda = lambda, ini.W = ini.W, ini.V = ini.V, form = form)
+               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma,ini.W = ini.W, ini.V = ini.V, form = form)
 
   } else {
 
@@ -104,8 +99,7 @@ formcall <- function(duration,
     colnames(X) <- cnx
     colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, S = S, N = N, burn = burn,
-               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho,
-               lambda = lambda, ini.W = ini.W, ini.V = ini.V,
+               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V = ini.V,
                form = form, prop.varV = prop.varV, prop.varW = prop.varW)
 
   }
@@ -2145,14 +2139,13 @@ mcmcSP <- function(Y,
                    m = 10,
                    ini.beta =  0,
                    ini.gamma = 0,
-                   rho = 1,
-                   lambda = 1,
                    ini.W = 0,
                    ini.V= 0,
                    form) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
+  rho = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
   W = rep(ini.W, length(Y))
@@ -2198,7 +2191,7 @@ mcmcSP <- function(Y,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 # @title mcmcSPlog
@@ -2218,17 +2211,26 @@ mcmcSP <- function(Y,
 #
 # @return chain of the variables of interest
 #
-mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m,
+mcmcSPlog <- function(Y,
+                      C,
+                      Y0,
+                      X,
+                      LY,
+                      Z,
+                      N,
+                      burn,
+                      thin,
+                      w = c(1, 1, 1),
+                      m,
                       ini.beta =  0,
                       ini.gamma = 0,
-                      rho = 1,
-                      lambda = 1,
                       ini.W = 0,
                       ini.V= 0,
                       form) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
+  rho = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
   W = rep(ini.W, length(Y))
@@ -2271,7 +2273,7 @@ mcmcSPlog <- function(Y, C, Y0, X, LY, Z, N, burn, thin, w = c(1, 1, 1), m,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 
@@ -2313,8 +2315,6 @@ mcmcspatialSP <- function(Y,
                           m = 10,
                           ini.beta =  0,
                           ini.gamma = 0,
-                          rho = 1,
-                          lambda = 1,
                           ini.W = 0,
                           ini.V= 0,
                           form,
@@ -2324,6 +2324,7 @@ mcmcspatialSP <- function(Y,
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
+  rho = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
   W = rep(ini.W, length(Y))
@@ -2384,7 +2385,7 @@ mcmcspatialSP <- function(Y,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 
@@ -2425,8 +2426,6 @@ mcmcSpatialLog <- function(Y,
                            m,
                            ini.beta =  0,
                            ini.gamma = 0,
-                           rho = 1,
-                           lambda = 1,
                            ini.W = 0,
                            ini.V= 0,
                            form,
@@ -2436,6 +2435,7 @@ mcmcSpatialLog <- function(Y,
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
   # initial values
+  rho = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
   W = rep(ini.W, length(Y))
@@ -2499,7 +2499,7 @@ mcmcSpatialLog <- function(Y,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, delta= delta.samp, lambda = lambda.samp, W = W.samp, V = V.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 
@@ -2540,8 +2540,6 @@ mcmcfrailtySP <- function(Y,
                           m,
                           ini.beta =  0,
                           ini.gamma = 0,
-                          rho = 1,
-                          lambda = 1,
                           ini.W = 0,
                           ini.V= 0,
                           form,
@@ -2553,6 +2551,8 @@ mcmcfrailtySP <- function(Y,
   p3 = length(unique(S))
   p4 = length(unique(S))
   # initial values
+  rho = 1
+  lambda = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
   W = rep(ini.W, length(Y))
@@ -2618,7 +2618,7 @@ mcmcfrailtySP <- function(Y,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 # @title mcmc Cure with Non-spatial frailties
@@ -2655,8 +2655,6 @@ mcmcfrailtySPlog <- function(Y,
                              m = 10,
                              ini.beta =  0,
                              ini.gamma = 0,
-                             rho = 1,
-                             lambda = 1,
                              ini.W = 0,
                              ini.V= 0,
                              form,
@@ -2668,6 +2666,8 @@ mcmcfrailtySPlog <- function(Y,
   p3 = length(unique(S))
   p4 = length(unique(S))
   # initial values
+  rho = 1
+  lambda = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
   W = rep(ini.W, length(Y))
@@ -2736,7 +2736,7 @@ mcmcfrailtySPlog <- function(Y,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, lambda = lambda.samp, delta = delta.samp, W = W.samp, V = V.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, S = S, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho, lambda = lambda, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
 }
 
 

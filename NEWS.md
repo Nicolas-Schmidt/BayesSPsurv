@@ -2,7 +2,7 @@
 
 # BayesSPsurv 0.1.3
 
-* parameter ini.gamma, ini.gamma, rho, lambda, ini.W and ini.V   are added to `spatialSPsurv()`, `exchangeSPsurv()` and `pooledSPsurv()`
+* parameter ini.gamma, ini.gamma, ini.W and ini.V   are added to `spatialSPsurv()`, `exchangeSPsurv()` and `pooledSPsurv()`
 * parameter prop.varV and prop.varW are added to `spatialSPsurv()` and `exchangeSPsurv()`
 * progress bar in `spatialSPsurv()`, `exchangeSPsurv()` and `pooledSPsurv()`
 

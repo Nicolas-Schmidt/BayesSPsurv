@@ -14,8 +14,6 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param ini.beta ...
 #' @param ini.gamma ...
-#' @param rho ...
-#' @param lambda ...
 #' @param ini.W ...
 #' @param ini.V ...
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
@@ -42,8 +40,6 @@
 #' \item{S}{vector of `S'.}
 #' \item{ini.beta}{...}
 #' \item{ini.gamma}{...}
-#' \item{rho}{...}
-#' \item{lambda}{...}
 #' \item{ini.W}{...}
 #' \item{ini.V}{...}
 #' \item{form}{character, type of distribution.}
@@ -140,8 +136,6 @@ exchangeSPsurv <- function(duration,
                           m = 10,
                           ini.beta =  0,
                           ini.gamma = 0,
-                          rho = 1,
-                          lambda = 1,
                           ini.W = 0,
                           ini.V= 0,
                           form = c('Weibull', 'exponential', 'loglog'),
@@ -154,22 +148,21 @@ exchangeSPsurv <- function(duration,
     model <- 'frailtySPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
                   LY = LY, S = S, N = N, burn = burn, thin = thin, w = w, m = m,
-                  ini.beta = ini.beta, ini.gamma = ini.gamma, rho = rho,
-                  lambda = lambda, ini.W = ini.W, ini.V = ini.V,
+                  ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V = ini.V,
                   form = dis, prop.varV = prop.varV, prop.varW = prop.varW, model = model)
 
     if(form == 'loglog'){
         results <- mcmcfrailtySPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                                  S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
                                  m  = r$m, ini.beta = r$ini.beta, ini.gamma = r$ini.gamma,
-                                 rho = r$rho, lambda = r$lambda, ini.W = r$ini.W, ini.V = r$ini.V,
+                                 ini.W = r$ini.W, ini.V = r$ini.V,
                                  form = r$form, prop.varV = r$prop.varV, prop.varW = r$prop.varW,
                                  id_WV = id_WV)
     } else {
         results <- mcmcfrailtySP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                              S = r$S, N = r$N, burn = r$burn, thin = r$thin, w  = r$w,
                              m  = r$m, ini.beta = r$ini.beta, ini.gamma = r$ini.gamma,
-                             rho = r$rho, lambda = r$lambda, ini.W = r$ini.W, ini.V = r$ini.V,
+                             ini.W = r$ini.W, ini.V = r$ini.V,
                              form = r$form, prop.varV = r$prop.varV, prop.varW = r$prop.varW,
                              id_WV = id_WV)
     }

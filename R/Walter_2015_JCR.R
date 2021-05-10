@@ -16,11 +16,12 @@
 #'    \item{ethfrac}{index of ethnic fractionalization.}
 #'    \item{unpko}{number of UN peacekeepers on the ground.}
 #'    \item{ccode}{country code.}
+#'    \item{id}{...}
 #' }
 #' @docType data
 #' @keywords datasets
 #' @name Walter_2015_JCR
 #' @usage data(Walter_2015_JCR)
-#' @format A data frame with 1237 rows and 12 variables
+#' @format A data frame with 1237 rows and 13 variables
 #' @source Walter, Barbara F. (2015), Why Bad Governance Leads to Repeat Civil War,  Journal of Conflict Resolution 59(7), 1242 - 1272.
 NULL

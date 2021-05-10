@@ -20,8 +20,6 @@ pooledSPsurv(
   m = 10,
   ini.beta = 0,
   ini.gamma = 0,
-  rho = 1,
-  lambda = 1,
   ini.W = 0,
   ini.V = 0,
   form = c("Weibull", "exponential", "loglog")
@@ -58,10 +56,6 @@ pooledSPsurv(
 
 \item{ini.gamma}{...}
 
-\item{rho}{...}
-
-\item{lambda}{...}
-
 \item{ini.W}{...}
 
 \item{ini.V}{...}
@@ -91,8 +85,6 @@ A \code{"pooledSPsurv"} object has the following elements:
 \item{C}{vector of `C'.}
 \item{ini.beta}{...}
 \item{ini.gamma}{...}
-\item{rho}{...}
-\item{lambda}{...}
 \item{ini.W}{...}
 \item{ini.V}{...}
 \item{form}{character, type of distribution.}
@@ -122,7 +114,7 @@ set.seed(123456)
 model <-
     pooledSPsurv(
         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-            instabl + intensityln + ethfrac + unpko,
+                   instabl + intensityln + ethfrac + unpko,
         immune   = cured ~ fhcompor1 + lgdpl + victory,
         Y0       = 't.0',
         LY       = 'lastyear',

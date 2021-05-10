@@ -22,8 +22,6 @@ spatialSPsurv(
   m = 10,
   ini.beta = 0,
   ini.gamma = 0,
-  rho = 1,
-  lambda = 1,
   ini.W = 0,
   ini.V = 0,
   form = c("Weibull", "exponential", "loglog"),
@@ -67,10 +65,6 @@ spatialSPsurv(
 
 \item{ini.gamma}{...}
 
-\item{rho}{...}
-
-\item{lambda}{...}
-
 \item{ini.W}{...}
 
 \item{ini.V}{...}
@@ -110,8 +104,6 @@ A \code{"spatialSPsurv"} object has the following elements:
 \item{S}{vector of `S'.}
 \item{ini.beta}{...}
 \item{ini.gamma}{...}
-\item{rho}{...}
-\item{lambda}{...}
 \item{ini.W}{...}
 \item{ini.V}{...}
 \item{form}{character, type of distribution.}
