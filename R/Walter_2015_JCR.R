@@ -16,7 +16,7 @@
 #'    \item{ethfrac}{index of ethnic fractionalization.}
 #'    \item{unpko}{number of UN peacekeepers on the ground.}
 #'    \item{ccode}{country code.}
-#'    \item{id}{...}
+#'    \item{id}{unique conflict identifier.}
 #' }
 #' @docType data
 #' @keywords datasets
