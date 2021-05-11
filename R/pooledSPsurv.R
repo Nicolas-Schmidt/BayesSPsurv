@@ -28,10 +28,10 @@
 #' \item{Y}{vector of `Y'.}
 #' \item{Y0}{vector of `Y0'.}
 #' \item{C}{vector of `C'.}
-#' \item{ini.beta}{list, initial value of beta.}
-#' \item{ini.gamma}{list, initial value of gamma.}
-#' \item{ini.W}{list, initial value of W.}
-#' \item{ini.V}{list, initial value of V.}
+#' \item{ini.beta}{character, numeric initial value of beta.}
+#' \item{ini.gamma}{character, numeric initial value of gamma.}
+#' \item{ini.W}{character, numeric initial value of W.}
+#' \item{ini.V}{character, numeric initial value of V.}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
 #'
