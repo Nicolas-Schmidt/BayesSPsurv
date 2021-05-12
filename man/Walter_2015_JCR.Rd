@@ -31,7 +31,7 @@ It has data on duration of post-war peace as well as information on other releva
    \item{ethfrac}{index of ethnic fractionalization.}
    \item{unpko}{number of UN peacekeepers on the ground.}
    \item{ccode}{country code.}
-   \item{id}{...}
+   \item{id}{unique conflict identifier.}
 }
 }
 \keyword{datasets}

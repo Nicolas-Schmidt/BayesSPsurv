@@ -58,19 +58,17 @@ exchangeSPsurv(
 
 \item{m}{limit on steps in the slice sampling. A vector of values for beta, gamma, rho.}
 
-\item{ini.beta}{...}
+\item{ini.beta}{initial value for the parameter vector beta.  By default is 0.}
 
-\item{ini.gamma}{...}
+\item{ini.gamma}{initial value for the parameter vector gamma. By default is 0.}
 
-\item{ini.W}{...}
+\item{ini.W}{initial value for the parameter vector W. By default is 0.}
 
-\item{ini.V}{...}
+\item{ini.V}{initial value for the parameter vector V.  By default is 0. #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
-\item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
+\item{prop.varV}{proposed variance for V in Metropolis-Hastings.}
 
-\item{prop.varV}{proposed variance for Metropolis-Hastings.}
-
-\item{prop.varW}{proposed variance for Metropolis-Hastings.}
+\item{prop.varW}{proposed variance for W in Metropolis-Hastings.}
 
 \item{id_WV}{vector of type character that modifies the colnames of W and V in the model’s result. By default is \code{unique(data[,S])}.}
 
@@ -99,10 +97,10 @@ An \code{"exchangeSPsurv"} object has the following elements:
 \item{Y0}{vector of `Y0'.}
 \item{C}{vector of `C'.}
 \item{S}{vector of `S'.}
-\item{ini.beta}{...}
-\item{ini.gamma}{...}
-\item{ini.W}{...}
-\item{ini.V}{...}
+\item{ini.beta}{numeric initial values of beta.}
+\item{ini.gamma}{numeric initial values of gamma.}
+\item{ini.W}{numeric initial values of W.}
+\item{ini.V}{numeric initial values of V.}
 \item{form}{character, type of distribution.}
 \item{call}{description for the model to be estimated.}
 
