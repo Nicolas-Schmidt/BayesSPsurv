@@ -212,7 +212,7 @@ print.frailtySPsurv <- function(x, ...){
     cat('Duration equation: \n')
     print(summary(x, parameter = 'betas')$statistics)
     cat('\n')
-    cat('Inmune equation: \n')
+    cat('Immune equation: \n')
     print(summary(x, parameter = 'gammas')$statistics)
     cat('\n')
 
