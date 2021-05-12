@@ -13,8 +13,6 @@
 #' @param m limit on steps in the slice sampling. A vector of values for beta, gamma, rho.
 #' @param ini.beta initial value for the parameter vector beta.  By default is 0.
 #' @param ini.gamma initial value for the parameter vector gamma. By default is 0.
-#' @param ini.W initial value for the parameter vector W. By default is 0.
-#' @param ini.V initial value for the parameter vector V.  By default is 0. #'
 #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).
 #'
 #' @return pooledSPsurv returns an object of class \code{"SPsurv"}.
@@ -31,8 +29,6 @@
 #' \item{C}{vector of `C'.}
 #' \item{ini.beta}{numeric initial value of beta.}
 #' \item{ini.gamma}{numeric initial value of gamma.}
-#' \item{ini.W}{numeric initial value of W.}
-#' \item{ini.V}{numeric initial value of V.}
 #' \item{form}{character, type of distribution.}
 #' \item{call}{description for the model to be estimated.}
 #'
@@ -84,8 +80,6 @@ pooledSPsurv <- function(duration,
                   m = 10,
                   ini.beta =  0,
                   ini.gamma = 0,
-                  ini.W = 0,
-                  ini.V= 0,
                   form = c('Weibull', 'exponential', 'loglog'))
 {
 
@@ -93,20 +87,18 @@ pooledSPsurv <- function(duration,
     model <- 'SPsurv'
     r   <- formcall(duration = duration, immune = immune, data = data, Y0 = Y0,
                     LY = LY, N = N, burn = burn, thin = thin, w = w,
-                    m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V = ini.V,
+                    m = m, ini.beta = ini.beta, ini.gamma = ini.gamma,
                     form = dis, model = model)
 
     if(form == 'loglog') {
         results <- mcmcSPlog(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                           N = r$N, burn = r$burn, thin = r$thin, w  = r$w, m  = r$m,
                           ini.beta = r$ini.beta, ini.gamma = r$ini.gamma,
-                          ini.W = r$ini.W, ini.V = r$ini.V,
                           form = r$form)
     } else {
         results <- mcmcSP(Y = r$Y, Y0 = r$Y0, C = r$C, LY = r$LY, X = r$X, Z = r$Z,
                       N = r$N, burn = r$burn, thin = r$thin, w  = r$w, m  = r$m,
                       ini.beta = r$ini.beta, ini.gamma = r$ini.gamma,
-                      ini.W = r$ini.W, ini.V = r$ini.V,
                       form = r$form)
     }
 

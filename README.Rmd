@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # BayesSPsurv
 
 <!-- badges: start -->
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/BayesMFSurv)](https://cran.r-project.org/package=BayesSPsurv)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/BayesSPsurv)](https://cran.r-project.org/package=BayesSPsurv)
 [![R build status](https://github.com/Nicolas-Schmidt/spatialSPsurv/workflows/R-CMD-check/badge.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv/actions)
 [![Project Status: Active â€“ The project has reached a stable, usable
 state and is being actively
@@ -34,7 +34,7 @@ Parametric spatial split-population (SP) survival models for clustered event pro
 
 ### Installation
 
-The latest version of the package (`0.1.1`) is available on [CRAN R](https://CRAN.R-project.org/package=BayesSPsurv):
+The latest version of the package (`0.1.2`) is available on [CRAN R](https://CRAN.R-project.org/package=BayesSPsurv):
 ```r
 install.packages("BayesSPsurv")
 ```

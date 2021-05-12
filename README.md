@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/BayesMFSurv)](https://cran.r-project.org/package=BayesSPsurv)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/BayesSPsurv)](https://cran.r-project.org/package=BayesSPsurv)
 [![R build
 status](https://github.com/Nicolas-Schmidt/spatialSPsurv/workflows/R-CMD-check/badge.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv/actions)
 [![Project Status: Active â€“ The project has reached a stable, usable
@@ -34,7 +34,7 @@ broadly applicable to a variety of research areas.
 
 ### Installation
 
-The latest version of the package (`0.1.1`) is available on [CRAN
+The latest version of the package (`0.1.2`) is available on [CRAN
 R](https://CRAN.R-project.org/package=BayesSPsurv):
 
 ``` r
@@ -142,7 +142,7 @@ print(model)
 #> lgdpl         0.4221808 0.1185057 0.01324934     0.02161274
 #> unpko         0.1617510 0.7679051 0.08585440     0.08585440
 #> 
-#> Inmune equation: 
+#> Immune equation: 
 #>                  Mean       SD  Naive SE Time-series SE
 #> (Intercept) -0.383487 3.797043 0.4245223      0.5575999
 #> lgdpl       -1.461369 1.757769 0.1965245      0.2475315
@@ -274,7 +274,7 @@ print(model)
 #> victory       0.05918528 0.5611721 0.06274094     0.06274094
 #> unpko         0.10013585 0.8112391 0.09069929     0.09069929
 #> 
-#> Inmune equation: 
+#> Immune equation: 
 #>                  Mean       SD  Naive SE Time-series SE
 #> (Intercept) -2.595263 6.259883 0.6998762       1.530030
 #> lgdpl       -1.782770 3.348600 0.3743848       1.116384

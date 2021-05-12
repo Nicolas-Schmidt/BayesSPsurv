@@ -20,8 +20,6 @@ pooledSPsurv(
   m = 10,
   ini.beta = 0,
   ini.gamma = 0,
-  ini.W = 0,
-  ini.V = 0,
   form = c("Weibull", "exponential", "loglog")
 )
 
@@ -56,10 +54,6 @@ pooledSPsurv(
 
 \item{ini.gamma}{initial value for the parameter vector gamma. By default is 0.}
 
-\item{ini.W}{initial value for the parameter vector W. By default is 0.}
-
-\item{ini.V}{initial value for the parameter vector V.  By default is 0. #'}
-
 \item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
 \item{object}{an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.}
@@ -85,8 +79,6 @@ A \code{"pooledSPsurv"} object has the following elements:
 \item{C}{vector of `C'.}
 \item{ini.beta}{numeric initial value of beta.}
 \item{ini.gamma}{numeric initial value of gamma.}
-\item{ini.W}{numeric initial value of W.}
-\item{ini.V}{numeric initial value of V.}
 \item{form}{character, type of distribution.}
 \item{call}{description for the model to be estimated.}
 

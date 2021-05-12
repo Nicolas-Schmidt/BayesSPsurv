@@ -80,7 +80,7 @@ formcall <- function(duration,
     colnames(X) <- cnx
     colnames(Z) <- cnz
     fm <- list(Y = Y, Y0 = Y0, C = C, LY = LY, X = X, Z = Z, N = N, burn = burn,
-               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma,ini.W = ini.W, ini.V = ini.V, form = form)
+               thin = thin, w = w, m = m, ini.beta = ini.beta, ini.gamma = ini.gamma, form = form)
 
   } else {
 
@@ -2139,8 +2139,6 @@ mcmcSP <- function(Y,
                    m = 10,
                    ini.beta =  0,
                    ini.gamma = 0,
-                   ini.W = 0,
-                   ini.V= 0,
                    form) {
   p1 = dim(X)[2]
   p2 = dim(Z)[2]
@@ -2148,8 +2146,8 @@ mcmcSP <- function(Y,
   rho = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
-  W = rep(ini.W, length(Y))
-  V = rep(ini.V, length(Y))
+  W = rep(0, length(Y))
+  #V = rep(0, length(Y))
   delta = exp(Z %*% gammas)/ (1 + exp(Z %*% gammas))
   Sigma.b = 10 * p1 * diag(p1)
   Sigma.g = 10 * p2 * diag(p2)
@@ -2191,7 +2189,7 @@ mcmcSP <- function(Y,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp, delta = delta.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma)))
 }
 
 # @title mcmcSPlog
@@ -2233,8 +2231,8 @@ mcmcSPlog <- function(Y,
   rho = 1
   betas = rep(ini.beta, p1)
   gammas = rep(ini.gamma, p2)
-  W = rep(ini.W, length(Y))
-  V = rep(ini.V, length(Y))
+  W = rep(0, length(Y))
+  #V = rep(0, length(Y))
   delta = exp(Z %*% gammas)/ (1 + exp(Z %*% gammas))
   Sigma.b = 5 * p1 * diag(p1)
   Sigma.g = 5 * p2 * diag(p2)
@@ -2273,7 +2271,7 @@ mcmcSPlog <- function(Y,
   colnames(gammas.samp) <- colnames(Z) #adc
   return(list(betas   = betas.samp, gammas = gammas.samp, rho = rho.samp,
               spstats = list(X = X, Z = Z, Y = Y,  Y0 = Y0, C = C, form = form),
-              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma, ini.W = ini.W, ini.V  = ini.V)))
+              initial = list(ini.beta = ini.beta, ini.gamma = ini.gamma)))
 }
 
 
