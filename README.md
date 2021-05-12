@@ -279,3 +279,99 @@ print(model)
 #> (Intercept) -2.595263 6.259883 0.6998762       1.530030
 #> lgdpl       -1.782770 3.348600 0.3743848       1.116384
 ```
+
+## Parallel MCMC
+
+``` r
+
+library(doParallel)
+#> Loading required package: foreach
+#> Loading required package: iterators
+#> Loading required package: parallel
+library(snow)
+#> 
+#> Attaching package: 'snow'
+#> The following objects are masked from 'package:parallel':
+#> 
+#>     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+#>     clusterExport, clusterMap, clusterSplit, makeCluster, parApply,
+#>     parCapply, parLapply, parRapply, parSapply, splitIndices,
+#>     stopCluster
+library(doRNG)
+#> Loading required package: rngtools
+library(coda)
+
+
+workers <- makeCluster(detectCores() - 1 ,type = "SOCK", outfile = "log.txt")
+registerDoParallel(workers)
+
+inivals <- c(0, 1, 10, 50)
+
+data(Walter_2015_JCR)
+walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", unitID = "id",
+                       tID = "year", freq = "year", ongoing = FALSE)
+#> Warning in attempt_date(data[, tID], freq): Converting to 'Date' class with
+#> yyyy-06-30
+
+walter <- spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
+set.seed(123456)
+
+ctype = rbind
+t = 1
+tm1 = system.time({
+    Out <- foreach(i = 1:length(inivals),.combine = ctype, .errorhandling = 'stop',
+                   .packages='BayesSPsurv',
+                   .options.RNG = t) %dorng%
+        {spatialSPsurv(
+            duration  = duration ~ victory + comprehensive + lgdpl + unpko,
+            immune    = atrisk ~ lgdpl,
+            Y0        = 't.0',
+            LY        = 'lastyear',
+            S         = 'sp_id' ,
+            data      = walter[[1]],
+            N         = 1500,
+            burn      = 300,
+            thin      = 15,
+            w         = c(1,1,1),
+            m         = 10,
+            ini.beta  =  inivals[i],
+            ini.gamma = inivals[i],
+            ini.W     = inivals[i],
+            ini.V     = inivals[i],
+            form      = "Weibull",
+            prop.varV = 1e-05,
+            prop.varW = 1e-03,
+            A         = walter[[2]])
+        }
+})
+
+
+betas  <- do.call("rbind", lapply(Out[1:4], function(x) as.mcmc.list(as.mcmc(x))))
+gammas <- do.call("rbind", lapply(Out[5:8], function(x) as.mcmc.list(as.mcmc(x))))
+
+#Gelman Diagnostics
+
+coda::gelman.diag(betas)
+#> Potential scale reduction factors:
+#> 
+#>               Point est. Upper C.I.
+#> (Intercept)         1.16       1.45
+#> victory             1.21       1.51
+#> comprehensive       1.21       1.29
+#> lgdpl               1.27       1.60
+#> unpko               1.15       1.19
+#> 
+#> Multivariate psrf
+#> 
+#> 1.07
+coda::gelman.diag(gammas)
+#> Potential scale reduction factors:
+#> 
+#>             Point est. Upper C.I.
+#> (Intercept)       1.25       1.74
+#> lgdpl             1.12       1.39
+#> 
+#> Multivariate psrf
+#> 
+#> 1.23
+```
