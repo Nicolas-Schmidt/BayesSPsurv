@@ -58,7 +58,9 @@ pooledSPsurv(
 
 \item{ini.W}{initial value for the parameter vector W. By default is 0.}
 
-\item{ini.V}{initial value for the parameter vector V.  By default is 0. #' @param form type of parametric model (Weibull, Exponential, or Log-Logistic).}
+\item{ini.V}{initial value for the parameter vector V.  By default is 0. #'}
+
+\item{form}{type of parametric model (Weibull, Exponential, or Log-Logistic).}
 
 \item{object}{an object of class \code{SPsurv}, the output of \code{\link{pooledSPsurv}}.}
 
