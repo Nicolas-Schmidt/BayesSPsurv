@@ -93,25 +93,23 @@ walter <- BayesSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold 
 
 set.seed(123456)
 
-model <- 
-    spatialSPsurv(
-        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                    instabl + intensityln + ethfrac + unpko,
-        immune    = cured ~ fhcompor1 + lgdpl + victory,
-        Y0        = 't.0',
-        LY        = 'lastyear',
-        S         = 'sp_id' ,
-        data      = walter[[1]],
-        N         = 500,
-        burn      = 10,
-        thin      = 10,
-        w         = c(1,1,1),
-        m         = 10,
-        form      = "Weibull",
-        prop.varV = 1e-05,
-        prop.varW = 1e-03,
-        A         = walter[[2]]
-    )
+model <- spatialSPsurv(
+          duration  = duration ~ victory + comprehensive + lgdpl + unpko,
+          immune    = atrisk ~ lgdpl,
+          Y0        = 't.0',
+          LY        = 'lastyear',
+          S         = 'sp_id' ,
+          data      = walter[[1]],
+          N         = 1500,
+          burn      = 300,
+          thin      = 15,
+          w         = c(1,1,1),
+          m         = 10,
+          form      = "Weibull",
+          prop.varV = 1e-05,
+          prop.varW = 1e-03,
+          A         = walter[[2]]
+        )
 
 print(model)
 
@@ -145,31 +143,28 @@ walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
                                    unitID = "id", tID = "year", 
                                    freq = "year", ongoing = FALSE)
 
-walter$S     <- rep(x = 1:length(unique(walter$ccode)), times = rle(walter$ccode)$lengths)
-country <- countrycode::countrycode(unique(walter$ccode),'gwn','iso3c')
+walter$S <- rep(x = 1:length(unique(walter$ccode)), times = rle(walter$ccode)$lengths)
+country  <- countrycode::countrycode(unique(walter$ccode),'gwn','iso3c')
 
 set.seed(123456)
 
-model <-
-    exchangeSPsurv(
-        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-                    instabl + intensityln + ethfrac + unpko,
-        immune    = cured ~ fhcompor1 + lgdpl + victory,
-        Y0        = 't.0',
-        LY        = 'lastyear',
-        S         = 'S' ,
-        data      = walter,
-        N         = 500,
-        burn      = 10,
-        thin      = 10,
-        w         = c(1,1,1),
-        m         = 10,
-        form      = "loglog",
-        prop.varV = 1e-05,
-        prop.varW = 1e-03,
-        id_WV    = country
-    )
-
+model <- exchangeSPsurv(
+          duration  = duration ~ comprehensive + victory + unpko,
+          immune    = atrisk ~ lgdpl,
+          Y0        = 't.0',
+          LY        = 'lastyear',
+          S         = 'S' ,
+          data      = walter,
+          N         = 1500,
+          burn      = 300,
+          thin      = 15,
+          w         = c(1,1,1),
+          m         = 10,
+          form      = "Weibull",
+          prop.varV = 1e-05,
+          prop.varW = 1e-03,
+          id_WV     = country
+        )
 
 library(ggplot2)
 
@@ -195,21 +190,19 @@ Bayesian SP survical model without unit-specific i.i.d frailties.
 
 set.seed(123456)
 
-model <-
-     pooledSPsurv(
-         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-             instabl + intensityln + ethfrac + unpko,
-         immune   = cured ~ fhcompor1 + lgdpl + victory,
-         Y0       = 't.0',
-         LY       = 'lastyear',
-         data     = walter,
-         N        = 500,
-         burn     = 10,
-         thin     = 10,
-         w        = c(1,1,1),
-         m        = 10,
-         form     = "Weibull"
-     )
+model <-pooledSPsurv(
+          duration = duration ~ comprehensive + victory + unpko,
+          immune   = atrisk ~ lgdpl,
+          Y0       = 't.0',
+          LY       = 'lastyear',
+          data     = walter,
+          N        = 1500,
+          burn     = 300,
+          thin     = 15,
+          w        = c(1,1,1),
+          m        = 10,
+          form     = "Weibull"
+      )
 
 print(model)
 

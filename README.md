@@ -98,70 +98,61 @@ walter <- BayesSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold 
 
 set.seed(123456)
 
-model <- 
-    spatialSPsurv(
-        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory + 
-                    instabl + intensityln + ethfrac + unpko,
-        immune    = cured ~ fhcompor1 + lgdpl + victory,
-        Y0        = 't.0',
-        LY        = 'lastyear',
-        S         = 'sp_id' ,
-        data      = walter[[1]],
-        N         = 500,
-        burn      = 10,
-        thin      = 10,
-        w         = c(1,1,1),
-        m         = 10,
-        form      = "Weibull",
-        prop.varV = 1e-05,
-        prop.varW = 1e-03,
-        A         = walter[[2]]
-    )
+model <- spatialSPsurv(
+          duration  = duration ~ victory + comprehensive + lgdpl + unpko,
+          immune    = atrisk ~ lgdpl,
+          Y0        = 't.0',
+          LY        = 'lastyear',
+          S         = 'sp_id' ,
+          data      = walter[[1]],
+          N         = 1500,
+          burn      = 300,
+          thin      = 15,
+          w         = c(1,1,1),
+          m         = 10,
+          form      = "Weibull",
+          prop.varV = 1e-05,
+          prop.varW = 1e-03,
+          A         = walter[[2]]
+        )
 
 print(model)
 #> Call:
-#> spatialSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
-#>     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
-#>     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
-#>     S = "sp_id", A = walter[[2]], data = walter[[1]], N = 500, 
-#>     burn = 10, thin = 10, w = c(1, 1, 1), m = 10, form = "Weibull", 
+#> spatialSPsurv(duration = duration ~ victory + comprehensive + 
+#>     lgdpl + unpko, immune = atrisk ~ lgdpl, Y0 = "t.0", LY = "lastyear", 
+#>     S = "sp_id", A = walter[[2]], data = walter[[1]], N = 1500, 
+#>     burn = 300, thin = 15, w = c(1, 1, 1), m = 10, form = "Weibull", 
 #>     prop.varV = 1e-05, prop.varW = 0.001)
 #> 
 #> 
-#> Iterations = 1:49
+#> Iterations = 1:80
 #> Thinning interval = 1 
 #> Number of chains = 1 
-#> Sample size per chain = 49 
+#> Sample size per chain = 80 
 #> 
 #> Empirical mean and standard deviation for each variable,
 #> plus standard error of the mean:
 #> 
 #> 
 #> Duration equation: 
-#>                      Mean         SD   Naive SE Time-series SE
-#> (Intercept)    1.12175943 0.72782728 0.10397533     0.20640125
-#> fhcompor1     -0.94228430 0.40918165 0.05845452     0.05293352
-#> lgdpl         -0.01583485 0.09102508 0.01300358     0.03297101
-#> comprehensive -0.66300249 0.31027598 0.04432514     0.04432514
-#> victory        0.25435614 0.46844978 0.06692140     0.06692140
-#> instabl        0.67515125 0.45626742 0.06518106     0.06518106
-#> intensityln    0.16878473 0.08716617 0.01245231     0.04559517
-#> ethfrac       -0.02405502 0.58857859 0.08408266     0.08677714
-#> unpko          0.44344674 0.63423139 0.09060448     0.11244357
+#>                    Mean        SD   Naive SE Time-series SE
+#> (Intercept)   0.5472465 0.7770281 0.08687438     0.03375775
+#> victory       0.1083226 0.5791961 0.06475609     0.09381673
+#> comprehensive 0.2390011 0.5841345 0.06530822     0.06530822
+#> lgdpl         0.4221808 0.1185057 0.01324934     0.02161274
+#> unpko         0.1617510 0.7679051 0.08585440     0.08585440
 #> 
 #> Inmune equation: 
-#>                    Mean       SD  Naive SE Time-series SE
-#> (Intercept) -0.52444626 4.385563 0.6265090      1.0810530
-#> fhcompor1   -0.30397958 4.471833 0.6388332      1.2863354
-#> lgdpl       -1.50327218 1.260961 0.1801372      0.1801372
-#> victory     -0.02088428 2.335731 0.3336758      0.3336758
+#>                  Mean       SD  Naive SE Time-series SE
+#> (Intercept) -0.383487 3.797043 0.4245223      0.5575999
+#> lgdpl       -1.461369 1.757769 0.1965245      0.2475315
 
 SPstats(model)
 #> $DIC
-#> [1] -26548.19
+#> [1] -4783.756
 #> 
 #> $Loglik
-#> [1] 18037.57
+#> [1] 3556.558
 
 # ~~~~~~~~~~~~~~~
 # Choropleth Map
@@ -197,31 +188,28 @@ walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war",
                                    unitID = "id", tID = "year", 
                                    freq = "year", ongoing = FALSE)
 
-walter$S     <- rep(x = 1:length(unique(walter$ccode)), times = rle(walter$ccode)$lengths)
-country <- countrycode::countrycode(unique(walter$ccode),'gwn','iso3c')
+walter$S <- rep(x = 1:length(unique(walter$ccode)), times = rle(walter$ccode)$lengths)
+country  <- countrycode::countrycode(unique(walter$ccode),'gwn','iso3c')
 
 set.seed(123456)
 
-model <-
-    exchangeSPsurv(
-        duration  = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-                    instabl + intensityln + ethfrac + unpko,
-        immune    = cured ~ fhcompor1 + lgdpl + victory,
-        Y0        = 't.0',
-        LY        = 'lastyear',
-        S         = 'S' ,
-        data      = walter,
-        N         = 500,
-        burn      = 10,
-        thin      = 10,
-        w         = c(1,1,1),
-        m         = 10,
-        form      = "loglog",
-        prop.varV = 1e-05,
-        prop.varW = 1e-03,
-        id_WV    = country
-    )
-
+model <- exchangeSPsurv(
+          duration  = duration ~ comprehensive + victory + unpko,
+          immune    = atrisk ~ lgdpl,
+          Y0        = 't.0',
+          LY        = 'lastyear',
+          S         = 'S' ,
+          data      = walter,
+          N         = 1500,
+          burn      = 300,
+          thin      = 15,
+          w         = c(1,1,1),
+          m         = 10,
+          form      = "Weibull",
+          prop.varV = 1e-05,
+          prop.varW = 1e-03,
+          id_WV     = country
+        )
 
 library(ggplot2)
 
@@ -248,56 +236,46 @@ Bayesian SP survical model without unit-specific i.i.d frailties.
 
 set.seed(123456)
 
-model <-
-     pooledSPsurv(
-         duration = duration ~ fhcompor1 + lgdpl + comprehensive + victory +
-             instabl + intensityln + ethfrac + unpko,
-         immune   = cured ~ fhcompor1 + lgdpl + victory,
-         Y0       = 't.0',
-         LY       = 'lastyear',
-         data     = walter,
-         N        = 500,
-         burn     = 10,
-         thin     = 10,
-         w        = c(1,1,1),
-         m        = 10,
-         form     = "Weibull"
-     )
+model <-pooledSPsurv(
+          duration = duration ~ comprehensive + victory + unpko,
+          immune   = atrisk ~ lgdpl,
+          Y0       = 't.0',
+          LY       = 'lastyear',
+          data     = walter,
+          N        = 1500,
+          burn     = 300,
+          thin     = 15,
+          w        = c(1,1,1),
+          m        = 10,
+          form     = "Weibull"
+      )
 
 print(model)
 #> Call:
-#> pooledSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
-#>     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
-#>     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
-#>     data = walter, N = 500, burn = 10, thin = 10, w = c(1, 1, 
-#>         1), m = 10, form = "Weibull")
+#> pooledSPsurv(duration = duration ~ comprehensive + victory + 
+#>     unpko, immune = atrisk ~ lgdpl, Y0 = "t.0", LY = "lastyear", 
+#>     data = walter, N = 1500, burn = 300, thin = 15, w = c(1, 
+#>         1, 1), m = 10, form = "Weibull")
 #> 
 #> 
-#> Iterations = 1:49
+#> Iterations = 1:80
 #> Thinning interval = 1 
 #> Number of chains = 1 
-#> Sample size per chain = 49 
+#> Sample size per chain = 80 
 #> 
 #> Empirical mean and standard deviation for each variable,
 #> plus standard error of the mean:
 #> 
 #> 
 #> Duration equation: 
-#>                      Mean        SD   Naive SE Time-series SE
-#> (Intercept)    1.41645165 0.7630170 0.10900243     0.25754335
-#> fhcompor1     -0.73118837 0.4446105 0.06351579     0.06351579
-#> lgdpl         -0.04603712 0.1262530 0.01803614     0.05548108
-#> comprehensive -0.64177732 0.3831055 0.05472936     0.04350588
-#> victory        0.45487990 0.3810381 0.05443401     0.05443401
-#> instabl        0.66023159 0.4724143 0.06748776     0.06748776
-#> intensityln    0.17466335 0.1069724 0.01528177     0.04389407
-#> ethfrac       -0.01717105 0.5198537 0.07426481     0.07426481
-#> unpko          0.44262641 0.5719971 0.08171387     0.08171387
+#>                     Mean        SD   Naive SE Time-series SE
+#> (Intercept)   3.19047012 1.1807620 0.13201321     0.45104567
+#> comprehensive 0.30823578 0.7420113 0.08295939     0.08295939
+#> victory       0.05918528 0.5611721 0.06274094     0.06274094
+#> unpko         0.10013585 0.8112391 0.09069929     0.09069929
 #> 
 #> Inmune equation: 
-#>                   Mean       SD  Naive SE Time-series SE
-#> (Intercept) -1.3166061 4.668150 0.6668786      1.5578413
-#> fhcompor1   -2.5921085 5.214286 0.7448980      0.5620853
-#> lgdpl       -5.3924239 4.929649 0.7042356      1.5028341
-#> victory     -0.1413459 6.253230 0.8933186      2.5384936
+#>                  Mean       SD  Naive SE Time-series SE
+#> (Intercept) -2.595263 6.259883 0.6998762       1.530030
+#> lgdpl       -1.782770 3.348600 0.3743848       1.116384
 ```
