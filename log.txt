@@ -1,9 +1,0 @@
-starting worker for localhost:11449 
-Type: EXEC 
-Loading required package: foreach
-Loading required package: rngtools
-Type: EXEC 
-Error in unserialize(node$con) : error al leer desde conexión
-Calls: local ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
-Ejecución interrumpida
-nterrumpida
