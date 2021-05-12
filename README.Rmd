@@ -211,7 +211,7 @@ print(model)
 
 ## Parallel MCMC
 
-```{r}
+```{r, warning = FALSE, message=FALSE}
 
 library(doParallel)
 library(snow)
@@ -264,7 +264,8 @@ tm1 = system.time({
 betas  <- do.call("rbind", lapply(Out[1:4], function(x) as.mcmc.list(as.mcmc(x))))
 gammas <- do.call("rbind", lapply(Out[5:8], function(x) as.mcmc.list(as.mcmc(x))))
 
-#Gelman Diagnostics
+
+##  Gelman Diagnostics
 
 coda::gelman.diag(betas)
 coda::gelman.diag(gammas)

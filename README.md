@@ -285,20 +285,8 @@ print(model)
 ``` r
 
 library(doParallel)
-#> Loading required package: foreach
-#> Loading required package: iterators
-#> Loading required package: parallel
 library(snow)
-#> 
-#> Attaching package: 'snow'
-#> The following objects are masked from 'package:parallel':
-#> 
-#>     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-#>     clusterExport, clusterMap, clusterSplit, makeCluster, parApply,
-#>     parCapply, parLapply, parRapply, parSapply, splitIndices,
-#>     stopCluster
 library(doRNG)
-#> Loading required package: rngtools
 library(coda)
 
 
@@ -310,8 +298,6 @@ inivals <- c(0, 1, 10, 50)
 data(Walter_2015_JCR)
 walter <- spduration::add_duration(Walter_2015_JCR,"renewed_war", unitID = "id",
                        tID = "year", freq = "year", ongoing = FALSE)
-#> Warning in attempt_date(data[, tID], freq): Converting to 'Date' class with
-#> yyyy-06-30
 
 walter <- spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 set.seed(123456)
@@ -349,7 +335,8 @@ tm1 = system.time({
 betas  <- do.call("rbind", lapply(Out[1:4], function(x) as.mcmc.list(as.mcmc(x))))
 gammas <- do.call("rbind", lapply(Out[5:8], function(x) as.mcmc.list(as.mcmc(x))))
 
-#Gelman Diagnostics
+
+##  Gelman Diagnostics
 
 coda::gelman.diag(betas)
 #> Potential scale reduction factors:
