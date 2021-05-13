@@ -33,7 +33,7 @@ plot_JoinCount(
 A ggplot object
 }
 \description{
-Uses Joint Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering.
+Uses Join Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering.
 }
 \examples{
 
