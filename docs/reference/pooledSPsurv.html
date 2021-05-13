@@ -75,7 +75,7 @@ Returns a plot of a pooledSPsurv object via plot.mcmc." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BayesSPsurv</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ Returns a plot of a pooledSPsurv object via plot.mcmc." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +97,7 @@ Returns a plot of a pooledSPsurv object via plot.mcmc." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,28 +126,30 @@ Returns a plot of a pooledSPsurv object via plot.mcmc." />
 <p>Returns a plot of a pooledSPsurv object via <code><a href='https://rdrr.io/pkg/coda/man/plot.mcmc.html'>plot.mcmc</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pooledSPsurv</span>(
-  <span class='no'>duration</span>,
-  <span class='no'>immune</span>,
-  <span class='no'>Y0</span>,
-  <span class='no'>LY</span>,
-  <span class='no'>data</span>,
-  <span class='no'>N</span>,
-  <span class='no'>burn</span>,
-  <span class='no'>thin</span>,
-  <span class='kw'>w</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
-  <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>form</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Weibull"</span>, <span class='st'>"exponential"</span>, <span class='st'>"loglog"</span>)
-)
+    <pre class="usage"><span class='fu'>pooledSPsurv</span><span class='op'>(</span>
+  <span class='va'>duration</span>,
+  <span class='va'>immune</span>,
+  <span class='va'>Y0</span>,
+  <span class='va'>LY</span>,
+  <span class='va'>data</span>,
+  <span class='va'>N</span>,
+  <span class='va'>burn</span>,
+  <span class='va'>thin</span>,
+  w <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>,
+  m <span class='op'>=</span> <span class='fl'>10</span>,
+  ini.beta <span class='op'>=</span> <span class='fl'>0</span>,
+  ini.gamma <span class='op'>=</span> <span class='fl'>0</span>,
+  form <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Weibull"</span>, <span class='st'>"exponential"</span>, <span class='st'>"loglog"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for SPsurv</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>object</span>, parameter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for SPsurv</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for SPsurv</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, parameter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,6 +195,14 @@ Returns a plot of a pooledSPsurv object via plot.mcmc." />
       <td><p>limit on steps in the slice sampling. A vector of values for beta, gamma, rho.</p></td>
     </tr>
     <tr>
+      <th>ini.beta</th>
+      <td><p>initial value for the parameter vector beta.  By default is 0.</p></td>
+    </tr>
+    <tr>
+      <th>ini.gamma</th>
+      <td><p>initial value for the parameter vector gamma. By default is 0.</p></td>
+    </tr>
+    <tr>
       <th>form</th>
       <td><p>type of parametric model (Weibull, Exponential, or Log-Logistic).</p></td>
     </tr>
@@ -227,6 +237,8 @@ Returns a plot of a pooledSPsurv object via plot.mcmc." />
 <dt>Y</dt><dd><p>vector of `Y'.</p></dd>
 <dt>Y0</dt><dd><p>vector of `Y0'.</p></dd>
 <dt>C</dt><dd><p>vector of `C'.</p></dd>
+<dt>ini.beta</dt><dd><p>numeric initial value of beta.</p></dd>
+<dt>ini.gamma</dt><dd><p>numeric initial value of gamma.</p></dd>
 <dt>form</dt><dd><p>character, type of distribution.</p></dd>
 <dt>call</dt><dd><p>description for the model to be estimated.</p></dd>
 
@@ -237,29 +249,31 @@ list. Empirical mean, standard deviation and quantiles for each variable.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>walter</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>spduration</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/spduration/man/add_duration.html'>add_duration</a></span>(<span class='no'>Walter_2015_JCR</span>,<span class='st'>"renewed_war"</span>,
-                                   <span class='kw'>unitID</span> <span class='kw'>=</span> <span class='st'>"ccode"</span>, <span class='kw'>tID</span> <span class='kw'>=</span> <span class='st'>"year"</span>,
-                                   <span class='kw'>freq</span> <span class='kw'>=</span> <span class='st'>"year"</span>, <span class='kw'>ongoing</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Converting to 'Date' class with yyyy-06-30</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>123456</span>)
+<span class='va'>walter</span> <span class='op'>&lt;-</span> <span class='fu'>spduration</span><span class='fu'>::</span><span class='fu'><a href='https://andybeger.com/spduration/reference/add_duration.html'>add_duration</a></span><span class='op'>(</span><span class='va'>Walter_2015_JCR</span>,<span class='st'>"renewed_war"</span>,
+                                   unitID <span class='op'>=</span> <span class='st'>"ccode"</span>, tID <span class='op'>=</span> <span class='st'>"year"</span>,
+                                   freq <span class='op'>=</span> <span class='st'>"year"</span>, ongoing <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Converting to 'Date' class with yyyy-06-30</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>123456</span><span class='op'>)</span>
 
-<span class='no'>model</span> <span class='kw'>&lt;-</span>
-    <span class='fu'>pooledSPsurv</span>(
-        <span class='kw'>duration</span> <span class='kw'>=</span> <span class='no'>duration</span> ~ <span class='no'>fhcompor1</span> + <span class='no'>lgdpl</span> + <span class='no'>comprehensive</span> + <span class='no'>victory</span> +
-            <span class='no'>instabl</span> + <span class='no'>intensityln</span> + <span class='no'>ethfrac</span> + <span class='no'>unpko</span>,
-        <span class='kw'>immune</span>   <span class='kw'>=</span> <span class='no'>cured</span> ~ <span class='no'>fhcompor1</span> + <span class='no'>lgdpl</span> + <span class='no'>victory</span>,
-        <span class='kw'>Y0</span>       <span class='kw'>=</span> <span class='st'>'t.0'</span>,
-        <span class='kw'>LY</span>       <span class='kw'>=</span> <span class='st'>'lastyear'</span>,
-        <span class='kw'>data</span>     <span class='kw'>=</span> <span class='no'>walter</span>,
-        <span class='kw'>N</span>        <span class='kw'>=</span> <span class='fl'>100</span>,
-        <span class='kw'>burn</span>     <span class='kw'>=</span> <span class='fl'>10</span>,
-        <span class='kw'>thin</span>     <span class='kw'>=</span> <span class='fl'>10</span>,
-        <span class='kw'>w</span>        <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>),
-        <span class='kw'>m</span>        <span class='kw'>=</span> <span class='fl'>10</span>,
-        <span class='kw'>form</span>     <span class='kw'>=</span> <span class='st'>"Weibull"</span>
-    )
+<span class='va'>model</span> <span class='op'>&lt;-</span>
+    <span class='fu'>pooledSPsurv</span><span class='op'>(</span>
+        duration <span class='op'>=</span> <span class='va'>duration</span> <span class='op'>~</span> <span class='va'>fhcompor1</span> <span class='op'>+</span> <span class='va'>lgdpl</span> <span class='op'>+</span> <span class='va'>comprehensive</span> <span class='op'>+</span> <span class='va'>victory</span> <span class='op'>+</span>
+                   <span class='va'>instabl</span> <span class='op'>+</span> <span class='va'>intensityln</span> <span class='op'>+</span> <span class='va'>ethfrac</span> <span class='op'>+</span> <span class='va'>unpko</span>,
+        immune   <span class='op'>=</span> <span class='va'>cured</span> <span class='op'>~</span> <span class='va'>fhcompor1</span> <span class='op'>+</span> <span class='va'>lgdpl</span> <span class='op'>+</span> <span class='va'>victory</span>,
+        Y0       <span class='op'>=</span> <span class='st'>'t.0'</span>,
+        LY       <span class='op'>=</span> <span class='st'>'lastyear'</span>,
+        data     <span class='op'>=</span> <span class='va'>walter</span>,
+        N        <span class='op'>=</span> <span class='fl'>100</span>,
+        burn     <span class='op'>=</span> <span class='fl'>10</span>,
+        thin     <span class='op'>=</span> <span class='fl'>10</span>,
+        w        <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span>,
+        m        <span class='op'>=</span> <span class='fl'>10</span>,
+        form     <span class='op'>=</span> <span class='st'>"Weibull"</span>
+    <span class='op'>)</span>
 
 
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; Call:
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Call:
 #&gt; pooledSPsurv(duration = duration ~ fhcompor1 + lgdpl + comprehensive + 
 #&gt;     victory + instabl + intensityln + ethfrac + unpko, immune = cured ~ 
 #&gt;     fhcompor1 + lgdpl + victory, Y0 = "t.0", LY = "lastyear", 
@@ -288,14 +302,15 @@ list. Empirical mean, standard deviation and quantiles for each variable.
 #&gt; ethfrac       -0.21938349 0.70877869 0.23625956     0.23625956
 #&gt; unpko          0.84936611 0.65902802 0.21967601     0.21967601
 #&gt; 
-#&gt; Inmune equation: 
+#&gt; Immune equation: 
 #&gt;                   Mean       SD  Naive SE Time-series SE
 #&gt; (Intercept)  0.7645582 1.878438 0.6261459      1.2225668
 #&gt; fhcompor1    3.4480967 4.610149 1.5367162      2.8349533
 #&gt; lgdpl       -3.1381824 2.568191 0.8560636      0.8560636
 #&gt; victory     -0.6346364 3.068650 1.0228834      1.0228834
 #&gt; </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>model</span>, <span class='kw'>parameter</span> <span class='kw'>=</span> <span class='st'>"betas"</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>model</span>, parameter <span class='op'>=</span> <span class='st'>"betas"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Iterations = 1:9
 #&gt; Thinning interval = 1 
 #&gt; Number of chains = 1 
@@ -328,10 +343,10 @@ list. Empirical mean, standard deviation and quantiles for each variable.
 #&gt; ethfrac       -1.13836 -0.55928 -0.44751  0.427076  0.84619
 #&gt; unpko         -0.15069  0.51824  0.93883  1.298319  1.71663
 #&gt; </div><div class='input'>
-# plot(model)
+<span class='co'># plot(model)</span>
 
 
-# }
+<span class='co'># }</span>
 
 </div></pre>
   </div>
@@ -349,7 +364,7 @@ list. Empirical mean, standard deviation and quantiles for each variable.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

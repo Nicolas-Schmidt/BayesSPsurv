@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SPstats — SPstats • BayesSPsurv</title>
+<title>plot_JoinCount — plot_JoinCount • BayesSPsurv</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,8 @@
 
 
 
-<meta property="og:title" content="SPstats — SPstats" />
-<meta property="og:description" content="Calculates the deviance information criterion (DIC)
-     and Log-likelihood for fitted model outputs of pooled,
-exchangeable, and spatial Split Population survival models for which a log-likelihood can be obtained using the formula
-DIC = -2 * (L - P), where L is the log likelihood of the data given the posterior means of the parameter and
-P is the  estimate of the effective number of parameters in the model." />
+<meta property="og:title" content="plot_JoinCount — plot_JoinCount" />
+<meta property="og:description" content="Uses Join Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering." />
 
 
 
@@ -115,34 +111,81 @@ P is the  estimate of the effective number of parameters in the model." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>SPstats</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Nicolas-Schmidt/BayesSPsurv/blob/master/R/SPstats.R'><code>R/SPstats.R</code></a></small>
-    <div class="hidden name"><code>SPstats.Rd</code></div>
+    <h1>plot_JoinCount</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Nicolas-Schmidt/BayesSPsurv/blob/master/R/plots.R'><code>R/plots.R</code></a></small>
+    <div class="hidden name"><code>plot_JoinCount.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculates the deviance information criterion (DIC)
-     and Log-likelihood for fitted model outputs of pooled,
-exchangeable, and spatial Split Population survival models for which a log-likelihood can be obtained using the formula
-<em>DIC = -2 * (L - P)</em>, where <em>L</em> is the log likelihood of the data given the posterior means of the parameter and
-<em>P</em> is the  estimate of the effective number of parameters in the model.</p>
+    <p>Uses Join Count tests to assess spatial clustering or dispersion of categorical variables in the data. Negative values indicate positive spatial clustering.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>SPstats</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plot_JoinCount</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  var_cured <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  var_id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  var_time <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  n <span class='op'>=</span> <span class='fl'>1</span>,
+  t <span class='op'>=</span> <span class='fl'>1.645</span>,
+  threshold <span class='op'>=</span> <span class='fl'>800L</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>An object of the output of pooled, exchangeable, or spatial Split Population survival model .</p></td>
+      <th>data</th>
+      <td><p>data.</p></td>
+    </tr>
+    <tr>
+      <th>var_cured</th>
+      <td><p>binary indicator of immunity.</p></td>
+    </tr>
+    <tr>
+      <th>var_id</th>
+      <td><p>ID's unique identifier.</p></td>
+    </tr>
+    <tr>
+      <th>var_time</th>
+      <td><p>variable that measures time.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>number of observation per id.</p></td>
+    </tr>
+    <tr>
+      <th>t</th>
+      <td><p>value of the confidence interval.</p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>distance in kilometers. By default is 800.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List.</p>
+    <p>A ggplot object</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://nicolas-schmidt.github.io/BayesSPsurv/'>BayesSPsurv</a></span><span class='op'>)</span>
+<span class='va'>dataw</span>  <span class='op'>&lt;-</span> <span class='fu'>spduration</span><span class='fu'>::</span><span class='fu'><a href='https://andybeger.com/spduration/reference/add_duration.html'>add_duration</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'>BayesSPsurv</span><span class='fu'>::</span><span class='va'><a href='Walter_2015_JCR.html'>Walter_2015_JCR</a></span>,
+                                   y <span class='op'>=</span> <span class='st'>"renewed_war"</span>,
+                                   unitID <span class='op'>=</span> <span class='st'>"ccode"</span>,
+                                   tID <span class='op'>=</span> <span class='st'>"year"</span>,
+                                   freq <span class='op'>=</span> <span class='st'>"year"</span>,
+                                   ongoing <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Converting to 'Date' class with yyyy-06-30</span></div><div class='input'>
+
+<span class='fu'>plot_JoinCount</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>dataw</span>,
+               var_cured <span class='op'>=</span> <span class='st'>"cured"</span>,
+               var_id <span class='op'>=</span> <span class='st'>"ccode"</span>,
+               var_time <span class='op'>=</span> <span class='st'>"year"</span>,
+               n <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_JoinCount-1.png' alt='' width='700' height='433' /></div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
