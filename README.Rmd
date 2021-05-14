@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![Project Status: Active â€“ The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 `r badger::badge_devel("Nicolas-Schmidt/BayesSPsurv", "blue")`
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -249,7 +249,7 @@ tm1 = system.time({
             thin      = 15,
             w         = c(1,1,1),
             m         = 10,
-            ini.beta  =  inivals[i],
+            ini.beta  = inivals[i],
             ini.gamma = inivals[i],
             ini.W     = inivals[i],
             ini.V     = inivals[i],

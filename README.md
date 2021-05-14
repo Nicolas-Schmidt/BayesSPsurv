@@ -12,7 +12,7 @@ status](https://github.com/Nicolas-Schmidt/spatialSPsurv/workflows/R-CMD-check/b
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![](https://img.shields.io/badge/devel%20version-0.1.3-blue.svg)](https://github.com/Nicolas-Schmidt/BayesSPsurv)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -320,7 +320,7 @@ tm1 = system.time({
             thin      = 15,
             w         = c(1,1,1),
             m         = 10,
-            ini.beta  =  inivals[i],
+            ini.beta  = inivals[i],
             ini.gamma = inivals[i],
             ini.W     = inivals[i],
             ini.V     = inivals[i],
