@@ -251,7 +251,7 @@ model <-pooledSPsurv(
 
 Calling the generic `print()` function to display the results.
 
-```
+```{r}
 print(model)
 ```
 

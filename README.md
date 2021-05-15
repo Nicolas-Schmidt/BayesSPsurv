@@ -336,7 +336,36 @@ model <-pooledSPsurv(
 
 Calling the generic `print()` function to display the results.
 
-    print(model)
+``` r
+print(model)
+#> Call:
+#> pooledSPsurv(duration = duration ~ comprehensive + victory + 
+#>     unpko, immune = atrisk ~ lgdpl, Y0 = "t.0", LY = "lastyear", 
+#>     data = walter, N = 1500, burn = 300, thin = 15, w = c(1, 
+#>         1, 1), m = 10, form = "Weibull")
+#> 
+#> 
+#> Iterations = 1:80
+#> Thinning interval = 1 
+#> Number of chains = 1 
+#> Sample size per chain = 80 
+#> 
+#> Empirical mean and standard deviation for each variable,
+#> plus standard error of the mean:
+#> 
+#> 
+#> Duration equation: 
+#>                     Mean        SD   Naive SE Time-series SE
+#> (Intercept)   3.19047012 1.1807620 0.13201321     0.45104567
+#> comprehensive 0.30823578 0.7420113 0.08295939     0.08295939
+#> victory       0.05918528 0.5611721 0.06274094     0.06274094
+#> unpko         0.10013585 0.8112391 0.09069929     0.09069929
+#> 
+#> Immune equation: 
+#>                  Mean       SD  Naive SE Time-series SE
+#> (Intercept) -2.595263 6.259883 0.6998762       1.530030
+#> lgdpl       -1.782770 3.348600 0.3743848       1.116384
+```
 
 ### Parallel MCMC
 
