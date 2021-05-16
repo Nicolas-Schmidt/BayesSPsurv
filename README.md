@@ -161,8 +161,9 @@ plot_Moran.I(data = walter[[1]], var_duration = "duration", var_id = "ccode",var
 
 <img src="man/figures/README-figures-side-1.png" width="50%" /><img src="man/figures/README-figures-side-2.png" width="50%" />
 
-The plots above suggest that unobserved heterogeneous risk factors factors that trascend borders may lead to spatial autocorrelation in both the consolidation and duration of post-war peace. This suggests that a Spatial SP survival model is an appropriate method of analysis.We now estimate the **Bayesian Spatial split-population survival
-model**.
+The plots above suggest that unobserved heterogeneous risk factors factors that trascend borders may lead to spatial autocorrelation in both the consolidation and duration of post-war peace. This suggests that a Spatial SP survival model is an appropriate method of analysis.
+
+We now estimate the **Bayesian Spatial split-population survival model**.
 
 ``` r
 set.seed(123456)
