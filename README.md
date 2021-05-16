@@ -36,16 +36,16 @@ split-population (SP) survival (cure) models:
 **BayesSPsurv** uses an MCMC algorithm for Bayesian inference (Gibbs
 sampling and Metropolis-Hastings) to estimate the models listed above.
 
-### Why BayesSPsurv
+### Why BayesSPsurv?
 
 Scholars across multiple academic disciplines often analyze
 time-to-event data via conventional survival models. While useful, these
 models rely on two core assumptions that are not always tenable:
 
--   That all units will eventually experience the event of interest.
+-   Not all units may experience the event of interest.
 
--   That observations are independent from each other after controlling
-    for covariates.
+-   Observations may not be independent from each other after
+    controlling for covariates.
 
 **BayesSPsurv** allows users to estimate Bayesian Spatial
 split-population (SP) survival (cure) models with spatial frailties in
@@ -147,6 +147,21 @@ that are within 800 kms.of each other.
 walter <- BayesSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 ```
 
+**BayesSPsurv** contains two functions that allow one to assess the
+presence of spatial autocorrelation in the data: `plot_JoinCount` and
+`plot_Moran.I`.
+
+``` r
+par(mar = c(4, 4, .1, .1))
+
+plot_JoinCount(data = walter[[1]], var_cured = "cured", var_id = "ccode",var_time = "year", n = 12)
+
+plot_Moran.I(data = walter[[1]], var_duration = "duration", var_id = "ccode",var_time = "year", n = 12)
+```
+
+<img src="man/figures/README-figures-side-1.png" width="50%" /><img src="man/figures/README-figures-side-2.png" width="50%" />
+
+The plots above suggest that unobserved heterogeneous factors  
 We now estimate the **Bayesian Spatial split-population survival
 model**.
 
@@ -367,7 +382,13 @@ print(model)
 #> lgdpl       -1.782770 3.348600 0.3743848       1.116384
 ```
 
-### Parallel MCMC
+### Parallel MCMC: Assesing Convergence of Multiple Chains
+
+The following lines of code allow users to assess the convergence of
+multiple chains via the Gelman-Rubin diagnostic, which compares the
+variances within each chain to the variances between each chain [Gelman
+and Rubin
+(1992)](https://projecteuclid.org/journals/statistical-science/volume-7/issue-4/Inference-from-Iterative-Simulation-Using-Multiple-Sequences/10.1214/ss/1177011136.full).
 
 ``` r
 library(doParallel)

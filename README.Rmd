@@ -38,13 +38,13 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 
 **BayesSPsurv** uses an MCMC algorithm for Bayesian inference (Gibbs sampling and Metropolis-Hastings) to estimate the models listed above. 
 
-### Why BayesSPsurv
+### Why BayesSPsurv?
 
 Scholars across multiple academic disciplines often analyze time-to-event data via conventional survival models.  While useful, these models rely on two core assumptions that are not always tenable: 
 
-- That all units will eventually experience the event of interest. 
+- Not all units may experience the event of interest. 
 
-- That observations are independent from each other after controlling for covariates. 
+- Observations may not be independent from each other after controlling for covariates. 
 
 **BayesSPsurv** allows users to estimate Bayesian Spatial split-population (SP) survival (cure) models with spatial frailties in both the split and survival stages. This accounts for spatial clustering  in the "at risk" and "immune" populations. Users can also incorporate time-varying covariates. It also includes functions and code for pre-estimation autocorrelation diagnostics, creation of spatial weight matrix based on units and adjacencies of interest, and visualization of results, making **BayesSPsurv** flexible and broadly applicable to a variety of  research areas.
 
@@ -115,7 +115,20 @@ The `spatial_SA` function allows users can create the spatial weights matrix as 
 walter <- BayesSPsurv::spatial_SA(data = walter, var_ccode = "ccode", threshold = 800L)
 ```
 
-We now estimate the **Bayesian Spatial split-population survival model**.  
+**BayesSPsurv** contains two functions that allow one to assess the presence of spatial autocorrelation in the data: `plot_JoinCount` and `plot_Moran.I`. 
+
+```{r, figures-side, fig.show="hold", out.width="50%"}
+par(mar = c(4, 4, .1, .1))
+
+plot_JoinCount(data = walter[[1]], var_cured = "cured", var_id = "ccode",var_time = "year", n = 12)
+
+plot_Moran.I(data = walter[[1]], var_duration = "duration", var_id = "ccode",var_time = "year", n = 12)
+
+```
+
+The plots above suggest that unobserved heterogeneous risk factors factors that trascend borders may lead to spatial autocorrelation in both the consolidation and duration of post-war peace. This suggests that a Spatial SP survival model is an appropriate method of analysis. 
+
+So, we now estimate the **Bayesian Spatial split-population survival model** using the function `spatialSPsurv`.  
 
 ```{r, fig.width = 13, fig.height = 10, warning = FALSE}
 
@@ -165,7 +178,7 @@ rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
 
 ### Bayesian Exchangeable Split-Population (SP) Survival Model
 
-This model incorporates nonspatial unit-specific i.i.d frailties in the model’s split-stage (Vi) and survival stage (Wi) as well as time-varying covariates in each of these two stages.
+The function `exchangeSPsurv` fits a model that incorporates nonspatial unit-specific i.i.d frailties in the model’s split-stage (Vi) and survival stage (Wi) as well as time-varying covariates in each of these two stages.
 
 `exchangeSPsurv` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
@@ -208,7 +221,8 @@ model <- exchangeSPsurv(
         )
 ```
 
-You can generate the box-plots for unit-specific split and survival-stage frailties from the estimated model as follows. 
+You can generate the box-plots for unit-specific split and survival-stage frailties from the estimated model. 
+
 ```{r, fig.width = 13, fig.height = 10, warning = FALSE}
 library(ggplot2)
 
@@ -222,7 +236,7 @@ ggplot(w_country, aes(x = reorder(factor(name), value, FUN = median), y =  value
 
 ##  Bayesian Pooled Split-Population (SP) Survival Model 
 
-**BayesSPsurv** also fits Bayesian SP survival models without unit-specific i.i.d. frailties.
+**BayesSPsurv** also fits Bayesian SP survival models without unit-specific i.i.d. frailties via `pooledSPsurv`.
 
 `pooledSPsurv` Weibull model with N = 15,000 is [here](https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw).
 
@@ -249,13 +263,15 @@ model <-pooledSPsurv(
       )
 ```
 
-Calling the generic `print()` function to display the results.
+The generic `print()` function displays the results.
 
 ```{r}
 print(model)
 ```
 
-### Parallel MCMC
+### Parallel MCMC: Assesing Convergence of Multiple Chains
+
+The following lines of code allow users to assess the convergence of multiple chains via the Gelman-Rubin diagnostic, which compares the variances within each chain to the variances between each chain [Gelman and Rubin (1992)](https://projecteuclid.org/journals/statistical-science/volume-7/issue-4/Inference-from-Iterative-Simulation-Using-Multiple-Sequences/10.1214/ss/1177011136.full).
 
 ```{r, warning = FALSE, message=FALSE}
 
