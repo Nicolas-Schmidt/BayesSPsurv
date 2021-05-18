@@ -392,7 +392,6 @@ and Rubin
 
 ``` r
 library(doParallel)
-library(snow)
 library(doRNG)
 library(coda)
 
