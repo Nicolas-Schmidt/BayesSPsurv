@@ -1,0 +1,15 @@
+citHeader("To cite BayesSPsurv in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "BayesSPsurv: An R Package to Estimate Bayesian (Spatial) Split-Population Survival Models",
+  author   = "Brandon Bolte, Nicolás Schmidt, Sergio Béjar, Nguyen Huynh, Bumba Mukherjee",
+  journal  = "R JOURNAL",
+  year     = 2021,
+  volume   = 13,
+  number   = 1,
+  pages    = "595-613",
+  textVersion = paste(
+
+  )
+)

@@ -1,4 +1,6 @@
+# BayesSPsurv 0.1.4
 
+* add `bsps_map()`
 
 # BayesSPsurv 0.1.3
 

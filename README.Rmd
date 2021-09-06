@@ -167,12 +167,7 @@ SPstats(model)
 The following lines of code allow users to substantively interpret the spatial frailties. They generate a map that helps to determine whether adjacent units share similar frailty values.  Please note that the map below only illustrates survival-stage (W) frailties.  Substituting W for V in the code below generates a map for the split-stage frailties. 
 
 ```{r, fig.width = 13, fig.height = 10, warning = FALSE}
-spw   <- matrix(apply(model$W, 2, mean), ncol = 1, nrow = ncol(model$W))
-ccode <- colnames(model$W)
-ISO3  <- countrycode::countrycode(ccode,'gwn','iso3c')
-spw   <- data.frame(ccode = ccode, ISO3 = ISO3, spw = spw) 
-map   <- rworldmap::joinCountryData2Map(spw, joinCode = "ISO3", nameJoinColumn = "ISO3")
-rworldmap::mapCountryData(map, nameColumnToPlot = 'spw')
+bsps_map(data = model$W, mapTitle = "spw")
 
 ```
 
