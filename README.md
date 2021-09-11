@@ -23,15 +23,15 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 assess the performance of the following sets of Bayesian Spatial
 split-population (SP) survival (cure) models:
 
-  - Fit the Bayesian Spatial split-population survival model that
+-   Fit the Bayesian Spatial split-population survival model that
     accounts for both structural and spatial heterogeneity. Spatial
     autocorrelation is modeled with spatially weighted frailties, which
     are estimated using a CAR prior.
 
-  - Fit a non-spatial Bayesian SP survival model with exchangeable
+-   Fit a non-spatial Bayesian SP survival model with exchangeable
     frailties in the split and survival-stage equations.
 
-  - Fit a non-spatial parametric SP survival model with no frailties.
+-   Fit a non-spatial parametric SP survival model with no frailties.
 
 **BayesSPsurv** uses an MCMC algorithm for Bayesian inference (Gibbs
 sampling and Metropolis-Hastings) to estimate the models listed above.
@@ -42,9 +42,9 @@ Scholars across multiple academic disciplines often analyze
 time-to-event data via conventional survival models. While useful, these
 models rely on two core assumptions that are not always tenable:
 
-  - Not all units may experience the event of interest.
+-   Not all units may experience the event of interest.
 
-  - Observations may not be independent from each other after
+-   Observations may not be independent from each other after
     controlling for covariates.
 
 **BayesSPsurv** allows users to estimate Bayesian Spatial
@@ -60,7 +60,7 @@ variety of research areas.
 ### Functions in the BayesSPsurv Package
 
 | Function         | Description                                                                                                          |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
+|------------------|----------------------------------------------------------------------------------------------------------------------|
 | `spatialSPsurv`  | Markov Chain Monte Carlo (MCMC) to run time-varying Bayesian split population survival model with spatial frailties. |
 | `exchangeSPsurv` | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with exchangeable frailties.         |
 | `pooledSPsurv`   | Markov Chain Monte Carlo (MCMC) to run Bayesian split population survival model with no frailties.                   |
@@ -72,13 +72,13 @@ variety of research areas.
 
 ### Dependencies
 
-  - Rcpp (\>= 1.0.3)
-  - RcppArmadillo
-  - spduration
-  - countrycode
-  - progress
-  - dplyr
-  - ggplot2
+-   Rcpp (&gt;= 1.0.3)
+-   RcppArmadillo
+-   spduration
+-   countrycode
+-   progress
+-   dplyr
+-   ggplot2
 
 ### Installation
 
@@ -170,7 +170,6 @@ So, we now estimate the **Bayesian Spatial split-population survival
 model** using the function `spatialSPsurv`.
 
 ``` r
-
 set.seed(123456)
 
 model <- spatialSPsurv(
@@ -333,7 +332,6 @@ unit-specific i.i.d. frailties via `pooledSPsurv`.
 
 ``` r
 
-
 set.seed(123456)
 
 model <-pooledSPsurv(
@@ -393,7 +391,6 @@ and Rubin
 (1992)](https://projecteuclid.org/journals/statistical-science/volume-7/issue-4/Inference-from-Iterative-Simulation-Using-Multiple-Sequences/10.1214/ss/1177011136.full).
 
 ``` r
-
 library(doParallel)
 library(snow)
 library(doRNG)
