@@ -106,8 +106,8 @@
 <a href="#functions-in-the-bayesspsurv-package" class="anchor"></a>Functions in the BayesSPsurv Package</h3>
 <table class="table">
 <colgroup>
-<col width="13%">
-<col width="86%">
+<col width="12%">
+<col width="87%">
 </colgroup>
 <thead><tr class="header">
 <th>Function</th>
@@ -211,7 +211,8 @@
 <p>The plots above indicate that unobserved heterogeneous risk factors factors that trascend borders may lead to spatial autocorrelation in both the consolidation and duration of post-war peace. This suggests that a Spatial SP survival model is an appropriate method of analysis.</p>
 <p>So, we now estimate the <strong>Bayesian Spatial split-population survival model</strong> using the function <code>spatialSPsurv</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123456</span><span class="op">)</span>
+<code class="sourceCode R">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123456</span><span class="op">)</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/spatialSPsurv.html">spatialSPsurv</a></span><span class="op">(</span>
           duration  <span class="op">=</span> <span class="va">duration</span> <span class="op">~</span> <span class="va">victory</span> <span class="op">+</span> <span class="va">comprehensive</span> <span class="op">+</span> <span class="va">lgdpl</span> <span class="op">+</span> <span class="va">unpko</span>,
@@ -291,7 +292,7 @@
 <p>Since estimating the Exchangeable model does not require a spatial-weights matrix (A), users can type the following lines of code to prepare the data.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">walter</span><span class="op">$</span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">walter</span><span class="op">$</span><span class="va">ccode</span><span class="op">)</span><span class="op">)</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rle.html">rle</a></span><span class="op">(</span><span class="va">walter</span><span class="op">$</span><span class="va">ccode</span><span class="op">)</span><span class="op">$</span><span class="va">lengths</span><span class="op">)</span>
-<span class="va">country</span>  <span class="op">&lt;-</span> <span class="fu">countrycode</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/countrycode/reference/countrycode.html">countrycode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">walter</span><span class="op">$</span><span class="va">ccode</span><span class="op">)</span>,<span class="st">'gwn'</span>,<span class="st">'iso3c'</span><span class="op">)</span></code></pre></div>
+<span class="va">country</span>  <span class="op">&lt;-</span> <span class="fu">countrycode</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/countrycode/man/countrycode.html">countrycode</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">walter</span><span class="op">$</span><span class="va">ccode</span><span class="op">)</span>,<span class="st">'gwn'</span>,<span class="st">'iso3c'</span><span class="op">)</span></code></pre></div>
 <p>The model is estimated as follows.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123456</span><span class="op">)</span>
@@ -331,6 +332,7 @@
 <p><code>pooledSPsurv</code> Log-Logistic model with N = 15,000 is <a href="https://github.com/Nicolas-Schmidt/BayesSPsurv/tree/master/data-raw/data-raw-loglog">here</a>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
+
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123456</span><span class="op">)</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span><span class="fu"><a href="reference/pooledSPsurv.html">pooledSPsurv</a></span><span class="op">(</span>
@@ -381,7 +383,8 @@
 <a href="#parallel-mcmc-assesing-convergence-of-multiple-chains" class="anchor"></a>Parallel MCMC: Assesing Convergence of Multiple Chains</h3>
 <p>The following lines of code allow users to assess the convergence of multiple chains via the Gelman-Rubin diagnostic, which compares the variances within each chain to the variances between each chain <a href="https://projecteuclid.org/journals/statistical-science/volume-7/issue-4/Inference-from-Iterative-Simulation-Using-Multiple-Sequences/10.1214/ss/1177011136.full">Gelman and Rubin (1992)</a>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">doParallel</span><span class="op">)</span>
+<code class="sourceCode R">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">doParallel</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">snow</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://renozao.github.io/doRNG">doRNG</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">coda</span><span class="op">)</span>
@@ -494,9 +497,8 @@
 <li>Brandon L. Bolte <br><small class="roles"> Author </small>  </li>
 <li>Nicolas Schmidt <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Sergio Bejar <br><small class="roles"> Author </small>  </li>
-<li>Minnie M. Joo <br><small class="roles"> Author </small>  </li>
-<li>Nguyen K. Huynh <br><small class="roles"> Author </small>  </li>
 <li>Bumba Mukherjee <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
@@ -516,7 +518,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Brandon L. Bolte, Nicolas Schmidt, Sergio Bejar, Minnie M. Joo, Nguyen K. Huynh, Bumba Mukherjee.</p>
+  <p>Developed by Brandon L. Bolte, Nicolas Schmidt, Sergio Bejar, Bumba Mukherjee.</p>
 </div>
 
 <div class="pkgdown">

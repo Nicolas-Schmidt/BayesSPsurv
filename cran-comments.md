@@ -1,13 +1,15 @@
+
+## Resubmission BayesSPsurv
+
+URL change in README.md file. Before:  https://www.tidyverse.org/lifecycle/#stable, now: https://lifecycle.r-lib.org/articles/stages.html
+
+
+
+
 ## Test environments
-* local OS X install, R 4.1.1
-
-* R-hub
-    - Ubuntu Linux 20.04.1 LTS, R-release, GCC
-    - Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-
-* winbuilder
-    - R Under development
-
+* local Windows, R 4.0.5
+* ubuntu 16.04, R 4.0.3
+* win-builder (devel)
 
 ## R CMD check results
 

@@ -6,11 +6,6 @@
 
 using namespace Rcpp;
 
-#ifdef RCPP_USE_GLOBAL_ROSTREAM
-Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
-Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
-#endif
-
 // llikWeibull
 double llikWeibull(arma::vec Y, arma::vec Y0, arma::vec eXB, arma::vec delta, arma::vec C, arma::vec LY, double rho);
 RcppExport SEXP _BayesSPsurv_llikWeibull(SEXP YSEXP, SEXP Y0SEXP, SEXP eXBSEXP, SEXP deltaSEXP, SEXP CSEXP, SEXP LYSEXP, SEXP rhoSEXP) {
